@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Deal;
 
 namespace Deal
 {
-    public class Cliente : Usuario
+    public class Prestador
     {
-        public ICollection<Servico> servicos { get; set; }
+        
     }
 }
