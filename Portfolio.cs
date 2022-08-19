@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Deal
 {
-    public class Prestador : Usuario
+    public class Portfolio
     {
-        public Portfolio Portfolio { get; set; }
+        
     }
 }
