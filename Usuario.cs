@@ -11,7 +11,10 @@ namespace Deal
         public string Cpf { get; set; }
         public int Idade { get; set; }
         public string Endereco { get; set; }
+        public string CEP { get; set; }
         public string Telefone { get; set; }
         public float Pontuacao { get; set; }
+        public string Senha { get; set; }
+        public string Email { get; set; }
     }
 }
