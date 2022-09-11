@@ -8,6 +8,7 @@ namespace Deal
 {
     public class Servico
     {
+        public int idServico { get; set; }
         public Cliente cliente { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
