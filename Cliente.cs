@@ -19,5 +19,7 @@ namespace Deal
         public float Pontuacao { get; set; }
         public string Senha { get; set; }
         public string Email { get; set; }
+        public float Nota { get; set; } // Nota começa com valor 5
+        public int QtdAcordoRealizados { get; set; } // trocar nome?
     }
 }
