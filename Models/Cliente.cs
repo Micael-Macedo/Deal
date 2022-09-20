@@ -9,7 +9,7 @@ namespace Deal.Models
     public class Cliente
     {
         public int ClienteId { get; set; }
-        public ICollection<Servico> servicos { get; set; }
+        public ICollection<Servico> Servicos { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public int Idade { get; set; }
@@ -18,7 +18,7 @@ namespace Deal.Models
         public string Telefone { get; set; }
         public string Senha { get; set; }
         public string Email { get; set; }
-        public ICollection<float> Notas { get; set; } //Criar método média, ArrayNotas sempre começa com 5.0 de nota
+        public ICollection<Nota> Notas { get; set; }
         public int QtdAcordoRealizados { get; set; } 
 
         public float MediaNota()
@@ -26,7 +26,7 @@ namespace Deal.Models
             float TotalNotas = 0;
             foreach (var Nota in Notas)
             {
-                TotalNotas = +Nota;
+                TotalNotas += Nota.Avaliacao;
             }
             return TotalNotas / Notas.Count;
         }

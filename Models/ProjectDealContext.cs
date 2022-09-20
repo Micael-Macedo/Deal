@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Deal.Models;
 
 namespace Deal.Models
 {
@@ -16,5 +17,10 @@ namespace Deal.Models
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<Prestador> Prestadores { get; set; }
         public DbSet<Servico> Servicos { get; set; }
+        public DbSet<Deal.Models.Video>? Video { get; set; }
+        public DbSet<Deal.Models.AreaAtuacao>? AreaAtuacao { get; set; }
+        public DbSet<Deal.Models.Certificado>? Certificado { get; set; }
+        public DbSet<Deal.Models.Foto>? Foto { get; set; }
+        public DbSet<Deal.Models.Nota>? Nota { get; set; }
     }
 }

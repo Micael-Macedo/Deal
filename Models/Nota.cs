@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Deal.Models
 {
-    public class NovaAreaAtuacao
+    public class Nota
     {
-        public string NovaAreaAtuacaoId { get; set; }
-        public string AreaAtuacao { get; set; }
+        public int NotaId { get; set; }
+        public float Avaliacao { get; set; }
     }
 }
