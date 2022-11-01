@@ -2,13 +2,15 @@ using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 string mySqlConnection = builder.Configuration.GetConnectionString("DefaultDatabase");
-builder.Services.AddDbContext<ProjectDealContext>(opt => {
-opt.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection));
+builder.Services.AddDbContext<ProjectDealContext>(opt =>{
+    opt.UseMySql(connection, ServerVersion.AutoDetect(connection)); 
 });
+builder.Services.AddControllers();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 
