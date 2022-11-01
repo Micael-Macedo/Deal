@@ -16,3 +16,264 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat' !important;
+}
+:root{
+  --nav-button-text: black !important;
+  --nav-button-text-hover: blueviolet !important;
+  --nav-button-menu-bg: whitesmoke; 
+  --nav-button-menu-text: blueviolet;
+  --nav-button-menu-bg-hover: black; 
+  --nav-button-menu-text-hover: white;
+  --h1-introducao-site: black;
+  --h2-tipos-de-servicos: white;
+  --body-button: blueviolet !important;
+  --body-button-text: white !important;
+  --body-button-hover: black !important;
+  --body-button-text-hover: white !important;
+
+}
+nav{
+  font-size: 30px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+nav ul{
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  list-style: none;
+  align-items: center;
+}
+nav li{
+  display: flex;
+  margin: 10px 20px;
+  align-items: center;
+  align-content: center;  
+}
+nav a{
+  align-items: center;
+  text-decoration: none;
+  color: var(--nav-button-text);
+  transition: 0.5s;
+}
+nav a:hover{
+  color: var(--nav-button-text-hover);
+}
+nav img{
+  width: 60px;
+  height: 60px;
+}
+#NavContent{
+  display: flex;
+  flex-direction: column;
+}
+#navMenuButton{
+  background-color: var(--nav-button-menu-bg);
+  color: var(--nav-button-menu-text);
+  display: flex;
+  border-radius: 5px;
+  margin: 20px 10px;
+}
+#navMenuButton:hover{
+  background-color: var(--nav-button-menu-bg-hover) ;
+  color: var(--nav-button-menu-text-hover) ;
+  transition: 0.5s;
+}
+#NavMobile{
+  display: flex; 
+  align-items: center; 
+  text-align: center;
+  justify-content: center;
+  background-color: whitesmoke;
+}
+#NavMobile ul{
+  flex-direction: column;
+}
+
+section{
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+
+#introducao_Site{
+  display: flex;
+  height: 800px;
+  background-image: url(../img/caradamain.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+  margin-bottom: 0;
+  margin-top: 0;
+  align-items: center;
+}
+#introducao_site h1{
+  font-size: 40px;
+  font-weight: bolder !important;
+  color: var(--h1-introducao-site)
+}
+#introducao_Site p{
+  color: grey;
+  font-size: 30px;
+}
+#introducao_Site button{
+  border-radius: 10px;
+  padding: 10px 15px;
+  border-color: var(--body-button);
+  background-color: var(--body-button);
+  color:var(--body-button-text);
+  transition: 1s;
+}
+#introducao_Site button:hover{
+  border-color: var(--body-button-hover);
+  background-color: var(--body-button-hover);
+}
+h2{
+  margin: 50px 0 !important;
+}
+#tiposServicos{
+  margin-top: 0;
+  padding: 20px;
+  background-color: blueviolet;
+  text-align: center;
+}
+#tiposServicos h2{
+  color: white;
+}
+#list-tiposServicos{
+  display: flex;
+  height: 600px;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+}
+
+#servicosMaisSolicitados{
+  text-align: center;
+}
+#listServicosMaisSolicitados{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+
+.cardServicosMaisSolicitados{
+  width: 300px;
+  height: 400px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: white;
+  box-shadow: -5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.cardServicosMaisSolicitados img{
+  margin: 5px;
+  border-radius: 10px;
+  width: 100%;
+  height: 250px;
+}
+.cardServicosMaisSolicitados p{
+  text-align: center;
+  justify-self: center;
+  font-size: 30px;
+  font-weight: 700;
+}
+.cardServicosMaisSolicitados button{
+  padding: 5px 15px;
+  border-radius: 20px;
+  border-color: var(--body-button);
+  background-color: var(--body-button);
+  color: white;
+  font-weight: 700;
+  transition: 1s;
+}
+.cardServicosMaisSolicitados button:hover{
+  border-color: var(--body-button-hover);
+  background-color: var(--body-button-hover);
+}
+.servico{
+  background-color: white;
+  margin: 20px 10px;
+  width: 150px;
+  height: 150px;
+  box-shadow: 5px 5px black;
+  border-radius: 15px;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.servico img{
+  margin-top: 15px;
+  width: 70px;
+  height: 70px;
+}
+.formularioPrestador {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#content_Info_Deal_Devs{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-direction: column;
+}
+#Deal_sobre_nos{
+  background-image: url("../img/BG\ 1.png");
+  text-align: center;
+}
+.info_Deal_Dev{
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+  margin-bottom: 10px;
+}
+.info_Deal_Dev img{
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.fontMontserrat{
+  font-family: 'Montserrat';font-size: 30px;
+  
+}
+.fontMontserrat2{
+  font-family: 'Montserrat';
+  font-size: 30px;
+  font-weight: 900;
+  padding-top: -20;
+  
+}
+
+.mb-3{
+  width: 500px;
+  font-family: 'Montserrat';font-size: 15px;
+  color: blueviolet;
+}
+
+.btn-primary{
+  font-family: 'Montserrat';font-size: 15px !important;
+  background-color: var(--body-button);;
+  border: 0ch;
+}
+
+.area_atuacao{
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
