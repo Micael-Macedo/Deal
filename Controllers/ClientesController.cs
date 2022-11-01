@@ -9,16 +9,16 @@ using Deal.Models;
 
 namespace Deal.Controllers
 {
-    public class ClienteController : Controller
+    public class ClientesController : Controller
     {
         private readonly ProjectDealContext _context;
 
-        public ClienteController(ProjectDealContext context)
+        public ClientesController(ProjectDealContext context)
         {
             _context = context;
         }
 
-        // GET: Cliente
+        // GET: Clientes
         public async Task<IActionResult> Index()
         {
               return _context.Clientes != null ? 
@@ -26,7 +26,7 @@ namespace Deal.Controllers
                           Problem("Entity set 'ProjectDealContext.Clientes'  is null.");
         }
 
-        // GET: Cliente/Details/5
+        // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Clientes == null)
@@ -44,13 +44,13 @@ namespace Deal.Controllers
             return View(cliente);
         }
 
-        // GET: Cliente/Create
+        // GET: Clientes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Cliente/Create
+        // POST: Clientes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -66,7 +66,7 @@ namespace Deal.Controllers
             return View(cliente);
         }
 
-        // GET: Cliente/Edit/5
+        // GET: Clientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Clientes == null)
@@ -82,7 +82,7 @@ namespace Deal.Controllers
             return View(cliente);
         }
 
-        // POST: Cliente/Edit/5
+        // POST: Clientes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -117,7 +117,7 @@ namespace Deal.Controllers
             return View(cliente);
         }
 
-        // GET: Cliente/Delete/5
+        // GET: Clientes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Clientes == null)
@@ -135,7 +135,7 @@ namespace Deal.Controllers
             return View(cliente);
         }
 
-        // POST: Cliente/Delete/5
+        // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
