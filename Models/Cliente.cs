@@ -30,5 +30,18 @@ namespace Deal.Models
             }
             return TotalNotas / Notas.Count;
         }
+
+        public Boolean ConfirmarAcordo(){
+            //Para confirmar que o cliente tem interesse seria no caso um metodo pra um botão? tipo o action listening?
+            if (--Botão--){
+                return = true;
+            } else{
+                return false;
+            }
+        }
+
+        public string CompartilharPrestador(){
+            
+        }
     }
 }

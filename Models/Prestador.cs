@@ -20,6 +20,7 @@ namespace Deal.Models
         public string Email { get; set; }
         public ICollection<Nota> Notas { get; set; } //Criar método média, ArrayNotas sempre começa com 5.0 de nota
         public int QtdServicoRealizados { get; set; }
+        public ICollection<Dicas> Dicas { get; set; }
 
         public float MediaNota()
         {
@@ -29,6 +30,10 @@ namespace Deal.Models
                 TotalNotas += Nota.Avaliacao;
             }
             return TotalNotas / Notas.Count;
+        }
+
+        public Dicas AdicionarDicas(Dica){
+            Dicas.Add(Dica);
         }
     }
 }

@@ -12,5 +12,14 @@ namespace Deal.Models
         public Cliente Cliente { get; set; }
         public Prestador Prestador { get; set; }   
 
+        public void FecharAcordo(Cliente Prestador){
+            //Esse metodo que puxa outro, pode ficar aqui ou tem que ser no controller?
+            if ConfirmarAcordo(true){
+                Cliente = Cliente;
+                Prestador = Prestador;
+                Servico.Status = "Confirmado";
+            }
+        }
+
     }
 }
