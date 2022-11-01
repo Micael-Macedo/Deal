@@ -9,5 +9,8 @@ namespace Deal.Models
     {
         public int FotoId { get; set; }
         public string FotoPortfolio { get; set; }
+        [ForeignKey("Portfolio")]
+        public int FkPortfolio;
+         public Portfolio Portfolio { get; set; }
     }
 }

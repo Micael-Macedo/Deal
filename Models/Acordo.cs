@@ -7,10 +7,17 @@ namespace Deal.Models
 {
     public class Acordo
     {   
+        
         public int AcordoId { get; set; }
-        public Servico Servico { get; set; }
-        public Cliente Cliente { get; set; }
-        public Prestador Prestador { get; set; }   
+        [ForeignKey("Servico")]
+        public int FkServico { get; set; }
+        public virtual Servico Servico { get; set; }
+        [ForeignKey("Cliente")]
+        public int FkCliente { get; set; }
+        public virtual Cliente Cliente { get; set; }
+        [ForeignKey("Prestador")]
+        public int FkPrestador { get; set; }
+        public virtual Prestador Prestador { get; set; }   
 
     }
 }
