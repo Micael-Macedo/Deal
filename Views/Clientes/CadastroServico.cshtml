@@ -1,5 +1,5 @@
 @page
-@model Deal.Models.Servico
+@model Deal.Models.Cliente
 @{
     ViewData["Title"] = "CadastroServico";
 }
@@ -8,34 +8,34 @@
 
 <div>
     <form asp-action="CadastroServico">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Localizacao" class="control-label"></label>
-                <input asp-for="Localizacao" class="form-control" />
-                <span asp-validation-for="Localizacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cep" class="control-label"></label>
-                <input asp-for="Cep" class="form-control" />
-                <span asp-validation-for="Cep" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Categoria" class="control-label"></label>
-                <input asp-for="Categoria" class="form-control" />
-                <span asp-validation-for="Categoria" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Nome" class="control-label"></label>
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label"></label>
+            <input name="Descricao" class="form-control" />
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Localizacao" class="control-label"></label>
+            <input asp-for="Localizacao" class="form-control" />
+            <span asp-validation-for="Localizacao" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Cep" class="control-label"></label>
+            <input asp-for="Cep" class="form-control" />
+            <span asp-validation-for="Cep" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Categoria" class="control-label"></label>
+            <input asp-for="Categoria" class="form-control" />
+            <span asp-validation-for="Categoria" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
 </div>

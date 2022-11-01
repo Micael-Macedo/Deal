@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
-string mySqlConnection = builder.Configuration.GetConnectionString("DefaultDatabase");
 builder.Services.AddDbContext<ProjectDealContext>(opt =>{
     opt.UseMySql(connection, ServerVersion.AutoDetect(connection)); 
 });
