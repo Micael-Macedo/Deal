@@ -158,5 +158,9 @@ namespace Deal.Controllers
         {
           return (_context.Clientes?.Any(e => e.ClienteId == id)).GetValueOrDefault();
         }
+
+        private void ConfirmarAcordo (){
+            
+        }
     }
 }
