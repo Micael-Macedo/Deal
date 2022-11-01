@@ -3,6 +3,7 @@ using System;
 using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    partial class ProjectDealContextModelSnapshot : ModelSnapshot
+    [Migration("20221101023318_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,12 +268,12 @@ namespace Deal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("FkCliente")
-                        .HasColumnType("int");
 
                     b.Property<string>("Localizacao")
                         .IsRequired()
@@ -287,7 +289,7 @@ namespace Deal.Migrations
 
                     b.HasKey("ServicoId");
 
-                    b.HasIndex("FkCliente");
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Servicos");
                 });
@@ -379,7 +381,7 @@ namespace Deal.Migrations
                 {
                     b.HasOne("Deal.Models.Cliente", "Cliente")
                         .WithMany("Servicos")
-                        .HasForeignKey("FkCliente")
+                        .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -9,87 +9,90 @@ using Deal.Models;
 
 namespace Deal.Controllers
 {
-    public class ClienteController : Controller
+    public class ServicosController : Controller
     {
         private readonly ProjectDealContext _context;
 
-        public ClienteController(ProjectDealContext context)
+        public ServicosController(ProjectDealContext context)
         {
             _context = context;
         }
 
-        // GET: Cliente
+        // GET: Servicos
         public async Task<IActionResult> Index()
         {
-              return _context.Clientes != null ? 
-                          View(await _context.Clientes.ToListAsync()) :
-                          Problem("Entity set 'ProjectDealContext.Clientes'  is null.");
+            var projectDealContext = _context.Servicos.Include(s => s.Cliente);
+            return View(await projectDealContext.ToListAsync());
         }
 
-        // GET: Cliente/Details/5
+        // GET: Servicos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (id == null || _context.Servicos == null)
             {
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.ClienteId == id);
-            if (cliente == null)
+            var servico = await _context.Servicos
+                .Include(s => s.Cliente)
+                .FirstOrDefaultAsync(m => m.ServicoId == id);
+            if (servico == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(servico);
         }
 
-        // GET: Cliente/Create
+        // GET: Servicos/Create
         public IActionResult Create()
         {
+            ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId");
             return View();
         }
 
-        // POST: Cliente/Create
+        // POST: Servicos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClienteId,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdAcordoRealizados")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("ServicoId,FkCliente,Nome,Descricao,Localizacao,Cep,Categoria,Status")] Servico servico)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cliente);
+                _context.Add(servico);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
+            return View(servico);
         }
 
-        // GET: Cliente/Edit/5
+        // GET: Servicos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (id == null || _context.Servicos == null)
             {
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente == null)
+            var servico = await _context.Servicos.FindAsync(id);
+            if (servico == null)
             {
                 return NotFound();
             }
-            return View(cliente);
+            ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
+            return View(servico);
         }
 
-        // POST: Cliente/Edit/5
+        // POST: Servicos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdAcordoRealizados")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("ServicoId,FkCliente,Nome,Descricao,Localizacao,Cep,Categoria,Status")] Servico servico)
         {
-            if (id != cliente.ClienteId)
+            if (id != servico.ServicoId)
             {
                 return NotFound();
             }
@@ -98,12 +101,12 @@ namespace Deal.Controllers
             {
                 try
                 {
-                    _context.Update(cliente);
+                    _context.Update(servico);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.ClienteId))
+                    if (!ServicoExists(servico.ServicoId))
                     {
                         return NotFound();
                     }
@@ -114,49 +117,51 @@ namespace Deal.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
+            return View(servico);
         }
 
-        // GET: Cliente/Delete/5
+        // GET: Servicos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (id == null || _context.Servicos == null)
             {
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.ClienteId == id);
-            if (cliente == null)
+            var servico = await _context.Servicos
+                .Include(s => s.Cliente)
+                .FirstOrDefaultAsync(m => m.ServicoId == id);
+            if (servico == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(servico);
         }
 
-        // POST: Cliente/Delete/5
+        // POST: Servicos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Clientes == null)
+            if (_context.Servicos == null)
             {
-                return Problem("Entity set 'ProjectDealContext.Clientes'  is null.");
+                return Problem("Entity set 'ProjectDealContext.Servicos'  is null.");
             }
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente != null)
+            var servico = await _context.Servicos.FindAsync(id);
+            if (servico != null)
             {
-                _context.Clientes.Remove(cliente);
+                _context.Servicos.Remove(servico);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClienteExists(int id)
+        private bool ServicoExists(int id)
         {
-          return (_context.Clientes?.Any(e => e.ClienteId == id)).GetValueOrDefault();
+          return _context.Servicos.Any(e => e.ServicoId == id);
         }
     }
 }
