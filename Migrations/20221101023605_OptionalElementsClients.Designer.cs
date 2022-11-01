@@ -11,14 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    [Migration("20220927222955_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221101023605_OptionalElementsClients")]
+    partial class OptionalElementsClients
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Deal.Models.Acordo", b =>
