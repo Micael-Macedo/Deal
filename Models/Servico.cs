@@ -10,10 +10,9 @@ namespace Deal.Models
 {
     public class Servico
     {
-        [Key]
         public int ServicoId { get; set; }
         [ForeignKey("Cliente")]
-        public int FkCliente { get; set; }
+        public int? FkCliente { get; set; }
         public virtual Cliente Cliente { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
@@ -21,5 +20,7 @@ namespace Deal.Models
         public string Cep { get; set; }
         public string Categoria { get; set; }
         public string Status { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }
