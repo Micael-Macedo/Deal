@@ -21,7 +21,7 @@ namespace Deal.Controllers
         // GET: Servicos
         public async Task<IActionResult> Index()
         {
-            var projectDealContext = _context.Servicos.Include(s => s.Cliente);
+            var projectDealContext = _context.Servicos.Include(s => s.Categoria).Include(s => s.Cliente);
             return View(await projectDealContext.ToListAsync());
         }
 
@@ -34,6 +34,7 @@ namespace Deal.Controllers
             }
 
             var servico = await _context.Servicos
+                .Include(s => s.Categoria)
                 .Include(s => s.Cliente)
                 .FirstOrDefaultAsync(m => m.ServicoId == id);
             if (servico == null)
@@ -47,8 +48,16 @@ namespace Deal.Controllers
         // GET: Servicos/Create
         public IActionResult Create(int? id)
         {
+            if (id == null || _context.Servicos == null)
+            {
+                return NotFound();
+            }
+            int ClienteId = _context.Clientes.Where(c => c.ClienteId == id).FirstOrDefault().ClienteId;
+            Servico servico = new Servico(){FkCliente = ClienteId};
+            
+            ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId");
-            return View();
+            return View(servico);
         }
 
         // POST: Servicos/Create
@@ -56,14 +65,16 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ServicoId,FkCliente,Nome,Descricao,Localizacao,Cep,Categoria,Status,Latitude,Longitude")] Servico servico)
+        public async Task<IActionResult> Create([Bind("ServicoId,FkCliente,Nome,Descricao,Endereco,Estado,Cidade,Numero,Cep,FkCategoria,Status,Latitude,Longitude")] Servico servico)
         {
             if (ModelState.IsValid)
             {
+                servico.Status = "Solicitado";
                 _context.Add(servico);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
             return View(servico);
         }
@@ -81,6 +92,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
             return View(servico);
         }
@@ -90,7 +102,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ServicoId,FkCliente,Nome,Descricao,Localizacao,Cep,Categoria,Status,Latitude,Longitude")] Servico servico)
+        public async Task<IActionResult> Edit(int id, [Bind("ServicoId,FkCliente,Nome,Descricao,Endereco,Estado,Cidade,Numero,Cep,FkCategoria,Status,Latitude,Longitude")] Servico servico)
         {
             if (id != servico.ServicoId)
             {
@@ -117,6 +129,7 @@ namespace Deal.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
             return View(servico);
         }
@@ -130,6 +143,7 @@ namespace Deal.Controllers
             }
 
             var servico = await _context.Servicos
+                .Include(s => s.Categoria)
                 .Include(s => s.Cliente)
                 .FirstOrDefaultAsync(m => m.ServicoId == id);
             if (servico == null)
@@ -161,7 +175,7 @@ namespace Deal.Controllers
 
         private bool ServicoExists(int id)
         {
-          return (_context.Servicos?.Any(e => e.ServicoId == id)).GetValueOrDefault();
+          return _context.Servicos.Any(e => e.ServicoId == id);
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    partial class ProjectDealContextModelSnapshot : ModelSnapshot
+    [Migration("20221102063542_NotRequiredServiceAtributes")]
+    partial class NotRequiredServiceAtributes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -258,6 +260,9 @@ namespace Deal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Categoria")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Cep")
                         .HasColumnType("longtext");
 
@@ -272,9 +277,6 @@ namespace Deal.Migrations
 
                     b.Property<string>("Estado")
                         .HasColumnType("longtext");
-
-                    b.Property<int?>("FkCategoria")
-                        .HasColumnType("int");
 
                     b.Property<int?>("FkCliente")
                         .HasColumnType("int");
@@ -295,8 +297,6 @@ namespace Deal.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("ServicoId");
-
-                    b.HasIndex("FkCategoria");
 
                     b.HasIndex("FkCliente");
 
@@ -396,15 +396,9 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.Servico", b =>
                 {
-                    b.HasOne("Deal.Models.AreaAtuacao", "Categoria")
-                        .WithMany()
-                        .HasForeignKey("FkCategoria");
-
                     b.HasOne("Deal.Models.Cliente", "Cliente")
                         .WithMany("Servicos")
                         .HasForeignKey("FkCliente");
-
-                    b.Navigation("Categoria");
 
                     b.Navigation("Cliente");
                 });

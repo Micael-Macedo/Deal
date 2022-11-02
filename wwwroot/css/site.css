@@ -277,3 +277,7 @@ h2{
   flex-wrap: wrap;
   justify-content: space-between;
 }
+.map {
+  width: 1000px;
+  height: 500px;
+}

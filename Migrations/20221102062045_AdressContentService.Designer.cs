@@ -3,6 +3,7 @@ using System;
 using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    partial class ProjectDealContextModelSnapshot : ModelSnapshot
+    [Migration("20221102062045_AdressContentService")]
+    partial class AdressContentService
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -258,45 +260,52 @@ namespace Deal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Cep")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Cidade")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Descricao")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Endereco")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Estado")
+                        .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int?>("FkCategoria")
-                        .HasColumnType("int");
 
                     b.Property<int?>("FkCliente")
                         .HasColumnType("int");
 
-                    b.Property<double?>("Latitude")
+                    b.Property<double>("Latitude")
                         .HasColumnType("double");
 
-                    b.Property<double?>("Longitude")
+                    b.Property<double>("Longitude")
                         .HasColumnType("double");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Numero")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("ServicoId");
-
-                    b.HasIndex("FkCategoria");
 
                     b.HasIndex("FkCliente");
 
@@ -396,15 +405,9 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.Servico", b =>
                 {
-                    b.HasOne("Deal.Models.AreaAtuacao", "Categoria")
-                        .WithMany()
-                        .HasForeignKey("FkCategoria");
-
                     b.HasOne("Deal.Models.Cliente", "Cliente")
                         .WithMany("Servicos")
                         .HasForeignKey("FkCliente");
-
-                    b.Navigation("Categoria");
 
                     b.Navigation("Cliente");
                 });
