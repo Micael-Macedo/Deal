@@ -45,7 +45,7 @@ namespace Deal.Controllers
         }
 
         // GET: Servicos/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId");
             return View();
@@ -56,7 +56,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ServicoId,FkCliente,Nome,Descricao,Localizacao,Cep,Categoria,Status")] Servico servico)
+        public async Task<IActionResult> Create([Bind("ServicoId,FkCliente,Nome,Descricao,Localizacao,Cep,Categoria,Status,Latitude,Longitude")] Servico servico)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ServicoId,FkCliente,Nome,Descricao,Localizacao,Cep,Categoria,Status")] Servico servico)
+        public async Task<IActionResult> Edit(int id, [Bind("ServicoId,FkCliente,Nome,Descricao,Localizacao,Cep,Categoria,Status,Latitude,Longitude")] Servico servico)
         {
             if (id != servico.ServicoId)
             {
@@ -161,7 +161,7 @@ namespace Deal.Controllers
 
         private bool ServicoExists(int id)
         {
-          return _context.Servicos.Any(e => e.ServicoId == id);
+          return (_context.Servicos?.Any(e => e.ServicoId == id)).GetValueOrDefault();
         }
     }
 }
