@@ -9,9 +9,9 @@ namespace Deal.Models
     public class Foto
     {
         public int FotoId { get; set; }
-        public string FotoPortfolio { get; set; }
+        public string FotoPrestador { get; set; }
         [ForeignKey("Portfolio")]
-        public int FkPortfolio;
-         public Portfolio Portfolio { get; set; }
+        public int? FkPortfolio { get; set; }
+        public virtual Portfolio Portifolio { get; set; }
     }
 }

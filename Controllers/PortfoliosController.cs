@@ -9,87 +9,85 @@ using Deal.Models;
 
 namespace Deal.Controllers
 {
-    public class FotoController : Controller
+    public class PortfoliosController : Controller
     {
         private readonly ProjectDealContext _context;
 
-        public FotoController(ProjectDealContext context)
+        public PortfoliosController(ProjectDealContext context)
         {
             _context = context;
         }
 
-        // GET: Foto
+        // GET: Portfolios
         public async Task<IActionResult> Index()
         {
-              return _context.Foto != null ? 
-                          View(await _context.Foto.ToListAsync()) :
-                          Problem("Entity set 'ProjectDealContext.Foto'  is null.");
+              return View(await _context.Portfolios.ToListAsync());
         }
 
-        // GET: Foto/Details/5
+        // GET: Portfolios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Foto == null)
+            if (id == null || _context.Portfolios == null)
             {
                 return NotFound();
             }
 
-            var foto = await _context.Foto
-                .FirstOrDefaultAsync(m => m.FotoId == id);
-            if (foto == null)
+            var portfolio = await _context.Portfolios
+                .FirstOrDefaultAsync(m => m.PortfolioId == id);
+            if (portfolio == null)
             {
                 return NotFound();
             }
 
-            return View(foto);
+            return View(portfolio);
         }
 
-        // GET: Foto/Create
+        // GET: Portfolios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Foto/Create
+        // POST: Portfolios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FotoId,FotoPortfolio")] Foto foto)
+        public async Task<IActionResult> Create([Bind("PortfolioId,Descricao,ExperienciaProfissional")] Portfolio portfolio)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(foto);
+                _context.Add(portfolio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(foto);
+            return View(portfolio);
         }
 
-        // GET: Foto/Edit/5
+        // GET: Portfolios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Foto == null)
+            if (id == null || _context.Portfolios == null)
             {
                 return NotFound();
             }
 
-            var foto = await _context.Foto.FindAsync(id);
-            if (foto == null)
+            var portfolio = await _context.Portfolios.FindAsync(id);
+            if (portfolio == null)
             {
                 return NotFound();
             }
-            return View(foto);
+            return View(portfolio);
         }
 
-        // POST: Foto/Edit/5
+        // POST: Portfolios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FotoId,FotoPortfolio")] Foto foto)
+        public async Task<IActionResult> Edit(int id, [Bind("PortfolioId,Descricao,ExperienciaProfissional")] Portfolio portfolio)
         {
-            if (id != foto.FotoId)
+            if (id != portfolio.PortfolioId)
             {
                 return NotFound();
             }
@@ -98,12 +96,12 @@ namespace Deal.Controllers
             {
                 try
                 {
-                    _context.Update(foto);
+                    _context.Update(portfolio);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FotoExists(foto.FotoId))
+                    if (!PortfolioExists(portfolio.PortfolioId))
                     {
                         return NotFound();
                     }
@@ -114,49 +112,49 @@ namespace Deal.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(foto);
+            return View(portfolio);
         }
 
-        // GET: Foto/Delete/5
+        // GET: Portfolios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Foto == null)
+            if (id == null || _context.Portfolios == null)
             {
                 return NotFound();
             }
 
-            var foto = await _context.Foto
-                .FirstOrDefaultAsync(m => m.FotoId == id);
-            if (foto == null)
+            var portfolio = await _context.Portfolios
+                .FirstOrDefaultAsync(m => m.PortfolioId == id);
+            if (portfolio == null)
             {
                 return NotFound();
             }
 
-            return View(foto);
+            return View(portfolio);
         }
 
-        // POST: Foto/Delete/5
+        // POST: Portfolios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Foto == null)
+            if (_context.Portfolios == null)
             {
-                return Problem("Entity set 'ProjectDealContext.Foto'  is null.");
+                return Problem("Entity set 'ProjectDealContext.Portfolios'  is null.");
             }
-            var foto = await _context.Foto.FindAsync(id);
-            if (foto != null)
+            var portfolio = await _context.Portfolios.FindAsync(id);
+            if (portfolio != null)
             {
-                _context.Foto.Remove(foto);
+                _context.Portfolios.Remove(portfolio);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FotoExists(int id)
+        private bool PortfolioExists(int id)
         {
-          return (_context.Foto?.Any(e => e.FotoId == id)).GetValueOrDefault();
+          return _context.Portfolios.Any(e => e.PortfolioId == id);
         }
     }
 }

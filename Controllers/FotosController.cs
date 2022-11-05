@@ -9,85 +9,85 @@ using Deal.Models;
 
 namespace Deal.Controllers
 {
-    public class VideoController : Controller
+    public class FotosController : Controller
     {
         private readonly ProjectDealContext _context;
 
-        public VideoController(ProjectDealContext context)
+        public FotosController(ProjectDealContext context)
         {
             _context = context;
         }
 
-        // GET: Video
+        // GET: Fotos
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Video.ToListAsync());
+              return View(await _context.Fotos.ToListAsync());
         }
 
-        // GET: Video/Details/5
+        // GET: Fotos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Video == null)
+            if (id == null || _context.Fotos == null)
             {
                 return NotFound();
             }
 
-            var video = await _context.Video
-                .FirstOrDefaultAsync(m => m.VideoId == id);
-            if (video == null)
+            var foto = await _context.Fotos
+                .FirstOrDefaultAsync(m => m.FotoId == id);
+            if (foto == null)
             {
                 return NotFound();
             }
 
-            return View(video);
+            return View(foto);
         }
 
-        // GET: Video/Create
+        // GET: Fotos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Video/Create
+        // POST: Fotos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VideoId,VideoPrestador,FkPortfolio")] Video video)
+        public async Task<IActionResult> Create([Bind("FotoId,FotoPrestador,FkPortfolio")] Foto foto)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(video);
+                _context.Add(foto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(video);
+            return View(foto);
         }
 
-        // GET: Video/Edit/5
+        // GET: Fotos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Video == null)
+            if (id == null || _context.Fotos == null)
             {
                 return NotFound();
             }
 
-            var video = await _context.Video.FindAsync(id);
-            if (video == null)
+            var foto = await _context.Fotos.FindAsync(id);
+            if (foto == null)
             {
                 return NotFound();
             }
-            return View(video);
+            return View(foto);
         }
 
-        // POST: Video/Edit/5
+        // POST: Fotos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VideoId,VideoPrestador,FkPortfolio")] Video video)
+        public async Task<IActionResult> Edit(int id, [Bind("FotoId,FotoPrestador,FkPortfolio")] Foto foto)
         {
-            if (id != video.VideoId)
+            if (id != foto.FotoId)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace Deal.Controllers
             {
                 try
                 {
-                    _context.Update(video);
+                    _context.Update(foto);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VideoExists(video.VideoId))
+                    if (!FotoExists(foto.FotoId))
                     {
                         return NotFound();
                     }
@@ -112,49 +112,49 @@ namespace Deal.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(video);
+            return View(foto);
         }
 
-        // GET: Video/Delete/5
+        // GET: Fotos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Video == null)
+            if (id == null || _context.Fotos == null)
             {
                 return NotFound();
             }
 
-            var video = await _context.Video
-                .FirstOrDefaultAsync(m => m.VideoId == id);
-            if (video == null)
+            var foto = await _context.Fotos
+                .FirstOrDefaultAsync(m => m.FotoId == id);
+            if (foto == null)
             {
                 return NotFound();
             }
 
-            return View(video);
+            return View(foto);
         }
 
-        // POST: Video/Delete/5
+        // POST: Fotos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Video == null)
+            if (_context.Fotos == null)
             {
-                return Problem("Entity set 'ProjectDealContext.Video'  is null.");
+                return Problem("Entity set 'ProjectDealContext.Fotos'  is null.");
             }
-            var video = await _context.Video.FindAsync(id);
-            if (video != null)
+            var foto = await _context.Fotos.FindAsync(id);
+            if (foto != null)
             {
-                _context.Video.Remove(video);
+                _context.Fotos.Remove(foto);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VideoExists(int id)
+        private bool FotoExists(int id)
         {
-          return _context.Video.Any(e => e.VideoId == id);
+          return _context.Fotos.Any(e => e.FotoId == id);
         }
     }
 }
