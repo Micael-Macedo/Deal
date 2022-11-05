@@ -1,8 +1,25 @@
 html {
   font-size: 14px;
 }
-
-@media (min-width: 768px) {
+@media screen and (max-width: 769px) {
+  #Desktop-Nav{
+    display: none;
+  }
+  #Mobile-Nav{
+    display: block;
+  }
+  
+  html {
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 768px) {
+  #Desktop-Nav{
+    display: block;
+  }
+  #Mobile-Nav{
+    display: none;
+  }
   html {
     font-size: 16px;
   }
@@ -71,7 +88,6 @@ nav img{
 }
 #NavContent{
   display: flex;
-  flex-direction: column;
 }
 #navMenuButton{
   background-color: var(--nav-button-menu-bg);
@@ -93,7 +109,7 @@ nav img{
   background-color: whitesmoke;
 }
 #NavMobile ul{
-  flex-direction: column;
+  flex-direction: row;
 }
 
 section{
