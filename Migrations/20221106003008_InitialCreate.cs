@@ -89,38 +89,6 @@ namespace Deal.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Servicos",
-                columns: table => new
-                {
-                    ServicoId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ClienteId = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Descricao = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Localizacao = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Cep = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Categoria = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Status = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Servicos", x => x.ServicoId);
-                    table.ForeignKey(
-                        name: "FK_Servicos_Clientes_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Clientes",
-                        principalColumn: "ClienteId",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Certificado",
                 columns: table => new
                 {
@@ -128,35 +96,36 @@ namespace Deal.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CertificadoFotoPortfolio = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PortfolioId = table.Column<int>(type: "int", nullable: true)
+                    FkPortfolio = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Certificado", x => x.CertificadoId);
                     table.ForeignKey(
-                        name: "FK_Certificado_Portfolios_PortfolioId",
-                        column: x => x.PortfolioId,
+                        name: "FK_Certificado_Portfolios_FkPortfolio",
+                        column: x => x.FkPortfolio,
                         principalTable: "Portfolios",
-                        principalColumn: "PortfolioId");
+                        principalColumn: "PortfolioId",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Foto",
+                name: "Fotos",
                 columns: table => new
                 {
                     FotoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FotoPortfolio = table.Column<string>(type: "longtext", nullable: false)
+                    FotoPrestador = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PortfolioId = table.Column<int>(type: "int", nullable: true)
+                    FkPortfolio = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Foto", x => x.FotoId);
+                    table.PrimaryKey("PK_Fotos", x => x.FotoId);
                     table.ForeignKey(
-                        name: "FK_Foto_Portfolios_PortfolioId",
-                        column: x => x.PortfolioId,
+                        name: "FK_Fotos_Portfolios_FkPortfolio",
+                        column: x => x.FkPortfolio,
                         principalTable: "Portfolios",
                         principalColumn: "PortfolioId");
                 })
@@ -168,7 +137,7 @@ namespace Deal.Migrations
                 {
                     PrestadorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PortfolioId = table.Column<int>(type: "int", nullable: false),
+                    FkPortfolio = table.Column<int>(type: "int", nullable: true),
                     Nome = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Cpf = table.Column<string>(type: "longtext", nullable: false)
@@ -190,11 +159,10 @@ namespace Deal.Migrations
                 {
                     table.PrimaryKey("PK_Prestadores", x => x.PrestadorId);
                     table.ForeignKey(
-                        name: "FK_Prestadores_Portfolios_PortfolioId",
-                        column: x => x.PortfolioId,
+                        name: "FK_Prestadores_Portfolios_FkPortfolio",
+                        column: x => x.FkPortfolio,
                         principalTable: "Portfolios",
-                        principalColumn: "PortfolioId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PortfolioId");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -204,57 +172,50 @@ namespace Deal.Migrations
                 {
                     VideoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    VideoPortfolio = table.Column<string>(type: "longtext", nullable: false)
+                    VideoPrestador = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PortfolioId = table.Column<int>(type: "int", nullable: true)
+                    FkPortfolio = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Video", x => x.VideoId);
                     table.ForeignKey(
-                        name: "FK_Video_Portfolios_PortfolioId",
-                        column: x => x.PortfolioId,
+                        name: "FK_Video_Portfolios_FkPortfolio",
+                        column: x => x.FkPortfolio,
                         principalTable: "Portfolios",
                         principalColumn: "PortfolioId");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Acordos",
+                name: "AreasDeAtuacaoDoPrestador",
                 columns: table => new
                 {
-                    AcordoId = table.Column<int>(type: "int", nullable: false)
+                    AreasDeAtuacaoDoPrestadorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ServicoId = table.Column<int>(type: "int", nullable: false),
-                    ClienteId = table.Column<int>(type: "int", nullable: false),
-                    PrestadorId = table.Column<int>(type: "int", nullable: false)
+                    FkPrestador = table.Column<int>(type: "int", nullable: false),
+                    FkAreaAtuacao = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Acordos", x => x.AcordoId);
+                    table.PrimaryKey("PK_AreasDeAtuacaoDoPrestador", x => x.AreasDeAtuacaoDoPrestadorId);
                     table.ForeignKey(
-                        name: "FK_Acordos_Clientes_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Clientes",
-                        principalColumn: "ClienteId",
+                        name: "FK_AreasDeAtuacaoDoPrestador_AreaAtuacao_FkAreaAtuacao",
+                        column: x => x.FkAreaAtuacao,
+                        principalTable: "AreaAtuacao",
+                        principalColumn: "AreaAtuacaoId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Acordos_Prestadores_PrestadorId",
-                        column: x => x.PrestadorId,
+                        name: "FK_AreasDeAtuacaoDoPrestador_Prestadores_FkPrestador",
+                        column: x => x.FkPrestador,
                         principalTable: "Prestadores",
                         principalColumn: "PrestadorId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Acordos_Servicos_ServicoId",
-                        column: x => x.ServicoId,
-                        principalTable: "Servicos",
-                        principalColumn: "ServicoId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Nota",
+                name: "Notas",
                 columns: table => new
                 {
                     NotaId = table.Column<int>(type: "int", nullable: false)
@@ -265,69 +226,172 @@ namespace Deal.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Nota", x => x.NotaId);
+                    table.PrimaryKey("PK_Notas", x => x.NotaId);
                     table.ForeignKey(
-                        name: "FK_Nota_Clientes_ClienteId",
+                        name: "FK_Notas_Clientes_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "Clientes",
                         principalColumn: "ClienteId");
                     table.ForeignKey(
-                        name: "FK_Nota_Prestadores_PrestadorId",
+                        name: "FK_Notas_Prestadores_PrestadorId",
                         column: x => x.PrestadorId,
                         principalTable: "Prestadores",
                         principalColumn: "PrestadorId");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Acordos_ClienteId",
-                table: "Acordos",
-                column: "ClienteId");
+            migrationBuilder.CreateTable(
+                name: "Servicos",
+                columns: table => new
+                {
+                    ServicoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    FkCliente = table.Column<int>(type: "int", nullable: true),
+                    Nome = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Descricao = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Endereco = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Estado = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Cidade = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Numero = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Cep = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FkCategoria = table.Column<int>(type: "int", nullable: true),
+                    FkPrestador = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Latitude = table.Column<double>(type: "double", nullable: true),
+                    Longitude = table.Column<double>(type: "double", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Servicos", x => x.ServicoId);
+                    table.ForeignKey(
+                        name: "FK_Servicos_AreaAtuacao_FkCategoria",
+                        column: x => x.FkCategoria,
+                        principalTable: "AreaAtuacao",
+                        principalColumn: "AreaAtuacaoId");
+                    table.ForeignKey(
+                        name: "FK_Servicos_Clientes_FkCliente",
+                        column: x => x.FkCliente,
+                        principalTable: "Clientes",
+                        principalColumn: "ClienteId");
+                    table.ForeignKey(
+                        name: "FK_Servicos_Prestadores_FkPrestador",
+                        column: x => x.FkPrestador,
+                        principalTable: "Prestadores",
+                        principalColumn: "PrestadorId");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Acordos",
+                columns: table => new
+                {
+                    AcordoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    FkServico = table.Column<int>(type: "int", nullable: false),
+                    FkCliente = table.Column<int>(type: "int", nullable: false),
+                    FkPrestador = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Acordos", x => x.AcordoId);
+                    table.ForeignKey(
+                        name: "FK_Acordos_Clientes_FkCliente",
+                        column: x => x.FkCliente,
+                        principalTable: "Clientes",
+                        principalColumn: "ClienteId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Acordos_Prestadores_FkPrestador",
+                        column: x => x.FkPrestador,
+                        principalTable: "Prestadores",
+                        principalColumn: "PrestadorId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Acordos_Servicos_FkServico",
+                        column: x => x.FkServico,
+                        principalTable: "Servicos",
+                        principalColumn: "ServicoId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Acordos_PrestadorId",
+                name: "IX_Acordos_FkCliente",
                 table: "Acordos",
-                column: "PrestadorId");
+                column: "FkCliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Acordos_ServicoId",
+                name: "IX_Acordos_FkPrestador",
                 table: "Acordos",
-                column: "ServicoId");
+                column: "FkPrestador");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Certificado_PortfolioId",
+                name: "IX_Acordos_FkServico",
+                table: "Acordos",
+                column: "FkServico");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AreasDeAtuacaoDoPrestador_FkAreaAtuacao",
+                table: "AreasDeAtuacaoDoPrestador",
+                column: "FkAreaAtuacao");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AreasDeAtuacaoDoPrestador_FkPrestador",
+                table: "AreasDeAtuacaoDoPrestador",
+                column: "FkPrestador");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Certificado_FkPortfolio",
                 table: "Certificado",
-                column: "PortfolioId");
+                column: "FkPortfolio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Foto_PortfolioId",
-                table: "Foto",
-                column: "PortfolioId");
+                name: "IX_Fotos_FkPortfolio",
+                table: "Fotos",
+                column: "FkPortfolio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Nota_ClienteId",
-                table: "Nota",
+                name: "IX_Notas_ClienteId",
+                table: "Notas",
                 column: "ClienteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Nota_PrestadorId",
-                table: "Nota",
+                name: "IX_Notas_PrestadorId",
+                table: "Notas",
                 column: "PrestadorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Prestadores_PortfolioId",
+                name: "IX_Prestadores_FkPortfolio",
                 table: "Prestadores",
-                column: "PortfolioId");
+                column: "FkPortfolio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Servicos_ClienteId",
+                name: "IX_Servicos_FkCategoria",
                 table: "Servicos",
-                column: "ClienteId");
+                column: "FkCategoria");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Video_PortfolioId",
+                name: "IX_Servicos_FkCliente",
+                table: "Servicos",
+                column: "FkCliente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Servicos_FkPrestador",
+                table: "Servicos",
+                column: "FkPrestador");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Video_FkPortfolio",
                 table: "Video",
-                column: "PortfolioId");
+                column: "FkPortfolio");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -336,16 +400,16 @@ namespace Deal.Migrations
                 name: "Acordos");
 
             migrationBuilder.DropTable(
-                name: "AreaAtuacao");
+                name: "AreasDeAtuacaoDoPrestador");
 
             migrationBuilder.DropTable(
                 name: "Certificado");
 
             migrationBuilder.DropTable(
-                name: "Foto");
+                name: "Fotos");
 
             migrationBuilder.DropTable(
-                name: "Nota");
+                name: "Notas");
 
             migrationBuilder.DropTable(
                 name: "NovasAreasAtuacoes");
@@ -357,10 +421,13 @@ namespace Deal.Migrations
                 name: "Servicos");
 
             migrationBuilder.DropTable(
-                name: "Prestadores");
+                name: "AreaAtuacao");
 
             migrationBuilder.DropTable(
                 name: "Clientes");
+
+            migrationBuilder.DropTable(
+                name: "Prestadores");
 
             migrationBuilder.DropTable(
                 name: "Portfolios");

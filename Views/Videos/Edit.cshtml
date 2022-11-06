@@ -1,4 +1,4 @@
-@model Deal.Models.Foto
+@model Deal.Models.Video
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,17 +6,17 @@
 
 <h1>Edit</h1>
 
-<h4>Foto</h4>
+<h4>Video</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="FotoId" />
+            <input type="hidden" asp-for="VideoId" />
             <div class="form-group">
-                <label asp-for="FotoPrestador" class="control-label"></label>
-                <input asp-for="FotoPrestador" class="form-control" />
-                <span asp-validation-for="FotoPrestador" class="text-danger"></span>
+                <label asp-for="VideoPrestador" class="control-label"></label>
+                <input asp-for="VideoPrestador" class="form-control" />
+                <span asp-validation-for="VideoPrestador" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FkPortfolio" class="control-label"></label>

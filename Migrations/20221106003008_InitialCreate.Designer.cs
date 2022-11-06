@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    [Migration("20221101023605_OptionalElementsClients")]
-    partial class OptionalElementsClients
+    [Migration("20221106003008_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,22 +27,22 @@ namespace Deal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ClienteId")
+                    b.Property<int>("FkCliente")
                         .HasColumnType("int");
 
-                    b.Property<int>("PrestadorId")
+                    b.Property<int>("FkPrestador")
                         .HasColumnType("int");
 
-                    b.Property<int>("ServicoId")
+                    b.Property<int>("FkServico")
                         .HasColumnType("int");
 
                     b.HasKey("AcordoId");
 
-                    b.HasIndex("ClienteId");
+                    b.HasIndex("FkCliente");
 
-                    b.HasIndex("PrestadorId");
+                    b.HasIndex("FkPrestador");
 
-                    b.HasIndex("ServicoId");
+                    b.HasIndex("FkServico");
 
                     b.ToTable("Acordos");
                 });
@@ -62,6 +62,27 @@ namespace Deal.Migrations
                     b.ToTable("AreaAtuacao");
                 });
 
+            modelBuilder.Entity("Deal.Models.AreasDeAtuacaoDoPrestador", b =>
+                {
+                    b.Property<int>("AreasDeAtuacaoDoPrestadorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("FkAreaAtuacao")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FkPrestador")
+                        .HasColumnType("int");
+
+                    b.HasKey("AreasDeAtuacaoDoPrestadorId");
+
+                    b.HasIndex("FkAreaAtuacao");
+
+                    b.HasIndex("FkPrestador");
+
+                    b.ToTable("AreasDeAtuacaoDoPrestador");
+                });
+
             modelBuilder.Entity("Deal.Models.Certificado", b =>
                 {
                     b.Property<int>("CertificadoId")
@@ -72,12 +93,12 @@ namespace Deal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("PortfolioId")
+                    b.Property<int>("FkPortfolio")
                         .HasColumnType("int");
 
                     b.HasKey("CertificadoId");
 
-                    b.HasIndex("PortfolioId");
+                    b.HasIndex("FkPortfolio");
 
                     b.ToTable("Certificado");
                 });
@@ -133,18 +154,18 @@ namespace Deal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("FotoPortfolio")
+                    b.Property<int?>("FkPortfolio")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FotoPrestador")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("PortfolioId")
-                        .HasColumnType("int");
-
                     b.HasKey("FotoId");
 
-                    b.HasIndex("PortfolioId");
+                    b.HasIndex("FkPortfolio");
 
-                    b.ToTable("Foto");
+                    b.ToTable("Fotos");
                 });
 
             modelBuilder.Entity("Deal.Models.Nota", b =>
@@ -168,7 +189,7 @@ namespace Deal.Migrations
 
                     b.HasIndex("PrestadorId");
 
-                    b.ToTable("Nota");
+                    b.ToTable("Notas");
                 });
 
             modelBuilder.Entity("Deal.Models.NovaAreaAtuacao", b =>
@@ -226,15 +247,15 @@ namespace Deal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("FkPortfolio")
+                        .HasColumnType("int");
+
                     b.Property<int>("Idade")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("PortfolioId")
-                        .HasColumnType("int");
 
                     b.Property<int>("QtdServicoRealizados")
                         .HasColumnType("int");
@@ -249,7 +270,7 @@ namespace Deal.Migrations
 
                     b.HasKey("PrestadorId");
 
-                    b.HasIndex("PortfolioId");
+                    b.HasIndex("FkPortfolio");
 
                     b.ToTable("Prestadores");
                 });
@@ -260,36 +281,52 @@ namespace Deal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Categoria")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Cep")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
+                    b.Property<string>("Cidade")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Descricao")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Localizacao")
-                        .IsRequired()
+                    b.Property<string>("Endereco")
                         .HasColumnType("longtext");
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("FkCategoria")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FkCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FkPrestador")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Latitude")
+                        .HasColumnType("double");
+
+                    b.Property<double?>("Longitude")
+                        .HasColumnType("double");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Numero")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("ServicoId");
 
-                    b.HasIndex("ClienteId");
+                    b.HasIndex("FkCategoria");
+
+                    b.HasIndex("FkCliente");
+
+                    b.HasIndex("FkPrestador");
 
                     b.ToTable("Servicos");
                 });
@@ -300,16 +337,16 @@ namespace Deal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("PortfolioId")
+                    b.Property<int?>("FkPortfolio")
                         .HasColumnType("int");
 
-                    b.Property<string>("VideoPortfolio")
+                    b.Property<string>("VideoPrestador")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("VideoId");
 
-                    b.HasIndex("PortfolioId");
+                    b.HasIndex("FkPortfolio");
 
                     b.ToTable("Video");
                 });
@@ -318,19 +355,19 @@ namespace Deal.Migrations
                 {
                     b.HasOne("Deal.Models.Cliente", "Cliente")
                         .WithMany()
-                        .HasForeignKey("ClienteId")
+                        .HasForeignKey("FkCliente")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Deal.Models.Prestador", "Prestador")
                         .WithMany()
-                        .HasForeignKey("PrestadorId")
+                        .HasForeignKey("FkPrestador")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Deal.Models.Servico", "Servico")
                         .WithMany()
-                        .HasForeignKey("ServicoId")
+                        .HasForeignKey("FkServico")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -341,18 +378,43 @@ namespace Deal.Migrations
                     b.Navigation("Servico");
                 });
 
+            modelBuilder.Entity("Deal.Models.AreasDeAtuacaoDoPrestador", b =>
+                {
+                    b.HasOne("Deal.Models.AreaAtuacao", "AreaAtuacao")
+                        .WithMany()
+                        .HasForeignKey("FkAreaAtuacao")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Deal.Models.Prestador", "Prestador")
+                        .WithMany("AreasDeAtuacaoDoPrestador")
+                        .HasForeignKey("FkPrestador")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AreaAtuacao");
+
+                    b.Navigation("Prestador");
+                });
+
             modelBuilder.Entity("Deal.Models.Certificado", b =>
                 {
-                    b.HasOne("Deal.Models.Portfolio", null)
+                    b.HasOne("Deal.Models.Portfolio", "Portfolio")
                         .WithMany("Certificados")
-                        .HasForeignKey("PortfolioId");
+                        .HasForeignKey("FkPortfolio")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Portfolio");
                 });
 
             modelBuilder.Entity("Deal.Models.Foto", b =>
                 {
-                    b.HasOne("Deal.Models.Portfolio", null)
+                    b.HasOne("Deal.Models.Portfolio", "Portfolio")
                         .WithMany("Fotos")
-                        .HasForeignKey("PortfolioId");
+                        .HasForeignKey("FkPortfolio");
+
+                    b.Navigation("Portfolio");
                 });
 
             modelBuilder.Entity("Deal.Models.Nota", b =>
@@ -370,29 +432,39 @@ namespace Deal.Migrations
                 {
                     b.HasOne("Deal.Models.Portfolio", "Portfolio")
                         .WithMany()
-                        .HasForeignKey("PortfolioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FkPortfolio");
 
                     b.Navigation("Portfolio");
                 });
 
             modelBuilder.Entity("Deal.Models.Servico", b =>
                 {
+                    b.HasOne("Deal.Models.AreaAtuacao", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("FkCategoria");
+
                     b.HasOne("Deal.Models.Cliente", "Cliente")
                         .WithMany("Servicos")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FkCliente");
+
+                    b.HasOne("Deal.Models.Prestador", "Prestador")
+                        .WithMany()
+                        .HasForeignKey("FkPrestador");
+
+                    b.Navigation("Categoria");
 
                     b.Navigation("Cliente");
+
+                    b.Navigation("Prestador");
                 });
 
             modelBuilder.Entity("Deal.Models.Video", b =>
                 {
-                    b.HasOne("Deal.Models.Portfolio", null)
+                    b.HasOne("Deal.Models.Portfolio", "Portfolio")
                         .WithMany("Videos")
-                        .HasForeignKey("PortfolioId");
+                        .HasForeignKey("FkPortfolio");
+
+                    b.Navigation("Portfolio");
                 });
 
             modelBuilder.Entity("Deal.Models.Cliente", b =>
@@ -413,6 +485,8 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.Prestador", b =>
                 {
+                    b.Navigation("AreasDeAtuacaoDoPrestador");
+
                     b.Navigation("Notas");
                 });
 #pragma warning restore 612, 618
