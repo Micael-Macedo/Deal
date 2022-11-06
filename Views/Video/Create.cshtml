@@ -13,9 +13,14 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="VideoPortfolio" class="control-label"></label>
-                <input asp-for="VideoPortfolio" class="form-control" />
-                <span asp-validation-for="VideoPortfolio" class="text-danger"></span>
+                <label asp-for="VideoPrestador" class="control-label"></label>
+                <input asp-for="VideoPrestador" class="form-control" />
+                <span asp-validation-for="VideoPrestador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FkPortfolio" class="control-label"></label>
+                <input asp-for="FkPortfolio" class="form-control" />
+                <span asp-validation-for="FkPortfolio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

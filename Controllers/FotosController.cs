@@ -9,32 +9,30 @@ using Deal.Models;
 
 namespace Deal.Controllers
 {
-    public class FotoController : Controller
+    public class FotosController : Controller
     {
         private readonly ProjectDealContext _context;
 
-        public FotoController(ProjectDealContext context)
+        public FotosController(ProjectDealContext context)
         {
             _context = context;
         }
 
-        // GET: Foto
+        // GET: Fotos
         public async Task<IActionResult> Index()
         {
-              return _context.Foto != null ? 
-                          View(await _context.Foto.ToListAsync()) :
-                          Problem("Entity set 'ProjectDealContext.Foto'  is null.");
+              return View(await _context.Fotos.ToListAsync());
         }
 
-        // GET: Foto/Details/5
+        // GET: Fotos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Foto == null)
+            if (id == null || _context.Fotos == null)
             {
                 return NotFound();
             }
 
-            var foto = await _context.Foto
+            var foto = await _context.Fotos
                 .FirstOrDefaultAsync(m => m.FotoId == id);
             if (foto == null)
             {
@@ -44,18 +42,18 @@ namespace Deal.Controllers
             return View(foto);
         }
 
-        // GET: Foto/Create
+        // GET: Fotos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Foto/Create
+        // POST: Fotos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FotoId,FotoPortfolio")] Foto foto)
+        public async Task<IActionResult> Create([Bind("FotoId,FotoPrestador,FkPortfolio")] Foto foto)
         {
             if (ModelState.IsValid)
             {
@@ -66,15 +64,15 @@ namespace Deal.Controllers
             return View(foto);
         }
 
-        // GET: Foto/Edit/5
+        // GET: Fotos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Foto == null)
+            if (id == null || _context.Fotos == null)
             {
                 return NotFound();
             }
 
-            var foto = await _context.Foto.FindAsync(id);
+            var foto = await _context.Fotos.FindAsync(id);
             if (foto == null)
             {
                 return NotFound();
@@ -82,12 +80,12 @@ namespace Deal.Controllers
             return View(foto);
         }
 
-        // POST: Foto/Edit/5
+        // POST: Fotos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FotoId,FotoPortfolio")] Foto foto)
+        public async Task<IActionResult> Edit(int id, [Bind("FotoId,FotoPrestador,FkPortfolio")] Foto foto)
         {
             if (id != foto.FotoId)
             {
@@ -117,15 +115,15 @@ namespace Deal.Controllers
             return View(foto);
         }
 
-        // GET: Foto/Delete/5
+        // GET: Fotos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Foto == null)
+            if (id == null || _context.Fotos == null)
             {
                 return NotFound();
             }
 
-            var foto = await _context.Foto
+            var foto = await _context.Fotos
                 .FirstOrDefaultAsync(m => m.FotoId == id);
             if (foto == null)
             {
@@ -135,19 +133,19 @@ namespace Deal.Controllers
             return View(foto);
         }
 
-        // POST: Foto/Delete/5
+        // POST: Fotos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Foto == null)
+            if (_context.Fotos == null)
             {
-                return Problem("Entity set 'ProjectDealContext.Foto'  is null.");
+                return Problem("Entity set 'ProjectDealContext.Fotos'  is null.");
             }
-            var foto = await _context.Foto.FindAsync(id);
+            var foto = await _context.Fotos.FindAsync(id);
             if (foto != null)
             {
-                _context.Foto.Remove(foto);
+                _context.Fotos.Remove(foto);
             }
             
             await _context.SaveChangesAsync();
@@ -156,7 +154,7 @@ namespace Deal.Controllers
 
         private bool FotoExists(int id)
         {
-          return (_context.Foto?.Any(e => e.FotoId == id)).GetValueOrDefault();
+          return _context.Fotos.Any(e => e.FotoId == id);
         }
     }
 }

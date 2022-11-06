@@ -21,9 +21,9 @@ namespace Deal.Controllers
         // GET: Portfolios
         public async Task<IActionResult> Index()
         {
-              return _context.Portfolios != null ? 
-                          View(await _context.Portfolios.ToListAsync()) :
-                          Problem("Entity set 'ProjectDealContext.Portfolios'  is null.");
+
+              return View(await _context.Portfolios.ToListAsync());
+
         }
 
         // GET: Portfolios/Details/5
@@ -156,7 +156,8 @@ namespace Deal.Controllers
 
         private bool PortfolioExists(int id)
         {
-          return (_context.Portfolios?.Any(e => e.PortfolioId == id)).GetValueOrDefault();
+          return _context.Portfolios.Any(e => e.PortfolioId == id);
+
         }
     }
 }

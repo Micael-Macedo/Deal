@@ -3,6 +3,7 @@ using System;
 using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    partial class ProjectDealContextModelSnapshot : ModelSnapshot
+    [Migration("20221105234718_UpdateFkToPortfolio")]
+    partial class UpdateFkToPortfolio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,7 +168,7 @@ namespace Deal.Migrations
 
                     b.HasIndex("PortifolioPortfolioId");
 
-                    b.ToTable("Fotos");
+                    b.ToTable("Foto");
                 });
 
             modelBuilder.Entity("Deal.Models.Nota", b =>
@@ -190,7 +192,7 @@ namespace Deal.Migrations
 
                     b.HasIndex("PrestadorId");
 
-                    b.ToTable("Notas");
+                    b.ToTable("Nota");
                 });
 
             modelBuilder.Entity("Deal.Models.NovaAreaAtuacao", b =>

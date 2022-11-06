@@ -21,9 +21,7 @@ namespace Deal.Controllers
         // GET: Video
         public async Task<IActionResult> Index()
         {
-              return _context.Video != null ? 
-                          View(await _context.Video.ToListAsync()) :
-                          Problem("Entity set 'ProjectDealContext.Video'  is null.");
+              return View(await _context.Video.ToListAsync());
         }
 
         // GET: Video/Details/5
@@ -55,7 +53,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VideoId,VideoPortfolio")] Video video)
+        public async Task<IActionResult> Create([Bind("VideoId,VideoPrestador,FkPortfolio")] Video video)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +85,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VideoId,VideoPortfolio")] Video video)
+        public async Task<IActionResult> Edit(int id, [Bind("VideoId,VideoPrestador,FkPortfolio")] Video video)
         {
             if (id != video.VideoId)
             {
@@ -156,7 +154,7 @@ namespace Deal.Controllers
 
         private bool VideoExists(int id)
         {
-          return (_context.Video?.Any(e => e.VideoId == id)).GetValueOrDefault();
+          return _context.Video.Any(e => e.VideoId == id);
         }
     }
 }

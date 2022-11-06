@@ -9,32 +9,30 @@ using Deal.Models;
 
 namespace Deal.Controllers
 {
-    public class NotaController : Controller
+    public class NotasController : Controller
     {
         private readonly ProjectDealContext _context;
 
-        public NotaController(ProjectDealContext context)
+        public NotasController(ProjectDealContext context)
         {
             _context = context;
         }
 
-        // GET: Nota
+        // GET: Notas
         public async Task<IActionResult> Index()
         {
-              return _context.Nota != null ? 
-                          View(await _context.Nota.ToListAsync()) :
-                          Problem("Entity set 'ProjectDealContext.Nota'  is null.");
+              return View(await _context.Notas.ToListAsync());
         }
 
-        // GET: Nota/Details/5
+        // GET: Notas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Nota == null)
+            if (id == null || _context.Notas == null)
             {
                 return NotFound();
             }
 
-            var nota = await _context.Nota
+            var nota = await _context.Notas
                 .FirstOrDefaultAsync(m => m.NotaId == id);
             if (nota == null)
             {
@@ -44,13 +42,13 @@ namespace Deal.Controllers
             return View(nota);
         }
 
-        // GET: Nota/Create
+        // GET: Notas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Nota/Create
+        // POST: Notas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -66,15 +64,15 @@ namespace Deal.Controllers
             return View(nota);
         }
 
-        // GET: Nota/Edit/5
+        // GET: Notas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Nota == null)
+            if (id == null || _context.Notas == null)
             {
                 return NotFound();
             }
 
-            var nota = await _context.Nota.FindAsync(id);
+            var nota = await _context.Notas.FindAsync(id);
             if (nota == null)
             {
                 return NotFound();
@@ -82,7 +80,7 @@ namespace Deal.Controllers
             return View(nota);
         }
 
-        // POST: Nota/Edit/5
+        // POST: Notas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -117,15 +115,15 @@ namespace Deal.Controllers
             return View(nota);
         }
 
-        // GET: Nota/Delete/5
+        // GET: Notas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Nota == null)
+            if (id == null || _context.Notas == null)
             {
                 return NotFound();
             }
 
-            var nota = await _context.Nota
+            var nota = await _context.Notas
                 .FirstOrDefaultAsync(m => m.NotaId == id);
             if (nota == null)
             {
@@ -135,19 +133,19 @@ namespace Deal.Controllers
             return View(nota);
         }
 
-        // POST: Nota/Delete/5
+        // POST: Notas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Nota == null)
+            if (_context.Notas == null)
             {
-                return Problem("Entity set 'ProjectDealContext.Nota'  is null.");
+                return Problem("Entity set 'ProjectDealContext.Notas'  is null.");
             }
-            var nota = await _context.Nota.FindAsync(id);
+            var nota = await _context.Notas.FindAsync(id);
             if (nota != null)
             {
-                _context.Nota.Remove(nota);
+                _context.Notas.Remove(nota);
             }
             
             await _context.SaveChangesAsync();
@@ -156,7 +154,7 @@ namespace Deal.Controllers
 
         private bool NotaExists(int id)
         {
-          return (_context.Nota?.Any(e => e.NotaId == id)).GetValueOrDefault();
+          return _context.Notas.Any(e => e.NotaId == id);
         }
     }
 }

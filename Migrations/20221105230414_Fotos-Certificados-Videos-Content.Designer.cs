@@ -3,6 +3,7 @@ using System;
 using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    partial class ProjectDealContextModelSnapshot : ModelSnapshot
+    [Migration("20221105230414_Fotos-Certificados-Videos-Content")]
+    partial class FotosCertificadosVideosContent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,19 +154,16 @@ namespace Deal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("FkPortfolio")
+                    b.Property<int>("FkPortfolio")
                         .HasColumnType("int");
 
-                    b.Property<string>("FotoPrestador")
+                    b.Property<string>("FotoPortfolio")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("PortifolioPortfolioId")
-                        .HasColumnType("int");
-
                     b.HasKey("FotoId");
 
-                    b.HasIndex("PortifolioPortfolioId");
+                    b.HasIndex("FkPortfolio");
 
                     b.ToTable("Fotos");
                 });
@@ -190,7 +189,7 @@ namespace Deal.Migrations
 
                     b.HasIndex("PrestadorId");
 
-                    b.ToTable("Notas");
+                    b.ToTable("Nota");
                 });
 
             modelBuilder.Entity("Deal.Models.NovaAreaAtuacao", b =>
@@ -258,7 +257,7 @@ namespace Deal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("QtdServicoRealizados")
+                    b.Property<int?>("QtdServicoRealizados")
                         .HasColumnType("int");
 
                     b.Property<string>("Senha")
@@ -338,19 +337,16 @@ namespace Deal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("FkPortfolio")
+                    b.Property<int>("FkPortfolio")
                         .HasColumnType("int");
 
-                    b.Property<int>("PortifolioPortfolioId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("VideoPrestador")
+                    b.Property<string>("VideoPortfolio")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("VideoId");
 
-                    b.HasIndex("PortifolioPortfolioId");
+                    b.HasIndex("FkPortfolio");
 
                     b.ToTable("Video");
                 });
@@ -414,13 +410,13 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.Foto", b =>
                 {
-                    b.HasOne("Deal.Models.Portfolio", "Portifolio")
+                    b.HasOne("Deal.Models.Portfolio", "Portfolio")
                         .WithMany("Fotos")
-                        .HasForeignKey("PortifolioPortfolioId")
+                        .HasForeignKey("FkPortfolio")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Portifolio");
+                    b.Navigation("Portfolio");
                 });
 
             modelBuilder.Entity("Deal.Models.Nota", b =>
@@ -466,13 +462,13 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.Video", b =>
                 {
-                    b.HasOne("Deal.Models.Portfolio", "Portifolio")
+                    b.HasOne("Deal.Models.Portfolio", "Portfolio")
                         .WithMany("Videos")
-                        .HasForeignKey("PortifolioPortfolioId")
+                        .HasForeignKey("FkPortfolio")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Portifolio");
+                    b.Navigation("Portfolio");
                 });
 
             modelBuilder.Entity("Deal.Models.Cliente", b =>
