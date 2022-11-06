@@ -21,7 +21,8 @@ namespace Deal.Controllers
         // GET: Fotos
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Fotos.ToListAsync());
+            var projectDealContext = _context.Fotos.Include(f => f.Portfolio);
+            return View(await projectDealContext.ToListAsync());
         }
 
         // GET: Fotos/Details/5
@@ -33,6 +34,7 @@ namespace Deal.Controllers
             }
 
             var foto = await _context.Fotos
+                .Include(f => f.Portfolio)
                 .FirstOrDefaultAsync(m => m.FotoId == id);
             if (foto == null)
             {
@@ -45,6 +47,7 @@ namespace Deal.Controllers
         // GET: Fotos/Create
         public IActionResult Create()
         {
+            ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId");
             return View();
         }
 
@@ -61,6 +64,7 @@ namespace Deal.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", foto.FkPortfolio);
             return View(foto);
         }
 
@@ -77,6 +81,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", foto.FkPortfolio);
             return View(foto);
         }
 
@@ -112,6 +117,7 @@ namespace Deal.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", foto.FkPortfolio);
             return View(foto);
         }
 
@@ -124,6 +130,7 @@ namespace Deal.Controllers
             }
 
             var foto = await _context.Fotos
+                .Include(f => f.Portfolio)
                 .FirstOrDefaultAsync(m => m.FotoId == id);
             if (foto == null)
             {

@@ -1,4 +1,4 @@
-@model IEnumerable<Deal.Models.Foto>
+@model IEnumerable<Deal.Models.Video>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FotoPrestador)
+                @Html.DisplayNameFor(model => model.VideoPrestador)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Portfolio)
@@ -25,15 +25,15 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FotoPrestador)
+                @Html.DisplayFor(modelItem => item.VideoPrestador)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Portfolio.PortfolioId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.FotoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FotoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FotoId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.VideoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.VideoId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.VideoId">Delete</a>
             </td>
         </tr>
 }

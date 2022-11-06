@@ -9,22 +9,23 @@ using Deal.Models;
 
 namespace Deal.Controllers
 {
-    public class VideoController : Controller
+    public class VideosController : Controller
     {
         private readonly ProjectDealContext _context;
 
-        public VideoController(ProjectDealContext context)
+        public VideosController(ProjectDealContext context)
         {
             _context = context;
         }
 
-        // GET: Video
+        // GET: Videos
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Video.ToListAsync());
+            var projectDealContext = _context.Video.Include(v => v.Portfolio);
+            return View(await projectDealContext.ToListAsync());
         }
 
-        // GET: Video/Details/5
+        // GET: Videos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Video == null)
@@ -33,6 +34,7 @@ namespace Deal.Controllers
             }
 
             var video = await _context.Video
+                .Include(v => v.Portfolio)
                 .FirstOrDefaultAsync(m => m.VideoId == id);
             if (video == null)
             {
@@ -42,13 +44,14 @@ namespace Deal.Controllers
             return View(video);
         }
 
-        // GET: Video/Create
+        // GET: Videos/Create
         public IActionResult Create()
         {
+            ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId");
             return View();
         }
 
-        // POST: Video/Create
+        // POST: Videos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -61,10 +64,11 @@ namespace Deal.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", video.FkPortfolio);
             return View(video);
         }
 
-        // GET: Video/Edit/5
+        // GET: Videos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Video == null)
@@ -77,10 +81,11 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", video.FkPortfolio);
             return View(video);
         }
 
-        // POST: Video/Edit/5
+        // POST: Videos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -112,10 +117,11 @@ namespace Deal.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", video.FkPortfolio);
             return View(video);
         }
 
-        // GET: Video/Delete/5
+        // GET: Videos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Video == null)
@@ -124,6 +130,7 @@ namespace Deal.Controllers
             }
 
             var video = await _context.Video
+                .Include(v => v.Portfolio)
                 .FirstOrDefaultAsync(m => m.VideoId == id);
             if (video == null)
             {
@@ -133,7 +140,7 @@ namespace Deal.Controllers
             return View(video);
         }
 
-        // POST: Video/Delete/5
+        // POST: Videos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
