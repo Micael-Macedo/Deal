@@ -53,7 +53,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClienteId,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdAcordoRealizados")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("ClienteId,FotoUsuario,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdAcordoRealizados")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdAcordoRealizados")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,FotoUsuario,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdAcordoRealizados")] Cliente cliente)
         {
             if (id != cliente.ClienteId)
             {
@@ -150,21 +150,6 @@ namespace Deal.Controllers
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> CadastroServico(int? id)
-        {
-            if (id == null || _context.Clientes == null)
-            {
-                return NotFound();
-            }
-
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-            return View(cliente);
         }
 
         private bool ClienteExists(int id)
