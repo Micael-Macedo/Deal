@@ -45,6 +45,16 @@ namespace Deal.Controllers
         }
 
         // GET: Prestadores/Create
+        public IActionResult BuscarServicos()
+        {
+            Servico = new Servico();
+            if(_context.Servico.Status("Dispoível")){
+                ViewData["FkServico"] = new SelectList(_context.Servico, "ServicoId", "ServicoId");
+                return View();
+            }
+        }
+        
+
         public IActionResult Create()
         {
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId");

@@ -10021,19 +10021,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\micae\\.nuget\\packages\\": {}
+    "C:\\Users\\vini2\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projetos\\Deal\\Deal.csproj",
+      "projectUniqueName": "c:\\Users\\vini2\\Downloads\\PROJETOS\\Deal\\Deal.csproj",
       "projectName": "Deal",
-      "projectPath": "C:\\Projetos\\Deal\\Deal.csproj",
-      "packagesPath": "C:\\Users\\micae\\.nuget\\packages\\",
-      "outputPath": "C:\\Projetos\\Deal\\obj\\",
+      "projectPath": "c:\\Users\\vini2\\Downloads\\PROJETOS\\Deal\\Deal.csproj",
+      "packagesPath": "C:\\Users\\vini2\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\vini2\\Downloads\\PROJETOS\\Deal\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\micae\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\vini2\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -10103,7 +10103,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

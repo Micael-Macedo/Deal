@@ -13,6 +13,8 @@ namespace Deal.Models
         public string FotoPrestador { get; set; }
         [ForeignKey("Portfolio")]
         public int? FkPortfolio { get; set; }
+        [ForeignKey("Servico")]
+        public int? FkServico { get; set; }
         public Portfolio? Portfolio { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
