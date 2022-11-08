@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.FotoPrestador)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Portfolio)
             </th>
             <th>
@@ -48,6 +51,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+               <img src="@Html.DisplayFor(modelItem => item.FotoPrestador)" alt="" srcset=""> 
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Portfolio.PortfolioId)
             </td>
