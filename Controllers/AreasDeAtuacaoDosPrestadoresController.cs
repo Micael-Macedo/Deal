@@ -164,6 +164,17 @@ namespace Deal.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> ListPrestadores(int? id)
+        {
+            if (id == null || _context.Prestadores == null)
+            {
+                return NotFound();
+            }
+            Servico servico = new Servico();
+            servico = _context.Servicos.Find(id);
+            var projectDealContext = _context.AreasDeAtuacaoDoPrestador.Where(a => a.FkAreaAtuacao == servico.FkCategoria).Include(a => a.AreaAtuacao).Include(a => a.Prestador);
+            return View(await projectDealContext.ToListAsync());
+        }
 
         private bool AreasDeAtuacaoDoPrestadorExists(int id)
         {
