@@ -22,5 +22,6 @@ namespace Deal.Models
         public DbSet<Certificado>? Certificado { get; set; }
         public DbSet<Foto>? Fotos { get; set; }
         public DbSet<Nota>? Notas { get; set; }
+        public DbSet<AreasDeAtuacaoDoPrestador>? AreasDeAtuacaoDoPrestador { get; set; }
     }
 }

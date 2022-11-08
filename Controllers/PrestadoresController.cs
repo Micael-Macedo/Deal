@@ -56,7 +56,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrestadorId,FkPortfolio,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdServicoRealizados")] Prestador prestador)
+        public async Task<IActionResult> Create([Bind("PrestadorId,FotoPrestador,FkPortfolio,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdServicoRealizados")] Prestador prestador)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrestadorId,FkPortfolio,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdServicoRealizados")] Prestador prestador)
+        public async Task<IActionResult> Edit(int id, [Bind("PrestadorId,FotoPrestador,FkPortfolio,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdServicoRealizados")] Prestador prestador)
         {
             if (id != prestador.PrestadorId)
             {
@@ -158,18 +158,6 @@ namespace Deal.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public async Task<IActionResult> ListPrestador(int? id)
-        {
-            if (id == null || _context.Prestadores == null)
-            {
-                return NotFound();
-            }
-            Servico servico = new Servico();
-            servico = _context.Servicos.Find(id);
-            var projectDealContext = _context.Prestadores.Where(P => P.AreasDeAtuacaoDoPrestador.Any(A => A.AreaAtuacao == servico.Categoria)).Include(p => p.Portfolio);
-            return View(await projectDealContext.ToListAsync());
-        }
-
         private bool PrestadorExists(int id)
         {
           return _context.Prestadores.Any(e => e.PrestadorId == id);
