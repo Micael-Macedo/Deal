@@ -34,14 +34,3 @@ app.MapControllerRoute(
 
 app.Run();
 
-public async Task<IActionResult> ListPrestador(int? id)
-        {
-            if (id == null || _context.Prestadores == null)
-            {
-                return NotFound();
-            }
-            Servico servico = new Servico();
-            servico = _context.Servicos.Find(id);
-            var projectDealContext = _context.Prestadores.Where(P => P.AreasDeAtuacaoDoPrestador.Any(A => A.AreaAtuacao == servico.Categoria)).Include(p => p.Portfolio);
-            return View(await projectDealContext.ToListAsync());
-        }

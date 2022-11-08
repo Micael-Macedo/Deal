@@ -79,7 +79,7 @@
                 @Html.DisplayFor(modelItem => item.Cep)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Categoria.AreaAtuacaoId)
+                @Html.DisplayFor(modelItem => item.Categoria.Atuacao)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
@@ -93,7 +93,8 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ServicoId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ServicoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ServicoId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.ServicoId">Delete</a> |
+                <a asp-controller="Prestadores" asp-action="ListPrestadores" asp-route-id="@item.ServicoId">Selecionar Prestador</a>
             </td>
         </tr>
 }
