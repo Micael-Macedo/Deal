@@ -173,6 +173,34 @@ namespace Deal.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> AddPrestador(int? id)
+        {
+            if (id == null || _context.Servicos == null)
+            {
+                return NotFound();
+            }
+            var servico = await _context.Servicos.FindAsync(id);
+            List<AreasDeAtuacaoDoPrestador> listPrestadoresDisponiveis = _context.AreasDeAtuacaoDoPrestador.Where(A => A.FkAreaAtuacao == servico.FkCategoria).ToList();
+            List<int?> IdPrestadores = new List<int?>();
+            foreach (var item in listPrestadoresDisponiveis)
+            {
+                IdPrestadores.Add(item.FkPrestador);
+            }
+            List<Prestador> prestadoresFiltrados = new List<Prestador>();
+            foreach (var item in IdPrestadores)
+            {
+                prestadoresFiltrados.Add(_context.Prestadores.Find(item));
+            }
+            if (servico == null)
+            {
+                return NotFound();
+            }
+            ViewData["Prestadores"]= prestadoresFiltrados;
+            ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
+            ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
+
+            return View(servico);
+        }
         private bool ServicoExists(int id)
         {
           return _context.Servicos.Any(e => e.ServicoId == id);
