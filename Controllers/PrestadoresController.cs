@@ -166,29 +166,23 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            var servico = await _context.Servicos.FindAsync(id);
-            List<Prestador> listServicosDisponiveis = _context.Prestadores.Where(A => A.AreasDeAtuacaoDoPrestador == servico.Categoria).ToList();
-            List<int?> IdServicos= new List<int?>();
-            foreach (var item in listServicosDisponiveis)
+            var prestador = await _context.Prestadores.FindAsync(id);
+            List<AreasDeAtuacaoDoPrestador> listAreasDeAtuacao = _context.AreasDeAtuacaoDoPrestador.Where(A => A.FkPrestador == prestador.PrestadorId).ToList();
+            List<int?> IdAreasDeAtuacao= new List<int?>();
+            foreach (var item in listAreasDeAtuacao)
             {
-                if (servico.Status == "Dispoível")
-                {
-                    IdServicos.Add(item.PrestadorId);
-                }  
+                IdAreasDeAtuacao.Add(item.FkAreaAtuacao);
             }
-            List<Servico> ServicosEncontrados = new List<Servico>();
-            foreach (var item in IdServicos)
-            {
-                ServicosEncontrados.Add(_context.Servicos.Find(item));
+            List<Servico> servicos = new List<Servico>();
+            foreach(var item in IdAreasDeAtuacao){
+                servicos.AddRange(_context.Servicos.Where(S => S.FkCategoria == item).ToList());
             }
-            if (servico == null)
-            {
-                return NotFound();
-            }
-            ViewData["Servicos"]= ServicosEncontrados;
-            ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
-            return View(servico);
+            List<Servico> servicosFiltrados = servicos.Where(s => s.Status == "Solicitado").ToList();
+            ViewData["Servicos"]= servicosFiltrados;
+
+            return View(prestador);
         }
+
         private bool PrestadorExists(int id)
         {
           return _context.Prestadores.Any(e => e.PrestadorId == id);
