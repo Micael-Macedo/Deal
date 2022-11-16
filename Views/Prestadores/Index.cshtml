@@ -52,7 +52,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-               <img src="@Html.DisplayFor(modelItem => item.FotoPrestador)" alt="" srcset=""> 
+               <img width="300px" height="300px" src="@Html.DisplayFor(modelItem => item.FotoPrestador)" alt="" srcset=""> 
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Portfolio.PortfolioId)

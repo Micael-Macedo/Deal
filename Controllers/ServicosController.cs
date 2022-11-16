@@ -295,6 +295,35 @@ namespace Deal.Controllers
 
             return View(servico);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddPrestador(int? servicoId, int? prestadorId){
+            
+            if (ModelState.IsValid)
+            {
+                Servico servico = _context.Servicos.Find(servicoId);
+                try
+                {
+                    servico.FkPrestador = prestadorId;
+                    servico.Status = "Convite enviado";
+                    _context.Update(servico);
+                    await _context.SaveChangesAsync();
+                }
+                catch(DbUpdateConcurrencyException){
+                    if (!ServicoExists(servico.ServicoId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+            
+        }
         private bool ServicoExists(int id)
         {
             return _context.Servicos.Any(e => e.ServicoId == id);
