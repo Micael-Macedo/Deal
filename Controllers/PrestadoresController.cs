@@ -139,6 +139,7 @@ namespace Deal.Controllers
 
             return View(prestador);
         }
+        
 
         // POST: Prestadores/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -157,6 +158,36 @@ namespace Deal.Controllers
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> FindService(int? id)
+        {
+            if (id == null || _context.Servicos == null)
+            {
+                return NotFound();
+            }
+            var servico = await _context.Servicos.FindAsync(id);
+            List<Prestador> listServicosDisponiveis = _context.Prestadores.Where(A => A.AreasDeAtuacaoDoPrestador == servico.Categoria).ToList();
+            List<int?> IdServicos= new List<int?>();
+            foreach (var item in listServicosDisponiveis)
+            {
+                if (servico.Status == "Dispoível")
+                {
+                    IdServicos.Add(item.PrestadorId);
+                }  
+            }
+            List<Servico> ServicosEncontrados = new List<Servico>();
+            foreach (var item in IdServicos)
+            {
+                ServicosEncontrados.Add(_context.Servicos.Find(item));
+            }
+            if (servico == null)
+            {
+                return NotFound();
+            }
+            ViewData["Servicos"]= ServicosEncontrados;
+            ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
+            return View(servico);
         }
         private bool PrestadorExists(int id)
         {

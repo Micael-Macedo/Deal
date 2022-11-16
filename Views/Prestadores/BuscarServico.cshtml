@@ -1,0 +1,71 @@
+@model Deal.Models.Servico
+
+@{
+    ViewData["Title"] = "Details";
+    Servico prestador = new Servico();
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Servico</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cep)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cep)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+        
+    </dl>
+</div>
+
+<table>
+    @foreach (var item in ViewData["Servicos"] as IList<Servico>)
+    {
+        <thead>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>CEP</th>
+            <th>Endereço</th>
+        </thead>
+        <tbody>
+            <td>
+                @item.Nome
+            </td>
+            <td>
+                @item.Descricao
+            </td>
+            <td>
+                @item.Cep
+            </td>
+            <td>
+                @item.Endereco
+            </td>
+        </tbody>
+
+    }
+</table>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ServicoId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
