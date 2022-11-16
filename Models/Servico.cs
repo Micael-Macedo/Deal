@@ -30,5 +30,14 @@ namespace Deal.Models
         public string? Status { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
+
+        public bool ClienteCancelaServico(){
+            this.Cliente.ServicosCancelados++;
+            if(this.Cliente.ServicosCancelados == 5){
+                this.Cliente.ServicosCancelados = 0;
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace Deal.Models
         public string Telefone { get; set; }
         public string Senha { get; set; }
         public string Email { get; set; }
-        public ICollection<Nota>? Notas { get; set; } //Criar método média, ArrayNotas sempre começa com 5.0 de nota
+        public ICollection<NotaPrestador>? Notas { get; set; } //Criar método média, ArrayNotas sempre começa com 5.0 de nota
         public ICollection<AreasDeAtuacaoDoPrestador>? AreasDeAtuacaoDoPrestador { get; set; }
         public int QtdServicoRealizados { get; set; }
 
