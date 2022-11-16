@@ -53,8 +53,8 @@ namespace Deal.Controllers
                 return NotFound();
             }
             int ClienteId = _context.Clientes.Where(c => c.ClienteId == id).FirstOrDefault().ClienteId;
-            Servico servico = new Servico(){FkCliente = ClienteId};
-            
+            Servico servico = new Servico() { FkCliente = ClienteId };
+
             ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId");
             return View(servico);
@@ -153,6 +153,45 @@ namespace Deal.Controllers
 
             return View(servico);
         }
+        // GET: Cliente/Delete/5
+        public async Task<IActionResult> ClienteCancelaServico(int? id)
+        {
+            if (id == null || _context.Servicos == null)
+            {
+                return NotFound();
+            }
+
+            var servico = await _context.Servicos
+                .Include(s => s.Categoria)
+                .Include(s => s.Cliente)
+                .FirstOrDefaultAsync(m => m.ServicoId == id);
+            if (servico == null)
+            {
+                return NotFound();
+            }
+
+            return View(servico);
+        }
+        // GET: Servicos/Delete/5
+        public async Task<IActionResult> PrestadorCancelaServico(int? id)
+        {
+            if (id == null || _context.Servicos == null)
+            {
+                return NotFound();
+            }
+
+            var servico = await _context.Servicos
+                .Include(s => s.Categoria)
+                .Include(s => s.Cliente)
+                .FirstOrDefaultAsync(m => m.ServicoId == id);
+            if (servico == null)
+            {
+                return NotFound();
+            }
+            ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
+            ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId");
+            return View(servico);
+        }
 
         // POST: Servicos/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -168,11 +207,66 @@ namespace Deal.Controllers
             {
                 _context.Servicos.Remove(servico);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        // POST: Servicos/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ClienteCancelarServico(int id)
+        {
+            if (_context.Servicos == null)
+            {
+                return Problem("Entity set 'ProjectDealContext.Servicos'  is null.");
+            }
+            var servico = await _context.Servicos.FindAsync(id);
+            if (servico != null)
+            {
+                _context.Servicos.Remove(servico);
+            }
 
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        // POST: Servicos/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PrestadorCancelaServico(int id, [Bind("ServicoId,FkCliente,Nome,Descricao,Endereco,Estado,Cidade,Numero,Cep,FkCategoria,Status,Latitude,Longitude")] Servico servico)
+        {
+            if (id != servico.ServicoId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    servico.Status = "PrestadorCancelouServico";
+                    servico.FkPrestador = null;
+                    _context.Update(servico);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ServicoExists(servico.ServicoId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
+            ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
+            return View(servico);
+        }
         public async Task<IActionResult> AddPrestador(int? id)
         {
             if (id == null || _context.Servicos == null)
@@ -195,7 +289,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            ViewData["Prestadores"]= prestadoresFiltrados;
+            ViewData["Prestadores"] = prestadoresFiltrados;
             ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
 
@@ -203,7 +297,7 @@ namespace Deal.Controllers
         }
         private bool ServicoExists(int id)
         {
-          return _context.Servicos.Any(e => e.ServicoId == id);
+            return _context.Servicos.Any(e => e.ServicoId == id);
         }
     }
 }
