@@ -108,6 +108,18 @@
             <td>
                 @item.Email
             </td>
+            <td>
+                <a asp-controller="Prestadores" asp-action="Details" asp-route-id="@item.PrestadorId">Ver Prestador</a> |
+            </td>
+            <td>
+                <form asp-action="AddPrestador" method="post">
+                    <input name="servicoId" asp-for="ServicoId" />
+                    <input name="prestadorId" value="@item.PrestadorId">
+                    <div class="form-group">
+                        <input type="submit" value="Convidar" class="btn btn-primary" />
+                    </div>
+                </form>
+            </td>
         </tbody>
 
     }

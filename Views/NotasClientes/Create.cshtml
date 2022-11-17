@@ -1,25 +1,28 @@
-@model Deal.Models.Nota
+@model Deal.Models.NotaCliente
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
-<h4>Nota</h4>
+<h4>NotaCliente</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="NotaId" />
             <div class="form-group">
                 <label asp-for="Avaliacao" class="control-label"></label>
                 <input asp-for="Avaliacao" class="form-control" />
                 <span asp-validation-for="Avaliacao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="FkCliente" class="control-label"></label>
+                <select asp-for="FkCliente" class ="form-control" asp-items="ViewBag.FkCliente"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

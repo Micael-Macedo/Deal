@@ -138,13 +138,15 @@ namespace Deal.Controllers
         // POST: Acordo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> ClientCancela(int id)
         {
             if (_context.Acordos == null)
             {
                 return Problem("Entity set 'ProjectDealContext.Acordos'  is null.");
             }
             var acordo = await _context.Acordos.FindAsync(id);
+            acordo.Servico = _context.Servicos.Find(acordo.FkServico);
+            
             if (acordo != null)
             {
                 _context.Acordos.Remove(acordo);
