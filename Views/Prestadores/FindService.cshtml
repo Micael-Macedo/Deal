@@ -30,7 +30,7 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Endereco)
         </dd>
-        
+
     </dl>
 </div>
 
@@ -61,6 +61,12 @@
                 @item.Categoria.Atuacao
             </td>
         </tbody>
+
+        <form aps-action="FindService" method="post">
+            <input name="servicoId" value="@item.ServicoId">
+            <input asp-for="PrestadorId" name="prestadorId">
+            <button type="submit" value="Tenho interesse" class="btn btn-primary">tenho interesse</button>
+        </form>
     }
 </table>
 <div>
