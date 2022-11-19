@@ -42,7 +42,7 @@ namespace Deal.Controllers
             var prestador = await _context.Prestadores
                 .Include(p => p.Portfolio)
                 .FirstOrDefaultAsync(m => m.PrestadorId == id);
-                prestador.AreasAtuacao = AreasDeAtuacaoDoPrestador;
+            prestador.AreasAtuacao = AreasDeAtuacaoDoPrestador;
             if (prestador == null)
             {
                 return NotFound();
@@ -146,7 +146,7 @@ namespace Deal.Controllers
 
             return View(prestador);
         }
-        
+
 
         // POST: Prestadores/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -162,7 +162,7 @@ namespace Deal.Controllers
             {
                 _context.Prestadores.Remove(prestador);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -181,17 +181,49 @@ namespace Deal.Controllers
                 AreasDeAtuacao.Add(_context.AreaAtuacao.Find(item.FkAreaAtuacao));
             }
             List<Servico> servicos = new List<Servico>();
-            foreach(var item in AreasDeAtuacao){
+            foreach (var item in AreasDeAtuacao)
+            {
                 servicos.AddRange(_context.Servicos.Where(S => S.FkCategoria == item.AreaAtuacaoId).ToList());
             }
             List<Servico> servicosFiltrados = servicos.Where(s => s.Status == "Solicitado").ToList();
-            ViewData["Servicos"]= servicosFiltrados;
+            ViewData["Servicos"] = servicosFiltrados;
             return View(prestador);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> FindService(int? servicoId, int? prestadorId)
+        {
+            if (servicoId == null || _context.Servicos == null)
+            {
+                return NotFound();
+            }
+            Prestador prestador = await _context.Prestadores.FindAsync(prestadorId);
+            try
+            {
+                Servico servico = _context.Servicos.Find(servicoId);
+                servico.FkPrestador = prestadorId;
+                servico.Status = "Prestador tem interesse";
+                _context.Servicos.Update(servico);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PrestadorExists(prestador.PrestadorId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
         private bool PrestadorExists(int id)
         {
-          return _context.Prestadores.Any(e => e.PrestadorId == id);
+            return _context.Prestadores.Any(e => e.PrestadorId == id);
         }
     }
 }
+

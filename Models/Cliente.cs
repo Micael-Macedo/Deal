@@ -20,7 +20,8 @@ namespace Deal.Models
         public string Senha { get; set; }
         public string Email { get; set; }
         public ICollection<NotaCliente>? Notas { get; set; }
-        public int QtdAcordoRealizados { get; set; } 
+        public int QtdAcordoRealizados { get; set; }
+         
         public int ServicosCancelados { get; set; }
 
         public float MediaNota()
