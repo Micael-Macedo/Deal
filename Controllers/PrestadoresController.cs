@@ -175,16 +175,14 @@ namespace Deal.Controllers
             }
             var prestador = await _context.Prestadores.FindAsync(id);
             List<AreasDeAtuacaoDoPrestador> listAreasDeAtuacao = _context.AreasDeAtuacaoDoPrestador.Where(A => A.FkPrestador == prestador.PrestadorId).ToList();
-            List<int?> IdAreasDeAtuacao= new List<int?>();
             List<AreaAtuacao> AreasDeAtuacao = new List<AreaAtuacao>();
             foreach (var item in listAreasDeAtuacao)
             {
-                IdAreasDeAtuacao.Add(item.FkAreaAtuacao);
                 AreasDeAtuacao.Add(_context.AreaAtuacao.Find(item.FkAreaAtuacao));
             }
             List<Servico> servicos = new List<Servico>();
-            foreach(var item in IdAreasDeAtuacao){
-                servicos.AddRange(_context.Servicos.Where(S => S.FkCategoria == item).ToList());
+            foreach(var item in AreasDeAtuacao){
+                servicos.AddRange(_context.Servicos.Where(S => S.FkCategoria == item.AreaAtuacaoId).ToList());
             }
             List<Servico> servicosFiltrados = servicos.Where(s => s.Status == "Solicitado").ToList();
             ViewData["Servicos"]= servicosFiltrados;

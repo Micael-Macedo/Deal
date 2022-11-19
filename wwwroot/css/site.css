@@ -303,3 +303,9 @@ h2{
   gap: 20px;
   font-size: 20px;
 }
+
+.loginPage{
+  border: 2px solid black;
+  
+  border-radius: 5px;
+}
