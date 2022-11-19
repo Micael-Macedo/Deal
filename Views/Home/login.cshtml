@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Pagina Login";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container1 container loginPage">
+    <section class="container section-form">
+        <div>
+            <h1 class="titulo">Seja agora um <span class="roxo">cliente</span> ou <span class="roxo">profissional</span>
+            </h1>
+
+            <form action="login" class="formulario">
+                <p class="texto-email">Email</p>
+                <input id="email" name="email" type="text" placeholder="Email">
+                <p class="texto-senha">Senha</p>
+                <input id="senha" name="senha" type="password" placeholder="Senha">
+                <button class="login">Login</button>
+            </form>
+            <a asp-action="criarConta"><button class="criar-conta">Criar conta</button></a>
+        </div>
+    </section>
+</div>
