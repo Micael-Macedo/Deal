@@ -32,10 +32,17 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
+            List<AreasDeAtuacaoDoPrestador> listAreasDeAtuacaoDoPrestador = _context.AreasDeAtuacaoDoPrestador.Where(A => A.FkPrestador == id).ToList();
+            List<AreaAtuacao> AreasDeAtuacaoDoPrestador = new List<AreaAtuacao>();
+            foreach (var item in listAreasDeAtuacaoDoPrestador)
+            {
+                AreasDeAtuacaoDoPrestador.Add(_context.AreaAtuacao.Find(item.FkAreaAtuacao));
+                System.Console.WriteLine(AreasDeAtuacaoDoPrestador);
+            }
             var prestador = await _context.Prestadores
                 .Include(p => p.Portfolio)
                 .FirstOrDefaultAsync(m => m.PrestadorId == id);
+                prestador.AreasAtuacao = AreasDeAtuacaoDoPrestador;
             if (prestador == null)
             {
                 return NotFound();
@@ -169,9 +176,11 @@ namespace Deal.Controllers
             var prestador = await _context.Prestadores.FindAsync(id);
             List<AreasDeAtuacaoDoPrestador> listAreasDeAtuacao = _context.AreasDeAtuacaoDoPrestador.Where(A => A.FkPrestador == prestador.PrestadorId).ToList();
             List<int?> IdAreasDeAtuacao= new List<int?>();
+            List<AreaAtuacao> AreasDeAtuacao = new List<AreaAtuacao>();
             foreach (var item in listAreasDeAtuacao)
             {
                 IdAreasDeAtuacao.Add(item.FkAreaAtuacao);
+                AreasDeAtuacao.Add(_context.AreaAtuacao.Find(item.FkAreaAtuacao));
             }
             List<Servico> servicos = new List<Servico>();
             foreach(var item in IdAreasDeAtuacao){
@@ -179,7 +188,6 @@ namespace Deal.Controllers
             }
             List<Servico> servicosFiltrados = servicos.Where(s => s.Status == "Solicitado").ToList();
             ViewData["Servicos"]= servicosFiltrados;
-
             return View(prestador);
         }
 
