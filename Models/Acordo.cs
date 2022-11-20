@@ -13,12 +13,7 @@ namespace Deal.Models
         [ForeignKey("Servico")]
         public int? FkServico { get; set; }
         public virtual Servico Servico { get; set; }
-        [ForeignKey("Cliente")]
-        public int? FkCliente { get; set; }
-        public virtual Cliente Cliente { get; set; }
-        [ForeignKey("Prestador")]
-        public int? FkPrestador { get; set; }
-        public virtual Prestador Prestador { get; set; }   
+          
 
     }
 }

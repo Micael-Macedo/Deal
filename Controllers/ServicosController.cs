@@ -297,8 +297,9 @@ namespace Deal.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddPrestador(int? servicoId, int? prestadorId){
-            
+        public async Task<IActionResult> AddPrestador(int? servicoId, int? prestadorId)
+        {
+
             if (ModelState.IsValid)
             {
                 Servico servico = _context.Servicos.Find(servicoId);
@@ -309,7 +310,8 @@ namespace Deal.Controllers
                     _context.Update(servico);
                     await _context.SaveChangesAsync();
                 }
-                catch(DbUpdateConcurrencyException){
+                catch (DbUpdateConcurrencyException)
+                {
                     if (!ServicoExists(servico.ServicoId))
                     {
                         return NotFound();
@@ -322,11 +324,59 @@ namespace Deal.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(Index));
-            
+
         }
+        public async Task<IActionResult> ServicosPendentes(int? id)
+        {
+            var projectDealContext = _context.Servicos.Where(S => S.FkPrestador == id && S.Status == "Convite Enviado").Include(s => s.Categoria).Include(s => s.Cliente);
+            return View(await projectDealContext.ToListAsync());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ServicosPendentes(int? prestadorId, int? servicoId, string escolha)
+        {
+            Servico servico = _context.Servicos.Find(servicoId);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    if (escolha == "Aceitar")
+                    {
+                        Acordo acordo = new Acordo();
+                        acordo.FkServico = servicoId;
+                        _context.Acordos.Add(acordo);
+                        servico.Status = "Acordo Feito";
+                    }
+                    if (escolha == "Recusar")
+                    {
+                        servico.FkPrestador = null;
+                        servico.Status = "Servico Recusado";
+                    }
+                    _context.Servicos.Update(servico);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ServicoExists(servico.ServicoId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
         private bool ServicoExists(int id)
         {
             return _context.Servicos.Any(e => e.ServicoId == id);
         }
     }
 }
+
+
