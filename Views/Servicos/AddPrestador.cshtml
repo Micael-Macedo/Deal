@@ -113,8 +113,8 @@
             </td>
             <td>
                 <form asp-action="AddPrestador" method="post">
-                    <input name="servicoId" asp-for="ServicoId" />
-                    <input name="prestadorId" value="@item.PrestadorId">
+                    <input name="servicoId" asp-for="ServicoId"  type="hidden"/>
+                    <input name="prestadorId" value="@item.PrestadorId" type="hidden">
                     <div class="form-group">
                         <input type="submit" value="Convidar" class="btn btn-primary" />
                     </div>
