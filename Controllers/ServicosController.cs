@@ -343,9 +343,18 @@ namespace Deal.Controllers
 
                     if (escolha == "Aceitar")
                     {
+                        Prestador prestador = _context.Prestadores.Find(servico.FkPrestador);
+                        Cliente cliente = _context.Clientes.Find(servico.FkCliente);
                         Acordo acordo = new Acordo();
                         acordo.FkServico = servicoId;
                         _context.Acordos.Add(acordo);
+                        await _context.SaveChangesAsync();
+                        cliente.QtdAcordoRealizados = _context.Acordos.Where(A => A.Servico.FkCliente == cliente.ClienteId).Count();
+                        prestador.QtdServicoRealizados = _context.Acordos.Where(A => A.Servico.FkPrestador == prestador.PrestadorId).Count();
+                        _context.Prestadores.Update(prestador);
+                        await _context.SaveChangesAsync();
+                        _context.Clientes.Update(cliente);
+                        await _context.SaveChangesAsync();
                         servico.Status = "Acordo Feito";
                     }
                     if (escolha == "Recusar")
