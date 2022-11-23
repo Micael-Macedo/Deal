@@ -60,13 +60,15 @@
             <td>
                 @item.Categoria.Atuacao
             </td>
+            <td>
+                <form aps-action="FindService" method="post">
+                    <input name="servicoId" value="@item.ServicoId" type="hidden">
+                    <input asp-for="PrestadorId" name="prestadorId" type="hidden">
+                    <button type="submit" value="Tenho interesse" class="btn btn-primary">tenho interesse</button>
+                </form>
+            </td>
         </tbody>
 
-        <form aps-action="FindService" method="post">
-            <input name="servicoId" value="@item.ServicoId">
-            <input asp-for="PrestadorId" name="prestadorId">
-            <button type="submit" value="Tenho interesse" class="btn btn-primary">tenho interesse</button>
-        </form>
     }
 </table>
 <div>
