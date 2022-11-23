@@ -88,7 +88,8 @@
                 <a asp-action="Edit" asp-route-id="@item.PrestadorId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.PrestadorId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.PrestadorId">Delete</a> |
-                <a asp-controller="Servicos" asp-action="ServicosPendentes" asp-route-id="@item.PrestadorId">Servicos Solicitados</a>
+                <a asp-controller="Servicos" asp-action="ServicosPendentes" asp-route-id="@item.PrestadorId">Servicos Solicitados</a> |
+                <a asp-action="FindService" asp-route-id="@item.PrestadorId">Buscar Servicços</a>
             </td>
         </tr>
 }

@@ -21,9 +21,9 @@ namespace Deal.Controllers
         // GET: Acordo
         public async Task<IActionResult> Index()
         {
-              return _context.Acordos != null ? 
-                          View(await _context.Acordos.ToListAsync()) :
-                          Problem("Entity set 'ProjectDealContext.Acordos'  is null.");
+            return _context.Acordos != null ?
+                        View(await _context.Acordos.ToListAsync()) :
+                        Problem("Entity set 'ProjectDealContext.Acordos'  is null.");
         }
 
         // GET: Acordo/Details/5
@@ -146,19 +146,42 @@ namespace Deal.Controllers
             }
             var acordo = await _context.Acordos.FindAsync(id);
             acordo.Servico = _context.Servicos.Find(acordo.FkServico);
-            
+
             if (acordo != null)
             {
                 _context.Acordos.Remove(acordo);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> HomePage(int? id)
+        {
+            if (id == null || _context.Acordos == null)
+            {
+                return NotFound();
+            }
+
+            var acordo = await _context.Acordos
+            .Include(m =>m.Servico.Cliente)
+            .Include(m =>m.Servico.Cliente.Notas)
+            .Include(m =>m.Servico.Prestador)
+            .Include(m =>m.Servico.Prestador.Notas)
+            .Include(m =>m.Servico.Categoria)
+                .FirstOrDefaultAsync(m => m.AcordoId == id);
+
+            if (acordo == null)
+            {
+                return NotFound();
+            }
+
+            return View(acordo);
+        }
+
 
         private bool AcordoExists(int id)
         {
-          return (_context.Acordos?.Any(e => e.AcordoId == id)).GetValueOrDefault();
+            return (_context.Acordos?.Any(e => e.AcordoId == id)).GetValueOrDefault();
         }
     }
 }

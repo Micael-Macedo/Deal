@@ -70,6 +70,7 @@
             @Html.DisplayFor(model => model.QtdAcordoRealizados)
         </dd>
         <a asp-action="Create" asp-controller="Servicos" asp-route-id="@Model.ClienteId">Criar Serviço</a>
-        <a asp-action="Create" asp-controller="Servicos" asp-route-id="@Model.ClienteId">Criar Serviço</a>
+        <a asp-action="index" asp-controller="Servicos" asp-route-id="@Model.ClienteId">Ver Serviços</a>
+        <a asp-action="index" asp-controller="Acordo" asp-route-id="@Model.ClienteId">Ver Acordos</a>
     </dl>
 </div>

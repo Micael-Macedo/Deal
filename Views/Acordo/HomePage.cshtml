@@ -1,0 +1,44 @@
+@model Deal.Models.Acordo
+@{
+    ViewData["Title"] = "HomePage";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <div style="display: flex; justify-content: space-around;">
+        <div class="Cliente">
+            <h2>Cliente</h2>
+            <img width="200px" src="@Model.Servico.Cliente.FotoUsuario" alt="" srcset="">
+            <p>@Model.Servico.Cliente.Nome</p>
+            <p>@Model.Servico.Cliente.Email</p>
+            <p>@Model.Servico.Cliente.Idade</p>
+            <p>@Model.Servico.Cliente.Pontuacao</p>
+            <p>@Model.Servico.Cliente.QtdAcordoRealizados</p>
+        </div>
+        <div class="Prestador">
+            <h2>Prestador</h2>
+            <img width="200px" src="@Model.Servico.Prestador.FotoPrestador" alt="" srcset="">
+            <p>@Model.Servico.Prestador.Nome</p>
+            <p>@Model.Servico.Prestador.Email</p>
+            <p>@Model.Servico.Prestador.Idade</p>
+            <p>@Model.Servico.Prestador.Pontuacao</p>
+            <p>@Model.Servico.Prestador.QtdServicoRealizados</p>
+        </div>
+    </div>
+    <div class="Servico">
+        <h2>Informações do serviço</h2>
+        <p>@Model.Servico.Categoria.Atuacao</p>
+        <p>@Model.Servico.Nome</p>
+        <p>@Model.Servico.Descricao</p>
+        <p>@Model.Servico.Endereco</p>
+        <input hidden type="text" value="@Model.Servico.Latitude" id="DealLat">
+        <input hidden type="text" value="@Model.Servico.Longitude" id="DealLong"> 
+        <div class="card-container col-md-4">
+            <div class="map" id="gmp-map"></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/js/Dealmaps.js"></script>
+}

@@ -27,7 +27,7 @@ function initMap() {
   ];
 
   const getFormInputElement = (component) => document.getElementById(component + '-input');
-  const map = new google.maps.Map(document.getElementById("gmp-map"), {
+  const map = new google.maps.Map(document.getElementById("service-gmp-map"), {
     zoom: CONFIGURATION.mapOptions.zoom,
     center: { lat: -12.9704, lng: -38.5124 },
     mapTypeControl: false,

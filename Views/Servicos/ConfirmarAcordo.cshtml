@@ -1,0 +1,125 @@
+@model Deal.Models.Servico
+@{
+    ViewData["Title"] = "ConviteServico";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h1>Details</h1>
+<div>
+    <h4>Prestador</h4>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prestador.FotoPrestador)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.Prestador.FotoPrestador" alt="" width="300px" height="300px">
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prestador.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prestador.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prestador.Pontuacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prestador.Pontuacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prestador.QtdServicoRealizados)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prestador.QtdServicoRealizados)
+        </dd>
+        <dt class="col-sm-2">
+            <p>Ver mais informações</p>
+        </dt>
+        <dd class="col-sm-10">
+            <a asp-action="Details" asp-controller="Prestadores" target="_blank"
+                asp-route-id="@Model.FkPrestador">Visualizar Perfil</a>
+        </dd>
+    </dl>
+</div>
+<div>
+    <form asp-action="ConfirmarAcordo" method="post">
+        <input name="servicoId" asp-for="ServicoId" type="hidden" />
+        <div class="form-group">
+            <input name="escolha" type="submit" value="Aceitar" class="btn btn-primary" />
+            <input name="escolha" type="submit" value="Recusar" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+<div>
+    <h4>Servico</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cidade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cidade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cep)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cep)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Categoria)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Categoria.Atuacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+    </dl>
+</div>

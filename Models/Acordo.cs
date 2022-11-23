@@ -12,7 +12,9 @@ namespace Deal.Models
         public int AcordoId { get; set; }
         [ForeignKey("Servico")]
         public int? FkServico { get; set; }
-        public virtual Servico Servico { get; set; }
+        public virtual Servico? Servico { get; set; }
+        public float? NotaCliente { get; set; }
+        public float? NotaPrestador { get; set; }
           
 
     }
