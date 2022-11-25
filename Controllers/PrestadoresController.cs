@@ -32,10 +32,17 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
+            List<AreasDeAtuacaoDoPrestador> listAreasDeAtuacaoDoPrestador = _context.AreasDeAtuacaoDoPrestador.Where(A => A.FkPrestador == id).ToList();
+            List<AreaAtuacao> AreasDeAtuacaoDoPrestador = new List<AreaAtuacao>();
+            foreach (var item in listAreasDeAtuacaoDoPrestador)
+            {
+                AreasDeAtuacaoDoPrestador.Add(_context.AreaAtuacao.Find(item.FkAreaAtuacao));
+                System.Console.WriteLine(AreasDeAtuacaoDoPrestador);
+            }
             var prestador = await _context.Prestadores
                 .Include(p => p.Portfolio)
                 .FirstOrDefaultAsync(m => m.PrestadorId == id);
+            prestador.AreasAtuacao = AreasDeAtuacaoDoPrestador;
             if (prestador == null)
             {
                 return NotFound();
@@ -155,6 +162,7 @@ namespace Deal.Controllers
             return View(prestador);
         }
 
+
         // POST: Prestadores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -173,9 +181,64 @@ namespace Deal.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> FindService(int? id)
+        {
+            if (id == null || _context.Servicos == null)
+            {
+                return NotFound();
+            }
+            var prestador = await _context.Prestadores.FindAsync(id);
+            List<AreasDeAtuacaoDoPrestador> listAreasDeAtuacao = _context.AreasDeAtuacaoDoPrestador.Where(A => A.FkPrestador == prestador.PrestadorId).ToList();
+            List<AreaAtuacao> AreasDeAtuacao = new List<AreaAtuacao>();
+            foreach (var item in listAreasDeAtuacao)
+            {
+                AreasDeAtuacao.Add(_context.AreaAtuacao.Find(item.FkAreaAtuacao));
+            }
+            List<Servico> servicos = new List<Servico>();
+            foreach (var item in AreasDeAtuacao)
+            {
+                servicos.AddRange(_context.Servicos.Where(S => S.FkCategoria == item.AreaAtuacaoId).ToList());
+            }
+            List<Servico> servicosFiltrados = servicos.Where(s => s.Status == "Solicitado").ToList();
+            ViewData["Servicos"] = servicosFiltrados;
+            return View(prestador);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> FindService(int? servicoId, int? prestadorId)
+        {
+            if (servicoId == null || _context.Servicos == null)
+            {
+                return NotFound();
+            }
+            Prestador prestador = await _context.Prestadores.FindAsync(prestadorId);
+            try
+            {
+                Servico servico = _context.Servicos.Find(servicoId);
+                servico.FkPrestador = prestadorId;
+                servico.Status = "Prestador tem interesse";
+                _context.Servicos.Update(servico);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PrestadorExists(prestador.PrestadorId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
         private bool PrestadorExists(int id)
         {
             return _context.Prestadores.Any(e => e.PrestadorId == id);
         }
     }
 }
+

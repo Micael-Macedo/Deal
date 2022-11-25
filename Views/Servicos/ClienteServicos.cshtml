@@ -1,14 +1,10 @@
-@model IEnumerable<Deal.Models.Servico>
-
+@* @model Deal.Models.Servico
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ClienteServicos";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -104,14 +100,15 @@
                     {
                         <a asp-action="AddPrestador" asp-route-id="@item.ServicoId">Selecionar Prestador</a> 
                     }
-                    @if (item.Status == "Prestador tem interesse")
-                    {
-                        <a asp-action="ConfirmarAcordo" asp-route-id="@item.ServicoId">Confirmar Acordo</a>
-                    }
                     |
-                    <a asp-action="ClienteCancelaServico" asp-route-id="@item.ServicoId">Cancelar Servico</a> |
+                    @if (item.Status == "PrestadorInteresse")
+                    {
+                        <a asp-action="Confirmar Acordo" asp-route-id="@item.ServicoId">Confirmar Acordo</a>
+                    }
+                    <a asp-action="ClienteCancelaServico" asp-route-id="@item.ServicoId">Cliente Cancelar Servico</a> |
+                    <a asp-action="PrestadorCancelaServico" asp-route-id="@item.ServicoId">prestador Cancelar Servico</a>
                 </td>
             </tr>
         }
     </tbody>
-</table>
+</table> *@

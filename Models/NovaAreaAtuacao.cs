@@ -7,7 +7,7 @@ namespace Deal.Models
 {
     public class NovaAreaAtuacao
     {
-        public string NovaAreaAtuacaoId { get; set; }
-        public string AreaAtuacao { get; set; }
+        public string? NovaAreaAtuacaoId { get; set; }
+        public string? AreaAtuacao { get; set; }
     }
 }

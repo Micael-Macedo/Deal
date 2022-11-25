@@ -1,22 +1,60 @@
 @model Deal.Models.Servico
-
 @{
-    ViewData["Title"] = "Details";
-    Prestador prestador = new Prestador();
+    ViewData["Title"] = "ConviteServico";
 }
 
-<h1>Details</h1>
+<h1>@ViewData["Title"]</h1>
 
+<h1>Details</h1>
+<div>
+    <h4>Prestador</h4>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prestador.FotoPrestador)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.Prestador.FotoPrestador" alt="" width="300px" height="300px">
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prestador.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prestador.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prestador.Pontuacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prestador.Pontuacao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prestador.QtdServicoRealizados)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prestador.QtdServicoRealizados)
+        </dd>
+        <dt class="col-sm-2">
+            <p>Ver mais informações</p>
+        </dt>
+        <dd class="col-sm-10">
+            <a asp-action="Details" asp-controller="Prestadores" target="_blank"
+                asp-route-id="@Model.FkPrestador">Visualizar Perfil</a>
+        </dd>
+    </dl>
+</div>
+<div>
+    <form asp-action="ConfirmarAcordo" method="post">
+        <input name="servicoId" asp-for="ServicoId" type="hidden" />
+        <div class="form-group">
+            <input name="escolha" type="submit" value="Aceitar" class="btn btn-primary" />
+            <input name="escolha" type="submit" value="Recusar" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
 <div>
     <h4>Servico</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cliente)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cliente.ClienteId)
-        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nome)
         </dt>
@@ -63,7 +101,7 @@
             @Html.DisplayNameFor(model => model.Categoria)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.AreaAtuacaoId)
+            @Html.DisplayFor(model => model.Categoria.Atuacao)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Status)
@@ -84,47 +122,4 @@
             @Html.DisplayFor(model => model.Longitude)
         </dd>
     </dl>
-</div>
-
-<table>
-    @foreach (var item in ViewData["Prestadores"] as IList<Prestador>)
-    {
-        <thead>
-            <th>Foto prestador</th>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Email</th>
-        </thead>
-        <tbody>
-            <td>
-                <img src="@item.FotoPrestador" alt="" srcset="" style="width: 100px; height: 100px;">
-            </td>
-            <td>
-                @item.Nome
-            </td>
-            <td>
-                @item.Idade
-            </td>
-            <td>
-                @item.Email
-            </td>
-            <td>
-                <a asp-controller="Prestadores" asp-action="Details" asp-route-id="@item.PrestadorId">Ver Prestador</a> |
-            </td>
-            <td>
-                <form asp-action="AddPrestador" method="post">
-                    <input name="servicoId" asp-for="ServicoId"  type="hidden"/>
-                    <input name="prestadorId" value="@item.PrestadorId" type="hidden">
-                    <div class="form-group">
-                        <input type="submit" value="Convidar" class="btn btn-primary" />
-                    </div>
-                </form>
-            </td>
-        </tbody>
-
-    }
-</table>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ServicoId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>

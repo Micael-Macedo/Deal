@@ -79,6 +79,20 @@ namespace Deal.Controllers
             }
             return View(cliente);
         }
+        public async Task<IActionResult> Home(int? id)
+        {
+            if (id == null || _context.Clientes == null)
+            {
+                return NotFound();
+            }
+
+            var cliente = await _context.Clientes.FindAsync(id);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+            return View(cliente);
+        }
 
         // POST: Clientes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.

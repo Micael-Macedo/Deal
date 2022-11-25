@@ -1,14 +1,10 @@
 @model IEnumerable<Deal.Models.Servico>
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ServiçosPendentes";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -48,9 +44,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Longitude)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FkPrestador)
-            </th>
+
         </tr>
     </thead>
     <tbody>
@@ -93,23 +87,20 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Longitude)
                 </td>
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.FkPrestador)
+                    <a asp-action="Details" asp-route-id="@item.ServicoId">Ver Servico</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ServicoId">Delete</a> |
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ServicoId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ServicoId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ServicoId">Delete</a> |
-                    @if (item.FkPrestador == null)
-                    {
-                        <a asp-action="AddPrestador" asp-route-id="@item.ServicoId">Selecionar Prestador</a> 
-                    }
-                    @if (item.Status == "Prestador tem interesse")
-                    {
-                        <a asp-action="ConfirmarAcordo" asp-route-id="@item.ServicoId">Confirmar Acordo</a>
-                    }
-                    |
-                    <a asp-action="ClienteCancelaServico" asp-route-id="@item.ServicoId">Cancelar Servico</a> |
+                <div class="form-group">
+                    <form asp-action="ServicosPendentes" method="post">
+                        <input type="hidden" name="servicoId" value="@item.ServicoId"/>
+                        <input type="hidden" name="prestadorId" value="@item.FkPrestador">
+                        <input name="escolha" type="submit" value="Recusar" class="btn btn-primary" />
+                        <input name="escolha" type="submit" value="Aceitar" class="btn btn-primary" />
+                    </form>
+                </div>
                 </td>
             </tr>
         }

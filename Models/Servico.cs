@@ -28,8 +28,8 @@ namespace Deal.Models
         public int? FkPrestador { get; set; }
         public virtual Prestador? Prestador { get; set; }
         public string? Status { get; set; }
-        public double? Latitude { get; set; }
-        public double? Longitude { get; set; }
+        public string? Latitude { get; set; }
+        public string? Longitude { get; set; }
 
         public bool ClienteCancelaServico(){
             this.Cliente.ServicosCancelados++;

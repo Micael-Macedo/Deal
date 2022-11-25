@@ -52,7 +52,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-               <img src="@Html.DisplayFor(modelItem => item.FotoPrestador)" alt="" srcset=""> 
+               <img width="300px" height="300px" src="@Html.DisplayFor(modelItem => item.FotoPrestador)" alt="" srcset=""> 
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Portfolio.PortfolioId)
@@ -87,7 +87,9 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PrestadorId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.PrestadorId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PrestadorId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.PrestadorId">Delete</a> |
+                <a asp-controller="Servicos" asp-action="ServicosPendentes" asp-route-id="@item.PrestadorId">Servicos Solicitados</a> |
+                <a asp-action="FindService" asp-route-id="@item.PrestadorId">Buscar Servicços</a>
             </td>
         </tr>
 }
