@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label asp-for="FotoPrestador" class="control-label"></label>
                 <input type="file" class="form-control" onchange="ConverterImagem()" id="NewFoto">
-                <input asp-for="FotoPrestador" type="hidden" id="FotoBase64"/>
+                <input asp-for="FotoPrestador" type="hidden" id="FotoBase64" />
                 <span asp-validation-for="FotoPrestador" class="text-danger"></span>
                 <div id="apresentar-imagem" style="width: 10%; height: 10%;"></div>
             </div>
@@ -59,10 +59,97 @@
                 <input type="email" asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            <div class="mb-3 area_atuacao">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="eletrica" id="eletrica">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Elétrica
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="mecanica" id="mecanica">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                Mecânica
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="carreto" id="carreto">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Carreto
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="manutencao_de_computadores"
+                                id="manutencao_de_computadores">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                Informática
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="pintura" id="pintura">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Pintura
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="macenaria" id="macenaria">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                Macenaria
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-start">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="hidraulica" id="hidraulica">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                Hidráulica
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="eletronica" id="eletronica">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                Eletrônica
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="servicos_gerais"
+                                id="servicos_gerais">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                Serviços gerais
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                @foreach (var item in ViewData["AreaAtuacao"] as IList<AreaAtuacao>)
+                {
+                    <input type ="checkbox" value="@item.AreaAtuacaoId">
+                    <label for="flexCheckChecked">@item.Atuacao</label>
+                    <br />
+                }
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
         </form>
     </div>
 </div>
@@ -70,4 +157,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
