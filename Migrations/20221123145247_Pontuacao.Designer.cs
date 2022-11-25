@@ -3,6 +3,7 @@ using System;
 using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    partial class ProjectDealContextModelSnapshot : ModelSnapshot
+    [Migration("20221123145247_Pontuacao")]
+    partial class Pontuacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -314,11 +316,11 @@ namespace Deal.Migrations
                     b.Property<int?>("FkPrestador")
                         .HasColumnType("int");
 
-                    b.Property<string>("Latitude")
-                        .HasColumnType("longtext");
+                    b.Property<double?>("Latitude")
+                        .HasColumnType("double");
 
-                    b.Property<string>("Longitude")
-                        .HasColumnType("longtext");
+                    b.Property<double?>("Longitude")
+                        .HasColumnType("double");
 
                     b.Property<string>("Nome")
                         .HasColumnType("longtext");

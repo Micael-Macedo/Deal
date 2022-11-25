@@ -10,10 +10,10 @@ namespace Deal.Models
     public class Certificado
     {
         public int CertificadoId { get; set; }
-        public string CertificadoFotoPortfolio { get; set; }
+        public string? CertificadoFotoPortfolio { get; set; }
         [ForeignKey("Portfolio")]
         public int FkPortfolio;
-        public Portfolio Portfolio { get; set; }
+        public virtual Portfolio? Portfolio { get; set; }
         
     }
 }

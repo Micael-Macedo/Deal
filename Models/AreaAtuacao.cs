@@ -8,6 +8,6 @@ namespace Deal.Models
     public class AreaAtuacao
     {
         public int AreaAtuacaoId { get; set; }
-        public string Atuacao { get; set; }
+        public string? Atuacao { get; set; }
     }
 }
