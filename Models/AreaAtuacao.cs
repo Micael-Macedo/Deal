@@ -9,5 +9,6 @@ namespace Deal.Models
     {
         public int AreaAtuacaoId { get; set; }
         public string Atuacao { get; set; }
+        public bool Checked { get; set; }
     }
 }

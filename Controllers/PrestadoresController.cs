@@ -47,6 +47,21 @@ namespace Deal.Controllers
         // GET: Prestadores/Create
         public IActionResult Create()
         {
+            List<AreaAtuacao> listacheckAreaAtuacao = new List<AreaAtuacao>();
+            Random rand = new Random();
+
+            for (int i = 0; i < _context.AreaAtuacao.Count(); i++)
+            {
+                AreaAtuacao listaAreaAtuacao = new AreaAtuacao
+                {
+                    AreaAtuacaoId = i,
+                    Atuacao = "CHECK" + i
+                };
+
+                listacheckAreaAtuacao.Add(listaAreaAtuacao);
+            }
+            ViewData["AreaAtuacao"] = listacheckAreaAtuacao;
+
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId");
             return View();
         }
@@ -154,13 +169,13 @@ namespace Deal.Controllers
             {
                 _context.Prestadores.Remove(prestador);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
         private bool PrestadorExists(int id)
         {
-          return _context.Prestadores.Any(e => e.PrestadorId == id);
+            return _context.Prestadores.Any(e => e.PrestadorId == id);
         }
     }
 }
