@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label asp-for="FotoPrestador" class="control-label"></label>
                 <input type="file" class="form-control" onchange="ConverterImagem()" id="NewFoto">
-                <input asp-for="FotoPrestador" type="hidden" id="FotoBase64"/>
+                <input asp-for="FotoPrestador" type="hidden" id="FotoBase64" />
                 <span asp-validation-for="FotoPrestador" class="text-danger"></span>
                 <div id="apresentar-imagem" style="width: 10%; height: 10%;"></div>
             </div>
@@ -70,4 +70,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

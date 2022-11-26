@@ -3,6 +3,7 @@ using System;
 using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    partial class ProjectDealContextModelSnapshot : ModelSnapshot
+    [Migration("20221125042906_FkDeal-to-Notas-and-Add-To-Check-Deal-Status")]
+    partial class FkDealtoNotasandAddToCheckDealStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,7 +214,7 @@ namespace Deal.Migrations
                     b.Property<int?>("FkAcordo")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FkPrestador")
+                    b.Property<int>("FkPrestador")
                         .HasColumnType("int");
 
                     b.HasKey("NotaPrestadorId");
@@ -436,7 +438,7 @@ namespace Deal.Migrations
                         .HasForeignKey("FkAcordo");
 
                     b.HasOne("Deal.Models.Cliente", "Cliente")
-                        .WithMany("NotasDoCliente")
+                        .WithMany("Notas")
                         .HasForeignKey("FkCliente");
 
                     b.Navigation("Acordo");
@@ -451,8 +453,10 @@ namespace Deal.Migrations
                         .HasForeignKey("FkAcordo");
 
                     b.HasOne("Deal.Models.Prestador", "Prestador")
-                        .WithMany("NotasDoPrestador")
-                        .HasForeignKey("FkPrestador");
+                        .WithMany("Notas")
+                        .HasForeignKey("FkPrestador")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Acordo");
 
@@ -500,7 +504,7 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.Cliente", b =>
                 {
-                    b.Navigation("NotasDoCliente");
+                    b.Navigation("Notas");
 
                     b.Navigation("Servicos");
                 });
@@ -520,7 +524,7 @@ namespace Deal.Migrations
 
                     b.Navigation("AreasDeAtuacaoDoPrestador");
 
-                    b.Navigation("NotasDoPrestador");
+                    b.Navigation("Notas");
                 });
 #pragma warning restore 612, 618
         }

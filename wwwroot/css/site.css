@@ -309,3 +309,6 @@ h2{
   
   border-radius: 5px;
 }
+.AvalicaoAcordo input{
+  background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Star_icon_stylized.svg/2153px-Star_icon_stylized.svg.png) !important;
+}

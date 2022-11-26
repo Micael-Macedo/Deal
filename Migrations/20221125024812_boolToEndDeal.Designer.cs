@@ -3,6 +3,7 @@ using System;
 using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    partial class ProjectDealContextModelSnapshot : ModelSnapshot
+    [Migration("20221125024812_boolToEndDeal")]
+    partial class boolToEndDeal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,9 +26,6 @@ namespace Deal.Migrations
                     b.Property<int>("AcordoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<bool>("AcordoFinalizado")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("ClienteFinalizaAcordo")
                         .HasColumnType("tinyint(1)");
@@ -185,15 +184,10 @@ namespace Deal.Migrations
                     b.Property<float>("Avaliacao")
                         .HasColumnType("float");
 
-                    b.Property<int?>("FkAcordo")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FkCliente")
+                    b.Property<int>("FkCliente")
                         .HasColumnType("int");
 
                     b.HasKey("NotaClienteId");
-
-                    b.HasIndex("FkAcordo");
 
                     b.HasIndex("FkCliente");
 
@@ -209,15 +203,10 @@ namespace Deal.Migrations
                     b.Property<float>("Avaliacao")
                         .HasColumnType("float");
 
-                    b.Property<int?>("FkAcordo")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FkPrestador")
+                    b.Property<int>("FkPrestador")
                         .HasColumnType("int");
 
                     b.HasKey("NotaPrestadorId");
-
-                    b.HasIndex("FkAcordo");
 
                     b.HasIndex("FkPrestador");
 
@@ -431,30 +420,22 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.NotaCliente", b =>
                 {
-                    b.HasOne("Deal.Models.Acordo", "Acordo")
-                        .WithMany()
-                        .HasForeignKey("FkAcordo");
-
                     b.HasOne("Deal.Models.Cliente", "Cliente")
-                        .WithMany("NotasDoCliente")
-                        .HasForeignKey("FkCliente");
-
-                    b.Navigation("Acordo");
+                        .WithMany("Notas")
+                        .HasForeignKey("FkCliente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("Deal.Models.NotaPrestador", b =>
                 {
-                    b.HasOne("Deal.Models.Acordo", "Acordo")
-                        .WithMany()
-                        .HasForeignKey("FkAcordo");
-
                     b.HasOne("Deal.Models.Prestador", "Prestador")
-                        .WithMany("NotasDoPrestador")
-                        .HasForeignKey("FkPrestador");
-
-                    b.Navigation("Acordo");
+                        .WithMany("Notas")
+                        .HasForeignKey("FkPrestador")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Prestador");
                 });
@@ -500,7 +481,7 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.Cliente", b =>
                 {
-                    b.Navigation("NotasDoCliente");
+                    b.Navigation("Notas");
 
                     b.Navigation("Servicos");
                 });
@@ -520,7 +501,7 @@ namespace Deal.Migrations
 
                     b.Navigation("AreasDeAtuacaoDoPrestador");
 
-                    b.Navigation("NotasDoPrestador");
+                    b.Navigation("Notas");
                 });
 #pragma warning restore 612, 618
         }

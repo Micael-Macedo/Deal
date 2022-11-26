@@ -11,7 +11,10 @@ namespace Deal.Models
         public int NotaClienteId { get; set; }
         public float Avaliacao { get; set; }
         [ForeignKey("Cliente")]
-        public int FkCliente { get; set; }
-        public Cliente Cliente { get; set; }
+        public int? FkCliente { get; set; }
+        public virtual Cliente? Cliente { get; set; }
+        [ForeignKey("Acordo")]
+        public int? FkAcordo { get; set; }
+        public virtual Acordo? Acordo { get; set; }
     }
 }
