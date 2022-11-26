@@ -21,6 +21,14 @@ namespace Deal.Controllers
         // GET: Clientes
         public async Task<IActionResult> Index()
         {
+            List<Cliente> clientes = _context.Clientes.ToList();
+            foreach (var cliente in clientes)
+            {
+                List<NotaCliente> notasDoCliente = _context.NotaClientes.Where(n => n.FkCliente == cliente.ClienteId).ToList();
+                cliente.Pontuacao = cliente.MediaNota();
+                _context.Clientes.Update(cliente);
+                await _context.SaveChangesAsync();
+            }
               return View(await _context.Clientes.ToListAsync());
         }
 

@@ -19,20 +19,31 @@ namespace Deal.Models
         public string? Telefone { get; set; }
         public string? Senha { get; set; }
         public string? Email { get; set; }
-        public float Pontuacao { get; set; }
-        public ICollection<NotaCliente>? Notas { get; set; }
+        private float pontuacao;
+        public ICollection<NotaCliente>? NotasDoCliente { get; set; }
         public int QtdAcordoRealizados { get; set; }
-         
-        public int ServicosCancelados { get; set; }
 
+        public int ServicosCancelados { get; set; }
+        public float Pontuacao
+        {
+            get
+            {
+                pontuacao = MediaNota();
+                return pontuacao;
+            }
+            set{
+                pontuacao = MediaNota();
+            }
+        }
         public float MediaNota()
         {
             float TotalNotas = 0;
-            foreach (var Nota in Notas)
+            foreach (var Nota in NotasDoCliente)
             {
                 TotalNotas += Nota.Avaliacao;
             }
-            return TotalNotas / Notas.Count;
+            float MediaAvaliacao = TotalNotas / NotasDoCliente.Count;
+            return MediaAvaliacao;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Deal.Controllers
         // GET: Prestadores
         public async Task<IActionResult> Index()
         {
-            var projectDealContext = _context.Prestadores.Include(p => p.Portfolio);
+            var projectDealContext = _context.Prestadores.Include(p => p.Portfolio).Include(p => p.NotasDoPrestador);
             return View(await projectDealContext.ToListAsync());
         }
 
@@ -70,6 +70,7 @@ namespace Deal.Controllers
             ViewData["AreaAtuacao"] = listacheckAreaAtuacao;
 
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId");
+            ViewData["AreaAtuacao"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             return View();
         }
 
@@ -78,12 +79,21 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrestadorId,FotoPrestador,FkPortfolio,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdServicoRealizados")] Prestador prestador)
+        public async Task<IActionResult> Create([Bind("PrestadorId,FotoPrestador,FkPortfolio,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdServicoRealizados")] Prestador prestador, List<AreaAtuacao> AreasAtuacaoDoPrestador)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(prestador);
                 await _context.SaveChangesAsync();
+                prestador = _context.Prestadores.Find(prestador);
+                foreach (var atuacao in AreasAtuacaoDoPrestador)
+                {
+                    AreasDeAtuacaoDoPrestador RelacionarAreasDeAtuacaoComPrestador = new AreasDeAtuacaoDoPrestador();
+                    RelacionarAreasDeAtuacaoComPrestador.FkPrestador = prestador.PrestadorId;
+                    RelacionarAreasDeAtuacaoComPrestador.FkAreaAtuacao = atuacao.AreaAtuacaoId;
+                    _context.AreasDeAtuacaoDoPrestador.Add(RelacionarAreasDeAtuacaoComPrestador);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", prestador.FkPortfolio);

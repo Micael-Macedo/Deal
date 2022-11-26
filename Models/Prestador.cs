@@ -22,20 +22,32 @@ namespace Deal.Models
         public string? Telefone { get; set; }
         public string? Senha { get; set; }
         public string? Email { get; set; }
-        public float Pontuacao { get; set; }
-        public ICollection<NotaPrestador>? Notas { get; set; } //Criar método média, ArrayNotas sempre começa com 5.0 de nota
+        private float pontuacao { get; set; }
+        public ICollection<NotaPrestador>? NotasDoPrestador { get; set; } //Criar método média, ArrayNotas sempre começa com 5.0 de nota
         public virtual ICollection<AreaAtuacao>? AreasAtuacao { get; set; }
         public ICollection<AreasDeAtuacaoDoPrestador>? AreasDeAtuacaoDoPrestador { get; set; }
         public int QtdServicoRealizados { get; set; }
 
+        public float Pontuacao
+        {
+            get
+            {
+                pontuacao = MediaNota();
+                return pontuacao;
+            }
+            set{
+                pontuacao = MediaNota();
+            }
+        }
         public float MediaNota()
         {
             float TotalNotas = 0;
-            foreach (var Nota in Notas)
+            foreach (var Nota in NotasDoPrestador)
             {
                 TotalNotas += Nota.Avaliacao;
             }
-            return TotalNotas / Notas.Count;
+            float MediaAvaliacao = TotalNotas / NotasDoPrestador.Count;
+            return MediaAvaliacao;
         }
     }
 }
