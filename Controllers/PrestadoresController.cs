@@ -32,12 +32,11 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            List<AreasDeAtuacaoDoPrestador> listAreasDeAtuacaoDoPrestador = _context.AreasDeAtuacaoDoPrestador.Where(A => A.FkPrestador == id).ToList();
+            List<AreasDeAtuacaoDoPrestador> listAreasDeAtuacaoDoPrestador = await _context.AreasDeAtuacaoDoPrestador.Where(A => A.FkPrestador == id).ToListAsync();
             List<AreaAtuacao> AreasDeAtuacaoDoPrestador = new List<AreaAtuacao>();
-            foreach (var item in listAreasDeAtuacaoDoPrestador)
+            foreach (var areaAtuacao in listAreasDeAtuacaoDoPrestador)
             {
-                AreasDeAtuacaoDoPrestador.Add(_context.AreaAtuacao.Find(item.FkAreaAtuacao));
-                System.Console.WriteLine(AreasDeAtuacaoDoPrestador);
+                AreasDeAtuacaoDoPrestador.Add(_context.AreaAtuacao.Find(areaAtuacao.FkAreaAtuacao));
             }
             var prestador = await _context.Prestadores
                 .Include(p => p.Portfolio)
@@ -47,28 +46,14 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.areasAtuacao = AreasDeAtuacaoDoPrestador;
             return View(prestador);
         }
 
         // GET: Prestadores/Create
         public IActionResult Create()
         {
-            List<AreaAtuacao> listacheckAreaAtuacao = new List<AreaAtuacao>();
-            Random rand = new Random();
-
-            for (int i = 0; i < _context.AreaAtuacao.Count(); i++)
-            {
-                AreaAtuacao listaAreaAtuacao = new AreaAtuacao
-                {
-                    AreaAtuacaoId = i,
-                    Atuacao = "CHECK" + i
-                };
-
-                listacheckAreaAtuacao.Add(listaAreaAtuacao);
-            }
-            ViewData["AreaAtuacao"] = listacheckAreaAtuacao;
-
+            ViewData["AreaAtuacaoId"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId");
             return View();
         }
@@ -78,12 +63,21 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrestadorId,FotoPrestador,FkPortfolio,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdServicoRealizados")] Prestador prestador)
+        public async Task<IActionResult> Create([Bind("PrestadorId,FotoPrestador,FkPortfolio,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdServicoRealizados")] Prestador prestador, List<int> areasAtuacao)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(prestador);
                 await _context.SaveChangesAsync();
+                foreach (int areasAtuacaoId in areasAtuacao)
+                {
+                    AreasDeAtuacaoDoPrestador areasDeAtuacaoDosPrestadores = new AreasDeAtuacaoDoPrestador();
+                    areasDeAtuacaoDosPrestadores.FkPrestador = prestador.PrestadorId;
+                    areasDeAtuacaoDosPrestadores.FkAreaAtuacao = areasAtuacaoId;
+                    _context.AreasDeAtuacaoDoPrestador.Add(areasDeAtuacaoDosPrestadores);
+                }
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", prestador.FkPortfolio);
@@ -103,6 +97,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", prestador.FkPortfolio);
             return View(prestador);
         }
@@ -112,7 +107,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrestadorId,FotoPrestador,FkPortfolio,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdServicoRealizados")] Prestador prestador)
+        public async Task<IActionResult> Edit(int id, [Bind("PrestadorId,FotoPrestador,FkPortfolio,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdServicoRealizados")] Prestador prestador, List<int> areasAtuacao)
         {
             if (id != prestador.PrestadorId)
             {
@@ -125,6 +120,15 @@ namespace Deal.Controllers
                 {
                     _context.Update(prestador);
                     await _context.SaveChangesAsync();
+                    foreach (int areasAtuacaoId in areasAtuacao)
+                    {
+                        AreasDeAtuacaoDoPrestador areasDeAtuacaoDosPrestadores = new AreasDeAtuacaoDoPrestador();
+                        areasDeAtuacaoDosPrestadores.FkPrestador = prestador.PrestadorId;
+                        areasDeAtuacaoDosPrestadores.FkAreaAtuacao = areasAtuacaoId;
+                        _context.AreasDeAtuacaoDoPrestador.Update(areasDeAtuacaoDosPrestadores);
+                    }
+                    await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -139,6 +143,7 @@ namespace Deal.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AreaAtuacaoId"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", prestador.FkPortfolio);
             return View(prestador);
         }
