@@ -15,6 +15,18 @@
             <p>@Model.Servico.Cliente.Idade</p>
             <p>@Model.Servico.Cliente.Pontuacao</p>
             <p>@Model.Servico.Cliente.QtdAcordoRealizados</p>
+            @if (@Model.AcordoFinalizado)
+            {
+                <a asp-action="AvaliacaoDoPrestador" asp-route-id="@Model.AcordoId">Avaliar Prestador</a>
+            }
+            @if (@Model.ClienteFinalizaAcordo == true && @Model.AcordoFinalizado != true)
+            {
+                <p>Cliente Gostaria de finalizar o Acordo</p>
+            }
+            @if(@Model.AcordoFinalizado != true && @Model.ClienteFinalizaAcordo != true){
+                <a asp-action="ClienteFinalizaAcordo" asp-route-id="@Model.AcordoId">Finalizar Acordo</a>
+                <a asp-action="CancelarAcordo" asp-route-id="@Model.AcordoId">Deletar Acordo</a>
+            }
         </div>
         <div class="Prestador">
             <h2>Prestador</h2>
@@ -24,6 +36,19 @@
             <p>@Model.Servico.Prestador.Idade</p>
             <p>@Model.Servico.Prestador.Pontuacao</p>
             <p>@Model.Servico.Prestador.QtdServicoRealizados</p>
+            @if (@Model.AcordoFinalizado)
+            {
+                <a asp-action="AvaliacaoDoCliente" asp-route-id="@Model.AcordoId">Avaliar Cliente</a>
+            }
+            @if (@Model.PrestadorFinalizaAcordo == true && @Model.AcordoFinalizado != true)
+            {
+                <p>Prestador Gostaria de finalizar o Acordo</p>
+            }
+            @if (@Model.AcordoFinalizado != true && @Model.PrestadorFinalizaAcordo != true)
+            {
+                <a asp-action="PrestadorFinalizaAcordo" asp-route-id="@Model.AcordoId">Finalizar Acordo</a>
+                <a asp-action="EncerrarAcordo" asp-route-id="@Model.AcordoId">Deletar Acordo</a>
+            }
         </div>
     </div>
     <div class="Servico">

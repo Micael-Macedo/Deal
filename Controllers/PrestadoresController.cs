@@ -21,7 +21,7 @@ namespace Deal.Controllers
         // GET: Prestadores
         public async Task<IActionResult> Index()
         {
-            var projectDealContext = _context.Prestadores.Include(p => p.Portfolio);
+            var projectDealContext = _context.Prestadores.Include(p => p.Portfolio).Include(p => p.NotasDoPrestador);
             return View(await projectDealContext.ToListAsync());
         }
 
@@ -55,6 +55,7 @@ namespace Deal.Controllers
         {
             ViewData["AreaAtuacaoId"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId");
+            ViewData["AreaAtuacao"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             return View();
         }
 
@@ -64,6 +65,7 @@ namespace Deal.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PrestadorId,FotoPrestador,FkPortfolio,Nome,Cpf,Idade,Endereco,Cep,Telefone,Senha,Email,QtdServicoRealizados")] Prestador prestador, List<int> areasAtuacao)
+
         {
             if (ModelState.IsValid)
             {
@@ -77,6 +79,7 @@ namespace Deal.Controllers
                     _context.AreasDeAtuacaoDoPrestador.Add(areasDeAtuacaoDosPrestadores);
                 }
                 await _context.SaveChangesAsync();
+
 
                 return RedirectToAction(nameof(Index));
             }

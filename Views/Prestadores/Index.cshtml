@@ -45,53 +45,61 @@
             <th>
                 @Html.DisplayNameFor(model => model.QtdServicoRealizados)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pontuacao)
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-               <img width="300px" height="300px" src="@Html.DisplayFor(modelItem => item.FotoPrestador)" alt="" srcset=""> 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Portfolio.PortfolioId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cpf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Idade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Endereco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cep)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Senha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QtdServicoRealizados)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PrestadorId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PrestadorId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PrestadorId">Delete</a> |
-                <a asp-controller="Servicos" asp-action="ServicosPendentes" asp-route-id="@item.PrestadorId">Servicos Solicitados</a> |
-                <a asp-action="FindService" asp-route-id="@item.PrestadorId">Buscar Servicços</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img width="300px" height="300px" src="@Html.DisplayFor(modelItem => item.FotoPrestador)" alt=""
+                    srcset="">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Portfolio.PortfolioId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cpf)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Idade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Senha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QtdServicoRealizados)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pontuacao)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PrestadorId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PrestadorId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PrestadorId">Delete</a> |
+                    <a asp-controller="Servicos" asp-action="ServicosPendentes" asp-route-id="@item.PrestadorId">Servicos
+                        Solicitados</a> |
+                    <a asp-action="FindService" asp-route-id="@item.PrestadorId">Buscar Servicços</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

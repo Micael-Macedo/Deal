@@ -163,11 +163,11 @@ namespace Deal.Controllers
             }
 
             var acordo = await _context.Acordos
-            .Include(m =>m.Servico.Cliente)
-            .Include(m =>m.Servico.Cliente.Notas)
-            .Include(m =>m.Servico.Prestador)
-            .Include(m =>m.Servico.Prestador.Notas)
-            .Include(m =>m.Servico.Categoria)
+            .Include(m => m.Servico.Cliente)
+            .Include(m => m.Servico.Cliente.NotasDoCliente)
+            .Include(m => m.Servico.Prestador)
+            .Include(m => m.Servico.Prestador.NotasDoPrestador)
+            .Include(m => m.Servico.Categoria)
                 .FirstOrDefaultAsync(m => m.AcordoId == id);
 
             if (acordo == null)
@@ -177,8 +177,174 @@ namespace Deal.Controllers
 
             return View(acordo);
         }
+        public async Task<IActionResult> AvaliacaoDoCliente(int? id)
+        {
+            if (id == null || _context.Acordos == null)
+            {
+                return NotFound();
+            }
 
+            var acordo = await _context.Acordos
+            .Include(m => m.Servico)
+            .Include(m => m.Servico.Cliente)
+            .Include(m => m.Servico.Prestador)
+            .FirstOrDefaultAsync(m => m.AcordoId == id);
+            if (acordo == null)
+            {
+                return NotFound();
+            }
 
+            return View(acordo);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AvaliacaoDoCliente(int? AcordoId, int nota)
+        {
+            if (_context.Acordos == null)
+            {
+                return NotFound();
+            }
+            Acordo acordo = _context.Acordos.Find(AcordoId);
+            Servico servico = _context.Servicos.Find(acordo.FkServico);
+            if(ModelState.IsValid){
+                NotaCliente notaCliente = new NotaCliente();
+                notaCliente.FkCliente = servico.FkCliente;
+                notaCliente.Avaliacao = nota;
+                notaCliente.FkAcordo = acordo.AcordoId;
+                _context.NotaClientes.Add(notaCliente);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(acordo);
+        }
+        public async Task<IActionResult> AvaliacaoDoPrestador(int? id)
+        {
+            if (id == null || _context.Acordos == null)
+            {
+                return NotFound();
+            }
+
+            var acordo = await _context.Acordos
+            .Include(m => m.Servico)
+            .Include(m => m.Servico.Cliente)
+            .Include(m => m.Servico.Prestador)
+            .FirstOrDefaultAsync(m => m.AcordoId == id);
+            if (acordo == null)
+            {
+                return NotFound();
+            }
+
+            return View(acordo);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AvaliacaoDoPrestador(int? AcordoId, int nota)
+        {
+            if (_context.Acordos == null)
+            {
+                return NotFound();
+            }
+            Acordo acordo = _context.Acordos.Find(AcordoId);
+            Servico servico = _context.Servicos.Find(acordo.FkServico);
+            if(ModelState.IsValid){
+                NotaPrestador notaPrestador = new NotaPrestador();
+                notaPrestador.FkPrestador = servico.FkPrestador;
+                notaPrestador.Avaliacao = nota;
+                notaPrestador.FkAcordo = acordo.AcordoId;
+                _context.NotaPrestadores.Add(notaPrestador);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(acordo);
+        }
+        public async Task<IActionResult> ClienteFinalizaAcordo(int? id)
+        {
+            if (id == null || _context.Acordos == null)
+            {
+                return NotFound();
+            }
+
+            var acordo = await _context.Acordos
+            .Include(m => m.Servico)
+            .Include(m => m.Servico.Categoria)
+            .Include(m => m.Servico.Cliente)
+            .Include(m => m.Servico.Prestador)
+            .FirstOrDefaultAsync(m => m.AcordoId == id);
+            if (acordo == null)
+            {
+                return NotFound();
+            }
+
+            return View(acordo);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ClienteFinalizaAcordo(int? acordoId, string Finalizar)
+        {
+            if (_context.Acordos == null)
+            {
+                return NotFound();
+            }
+            Acordo acordo = _context.Acordos.Find(acordoId);
+            if (acordo == null)
+            {
+                return NotFound();
+            }
+            if(ModelState.IsValid){
+                if(Finalizar == "true"){
+                    acordo.ClienteFinalizaAcordo = true;
+                    acordo.VerificarSeAcordoFoiFinalizado();
+                    _context.Acordos.Update(acordo);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("HomePage", "Acordo", acordoId);
+                }
+            }
+            return View(acordo);
+        }
+        public async Task<IActionResult> PrestadorFinalizaAcordo(int? id)
+        {
+            if (id == null || _context.Acordos == null)
+            {
+                return NotFound();
+            }
+
+            var acordo = await _context.Acordos
+            .Include(m => m.Servico)
+            .Include(m => m.Servico.Categoria)
+            .Include(m => m.Servico.Cliente)
+            .Include(m => m.Servico.Prestador)
+            .FirstOrDefaultAsync(m => m.AcordoId == id);
+            if (acordo == null)
+            {
+                return NotFound();
+            }
+
+            return View(acordo);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PrestadorFinalizaAcordo(int? acordoId, string Finalizar)
+        {
+            if (_context.Acordos == null)
+            {
+                return NotFound();
+            }
+            Acordo acordo = _context.Acordos.Find(acordoId);
+            if (acordo == null)
+            {
+                return NotFound();
+            }
+            if(ModelState.IsValid){
+                if(Finalizar == "true"){
+                    acordo.PrestadorFinalizaAcordo = true;
+                    acordo.VerificarSeAcordoFoiFinalizado();
+                    _context.Acordos.Update(acordo);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("HomePage", "Acordo", acordoId);
+                }
+            }
+            return View(acordo);
+        }
         private bool AcordoExists(int id)
         {
             return (_context.Acordos?.Any(e => e.AcordoId == id)).GetValueOrDefault();

@@ -3,6 +3,7 @@ using System;
 using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    partial class ProjectDealContextModelSnapshot : ModelSnapshot
+    [Migration("20221125235608_SetPontuacao")]
+    partial class SetPontuacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,10 +61,8 @@ namespace Deal.Migrations
                     b.Property<string>("Atuacao")
                         .HasColumnType("longtext");
 
-
-                    b.Property<bool>("Checked")
-                        .HasColumnType("tinyint(1)");
-
+                    b.Property<int?>("PrestadorId")
+                        .HasColumnType("int");
 
                     b.HasKey("AreaAtuacaoId");
 
