@@ -10,11 +10,19 @@
         <div class="Cliente">
             <h2>Cliente</h2>
             <img width="200px" src="@Model.Servico.Cliente.FotoUsuario" alt="" srcset="">
+<<<<<<< HEAD
+            <p><b>Nome</b> @Model.Servico.Cliente.Nome</p>
+            <p><b>Email</b> @Model.Servico.Cliente.Email</p>
+            <p><b>Idade</b> @Model.Servico.Cliente.Idade</p>
+            @* <p><b>Pontuação</b> @Model.Servico.Cliente.Pontuacao</p> *@
+            <p><b>Acordos Realizados</b> @Model.Servico.Cliente.QtdAcordoRealizados</p>
+=======
             <p>@Model.Servico.Cliente.Nome</p>
             <p>@Model.Servico.Cliente.Email</p>
             <p>@Model.Servico.Cliente.Idade</p>
             @* <p>@Model.Servico.Cliente.Pontuacao</p> *@
             <p>@Model.Servico.Cliente.QtdAcordoRealizados</p>
+>>>>>>> 999ca9c28e07ea5ce827f0880fa29e65b00c9f40
             @if (@Model.AcordoFinalizado)
             {
                 <a asp-action="AvaliacaoDoPrestador" asp-route-id="@Model.AcordoId">Avaliar Prestador</a>
@@ -31,11 +39,19 @@
         <div class="Prestador">
             <h2>Prestador</h2>
             <img width="200px" src="@Model.Servico.Prestador.FotoPrestador" alt="" srcset="">
+<<<<<<< HEAD
+            <p><b>Nome</b>@Model.Servico.Prestador.Nome</p>
+            <p><b>Email</b>@Model.Servico.Prestador.Email</p>
+            <p><b>Idade</b>@Model.Servico.Prestador.Idade</p>
+            <p><b>Pontuação</b>@Model.Servico.Prestador.Pontuacao</p>
+            <p><b>Serviços Realizados</b>@Model.Servico.Prestador.QtdServicoRealizados</p>
+=======
             <p>@Model.Servico.Prestador.Nome</p>
             <p>@Model.Servico.Prestador.Email</p>
             <p>@Model.Servico.Prestador.Idade</p>
             @* <p>@Model.Servico.Prestador.Pontuacao</p> *@
             <p>@Model.Servico.Prestador.QtdServicoRealizados</p>
+>>>>>>> 999ca9c28e07ea5ce827f0880fa29e65b00c9f40
             @if (@Model.AcordoFinalizado)
             {
                 <a asp-action="AvaliacaoDoCliente" asp-route-id="@Model.AcordoId">Avaliar Cliente</a>
