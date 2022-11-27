@@ -25,6 +25,20 @@ namespace Deal.Controllers
                         View(await _context.Acordos.ToListAsync()) :
                         Problem("Entity set 'ProjectDealContext.Acordos'  is null.");
         }
+        public async Task<IActionResult> ClienteAcordos(int? id)
+        {
+            List<Acordo> acordos = await _context.Acordos.Where(a => a.Servico.FkCliente == id).ToListAsync();
+            return _context.Acordos != null ?
+                        View(acordos) :
+                        Problem("Entity set 'ProjectDealContext.Acordos'  is null.");
+        }
+        public async Task<IActionResult> PrestadorAcordos(int? id)
+        {
+            List<Acordo> acordos = await _context.Acordos.Where(a => a.Servico.FkPrestador == id).ToListAsync();
+            return _context.Acordos != null ?
+                        View(acordos) :
+                        Problem("Entity set 'ProjectDealContext.Acordos'  is null.");
+        }
 
         // GET: Acordo/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -43,6 +57,7 @@ namespace Deal.Controllers
 
             return View(acordo);
         }
+
 
         // GET: Acordo/Create
         public IActionResult Create()
@@ -206,7 +221,8 @@ namespace Deal.Controllers
             }
             Acordo acordo = _context.Acordos.Find(AcordoId);
             Servico servico = _context.Servicos.Find(acordo.FkServico);
-            if(ModelState.IsValid){
+            if (ModelState.IsValid)
+            {
                 NotaCliente notaCliente = new NotaCliente();
                 notaCliente.FkCliente = servico.FkCliente;
                 notaCliente.Avaliacao = nota;
@@ -246,7 +262,8 @@ namespace Deal.Controllers
             }
             Acordo acordo = _context.Acordos.Find(AcordoId);
             Servico servico = _context.Servicos.Find(acordo.FkServico);
-            if(ModelState.IsValid){
+            if (ModelState.IsValid)
+            {
                 NotaPrestador notaPrestador = new NotaPrestador();
                 notaPrestador.FkPrestador = servico.FkPrestador;
                 notaPrestador.Avaliacao = nota;
@@ -290,8 +307,10 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            if(ModelState.IsValid){
-                if(Finalizar == "true"){
+            if (ModelState.IsValid)
+            {
+                if (Finalizar == "true")
+                {
                     acordo.ClienteFinalizaAcordo = true;
                     acordo.VerificarSeAcordoFoiFinalizado();
                     _context.Acordos.Update(acordo);
@@ -334,8 +353,10 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            if(ModelState.IsValid){
-                if(Finalizar == "true"){
+            if (ModelState.IsValid)
+            {
+                if (Finalizar == "true")
+                {
                     acordo.PrestadorFinalizaAcordo = true;
                     acordo.VerificarSeAcordoFoiFinalizado();
                     _context.Acordos.Update(acordo);
