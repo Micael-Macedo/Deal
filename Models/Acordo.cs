@@ -17,6 +17,8 @@ namespace Deal.Models
         public float? NotaPrestador { get; set; }
         private bool clienteFinalizaAcordo;
         private bool prestadorFinalizaAcordo;
+        public bool AvaliouCliente { get; set; }
+        public bool AvaliouPrestador { get; set; }
         public bool ClienteFinalizaAcordo
         {
             get

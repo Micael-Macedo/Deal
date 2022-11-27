@@ -21,7 +21,18 @@ namespace Deal.Controllers
         // GET: Prestadores
         public async Task<IActionResult> Index()
         {
-            var projectDealContext = _context.Prestadores.Include(p => p.Portfolio).Include(p => p.NotasDoPrestador);
+            List<Prestador> prestadores = await _context.Prestadores.ToListAsync();
+            foreach (var prestador in prestadores)
+            {
+                List<NotaPrestador> notasDoPrestador = await _context.NotaPrestadores.Where(n => n.FkPrestador == prestador.PrestadorId).ToListAsync();
+                if(notasDoPrestador.Count != 0){
+                    prestador.NotasDoPrestador = notasDoPrestador;
+                }
+                prestador.Pontuacao = prestador.MediaNota();
+                _context.Prestadores.Update(prestador);
+                await _context.SaveChangesAsync();
+            }
+            var projectDealContext = _context.Prestadores.Include(p => p.Portfolio);
             return View(await projectDealContext.ToListAsync());
         }
 
@@ -54,23 +65,9 @@ namespace Deal.Controllers
         // GET: Prestadores/Create
         public IActionResult Create()
         {
-            List<AreaAtuacao> listacheckAreaAtuacao = new List<AreaAtuacao>();
-            Random rand = new Random();
-
-            for (int i = 0; i < _context.AreaAtuacao.Count(); i++)
-            {
-                AreaAtuacao listaAreaAtuacao = new AreaAtuacao
-                {
-                    AreaAtuacaoId = i,
-                    Atuacao = "CHECK" + i
-                };
-
-                listacheckAreaAtuacao.Add(listaAreaAtuacao);
-            }
-            ViewData["AreaAtuacao"] = listacheckAreaAtuacao;
-
+            List<AreaAtuacao> listaAreasDeAtuacao = _context.AreaAtuacao.ToList();
+            ViewData["AreaAtuacao"] = listaAreasDeAtuacao;
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId");
-            ViewData["AreaAtuacao"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             return View();
         }
 
@@ -83,9 +80,12 @@ namespace Deal.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(AreasAtuacaoDoPrestador == null){
+                    return NotFound();
+                }
                 _context.Add(prestador);
                 await _context.SaveChangesAsync();
-                prestador = _context.Prestadores.Find(prestador);
+                
                 foreach (var atuacao in AreasAtuacaoDoPrestador)
                 {
                     AreasDeAtuacaoDoPrestador RelacionarAreasDeAtuacaoComPrestador = new AreasDeAtuacaoDoPrestador();

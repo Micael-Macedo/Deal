@@ -5,26 +5,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Deal.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "AreaAtuacao",
-                columns: table => new
-                {
-                    AreaAtuacaoId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Atuacao = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AreaAtuacao", x => x.AreaAtuacaoId);
-                })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
@@ -33,22 +18,26 @@ namespace Deal.Migrations
                 {
                     ClienteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "longtext", nullable: false)
+                    FotoUsuario = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Cpf = table.Column<string>(type: "longtext", nullable: false)
+                    Nome = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Cpf = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Idade = table.Column<int>(type: "int", nullable: false),
-                    Endereco = table.Column<string>(type: "longtext", nullable: false)
+                    Endereco = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Cep = table.Column<string>(type: "longtext", nullable: false)
+                    Cep = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Telefone = table.Column<string>(type: "longtext", nullable: false)
+                    Telefone = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Senha = table.Column<string>(type: "longtext", nullable: false)
+                    Senha = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "longtext", nullable: false)
+                    Email = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    QtdAcordoRealizados = table.Column<int>(type: "int", nullable: false)
+                    QtdAcordoRealizados = table.Column<int>(type: "int", nullable: false),
+                    ServicosCancelados = table.Column<int>(type: "int", nullable: false),
+                    Pontuacao = table.Column<float>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,7 +51,7 @@ namespace Deal.Migrations
                 {
                     NovaAreaAtuacaoId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    AreaAtuacao = table.Column<string>(type: "longtext", nullable: false)
+                    AreaAtuacao = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -77,9 +66,9 @@ namespace Deal.Migrations
                 {
                     PortfolioId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Descricao = table.Column<string>(type: "longtext", nullable: false)
+                    Descricao = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ExperienciaProfissional = table.Column<string>(type: "longtext", nullable: false)
+                    ExperienciaProfissional = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -94,7 +83,7 @@ namespace Deal.Migrations
                 {
                     CertificadoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CertificadoFotoPortfolio = table.Column<string>(type: "longtext", nullable: false)
+                    CertificadoFotoPortfolio = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     FkPortfolio = table.Column<int>(type: "int", nullable: false)
                 },
@@ -137,23 +126,26 @@ namespace Deal.Migrations
                 {
                     PrestadorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FkPortfolio = table.Column<int>(type: "int", nullable: true),
-                    Nome = table.Column<string>(type: "longtext", nullable: false)
+                    FotoPrestador = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Cpf = table.Column<string>(type: "longtext", nullable: false)
+                    FkPortfolio = table.Column<int>(type: "int", nullable: true),
+                    Nome = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Cpf = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Idade = table.Column<int>(type: "int", nullable: false),
-                    Endereco = table.Column<string>(type: "longtext", nullable: false)
+                    Endereco = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Cep = table.Column<string>(type: "longtext", nullable: false)
+                    Cep = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Telefone = table.Column<string>(type: "longtext", nullable: false)
+                    Telefone = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Senha = table.Column<string>(type: "longtext", nullable: false)
+                    Senha = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "longtext", nullable: false)
+                    Email = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    QtdServicoRealizados = table.Column<int>(type: "int", nullable: false)
+                    QtdServicoRealizados = table.Column<int>(type: "int", nullable: false),
+                    Pontuacao = table.Column<float>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -172,7 +164,7 @@ namespace Deal.Migrations
                 {
                     VideoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    VideoPrestador = table.Column<string>(type: "longtext", nullable: false)
+                    VideoPrestador = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     FkPortfolio = table.Column<int>(type: "int", nullable: true)
                 },
@@ -188,13 +180,34 @@ namespace Deal.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "AreaAtuacao",
+                columns: table => new
+                {
+                    AreaAtuacaoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Atuacao = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PrestadorId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AreaAtuacao", x => x.AreaAtuacaoId);
+                    table.ForeignKey(
+                        name: "FK_AreaAtuacao_Prestadores_PrestadorId",
+                        column: x => x.PrestadorId,
+                        principalTable: "Prestadores",
+                        principalColumn: "PrestadorId");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "AreasDeAtuacaoDoPrestador",
                 columns: table => new
                 {
                     AreasDeAtuacaoDoPrestadorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FkPrestador = table.Column<int>(type: "int", nullable: false),
-                    FkAreaAtuacao = table.Column<int>(type: "int", nullable: false)
+                    FkPrestador = table.Column<int>(type: "int", nullable: true),
+                    FkAreaAtuacao = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -203,38 +216,10 @@ namespace Deal.Migrations
                         name: "FK_AreasDeAtuacaoDoPrestador_AreaAtuacao_FkAreaAtuacao",
                         column: x => x.FkAreaAtuacao,
                         principalTable: "AreaAtuacao",
-                        principalColumn: "AreaAtuacaoId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AreaAtuacaoId");
                     table.ForeignKey(
                         name: "FK_AreasDeAtuacaoDoPrestador_Prestadores_FkPrestador",
                         column: x => x.FkPrestador,
-                        principalTable: "Prestadores",
-                        principalColumn: "PrestadorId",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Notas",
-                columns: table => new
-                {
-                    NotaId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Avaliacao = table.Column<float>(type: "float", nullable: false),
-                    ClienteId = table.Column<int>(type: "int", nullable: true),
-                    PrestadorId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notas", x => x.NotaId);
-                    table.ForeignKey(
-                        name: "FK_Notas_Clientes_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Clientes",
-                        principalColumn: "ClienteId");
-                    table.ForeignKey(
-                        name: "FK_Notas_Prestadores_PrestadorId",
-                        column: x => x.PrestadorId,
                         principalTable: "Prestadores",
                         principalColumn: "PrestadorId");
                 })
@@ -265,8 +250,10 @@ namespace Deal.Migrations
                     FkPrestador = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Latitude = table.Column<double>(type: "double", nullable: true),
-                    Longitude = table.Column<double>(type: "double", nullable: true)
+                    Latitude = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Longitude = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -295,48 +282,87 @@ namespace Deal.Migrations
                 {
                     AcordoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FkServico = table.Column<int>(type: "int", nullable: false),
-                    FkCliente = table.Column<int>(type: "int", nullable: false),
-                    FkPrestador = table.Column<int>(type: "int", nullable: false)
+                    FkServico = table.Column<int>(type: "int", nullable: true),
+                    NotaCliente = table.Column<float>(type: "float", nullable: true),
+                    NotaPrestador = table.Column<float>(type: "float", nullable: true),
+                    AvaliouCliente = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AvaliouPrestador = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ClienteFinalizaAcordo = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    PrestadorFinalizaAcordo = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AcordoFinalizado = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Acordos", x => x.AcordoId);
                     table.ForeignKey(
-                        name: "FK_Acordos_Clientes_FkCliente",
-                        column: x => x.FkCliente,
-                        principalTable: "Clientes",
-                        principalColumn: "ClienteId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Acordos_Prestadores_FkPrestador",
-                        column: x => x.FkPrestador,
-                        principalTable: "Prestadores",
-                        principalColumn: "PrestadorId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Acordos_Servicos_FkServico",
                         column: x => x.FkServico,
                         principalTable: "Servicos",
-                        principalColumn: "ServicoId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ServicoId");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Acordos_FkCliente",
-                table: "Acordos",
-                column: "FkCliente");
+            migrationBuilder.CreateTable(
+                name: "NotaClientes",
+                columns: table => new
+                {
+                    NotaClienteId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Avaliacao = table.Column<float>(type: "float", nullable: false),
+                    FkCliente = table.Column<int>(type: "int", nullable: true),
+                    FkAcordo = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotaClientes", x => x.NotaClienteId);
+                    table.ForeignKey(
+                        name: "FK_NotaClientes_Acordos_FkAcordo",
+                        column: x => x.FkAcordo,
+                        principalTable: "Acordos",
+                        principalColumn: "AcordoId");
+                    table.ForeignKey(
+                        name: "FK_NotaClientes_Clientes_FkCliente",
+                        column: x => x.FkCliente,
+                        principalTable: "Clientes",
+                        principalColumn: "ClienteId");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Acordos_FkPrestador",
-                table: "Acordos",
-                column: "FkPrestador");
+            migrationBuilder.CreateTable(
+                name: "NotaPrestadores",
+                columns: table => new
+                {
+                    NotaPrestadorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Avaliacao = table.Column<float>(type: "float", nullable: false),
+                    FkPrestador = table.Column<int>(type: "int", nullable: true),
+                    FkAcordo = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotaPrestadores", x => x.NotaPrestadorId);
+                    table.ForeignKey(
+                        name: "FK_NotaPrestadores_Acordos_FkAcordo",
+                        column: x => x.FkAcordo,
+                        principalTable: "Acordos",
+                        principalColumn: "AcordoId");
+                    table.ForeignKey(
+                        name: "FK_NotaPrestadores_Prestadores_FkPrestador",
+                        column: x => x.FkPrestador,
+                        principalTable: "Prestadores",
+                        principalColumn: "PrestadorId");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Acordos_FkServico",
                 table: "Acordos",
                 column: "FkServico");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AreaAtuacao_PrestadorId",
+                table: "AreaAtuacao",
+                column: "PrestadorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AreasDeAtuacaoDoPrestador_FkAreaAtuacao",
@@ -359,14 +385,24 @@ namespace Deal.Migrations
                 column: "FkPortfolio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notas_ClienteId",
-                table: "Notas",
-                column: "ClienteId");
+                name: "IX_NotaClientes_FkAcordo",
+                table: "NotaClientes",
+                column: "FkAcordo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notas_PrestadorId",
-                table: "Notas",
-                column: "PrestadorId");
+                name: "IX_NotaClientes_FkCliente",
+                table: "NotaClientes",
+                column: "FkCliente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaPrestadores_FkAcordo",
+                table: "NotaPrestadores",
+                column: "FkAcordo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaPrestadores_FkPrestador",
+                table: "NotaPrestadores",
+                column: "FkPrestador");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Prestadores_FkPortfolio",
@@ -397,9 +433,6 @@ namespace Deal.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Acordos");
-
-            migrationBuilder.DropTable(
                 name: "AreasDeAtuacaoDoPrestador");
 
             migrationBuilder.DropTable(
@@ -409,13 +442,19 @@ namespace Deal.Migrations
                 name: "Fotos");
 
             migrationBuilder.DropTable(
-                name: "Notas");
+                name: "NotaClientes");
+
+            migrationBuilder.DropTable(
+                name: "NotaPrestadores");
 
             migrationBuilder.DropTable(
                 name: "NovasAreasAtuacoes");
 
             migrationBuilder.DropTable(
                 name: "Video");
+
+            migrationBuilder.DropTable(
+                name: "Acordos");
 
             migrationBuilder.DropTable(
                 name: "Servicos");
