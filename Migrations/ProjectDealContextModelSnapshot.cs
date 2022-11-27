@@ -28,6 +28,12 @@ namespace Deal.Migrations
                     b.Property<bool>("AcordoFinalizado")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<bool>("AvaliouCliente")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("AvaliouPrestador")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("ClienteFinalizaAcordo")
                         .HasColumnType("tinyint(1)");
 
@@ -59,10 +65,8 @@ namespace Deal.Migrations
                     b.Property<string>("Atuacao")
                         .HasColumnType("longtext");
 
-
-                    b.Property<bool>("Checked")
-                        .HasColumnType("tinyint(1)");
-
+                    b.Property<int?>("PrestadorId")
+                        .HasColumnType("int");
 
                     b.HasKey("AreaAtuacaoId");
 

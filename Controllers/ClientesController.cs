@@ -21,15 +21,19 @@ namespace Deal.Controllers
         // GET: Clientes
         public async Task<IActionResult> Index()
         {
-            List<Cliente> clientes = _context.Clientes.ToList();
+            List<Cliente> clientes = await _context.Clientes.ToListAsync();
             foreach (var cliente in clientes)
             {
-                List<NotaCliente> notasDoCliente = _context.NotaClientes.Where(n => n.FkCliente == cliente.ClienteId).ToList();
+                List<NotaCliente> notasDoCliente = await _context.NotaClientes.Where(n => n.FkCliente == cliente.ClienteId).ToListAsync();
+                if(notasDoCliente.Count != 0){
+                    cliente.NotasDoCliente = notasDoCliente;
+                }
                 cliente.Pontuacao = cliente.MediaNota();
                 _context.Clientes.Update(cliente);
                 await _context.SaveChangesAsync();
             }
-              return View(await _context.Clientes.ToListAsync());
+            var projectDealContext = _context.Clientes;
+            return View(await projectDealContext.ToListAsync());
         }
 
         // GET: Clientes/Details/5
@@ -169,14 +173,14 @@ namespace Deal.Controllers
             {
                 _context.Clientes.Remove(cliente);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClienteExists(int id)
         {
-          return _context.Clientes.Any(e => e.ClienteId == id);
+            return _context.Clientes.Any(e => e.ClienteId == id);
         }
     }
 }

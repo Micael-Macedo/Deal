@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    [Migration("20221108102944_Foto-Prestador")]
-    partial class FotoPrestador
+    [Migration("20221127030816_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,20 +27,31 @@ namespace Deal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("FkCliente")
+                    b.Property<bool>("AcordoFinalizado")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("AvaliouCliente")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("AvaliouPrestador")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("ClienteFinalizaAcordo")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("FkServico")
                         .HasColumnType("int");
 
-                    b.Property<int>("FkPrestador")
-                        .HasColumnType("int");
+                    b.Property<float?>("NotaCliente")
+                        .HasColumnType("float");
 
-                    b.Property<int>("FkServico")
-                        .HasColumnType("int");
+                    b.Property<float?>("NotaPrestador")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("PrestadorFinalizaAcordo")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("AcordoId");
-
-                    b.HasIndex("FkCliente");
-
-                    b.HasIndex("FkPrestador");
 
                     b.HasIndex("FkServico");
 
@@ -54,10 +65,14 @@ namespace Deal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Atuacao")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("PrestadorId")
+                        .HasColumnType("int");
+
                     b.HasKey("AreaAtuacaoId");
+
+                    b.HasIndex("PrestadorId");
 
                     b.ToTable("AreaAtuacao");
                 });
@@ -68,10 +83,10 @@ namespace Deal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("FkAreaAtuacao")
+                    b.Property<int?>("FkAreaAtuacao")
                         .HasColumnType("int");
 
-                    b.Property<int>("FkPrestador")
+                    b.Property<int?>("FkPrestador")
                         .HasColumnType("int");
 
                     b.HasKey("AreasDeAtuacaoDoPrestadorId");
@@ -90,7 +105,6 @@ namespace Deal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CertificadoFotoPortfolio")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("FkPortfolio")
@@ -110,41 +124,39 @@ namespace Deal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Cep")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Cpf")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Endereco")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("FotoUsuario")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("Idade")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<float>("Pontuacao")
+                        .HasColumnType("float");
 
                     b.Property<int>("QtdAcordoRealizados")
                         .HasColumnType("int");
 
                     b.Property<string>("Senha")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("ServicosCancelados")
+                        .HasColumnType("int");
+
                     b.Property<string>("Telefone")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("ClienteId");
@@ -172,28 +184,52 @@ namespace Deal.Migrations
                     b.ToTable("Fotos");
                 });
 
-            modelBuilder.Entity("Deal.Models.Nota", b =>
+            modelBuilder.Entity("Deal.Models.NotaCliente", b =>
                 {
-                    b.Property<int>("NotaId")
+                    b.Property<int>("NotaClienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<float>("Avaliacao")
                         .HasColumnType("float");
 
-                    b.Property<int?>("ClienteId")
+                    b.Property<int?>("FkAcordo")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PrestadorId")
+                    b.Property<int?>("FkCliente")
                         .HasColumnType("int");
 
-                    b.HasKey("NotaId");
+                    b.HasKey("NotaClienteId");
 
-                    b.HasIndex("ClienteId");
+                    b.HasIndex("FkAcordo");
 
-                    b.HasIndex("PrestadorId");
+                    b.HasIndex("FkCliente");
 
-                    b.ToTable("Notas");
+                    b.ToTable("NotaClientes");
+                });
+
+            modelBuilder.Entity("Deal.Models.NotaPrestador", b =>
+                {
+                    b.Property<int>("NotaPrestadorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<float>("Avaliacao")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("FkAcordo")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FkPrestador")
+                        .HasColumnType("int");
+
+                    b.HasKey("NotaPrestadorId");
+
+                    b.HasIndex("FkAcordo");
+
+                    b.HasIndex("FkPrestador");
+
+                    b.ToTable("NotaPrestadores");
                 });
 
             modelBuilder.Entity("Deal.Models.NovaAreaAtuacao", b =>
@@ -202,7 +238,6 @@ namespace Deal.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("AreaAtuacao")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("NovaAreaAtuacaoId");
@@ -217,11 +252,9 @@ namespace Deal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Descricao")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ExperienciaProfissional")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("PortfolioId");
@@ -236,44 +269,39 @@ namespace Deal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Cep")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Cpf")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Endereco")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int?>("FkPortfolio")
                         .HasColumnType("int");
 
                     b.Property<string>("FotoPrestador")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("Idade")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<float>("Pontuacao")
+                        .HasColumnType("float");
 
                     b.Property<int>("QtdServicoRealizados")
                         .HasColumnType("int");
 
                     b.Property<string>("Senha")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Telefone")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("PrestadorId");
@@ -313,11 +341,11 @@ namespace Deal.Migrations
                     b.Property<int?>("FkPrestador")
                         .HasColumnType("int");
 
-                    b.Property<double?>("Latitude")
-                        .HasColumnType("double");
+                    b.Property<string>("Latitude")
+                        .HasColumnType("longtext");
 
-                    b.Property<double?>("Longitude")
-                        .HasColumnType("double");
+                    b.Property<string>("Longitude")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Nome")
                         .HasColumnType("longtext");
@@ -349,7 +377,6 @@ namespace Deal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("VideoPrestador")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("VideoId");
@@ -361,44 +388,29 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.Acordo", b =>
                 {
-                    b.HasOne("Deal.Models.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("FkCliente")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Deal.Models.Prestador", "Prestador")
-                        .WithMany()
-                        .HasForeignKey("FkPrestador")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Deal.Models.Servico", "Servico")
                         .WithMany()
-                        .HasForeignKey("FkServico")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cliente");
-
-                    b.Navigation("Prestador");
+                        .HasForeignKey("FkServico");
 
                     b.Navigation("Servico");
+                });
+
+            modelBuilder.Entity("Deal.Models.AreaAtuacao", b =>
+                {
+                    b.HasOne("Deal.Models.Prestador", null)
+                        .WithMany("AreasAtuacao")
+                        .HasForeignKey("PrestadorId");
                 });
 
             modelBuilder.Entity("Deal.Models.AreasDeAtuacaoDoPrestador", b =>
                 {
                     b.HasOne("Deal.Models.AreaAtuacao", "AreaAtuacao")
                         .WithMany()
-                        .HasForeignKey("FkAreaAtuacao")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FkAreaAtuacao");
 
                     b.HasOne("Deal.Models.Prestador", "Prestador")
                         .WithMany("AreasDeAtuacaoDoPrestador")
-                        .HasForeignKey("FkPrestador")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FkPrestador");
 
                     b.Navigation("AreaAtuacao");
 
@@ -425,15 +437,34 @@ namespace Deal.Migrations
                     b.Navigation("Portfolio");
                 });
 
-            modelBuilder.Entity("Deal.Models.Nota", b =>
+            modelBuilder.Entity("Deal.Models.NotaCliente", b =>
                 {
-                    b.HasOne("Deal.Models.Cliente", null)
-                        .WithMany("Notas")
-                        .HasForeignKey("ClienteId");
+                    b.HasOne("Deal.Models.Acordo", "Acordo")
+                        .WithMany()
+                        .HasForeignKey("FkAcordo");
 
-                    b.HasOne("Deal.Models.Prestador", null)
-                        .WithMany("Notas")
-                        .HasForeignKey("PrestadorId");
+                    b.HasOne("Deal.Models.Cliente", "Cliente")
+                        .WithMany("NotasDoCliente")
+                        .HasForeignKey("FkCliente");
+
+                    b.Navigation("Acordo");
+
+                    b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("Deal.Models.NotaPrestador", b =>
+                {
+                    b.HasOne("Deal.Models.Acordo", "Acordo")
+                        .WithMany()
+                        .HasForeignKey("FkAcordo");
+
+                    b.HasOne("Deal.Models.Prestador", "Prestador")
+                        .WithMany("NotasDoPrestador")
+                        .HasForeignKey("FkPrestador");
+
+                    b.Navigation("Acordo");
+
+                    b.Navigation("Prestador");
                 });
 
             modelBuilder.Entity("Deal.Models.Prestador", b =>
@@ -477,7 +508,7 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.Cliente", b =>
                 {
-                    b.Navigation("Notas");
+                    b.Navigation("NotasDoCliente");
 
                     b.Navigation("Servicos");
                 });
@@ -493,9 +524,11 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.Prestador", b =>
                 {
+                    b.Navigation("AreasAtuacao");
+
                     b.Navigation("AreasDeAtuacaoDoPrestador");
 
-                    b.Navigation("Notas");
+                    b.Navigation("NotasDoPrestador");
                 });
 #pragma warning restore 612, 618
         }

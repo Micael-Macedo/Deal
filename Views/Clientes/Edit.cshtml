@@ -15,8 +15,10 @@
             <input type="hidden" asp-for="ClienteId" />
             <div class="form-group">
                 <label asp-for="FotoUsuario" class="control-label"></label>
-                <input asp-for="FotoUsuario" class="form-control" />
+                <input type="file" class="form-control" onchange="ConverterImagem()" id="NewFoto">
+                <input asp-for="FotoUsuario" type="hidden" id="FotoBase64"/>
                 <span asp-validation-for="FotoUsuario" class="text-danger"></span>
+                <div id="apresentar-imagem" style="width: 200px; height: 200px;"></div>
             </div>
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>

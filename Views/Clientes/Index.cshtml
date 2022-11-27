@@ -43,7 +43,7 @@
                 @Html.DisplayNameFor(model => model.QtdAcordoRealizados)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pontuacao)
+                @* @Html.DisplayNameFor(model => model.Pontuacao) *@
             </th>
         </tr>
     </thead>
@@ -52,7 +52,7 @@
         {
             <tr>
                 <td>
-                    <img src="@Html.DisplayFor(modelItem => item.FotoUsuario)" alt="" style="width: 10%;">
+                    <img src="@Html.DisplayFor(modelItem => item.FotoUsuario)" alt="" width="300px" height="300px">
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nome)
@@ -82,7 +82,7 @@
                     @Html.DisplayFor(modelItem => item.QtdAcordoRealizados)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Pontuacao)
+                    @* @Html.DisplayFor(modelItem => item.Pontuacao) *@
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ClienteId">Edit</a> |
