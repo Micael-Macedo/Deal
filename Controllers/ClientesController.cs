@@ -25,7 +25,7 @@ namespace Deal.Controllers
             foreach (var cliente in clientes)
             {
                 List<NotaCliente> notasDoCliente = _context.NotaClientes.Where(n => n.FkCliente == cliente.ClienteId).ToList();
-                cliente.Pontuacao = cliente.MediaNota();
+                // cliente.Pontuacao = cliente.MediaNota();
                 _context.Clientes.Update(cliente);
                 await _context.SaveChangesAsync();
             }

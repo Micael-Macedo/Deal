@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KXtj7OcHStYR1CJtLLLfRcQyvelasDo6yP8G1yX+8SQ8Xiws+rRviTTqXHJpNf/qzrMj9zVlp6SQcQkKQERlzQ==",
+  "dgSpecHash": "9HlNHCdK5r4SdOWb9ptJFXNA30OpVgRyk6OjWZ6qXuo7ofLeYGleDqT92D1x7s8WzE8khD4e3/iqXh6fcHITYw==",
   "success": true,
-  "projectFilePath": "c:\\Users\\vini2\\OneDrive\\Área de Trabalho\\Deal\\Deal.csproj",
+  "projectFilePath": "C:\\Users\\vini2\\OneDrive\\Área de Trabalho\\Deal\\Deal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vini2\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\vini2\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

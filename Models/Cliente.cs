@@ -24,26 +24,26 @@ namespace Deal.Models
         public int QtdAcordoRealizados { get; set; }
 
         public int ServicosCancelados { get; set; }
-        public float Pontuacao
-        {
-            get
-            {
-                pontuacao = MediaNota();
-                return pontuacao;
-            }
-            set{
-                pontuacao = MediaNota();
-            }
-        }
-        public float MediaNota()
-        {
-            float TotalNotas = 0;
-            foreach (var Nota in NotasDoCliente)
-            {
-                TotalNotas += Nota.Avaliacao;
-            }
-            float MediaAvaliacao = TotalNotas / NotasDoCliente.Count;
-            return MediaAvaliacao;
-        }
+        // public float Pontuacao
+        // {
+        //     get
+        //     {
+        //         pontuacao = MediaNota();
+        //         return pontuacao;
+        //     }
+        //     set{
+        //         pontuacao = MediaNota();
+        //     }
+        // }
+        // public float MediaNota()
+        // {
+        //     float TotalNotas = 0;
+        //     foreach (var Nota in NotasDoCliente)
+        //     {
+        //         TotalNotas += Nota.Avaliacao;
+        //     }
+        //     float MediaAvaliacao = TotalNotas / NotasDoCliente.Count;
+        //     return MediaAvaliacao;
+        // }
     }
 }

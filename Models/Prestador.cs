@@ -28,26 +28,26 @@ namespace Deal.Models
         public ICollection<AreasDeAtuacaoDoPrestador>? AreasDeAtuacaoDoPrestador { get; set; }
         public int QtdServicoRealizados { get; set; }
 
-        public float Pontuacao
-        {
-            get
-            {
-                pontuacao = MediaNota();
-                return pontuacao;
-            }
-            set{
-                pontuacao = MediaNota();
-            }
-        }
-        public float MediaNota()
-        {
-            float TotalNotas = 0;
-            foreach (var Nota in NotasDoPrestador)
-            {
-                TotalNotas += Nota.Avaliacao;
-            }
-            float MediaAvaliacao = TotalNotas / NotasDoPrestador.Count;
-            return MediaAvaliacao;
-        }
+        // public float Pontuacao
+        // {
+        //     get
+        //     {
+        //         pontuacao = MediaNota();
+        //         return pontuacao;
+        //     }
+        //     set{
+        //         pontuacao = MediaNota();
+        //     }
+        // }
+        // public float MediaNota()
+        // {
+        //     float TotalNotas = 0;
+        //     foreach (var Nota in NotasDoPrestador)
+        //     {
+        //         TotalNotas += Nota.Avaliacao;
+        //     }
+        //     float MediaAvaliacao = TotalNotas / NotasDoPrestador.Count;
+        //     return MediaAvaliacao;
+        // }
     }
 }
