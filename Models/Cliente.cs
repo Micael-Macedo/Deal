@@ -24,7 +24,7 @@ namespace Deal.Models
         public int QtdAcordoRealizados { get; set; }
 
         public int ServicosCancelados { get; set; }
-       
+ 
         public float MediaNota()
         {
             if (NotasDoCliente == null || NotasDoCliente.Count == 0)
@@ -42,5 +42,6 @@ namespace Deal.Models
                 return MediaAvaliacao;
             }
         }
+
     }
 }

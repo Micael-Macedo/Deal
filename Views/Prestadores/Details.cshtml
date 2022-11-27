@@ -5,7 +5,9 @@
 }
 
 <h1>Details</h1>
-
+ @{
+    var areasAtuacao = ViewBag.areasAtuacao;
+ }
 <div>
     <h4>Prestador</h4>
     <hr />
@@ -80,13 +82,14 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.AreasAtuacao)
         </dt>
+         
         @if (Model.AreasAtuacao != null)
         {
         <dd class ="col-sm-10 areasDeAtuacaoDoPrestador">
-            @foreach (var item in Model.AreasAtuacao)
+            @foreach (var item in areasAtuacao)
             {
             <p>
-                @item.Atuacao
+                <li>@item.Atuacao</li>
             </p>
             }
         </dd>
