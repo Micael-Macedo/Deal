@@ -92,8 +92,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
-            ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
+            ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao", servico.FkCategoria);
+            ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "Nome", servico.FkCliente);
             return View(servico);
         }
 

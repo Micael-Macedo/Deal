@@ -7,28 +7,28 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Novo Cliente</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FotoUsuario)
+                Foto
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cpf)
+                CPF
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Idade)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Endereco)
+                Endereço
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cep)
+                CEP
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Telefone)
@@ -40,10 +40,10 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.QtdAcordoRealizados)
+                Acordos Realizados
             </th>
             <th>
-                @* @Html.DisplayNameFor(model => model.Pontuacao) *@
+                Avaliação
             </th>
         </tr>
     </thead>
@@ -85,9 +85,9 @@
                     @* @Html.DisplayFor(modelItem => item.Pontuacao) *@
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ClienteId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ClienteId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ClienteId">Delete</a> |
+                    <a asp-action="Edit" asp-route-id="@item.ClienteId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.ClienteId">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ClienteId">Apagar</a> |
                     <a asp-action="Home" asp-route-id="@item.ClienteId">Home</a> |
                     <a asp-controller="Servicos" asp-action="Create" asp-route-id="@item.ClienteId">Criar Servico</a>
                 </td>

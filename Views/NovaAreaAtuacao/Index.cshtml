@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AreaAtuacao)
+                Área de Atuação
             </th>
             <th></th>
         </tr>
@@ -25,9 +25,9 @@
                 @Html.DisplayFor(modelItem => item.AreaAtuacao)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.NovaAreaAtuacaoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.NovaAreaAtuacaoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.NovaAreaAtuacaoId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.NovaAreaAtuacaoId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.NovaAreaAtuacaoId">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.NovaAreaAtuacaoId">Apagar</a>
             </td>
         </tr>
 }

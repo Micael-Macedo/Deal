@@ -7,13 +7,13 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nova área de atuação</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Atuacao)
+                Área de atuação
             </th>
             <th></th>
         </tr>
@@ -25,9 +25,9 @@
                 @Html.DisplayFor(modelItem => item.Atuacao)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AreaAtuacaoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AreaAtuacaoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AreaAtuacaoId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.AreaAtuacaoId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.AreaAtuacaoId">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.AreaAtuacaoId">Apagar</a>
             </td>
         </tr>
 }

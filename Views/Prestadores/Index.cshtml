@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar</a>
 </p>
 <table class="table">
     <thead>
@@ -22,16 +22,16 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cpf)
+                CEP
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Idade)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Endereco)
+                Endereço
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cep)
+                CEP
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Telefone)
@@ -43,7 +43,7 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.QtdServicoRealizados)
+                Serviços Realizados
             </th>
             <th>
                 @* @Html.DisplayNameFor(model => model.Pontuacao) *@
@@ -92,9 +92,9 @@
                     @* @Html.DisplayFor(modelItem => item.Pontuacao) *@
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.PrestadorId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.PrestadorId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PrestadorId">Delete</a> |
+                    <a asp-action="Edit" asp-route-id="@item.PrestadorId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.PrestadorId">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PrestadorId">Apagar</a> |
                     <a asp-controller="Servicos" asp-action="ServicosPendentes" asp-route-id="@item.PrestadorId">Servicos
                         Solicitados</a> |
                     <a asp-action="FindService" asp-route-id="@item.PrestadorId">Buscar Servicços</a>

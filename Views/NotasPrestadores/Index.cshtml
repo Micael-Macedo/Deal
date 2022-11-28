@@ -7,16 +7,16 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Avaliacao)
+                Avaliação
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Prestador)
+                Prestador
             </th>
             <th></th>
         </tr>
@@ -28,12 +28,12 @@
                 @Html.DisplayFor(modelItem => item.Avaliacao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Prestador.PrestadorId)
+                @Html.DisplayFor(modelItem => item.Prestador.Nome)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.NotaPrestadorId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.NotaPrestadorId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.NotaPrestadorId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.NotaPrestadorId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.NotaPrestadorId">Detalhe</a> |
+                <a asp-action="Delete" asp-route-id="@item.NotaPrestadorId">Apagar</a>
             </td>
         </tr>
 }

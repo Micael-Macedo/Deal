@@ -1,7 +1,7 @@
 @model Deal.Models.Portfolio
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhe";
 }
 
 <h1>Details</h1>
@@ -11,13 +11,13 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
+           Descrição
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Descricao)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExperienciaProfissional)
+            Experiencia Profissional
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ExperienciaProfissional)
@@ -25,6 +25,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.PortfolioId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.PortfolioId">Editar</a> |
+    <a asp-action="Index">Retornar</a>
 </div>
