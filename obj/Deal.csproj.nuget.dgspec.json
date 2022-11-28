@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vini2\\OneDrive\\Área de Trabalho\\Deal\\Deal.csproj": {}
+    "C:\\Users\\vini2\\Downloads\\PROJETOS\\Deal\\Deal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vini2\\OneDrive\\Área de Trabalho\\Deal\\Deal.csproj": {
+    "C:\\Users\\vini2\\Downloads\\PROJETOS\\Deal\\Deal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vini2\\OneDrive\\Área de Trabalho\\Deal\\Deal.csproj",
+        "projectUniqueName": "C:\\Users\\vini2\\Downloads\\PROJETOS\\Deal\\Deal.csproj",
         "projectName": "Deal",
-        "projectPath": "C:\\Users\\vini2\\OneDrive\\Área de Trabalho\\Deal\\Deal.csproj",
+        "projectPath": "C:\\Users\\vini2\\Downloads\\PROJETOS\\Deal\\Deal.csproj",
         "packagesPath": "C:\\Users\\vini2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vini2\\OneDrive\\Área de Trabalho\\Deal\\obj\\",
+        "outputPath": "C:\\Users\\vini2\\Downloads\\PROJETOS\\Deal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vini2\\AppData\\Roaming\\NuGet\\NuGet.Config"

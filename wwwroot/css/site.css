@@ -342,6 +342,34 @@ h2{
   border-radius: 5px;
 }
 
+.tabela_h1{
+  font-size: 47px;
+  font-weight: 730;
+  color: rgb(32, 32, 32);
+}
+
+.botao{
+  font-size: 16px;
+  border: none;
+  border-radius: 0.6ch;
+  padding: 9px;
+  width: 250;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  background-color: blueviolet;
+}
+
+.botao2{
+  font-size: 16px;
+  border: none;
+  border-radius: 0.6ch;
+  margin: 5px;
+  padding: 9px;
+  width: 250;
+  color: rgb(255, 255, 255);
+  background-color: rgb(181, 105, 252);
+}
+
 .AvalicaoAcordo input{
   background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Star_icon_stylized.svg/2153px-Star_icon_stylized.svg.png) !important;
 }
