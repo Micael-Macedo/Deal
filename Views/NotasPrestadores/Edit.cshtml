@@ -1,12 +1,12 @@
 @model Deal.Models.NotaPrestador
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h4>NotaPrestador</h4>
+<h4>Nota Prestador</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,23 +14,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="NotaPrestadorId" />
             <div class="form-group">
-                <label asp-for="Avaliacao" class="control-label"></label>
+                <label class="control-label">Avaliação</label>
                 <input asp-for="Avaliacao" class="form-control" />
                 <span asp-validation-for="Avaliacao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FkPrestador" class="control-label"></label>
+                <label class="control-label">Prestador</label>
                 <select asp-for="FkPrestador" class="form-control" asp-items="ViewBag.FkPrestador"></select>
                 <span asp-validation-for="FkPrestador" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Retornar</a>
 </div>
 

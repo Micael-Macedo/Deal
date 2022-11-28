@@ -1,6 +1,6 @@
 @model Deal.Models.Acordo
 @{
-    ViewData["Title"] = "AvaliacaoPrestador";
+    ViewData["Title"] = "Avaliação Prestador";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -11,7 +11,7 @@
     </div>
     <form asp-action="AvaliacaoDoPrestador" method="post">
         <input type="hidden" asp-for="AcordoId" />
-        <label for="">Como você avaliar o Servico de @Model.Servico.Prestador.Nome</label>
+        <label for="">Como você avaliar o serviço de @Model.Servico.Prestador.Nome ?</label>
         <div class="AvalicaoAcordo">
             <input name="nota" value="1" type="radio">
             <input name="nota" value="2" type="radio">

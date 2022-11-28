@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Novo Video</a>
 </p>
 <table class="table">
     <thead>
@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.VideoPrestador)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FkPortfolio)
+                Portfolio
             </th>
             <th></th>
         </tr>
@@ -28,12 +28,12 @@
                 @Html.DisplayFor(modelItem => item.VideoPrestador)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FkPortfolio)
+                Portfolio
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.VideoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.VideoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VideoId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.VideoId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.VideoId">Detalhe</a> |
+                <a asp-action="Delete" asp-route-id="@item.VideoId">Apagar</a>
             </td>
         </tr>
 }

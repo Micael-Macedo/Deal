@@ -10,43 +10,37 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Cliente)
+                Cliente
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                Serviço
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descricao)
+                Descrição
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Endereco)
+               Endereço
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Estado)
+                Estado
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cidade)
+                Cidade
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Numero)
+                N°
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cep)
+                CEP
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Categoria)
+                Categoria
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                Status
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Latitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Longitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FkPrestador)
+               Prestador
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsDisponivel)
@@ -88,9 +82,15 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Latitude)
+                    @Html.DisplayFor(modelItem => item.Prestador.Nome)
                 </td>
                 <td>
+<<<<<<< HEAD
+                    <a asp-action="Edit" asp-route-id="@item.ServicoId">Edição</a> |
+                    <a asp-action="Details" asp-route-id="@item.ServicoId">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ServicoId">Apagar</a> |
+                    @if (item.FkPrestador == null)
+=======
                     @Html.DisplayFor(modelItem => item.Longitude)
                 </td>
                 <td>
@@ -104,6 +104,7 @@
                     <a asp-action="Details" asp-route-id="@item.ServicoId">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.ServicoId">Delete</a> |
                     @if (item.IsDisponivel)
+>>>>>>> 897d3fc38990300defd99b3446f4409170ed2106
                     {
                         <a asp-action="AddPrestador" asp-route-id="@item.ServicoId">Selecionar Prestador</a> 
                     }
