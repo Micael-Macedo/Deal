@@ -9,6 +9,9 @@ namespace Deal.Models
 {
     public class Prestador
     {
+        public Prestador(){
+            Pontuacao = 5;
+        }
         public int PrestadorId { get; set; }
         public string? FotoPrestador { get; set; }
         [ForeignKey("Portfolio")]
@@ -27,15 +30,30 @@ namespace Deal.Models
         public ICollection<AreaAtuacao>? AreasAtuacao { get; set; }
         public ICollection<AreasDeAtuacaoDoPrestador>? AreasDeAtuacaoDoPrestador { get; set; }
         public int QtdServicoRealizados { get; set; }
+        public int AcordosCancelados { get; set; }
 
         public float MediaNota()
         {
             if (NotasDoPrestador == null || NotasDoPrestador.Count == 0)
             {
-                return 5;
+                if(AcordosCancelados % 5 == 0){
+                    for(int i=0; i < AcordosCancelados/5; i++){
+                        NotaPrestador notaPrestador = new NotaPrestador();
+                        notaPrestador.Avaliacao = 1;
+                        NotasDoPrestador.Add(notaPrestador);
+                    }
+                }
+                return Pontuacao;
             }
             else
             {
+                if(AcordosCancelados % 5 == 0){
+                    for(int i=0; i < AcordosCancelados/5; i++){
+                        NotaPrestador notaPrestador = new NotaPrestador();
+                        notaPrestador.Avaliacao = 1;
+                        NotasDoPrestador.Add(notaPrestador);
+                    }
+                }
                 float TotalNotas = 0;
                 foreach (var Nota in NotasDoPrestador)
                 {

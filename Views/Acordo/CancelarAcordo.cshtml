@@ -1,0 +1,23 @@
+@model Deal.Models.Acordo
+@{
+    ViewData["Title"] = "CancelarAcordo";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h2>Deseja Cancelar o Acordo?</h2>
+    <p>Em caso de cancelamento o serviço deixará de existir e sua pontuação é reduzida conforme mais acordos forem
+        cancelados</p>
+    <form asp-action="CancelarAcordo" method="post">
+        <input type="hidden" asp-for="AcordoId" />
+        <div class="form-group">
+            <label for="justificativa" class="control-label">Justificativa</label>
+            <input type="text" style="width: 400px;" name="justificativa" class="form-control">
+        </div>
+        <div class="form-group">
+            <button type="submit" value="Cancelar" name="Cancelar" class="btn btn-danger">Cancelar Acordo</button>
+            <a asp-action="HomePage" asp-route-id="@Model.AcordoId" class="btn btn-primary">Retornar ao Acordo</a>
+        </div>
+    </form>
+</div>

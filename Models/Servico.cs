@@ -10,6 +10,10 @@ namespace Deal.Models
 {
     public class Servico
     {
+        public Servico()
+        {
+            IsDisponivel = true;
+        }
         public int ServicoId { get; set; }
         [ForeignKey("Cliente")]
         public int? FkCliente { get; set; }
@@ -30,14 +34,23 @@ namespace Deal.Models
         public string? Status { get; set; }
         public string? Latitude { get; set; }
         public string? Longitude { get; set; }
-
-        public bool ClienteCancelaServico(){
-            this.Cliente.ServicosCancelados++;
-            if(this.Cliente.ServicosCancelados == 5){
-                this.Cliente.ServicosCancelados = 0;
-                return true;
-            }
-            return false;
+        public bool IsDisponivel { get; set; }
+        public void PrestadorRecusaServico()
+        {
+            Status = "Prestador Recusou o Serviço";
+            IsDisponivel = true;
+            FkPrestador = null;
+        }
+        public void ClienteRecusaServico()
+        {
+            Status = "Prestador recusado";
+            IsDisponivel = true;
+            FkPrestador = null;
+        }
+        public void AcordoAceito()
+        {
+            Status = "Acordo Feito";
+            IsDisponivel = false;
         }
     }
 }

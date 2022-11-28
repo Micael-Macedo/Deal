@@ -43,7 +43,10 @@
                 @Html.DisplayNameFor(model => model.QtdAcordoRealizados)
             </th>
             <th>
-                @* @Html.DisplayNameFor(model => model.Pontuacao) *@
+                @Html.DisplayNameFor(model => model.Pontuacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcordosCancelados)
             </th>
         </tr>
     </thead>
@@ -82,7 +85,10 @@
                     @Html.DisplayFor(modelItem => item.QtdAcordoRealizados)
                 </td>
                 <td>
-                    @* @Html.DisplayFor(modelItem => item.Pontuacao) *@
+                    @Html.DisplayFor(modelItem => item.Pontuacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcordosCancelados)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ClienteId">Edit</a> |
