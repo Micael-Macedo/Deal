@@ -206,12 +206,15 @@ namespace Deal.Controllers
             }
             Acordo acordo = _context.Acordos.Find(AcordoId);
             Servico servico = _context.Servicos.Find(acordo.FkServico);
-            if(ModelState.IsValid){
+            if (ModelState.IsValid)
+            {
+                acordo.AvaliouCliente = true;
                 NotaCliente notaCliente = new NotaCliente();
                 notaCliente.FkCliente = servico.FkCliente;
                 notaCliente.Avaliacao = nota;
                 notaCliente.FkAcordo = acordo.AcordoId;
                 _context.NotaClientes.Add(notaCliente);
+                _context.Acordos.Update(acordo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -246,12 +249,15 @@ namespace Deal.Controllers
             }
             Acordo acordo = _context.Acordos.Find(AcordoId);
             Servico servico = _context.Servicos.Find(acordo.FkServico);
-            if(ModelState.IsValid){
+            if (ModelState.IsValid)
+            {
                 NotaPrestador notaPrestador = new NotaPrestador();
                 notaPrestador.FkPrestador = servico.FkPrestador;
                 notaPrestador.Avaliacao = nota;
                 notaPrestador.FkAcordo = acordo.AcordoId;
                 _context.NotaPrestadores.Add(notaPrestador);
+                acordo.AvaliouPrestador = true;
+                _context.Acordos.Update(acordo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -290,8 +296,10 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            if(ModelState.IsValid){
-                if(Finalizar == "true"){
+            if (ModelState.IsValid)
+            {
+                if (Finalizar == "true")
+                {
                     acordo.ClienteFinalizaAcordo = true;
                     acordo.VerificarSeAcordoFoiFinalizado();
                     _context.Acordos.Update(acordo);
@@ -334,8 +342,10 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            if(ModelState.IsValid){
-                if(Finalizar == "true"){
+            if (ModelState.IsValid)
+            {
+                if (Finalizar == "true")
+                {
                     acordo.PrestadorFinalizaAcordo = true;
                     acordo.VerificarSeAcordoFoiFinalizado();
                     _context.Acordos.Update(acordo);
@@ -344,6 +354,94 @@ namespace Deal.Controllers
                 }
             }
             return View(acordo);
+        }
+        public async Task<IActionResult> CancelarAcordo(int? id)
+        {
+            if (id == null || _context.Acordos == null)
+            {
+                return NotFound();
+            }
+
+            var acordo = await _context.Acordos
+            .Include(a => a.Servico)
+            .Include(a => a.Servico.Cliente)
+            .Include(a => a.Servico.Cliente.NotasDoCliente)
+            .Include(a => a.Servico.Prestador)
+                .FirstOrDefaultAsync(m => m.AcordoId == id);
+            if (acordo == null)
+            {
+                return NotFound();
+            }
+
+            return View(acordo);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CancelarAcordo(int? id, string justificativa)
+        {
+            Acordo acordo = await _context.Acordos.FindAsync(id);
+            Servico servico = await _context.Servicos.FindAsync(acordo.FkServico);
+            Cliente cliente = await _context.Clientes.FindAsync(servico.FkCliente);
+            cliente.AcordosCancelados += 1;
+            cliente.NotasDoCliente = await _context.NotaClientes.Where(n => n.FkCliente == cliente.ClienteId).ToListAsync();
+            
+            AcordoCancelado acordoCancelado = new AcordoCancelado();
+            acordoCancelado.AcordoFk = acordo.AcordoId;
+            acordoCancelado.Justificativa = justificativa;
+            _context.AcordosCancelados.Add(acordoCancelado);
+            await _context.SaveChangesAsync();
+
+            _context.Clientes.Update(cliente);
+            _context.Servicos.Remove(servico);
+            _context.Acordos.Remove(acordo);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Cliente");
+        }
+        public async Task<IActionResult> EncerrarAcordo(int? id)
+        {
+            if (id == null || _context.Acordos == null)
+            {
+                return NotFound();
+            }
+
+            var acordo = await _context.Acordos
+            .Include(a => a.Servico)
+            .Include(a => a.Servico.Cliente)
+            .Include(a => a.Servico.Prestador)
+            .Include(a => a.Servico.Prestador.NotasDoPrestador)
+                .FirstOrDefaultAsync(m => m.AcordoId == id);
+            if (acordo == null)
+            {
+                return NotFound();
+            }
+
+            return View(acordo);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EncerrarAcordo(int? id, string justificativa)
+        {
+            Acordo acordo = await _context.Acordos.FindAsync(id);
+            Servico servico = await _context.Servicos.FindAsync(acordo.FkServico);
+            servico.Prestador = null;
+            servico.Status = "Prestador Cancelou o acordo";
+            servico.IsDisponivel = true;
+            Prestador prestador = await _context.Prestadores.FindAsync(servico.FkPrestador);
+            prestador.AcordosCancelados += 1;
+            prestador.NotasDoPrestador = await _context.NotaPrestadores.Where(n => n.FkPrestador == prestador.PrestadorId).ToListAsync();
+            prestador.MediaNota();
+
+            AcordoCancelado acordoCancelado = new AcordoCancelado();
+            acordoCancelado.AcordoFk = acordo.AcordoId;
+            acordoCancelado.Justificativa = justificativa;
+            _context.AcordosCancelados.Add(acordoCancelado);
+            await _context.SaveChangesAsync();
+
+            _context.Prestadores.Update(prestador);
+            _context.Acordos.Remove(acordo);
+            _context.Servicos.Update(servico);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Prestadores");
         }
         private bool AcordoExists(int id)
         {

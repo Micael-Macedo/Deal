@@ -3,6 +3,7 @@ using System;
 using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    partial class ProjectDealContextModelSnapshot : ModelSnapshot
+    [Migration("20221127200016_AcordosCancelados")]
+    partial class AcordosCancelados
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,25 +56,6 @@ namespace Deal.Migrations
                     b.HasIndex("FkServico");
 
                     b.ToTable("Acordos");
-                });
-
-            modelBuilder.Entity("Deal.Models.AcordoCancelado", b =>
-                {
-                    b.Property<int>("AcordoCanceladoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("AcordoFk")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Justificativa")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("AcordoCanceladoId");
-
-                    b.HasIndex("AcordoFk");
-
-                    b.ToTable("AcordosCancelados");
                 });
 
             modelBuilder.Entity("Deal.Models.AreaAtuacao", b =>
@@ -285,9 +268,6 @@ namespace Deal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("AcordosCancelados")
-                        .HasColumnType("int");
-
                     b.Property<string>("Cep")
                         .HasColumnType("longtext");
 
@@ -361,9 +341,6 @@ namespace Deal.Migrations
                     b.Property<int?>("FkPrestador")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsDisponivel")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("Latitude")
                         .HasColumnType("longtext");
 
@@ -416,17 +393,6 @@ namespace Deal.Migrations
                         .HasForeignKey("FkServico");
 
                     b.Navigation("Servico");
-                });
-
-            modelBuilder.Entity("Deal.Models.AcordoCancelado", b =>
-                {
-                    b.HasOne("Deal.Models.Acordo", "Acordo")
-                        .WithMany()
-                        .HasForeignKey("AcordoFk")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Acordo");
                 });
 
             modelBuilder.Entity("Deal.Models.AreaAtuacao", b =>
