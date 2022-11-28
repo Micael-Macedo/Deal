@@ -1,10 +1,10 @@
 @model Deal.Models.Prestador
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
 <h4>Prestador</h4>
 <hr />
@@ -14,14 +14,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="PrestadorId" />
             <div class="form-group">
-                <label asp-for="FotoPrestador" class="control-label"></label>
+                <label class="control-label">Foto</label>
                 <input type="file" class="form-control" onchange="ConverterImagem()" id="NewFoto">
                 <input asp-for="FotoPrestador" type="hidden" id="FotoBase64" />
                 <span asp-validation-for="FotoPrestador" class="text-danger"></span>
                 <div id="apresentar-imagem" style="width: 10%; height: 10%; margin-bottom: 200px; position: relative;"></div>
             </div>
             <div class="form-group">
-                <label asp-for="FkPortfolio" class="control-label"></label>
+                <label  class="control-label">Portfolio</label>
                 <select asp-for="FkPortfolio" class="form-control" asp-items="ViewBag.FkPortfolio"></select>
                 <span asp-validation-for="FkPortfolio" class="text-danger"></span>
             </div>
@@ -31,7 +31,7 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cpf" class="control-label"></label>
+                <label class="control-label">CPF</label>
                 <input asp-for="Cpf" class="form-control" />
                 <span asp-validation-for="Cpf" class="text-danger"></span>
             </div>
@@ -41,12 +41,12 @@
                 <span asp-validation-for="Idade" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Endereco" class="control-label"></label>
+                <label class="control-label">Endereço</label>
                 <input asp-for="Endereco" class="form-control" />
                 <span asp-validation-for="Endereco" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cep" class="control-label"></label>
+                <label class="control-label">CEP</label>
                 <input asp-for="Cep" class="form-control" />
                 <span asp-validation-for="Cep" class="text-danger"></span>
             </div>
@@ -66,18 +66,18 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="QtdServicoRealizados" class="control-label"></label>
+                <label class="control-label">Serviços Realizados</label>
                 <input asp-for="QtdServicoRealizados" class="form-control" />
                 <span asp-validation-for="QtdServicoRealizados" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Retornar</a>
 </div>
 

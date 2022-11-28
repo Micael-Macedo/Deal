@@ -6,29 +6,29 @@
 
 <h1>Create</h1>
 
-<h4>NotaPrestador</h4>
+<h4>Nota Prestador</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Avaliacao" class="control-label"></label>
+                <label class="control-label">Avaliação</label>
                 <input asp-for="Avaliacao" class="form-control" />
                 <span asp-validation-for="Avaliacao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FkPrestador" class="control-label"></label>
+                <label  class="control-label">Prestador</label>
                 <select asp-for="FkPrestador" class ="form-control" asp-items="ViewBag.FkPrestador"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Retornar</a>
 </div>
 
