@@ -80,9 +80,16 @@
             @Html.DisplayFor(model => model.QtdServicoRealizados)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AreasAtuacao)
+            Link do Prestador:
         </dt>
-         
+        <dd class = "col-sm-10">
+            <input style="display: none;" type="text" value="https://localhost:7234/Prestadores/Details/@Model.PrestadorId" id="linkPrestador">
+            <button  onclick="copiarLinkPrestador()" onmouseout="outFunc()" style="width: 300px;">Copiar link do prestador</button>
+            <span class="tooltiptext" id="myTooltip"></span>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AreasAtuacao)
+        </dt>         
         @if (Model.AreasAtuacao != null)
         {
         <dd class ="col-sm-10 areasDeAtuacaoDoPrestador">
