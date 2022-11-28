@@ -8,6 +8,10 @@ namespace Deal.Models
 {
     public class Cliente
     {
+        public Cliente()
+        {
+            Pontuacao = 5;
+        }
         public int ClienteId { get; set; }
         public string? FotoUsuario { get; set; }
         public ICollection<Servico>? Servicos { get; set; }
@@ -23,16 +27,26 @@ namespace Deal.Models
         public ICollection<NotaCliente>? NotasDoCliente { get; set; }
         public int QtdAcordoRealizados { get; set; }
 
-        public int ServicosCancelados { get; set; }
- 
+        public int AcordosCancelados { get; set; }
+
         public float MediaNota()
         {
-            if (NotasDoCliente == null || NotasDoCliente.Count == 0)
+
+            if (NotasDoCliente == null || NotasDoCliente.Count == 0 )
             {
-                return 5;
+                return Pontuacao;
             }
             else
             {
+                if (AcordosCancelados % 5 == 0)
+                {
+                    for (int i = 0; i < AcordosCancelados / 5; i++)
+                    {
+                        NotaCliente notaCliente = new NotaCliente();
+                        notaCliente.Avaliacao = 1;
+                        NotasDoCliente.Add(notaCliente);
+                    }
+                }
                 float TotalNotas = 0;
                 foreach (var Nota in NotasDoCliente)
                 {
@@ -42,6 +56,22 @@ namespace Deal.Models
                 return MediaAvaliacao;
             }
         }
-
+        public bool PenalizarCliente()
+        {
+            if (AcordosCancelados % 5 == 0)
+            {
+                for (int i = 0; i < AcordosCancelados / 5; i++)
+                {
+                    NotaCliente notaCliente = new NotaCliente();
+                    notaCliente.Avaliacao = 1;
+                    NotasDoCliente.Add(notaCliente);
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
