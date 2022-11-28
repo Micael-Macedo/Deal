@@ -15,11 +15,7 @@
             <p><b>Idade</b> @Model.Servico.Cliente.Idade</p>
             <p><b>Pontuação</b> @Model.Servico.Cliente.Pontuacao</p>
             <p><b>Acordos Realizados</b> @Model.Servico.Cliente.QtdAcordoRealizados</p>
-<<<<<<< HEAD
             @if (@Model.AcordoFinalizado)
-=======
-            @if (@Model.AcordoFinalizado == true && @Model.AvaliouPrestador != true)
->>>>>>> 897d3fc38990300defd99b3446f4409170ed2106
             {
                 <a asp-action="AvaliacaoDoPrestador" asp-route-id="@Model.AcordoId">Avaliar Prestador</a>
             }
@@ -40,11 +36,7 @@
             <p><b>Idade</b>@Model.Servico.Prestador.Idade</p>
             <p><b>Pontuação</b>@Model.Servico.Prestador.Pontuacao</p>
             <p><b>Serviços Realizados</b>@Model.Servico.Prestador.QtdServicoRealizados</p>
-<<<<<<< HEAD
             @if (@Model.AcordoFinalizado)
-=======
-            @if (@Model.AcordoFinalizado == true && @Model.AvaliouCliente != true)
->>>>>>> 897d3fc38990300defd99b3446f4409170ed2106
             {
                 <a asp-action="AvaliacaoDoCliente" asp-route-id="@Model.AcordoId">Avaliar Cliente</a>
             }

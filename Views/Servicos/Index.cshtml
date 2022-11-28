@@ -87,7 +87,6 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ServicoId">Edição</a> |
                     <a asp-action="Details" asp-route-id="@item.ServicoId">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ServicoId">Apagar</a> |
                     @if (item.FkPrestador == null)
                     {
                         <a asp-action="AddPrestador" asp-route-id="@item.ServicoId">Selecionar Prestador</a> 
@@ -96,7 +95,6 @@
                     {
                         <a asp-action="ConfirmarAcordo" asp-route-id="@item.ServicoId">Confirmar Acordo</a>
                     }
-                    |
                     <a asp-action="ClienteCancelaServico" asp-route-id="@item.ServicoId">Cancelar Servico</a> |
                 </td>
             </tr>
