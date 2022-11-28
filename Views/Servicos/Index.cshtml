@@ -85,26 +85,10 @@
                     @Html.DisplayFor(modelItem => item.Prestador.Nome)
                 </td>
                 <td>
-<<<<<<< HEAD
                     <a asp-action="Edit" asp-route-id="@item.ServicoId">Edição</a> |
                     <a asp-action="Details" asp-route-id="@item.ServicoId">Detalhes</a> |
                     <a asp-action="Delete" asp-route-id="@item.ServicoId">Apagar</a> |
                     @if (item.FkPrestador == null)
-=======
-                    @Html.DisplayFor(modelItem => item.Longitude)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FkPrestador)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsDisponivel)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ServicoId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ServicoId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ServicoId">Delete</a> |
-                    @if (item.IsDisponivel)
->>>>>>> 897d3fc38990300defd99b3446f4409170ed2106
                     {
                         <a asp-action="AddPrestador" asp-route-id="@item.ServicoId">Selecionar Prestador</a> 
                     }

@@ -67,5 +67,51 @@ namespace Deal.Models
                 acordoFinalizado = value;
             }
         }
+        public bool AvaliarCliente(){
+            if(AvaliouCliente != true){
+                AvaliouCliente = true;
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public bool AvaliarPrestador(){
+            if(AvaliouPrestador != true){
+                AvaliouPrestador = true;
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public bool PrestadorFinalizouAcordo(){
+            if(PrestadorFinalizaAcordo != true){
+                prestadorFinalizaAcordo = true;
+                VerificarSeAcordoFoiFinalizado();
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public bool ClienteFinalizouAcordo(){
+            if(ClienteFinalizaAcordo != true){
+                ClienteFinalizaAcordo = true;
+                VerificarSeAcordoFoiFinalizado();
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public void CancelarAcordo(){
+            Servico.Cliente.AcordosCancelados++;
+            Servico.Cliente.MediaNota();
+        }
+        public void EncerrarAcordo(){
+            Servico.Prestador.AcordosCancelados++;
+            Servico.Prestador.MediaNota();
+            Servico.Prestador = null;
+            Servico.FkPrestador = null;
+            Servico.Status = "Prestador Cancelou o acordo";
+            Servico.IsDisponivel = true;
+        }
     }
 }
