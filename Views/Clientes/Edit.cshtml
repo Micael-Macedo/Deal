@@ -14,9 +14,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ClienteId" />
             <div class="form-group">
-                <label  class="control-label">Foto</label>
+                <label class="control-label">Foto</label>
                 <input type="file" class="form-control" onchange="ConverterImagem()" id="NewFoto">
-                <input asp-for="FotoUsuario" type="hidden" id="FotoBase64"/>
+                <input asp-for="FotoUsuario" type="hidden" id="FotoBase64" />
                 <span asp-validation-for="FotoUsuario" class="text-danger"></span>
                 <div id="apresentar-imagem" style="width: 200px; height: 200px;"></div>
             </div>
@@ -41,7 +41,7 @@
                 <span asp-validation-for="Endereco" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label  class="control-label">CEP</label>
+                <label class="control-label">CEP</label>
                 <input asp-for="Cep" class="form-control" />
                 <span asp-validation-for="Cep" class="text-danger"></span>
             </div>
@@ -61,11 +61,6 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Acordos Realizados</label>
-                <input asp-for="QtdAcordoRealizados" class="form-control" />
-                <span asp-validation-for="QtdAcordoRealizados" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
@@ -75,4 +70,3 @@
 <div>
     <a asp-action="Home" asp-route-id="@Model.ClienteId">Retornar</a>
 </div>
-

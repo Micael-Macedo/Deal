@@ -21,7 +21,7 @@ namespace Deal.Controllers
         // GET: Servicos
         public async Task<IActionResult> Index()
         {
-            var projectDealContext = _context.Servicos.Include(s => s.Categoria).Include(s => s.Cliente);
+            var projectDealContext = _context.Servicos.Include(s => s.Categoria).Include(s => s.Cliente).Include(s => s.Prestador);
             return View(await projectDealContext.ToListAsync());
         }
         // GET: Servicos/Details/5
