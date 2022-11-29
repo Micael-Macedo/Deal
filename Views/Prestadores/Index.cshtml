@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FotoPrestador)
+                Foto
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Portfolio)
@@ -46,10 +46,10 @@
                 Serviços Realizados
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pontuacao)
+                Pontuação
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AcordosCancelados)
+                Acordos Cancelados
             </th>
         </tr>
     </thead>
@@ -101,9 +101,9 @@
                     <a asp-action="Edit" asp-route-id="@item.PrestadorId">Editar</a> |
                     <a asp-action="Details" asp-route-id="@item.PrestadorId">Detalhes</a> |
                     <a asp-action="Delete" asp-route-id="@item.PrestadorId">Apagar</a> |
-                    <a asp-controller="Servicos" asp-action="ServicosPendentes" asp-route-id="@item.PrestadorId">Servicos
+                    <a asp-controller="Servicos" asp-action="ServicosPendentes" asp-route-id="@item.PrestadorId">Serviços
                         Solicitados</a> |
-                    <a asp-action="FindService" asp-route-id="@item.PrestadorId">Buscar Servicços</a>
+                    <a asp-action="FindService" asp-route-id="@item.PrestadorId">Buscar Serviços</a>
                 </td>
             </tr>
         }
