@@ -23,49 +23,47 @@ namespace Deal.Models
         public string? Telefone { get; set; }
         public string? Senha { get; set; }
         public string? Email { get; set; }
-        public float Pontuacao { get; set; }
+        public double Pontuacao { get; set; }
         public ICollection<NotaCliente>? NotasDoCliente { get; set; }
         public int QtdAcordoRealizados { get; set; }
 
         public int AcordosCancelados { get; set; }
 
-        public float MediaNota()
+        public double MediaNota()
         {
-
-            if (NotasDoCliente == null || NotasDoCliente.Count == 0 )
+            double MediaAvaliacao;
+            if (NotasDoCliente == null || NotasDoCliente.Count == 0)
             {
-                return Pontuacao;
+                if (VerificarAcordosCancelados())
+                {
+                    double PontuacaoPenalizada = AcordosCancelados / 5;
+                    MediaAvaliacao = (5 + PontuacaoPenalizada) / (PontuacaoPenalizada + 1);
+                    return Math.Round (MediaAvaliacao,2);
+                }else{
+                    return Math.Round (Pontuacao,2);
+                }
             }
             else
             {
-                if (AcordosCancelados % 5 == 0)
-                {
-                    for (int i = 0; i < AcordosCancelados / 5; i++)
-                    {
-                        NotaCliente notaCliente = new NotaCliente();
-                        notaCliente.Avaliacao = 1;
-                        NotasDoCliente.Add(notaCliente);
-                    }
-                }
-                float TotalNotas = 0;
+                double TotalNotas = 0;
                 foreach (var Nota in NotasDoCliente)
                 {
                     TotalNotas += Nota.Avaliacao;
                 }
-                float MediaAvaliacao = TotalNotas / NotasDoCliente.Count;
-                return MediaAvaliacao;
+                if (VerificarAcordosCancelados())
+                {
+                    double PontuacaoPenalizada = AcordosCancelados / 5;
+                    MediaAvaliacao = (TotalNotas + PontuacaoPenalizada + 5) / (NotasDoCliente.Count + PontuacaoPenalizada + 1);
+                }else{
+                    MediaAvaliacao = TotalNotas / NotasDoCliente.Count;
+                }
+                return Math.Round (MediaAvaliacao,2);
             }
         }
-        public bool PenalizarCliente()
+        public bool VerificarAcordosCancelados()
         {
             if (AcordosCancelados % 5 == 0)
             {
-                for (int i = 0; i < AcordosCancelados / 5; i++)
-                {
-                    NotaCliente notaCliente = new NotaCliente();
-                    notaCliente.Avaliacao = 1;
-                    NotasDoCliente.Add(notaCliente);
-                }
                 return true;
             }
             else

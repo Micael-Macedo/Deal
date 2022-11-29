@@ -189,7 +189,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
+            acordo.Servico.Prestador.MediaNota();
             return View(acordo);
         }
         public async Task<IActionResult> AvaliacaoDoCliente(int? id)
@@ -231,13 +231,13 @@ namespace Deal.Controllers
                 acordo.AvaliarCliente();
                 _context.Acordos.Update(acordo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Homepage", "Acordo", new { id = acordo.AcordoId });
             }
             return View(acordo);
         }
         public async Task<IActionResult> AvaliacaoDoPrestador(int? id)
         {
-            if (id == null || _context.Acordos == null )
+            if (id == null || _context.Acordos == null)
             {
                 return NotFound();
             }
@@ -275,7 +275,7 @@ namespace Deal.Controllers
                 acordo.AvaliarPrestador();
                 _context.Acordos.Update(acordo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Homepage", "Acordo", new { id = acordo.AcordoId });
             }
             return View(acordo);
         }
@@ -317,9 +317,16 @@ namespace Deal.Controllers
                 if (Finalizar == "true")
                 {
                     acordo.ClienteFinalizouAcordo();
+                    if (acordo.VerificarSeAcordoFoiFinalizado())
+                    {
+                        acordo.Servico = _context.Servicos.Find(acordo.FkServico);
+                        acordo.Servico.Prestador = _context.Prestadores.Find(acordo.Servico.FkPrestador);
+                        acordo.Servico.Cliente = _context.Clientes.Find(acordo.Servico.FkCliente);
+                        acordo.FinalizarAcordo();
+                    }
                     _context.Acordos.Update(acordo);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("HomePage", "Acordo", acordoId);
+                    return RedirectToAction("HomePage", "Acordo", new { id = acordoId });
                 }
             }
             return View(acordo);
@@ -362,9 +369,16 @@ namespace Deal.Controllers
                 if (Finalizar == "true")
                 {
                     acordo.PrestadorFinalizouAcordo();
+                    if (acordo.VerificarSeAcordoFoiFinalizado())
+                    {
+                        acordo.Servico = _context.Servicos.Find(acordo.FkServico);
+                        acordo.Servico.Prestador = _context.Prestadores.Find(acordo.Servico.FkPrestador);
+                        acordo.Servico.Cliente = _context.Clientes.Find(acordo.Servico.FkCliente);
+                        acordo.FinalizarAcordo();
+                    }
                     _context.Acordos.Update(acordo);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("HomePage", "Acordo", acordoId);
+                    return RedirectToAction("HomePage", "Acordo", new { id = acordoId });
                 }
             }
             return View(acordo);
@@ -398,7 +412,7 @@ namespace Deal.Controllers
             Cliente cliente = await _context.Clientes.FindAsync(servico.FkCliente);
             cliente.AcordosCancelados += 1;
             cliente.NotasDoCliente = await _context.NotaClientes.Where(n => n.FkCliente == cliente.ClienteId).ToListAsync();
-            
+
             AcordoCancelado acordoCancelado = new AcordoCancelado();
             acordoCancelado.AcordoFk = acordo.AcordoId;
             acordoCancelado.Justificativa = justificativa;
@@ -409,7 +423,7 @@ namespace Deal.Controllers
             _context.Servicos.Remove(servico);
             _context.Acordos.Remove(acordo);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Cliente");
+            return RedirectToAction("Home", "Clientes", new { id = cliente.ClienteId });
         }
         public async Task<IActionResult> EncerrarAcordo(int? id)
         {
@@ -455,7 +469,7 @@ namespace Deal.Controllers
             _context.Acordos.Remove(acordo);
             _context.Servicos.Update(servico);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Prestadores");
+            return RedirectToAction("Home", "Prestadores", new { id = prestador.PrestadorId });
         }
         public async Task<IActionResult> AcordosCliente(int? id)
         {
