@@ -212,7 +212,7 @@ namespace Deal.Controllers
             return RedirectToAction(nameof(Index));
         }
         // POST: Servicos/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ClienteCancelarServico(int id)
         {

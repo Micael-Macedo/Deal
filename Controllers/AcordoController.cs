@@ -204,7 +204,7 @@ namespace Deal.Controllers
             .Include(m => m.Servico.Cliente)
             .Include(m => m.Servico.Prestador)
             .FirstOrDefaultAsync(m => m.AcordoId == id);
-            if (acordo == null)
+            if (acordo == null || acordo.AvaliouCliente == true)
             {
                 return NotFound();
             }
@@ -223,12 +223,12 @@ namespace Deal.Controllers
             Servico servico = _context.Servicos.Find(acordo.FkServico);
             if (ModelState.IsValid)
             {
-                acordo.AvaliouCliente = true;
                 NotaCliente notaCliente = new NotaCliente();
                 notaCliente.FkCliente = servico.FkCliente;
                 notaCliente.Avaliacao = nota;
                 notaCliente.FkAcordo = acordo.AcordoId;
                 _context.NotaClientes.Add(notaCliente);
+                acordo.AvaliarCliente();
                 _context.Acordos.Update(acordo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -237,7 +237,7 @@ namespace Deal.Controllers
         }
         public async Task<IActionResult> AvaliacaoDoPrestador(int? id)
         {
-            if (id == null || _context.Acordos == null)
+            if (id == null || _context.Acordos == null )
             {
                 return NotFound();
             }
@@ -247,7 +247,7 @@ namespace Deal.Controllers
             .Include(m => m.Servico.Cliente)
             .Include(m => m.Servico.Prestador)
             .FirstOrDefaultAsync(m => m.AcordoId == id);
-            if (acordo == null)
+            if (acordo == null || acordo.AvaliouPrestador == true)
             {
                 return NotFound();
             }
@@ -271,7 +271,8 @@ namespace Deal.Controllers
                 notaPrestador.Avaliacao = nota;
                 notaPrestador.FkAcordo = acordo.AcordoId;
                 _context.NotaPrestadores.Add(notaPrestador);
-                acordo.AvaliouPrestador = true;
+
+                acordo.AvaliarPrestador();
                 _context.Acordos.Update(acordo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -315,8 +316,7 @@ namespace Deal.Controllers
             {
                 if (Finalizar == "true")
                 {
-                    acordo.ClienteFinalizaAcordo = true;
-                    acordo.VerificarSeAcordoFoiFinalizado();
+                    acordo.ClienteFinalizouAcordo();
                     _context.Acordos.Update(acordo);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("HomePage", "Acordo", acordoId);
@@ -361,8 +361,7 @@ namespace Deal.Controllers
             {
                 if (Finalizar == "true")
                 {
-                    acordo.PrestadorFinalizaAcordo = true;
-                    acordo.VerificarSeAcordoFoiFinalizado();
+                    acordo.PrestadorFinalizouAcordo();
                     _context.Acordos.Update(acordo);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("HomePage", "Acordo", acordoId);
@@ -438,10 +437,10 @@ namespace Deal.Controllers
         {
             Acordo acordo = await _context.Acordos.FindAsync(id);
             Servico servico = await _context.Servicos.FindAsync(acordo.FkServico);
+            Prestador prestador = await _context.Prestadores.FindAsync(servico.FkPrestador);
             servico.Prestador = null;
             servico.Status = "Prestador Cancelou o acordo";
             servico.IsDisponivel = true;
-            Prestador prestador = await _context.Prestadores.FindAsync(servico.FkPrestador);
             prestador.AcordosCancelados += 1;
             prestador.NotasDoPrestador = await _context.NotaPrestadores.Where(n => n.FkPrestador == prestador.PrestadorId).ToListAsync();
             prestador.MediaNota();

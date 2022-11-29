@@ -27,3 +27,17 @@ function ConverterImagem(){
      novaImagem.src = ContentBaseImagem64;
      
  }
+ function copiarLinkPrestador(){
+    var copyText = document.getElementById("linkPrestador");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value);
+  
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Link do prestador copiado";
+ }
+
+function outFunc() {
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "";
+  }
