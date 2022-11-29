@@ -25,42 +25,53 @@ namespace Deal.Models
         public string? Telefone { get; set; }
         public string? Senha { get; set; }
         public string? Email { get; set; }
-        public float Pontuacao { get; set; }
+        public double Pontuacao { get; set; }
         public ICollection<NotaPrestador>? NotasDoPrestador { get; set; } //Criar método média, ArrayNotas sempre começa com 5.0 de nota
         public ICollection<AreaAtuacao>? AreasAtuacao { get; set; }
         public ICollection<AreasDeAtuacaoDoPrestador>? AreasDeAtuacaoDoPrestador { get; set; }
         public int QtdServicoRealizados { get; set; }
         public int AcordosCancelados { get; set; }
 
-        public float MediaNota()
+         public double MediaNota()
         {
+            double MediaAvaliacao;
             if (NotasDoPrestador == null || NotasDoPrestador.Count == 0)
             {
-                if(AcordosCancelados % 5 == 0){
-                    for(int i=0; i < AcordosCancelados/5; i++){
-                        NotaPrestador notaPrestador = new NotaPrestador();
-                        notaPrestador.Avaliacao = 1;
-                        NotasDoPrestador.Add(notaPrestador);
-                    }
+                if (VerificarAcordosCancelados())
+                {
+                    double PontuacaoPenalizada = AcordosCancelados / 5;
+                    MediaAvaliacao = (5 + PontuacaoPenalizada) / (PontuacaoPenalizada + 1);
+                    return Math.Round(MediaAvaliacao,2);
+                }else{
+                    return Math.Round(Pontuacao,2);
                 }
-                return Pontuacao;
             }
             else
             {
-                if(AcordosCancelados % 5 == 0){
-                    for(int i=0; i < AcordosCancelados/5; i++){
-                        NotaPrestador notaPrestador = new NotaPrestador();
-                        notaPrestador.Avaliacao = 1;
-                        NotasDoPrestador.Add(notaPrestador);
-                    }
-                }
-                float TotalNotas = 0;
+                double TotalNotas = 0;
                 foreach (var Nota in NotasDoPrestador)
                 {
                     TotalNotas += Nota.Avaliacao;
                 }
-                float MediaAvaliacao = TotalNotas / NotasDoPrestador.Count;
-                return MediaAvaliacao;
+                if (VerificarAcordosCancelados())
+                {
+                    double PontuacaoPenalizada = AcordosCancelados / 5;
+                    MediaAvaliacao = (TotalNotas + PontuacaoPenalizada + 5) / (NotasDoPrestador.Count + PontuacaoPenalizada + 1);
+                }else{
+                    MediaAvaliacao = TotalNotas / NotasDoPrestador.Count;
+                }
+                return Math.Round(MediaAvaliacao,2);
+            }
+        }
+        public bool VerificarAcordosCancelados()
+        {
+            if (AcordosCancelados % 5 == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

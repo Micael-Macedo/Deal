@@ -406,7 +406,7 @@ namespace Deal.Controllers
                         acordo.FkServico = servicoId;
                         _context.Acordos.Add(acordo);
                         await _context.SaveChangesAsync();
-                        return RedirectToAction("HomePage", "Acordos", new { id = acordo.AcordoId });
+                        return RedirectToAction("HomePage", "Acordo", new { id = acordo.AcordoId });
                     }
                     if (escolha == "Recusar")
                     {

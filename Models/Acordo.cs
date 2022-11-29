@@ -18,6 +18,7 @@ namespace Deal.Models
         private bool clienteFinalizaAcordo;
         private bool prestadorFinalizaAcordo;
         public bool AvaliouCliente { get; set; }
+        private bool acordoFinalizado;
         public bool AvaliouPrestador { get; set; }
         public bool ClienteFinalizaAcordo
         {
@@ -47,7 +48,6 @@ namespace Deal.Models
         {
             if (clienteFinalizaAcordo == true && prestadorFinalizaAcordo == true)
             {
-                acordoFinalizado = true;
                 return true;
             }
             else
@@ -55,7 +55,6 @@ namespace Deal.Models
                 return false;
             }
         }
-        private bool acordoFinalizado;
         public bool AcordoFinalizado
         {
             get
@@ -86,7 +85,6 @@ namespace Deal.Models
         public bool PrestadorFinalizouAcordo(){
             if(PrestadorFinalizaAcordo != true){
                 prestadorFinalizaAcordo = true;
-                VerificarSeAcordoFoiFinalizado();
                 return true;
             }else{
                 return false;
@@ -95,7 +93,6 @@ namespace Deal.Models
         public bool ClienteFinalizouAcordo(){
             if(ClienteFinalizaAcordo != true){
                 ClienteFinalizaAcordo = true;
-                VerificarSeAcordoFoiFinalizado();
                 return true;
             }else{
                 return false;
@@ -112,6 +109,16 @@ namespace Deal.Models
             Servico.FkPrestador = null;
             Servico.Status = "Prestador Cancelou o acordo";
             Servico.IsDisponivel = true;
+        }
+        public bool FinalizarAcordo(){
+            if(Servico.Cliente != null && Servico.Prestador != null){
+                Servico.Cliente.QtdAcordoRealizados++;
+                Servico.Prestador.QtdServicoRealizados++;
+                acordoFinalizado = true;
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 }

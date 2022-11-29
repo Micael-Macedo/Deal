@@ -84,14 +84,18 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ServicoId">Editar</a> |
                     <a asp-action="Details" asp-route-id="@item.ServicoId">Detalhes</a> |
+                    @if (item.IsAcordoFeito)
+                    {
+                        <a asp-action="HomePage" asp-route-id="@item.ServicoId">Ver Acordo</a> 
+                    }
                     @if (item.IsDisponivel == true || item.IsAcordoFeito != true)
                     {
                         <a asp-action="AddPrestador" asp-route-id="@item.ServicoId">Selecionar Prestador</a> 
                     }
                     |
-                    @if (item.IsAcordoFeito != true)
+                    @if (item.IsAcordoFeito != true )
                     {
-                        <a asp-action="Confirmar Acordo" asp-route-id="@item.ServicoId">Confirmar Acordo</a> 
+                        <a asp-action="ConfirmarAcordo" asp-route-id="@item.ServicoId">Confirmar Acordo</a> 
                     }
                     |
                     @if (item.IsAcordoFeito != true)
