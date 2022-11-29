@@ -35,6 +35,20 @@ namespace Deal.Controllers
             var projectDealContext = _context.Prestadores.Include(p => p.Portfolio);
             return View(await projectDealContext.ToListAsync());
         }
+        public async Task<IActionResult> Home(int? id)
+        {
+            if (id == null || _context.Prestadores == null)
+            {
+                return NotFound();
+            }
+
+            var prestador = await _context.Prestadores.FindAsync(id);
+            if (prestador == null)
+            {
+                return NotFound();
+            }
+            return View(prestador);
+        }
 
         // GET: Prestadores/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -113,7 +127,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.PrestadorId = prestador.PrestadorId;
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", prestador.FkPortfolio);
             return View(prestador);
         }
@@ -222,6 +236,7 @@ namespace Deal.Controllers
                 servicos.AddRange(_context.Servicos.Where(S => S.FkCategoria == item.AreaAtuacaoId).ToList());
             }
             List<Servico> servicosFiltrados = servicos.Where(s => s.Status == "Solicitado").ToList();
+            ViewBag.PrestadorId = prestador.PrestadorId;
             ViewData["Servicos"] = servicosFiltrados;
             return View(prestador);
         }

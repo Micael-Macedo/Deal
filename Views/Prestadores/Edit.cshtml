@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Editar";
+    int PrestadorId = ViewBag.PrestadorId;
 }
 
 <h1>Editar</h1>
@@ -78,6 +79,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Retornar</a>
+    <a asp-action="Home" asp-route-id="@PrestadorId">Retornar</a>
 </div>
 

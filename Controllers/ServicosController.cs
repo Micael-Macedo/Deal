@@ -24,7 +24,6 @@ namespace Deal.Controllers
             var projectDealContext = _context.Servicos.Include(s => s.Categoria).Include(s => s.Cliente);
             return View(await projectDealContext.ToListAsync());
         }
-
         // GET: Servicos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -76,7 +75,7 @@ namespace Deal.Controllers
             }
             ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
-            return View(servico);
+            return RedirectToAction("MeusServicos", "Servicos", new { id = servico.FkCliente });
         }
 
         // GET: Servicos/Edit/5
@@ -131,7 +130,7 @@ namespace Deal.Controllers
             }
             ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
-            return View(servico);
+            return RedirectToAction("MeusServicos", "Servicos", new { id = servico.FkCliente });
         }
 
         // GET: Servicos/Delete/5
@@ -225,9 +224,8 @@ namespace Deal.Controllers
             {
                 _context.Servicos.Remove(servico);
             }
-
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("MeusServicos", "Servicos", new { id = servico.FkCliente });
         }
         // POST: Servicos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -265,7 +263,7 @@ namespace Deal.Controllers
             }
             ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
-            return View(servico);
+            return RedirectToAction("Home", "Prestador", new { id = servico.Prestador });
         }
         public async Task<IActionResult> AddPrestador(int? id)
         {
@@ -321,7 +319,7 @@ namespace Deal.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("MeusServicos", "Servicos", new { id = servico.FkCliente });
             }
             return RedirectToAction(nameof(Index));
 
@@ -340,7 +338,6 @@ namespace Deal.Controllers
             {
                 try
                 {
-
                     if (escolha == "Aceitar")
                     {
                         servico.AcordoAceito();
@@ -348,12 +345,12 @@ namespace Deal.Controllers
                         acordo.FkServico = servicoId;
                         _context.Acordos.Add(acordo);
                         await _context.SaveChangesAsync();
-
+                        return RedirectToAction("HomePage", "Acordo", new { id = acordo.AcordoId });
                     }
                     if (escolha == "Recusar")
                     {
                         servico.PrestadorRecusaServico();
-                        
+
                     }
                     _context.Servicos.Update(servico);
                     await _context.SaveChangesAsync();
@@ -409,7 +406,7 @@ namespace Deal.Controllers
                         acordo.FkServico = servicoId;
                         _context.Acordos.Add(acordo);
                         await _context.SaveChangesAsync();
-                        return RedirectToAction("Index", "Clientes");
+                        return RedirectToAction("HomePage", "Acordos", new { id = acordo.AcordoId });
                     }
                     if (escolha == "Recusar")
                     {
@@ -432,6 +429,12 @@ namespace Deal.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> MeusServicos(int? id)
+        {
+            ViewBag.ClienteId = id;
+            var projectDealContext = _context.Servicos.Where(s => s.FkCliente == id).Include(s => s.Categoria).Include(s => s.Cliente).Include(s => s.Prestador);
+            return View(await projectDealContext.ToListAsync());
         }
         private bool ServicoExists(int id)
         {

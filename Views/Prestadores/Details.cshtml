@@ -80,11 +80,7 @@
             @Html.DisplayFor(model => model.QtdServicoRealizados)
         </dd>
         <dt class = "col-sm-2">
-<<<<<<< HEAD
             Link do Prestador:
-=======
-            Área de Atuação
->>>>>>> c9e244cde3bf363febe726613a25023b8c89d0d3
         </dt>
         <dd class = "col-sm-10">
             <input style="display: none;" type="text" value="https://localhost:7234/Prestadores/Details/@Model.PrestadorId" id="linkPrestador">
@@ -109,5 +105,5 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.PrestadorId">Editar</a> |
-    <a asp-action="Index">Retornar</a>
+    <a asp-action="Home" asp-route-id="@Model.PrestadorId">Retornar</a>
 </div>

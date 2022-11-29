@@ -1,10 +1,11 @@
-@* @model Deal.Models.Servico
+@model IEnumerable<Deal.Models.Servico>
 @{
-    ViewData["Title"] = "ClienteServicos";
+    ViewData["Title"] = "Meus Serviços";
+    int ClienteId = ViewBag.ClienteId;
 }
 
 <h1>@ViewData["Title"]</h1>
-
+<a asp-action="Home" asp-controller="Clientes" asp-route-id="@ClienteId" class="btn btn-info">Retornar a pagina inicial</a>
 <table class="table">
     <thead>
         <tr>
@@ -37,12 +38,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Latitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Longitude)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FkPrestador)
@@ -84,31 +79,29 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Latitude)
+                    @Html.DisplayFor(modelItem => item.Prestador.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Longitude)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FkPrestador)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ServicoId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ServicoId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ServicoId">Delete</a> |
-                    @if (item.FkPrestador == null)
+                    <a asp-action="Edit" asp-route-id="@item.ServicoId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.ServicoId">Detalhes</a> |
+                    @if (item.IsDisponivel == true || item.IsAcordoFeito != true)
                     {
                         <a asp-action="AddPrestador" asp-route-id="@item.ServicoId">Selecionar Prestador</a> 
                     }
                     |
-                    @if (item.Status == "PrestadorInteresse")
+                    @if (item.IsAcordoFeito != true)
                     {
-                        <a asp-action="Confirmar Acordo" asp-route-id="@item.ServicoId">Confirmar Acordo</a>
+                        <a asp-action="Confirmar Acordo" asp-route-id="@item.ServicoId">Confirmar Acordo</a> 
                     }
-                    <a asp-action="ClienteCancelaServico" asp-route-id="@item.ServicoId">Cliente Cancelar Servico</a> |
+                    |
+                    @if (item.IsAcordoFeito != true)
+                    {
+                        <a asp-action="ClienteCancelaServico" asp-route-id="@item.ServicoId">Cancelar Servico</a>
+                    }
+                    |
                     <a asp-action="PrestadorCancelaServico" asp-route-id="@item.ServicoId">prestador Cancelar Servico</a>
                 </td>
             </tr>
         }
     </tbody>
-</table> *@
+</table>

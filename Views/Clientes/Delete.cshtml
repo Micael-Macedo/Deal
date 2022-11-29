@@ -76,6 +76,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="ClienteId" />
         <input type="submit" value="Apagar" class="btn btn-danger" /> |
-        <a asp-action="Index">Retornar</a>
+        <a asp-action="Home" asp-route-id="@Model.ClienteId">Retornar</a>
     </form>
 </div>

@@ -457,6 +457,20 @@ namespace Deal.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Prestadores");
         }
+        public async Task<IActionResult> AcordosCliente(int? id)
+        {
+            ViewBag.ClienteId = id;
+            return _context.Acordos != null ?
+                        View(await _context.Acordos.Where(a => a.Servico.FkCliente == id).ToListAsync()) :
+                        Problem("Entity set 'ProjectDealContext.Acordos'  is null.");
+        }
+        public async Task<IActionResult> AcordosPrestador(int? id)
+        {
+            ViewBag.PrestadorId = id;
+            return _context.Acordos != null ?
+                        View(await _context.Acordos.Where(a => a.Servico.FkPrestador == id).ToListAsync()) :
+                        Problem("Entity set 'ProjectDealContext.Acordos'  is null.");
+        }
         private bool AcordoExists(int id)
         {
             return (_context.Acordos?.Any(e => e.AcordoId == id)).GetValueOrDefault();
