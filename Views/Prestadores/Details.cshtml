@@ -13,7 +13,7 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-             @Html.DisplayNameFor(model => model.FotoPrestador)
+            Foto
         </dt>
         <dd class = "col-sm-10">
             <img src="@Html.DisplayFor(model => model.FotoPrestador)" alt="" srcset="">
@@ -80,11 +80,7 @@
             @Html.DisplayFor(model => model.QtdServicoRealizados)
         </dd>
         <dt class = "col-sm-2">
-<<<<<<< HEAD
             Link do Prestador:
-=======
-            Área de Atuação
->>>>>>> c9e244cde3bf363febe726613a25023b8c89d0d3
         </dt>
         <dd class = "col-sm-10">
             <input style="display: none;" type="text" value="https://localhost:7234/Prestadores/Details/@Model.PrestadorId" id="linkPrestador">
@@ -92,7 +88,7 @@
             <span class="tooltiptext" id="myTooltip"></span>
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AreasAtuacao)
+            Área de Atuação
         </dt>         
         @if (Model.AreasAtuacao != null)
         {
