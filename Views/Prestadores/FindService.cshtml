@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Detalhes";
     Servico servico = new Servico();
+    int PrestadorId = ViewBag.PrestadorId;
 }
 
 <h1>Detalhes</h1>
@@ -72,5 +73,5 @@
     }
 </table>
 <div>
-    <a asp-action="Index">Retornar</a>
+    <a asp-action="Home" asp-route-id="@PrestadorId">Retornar</a>
 </div>

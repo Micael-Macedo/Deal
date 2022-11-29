@@ -35,7 +35,7 @@ function initMap() {
     zoomControl: CONFIGURATION.mapOptions.zoomControl,
     streetViewControl: CONFIGURATION.mapOptions.streetViewControl
   });
-  const marker = new google.maps.Marker({map: map, draggable: false});
+  const marker = new google.maps.Marker({map: map, draggable: true});
   const autocompleteInput = getFormInputElement('location');
   const autocomplete = new google.maps.places.Autocomplete(autocompleteInput, {
     fields: ["address_components", "geometry", "name"],
@@ -86,7 +86,6 @@ function initMap() {
     map.setCenter(place.geometry.location);
     marker.setPosition(place.geometry.location);
     marker.setVisible(true);
-    console.log("Local: Latitude" + place.geometry.location);
     local = place.geometry.location;
     latitudeCadastrada.value = local.lat();
     longitudeCadastrada.value = local.lng();

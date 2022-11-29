@@ -35,6 +35,7 @@ namespace Deal.Models
         public string? Latitude { get; set; }
         public string? Longitude { get; set; }
         public bool IsDisponivel { get; set; }
+        public bool IsAcordoFeito { get; set; }
         public void PrestadorRecusaServico()
         {
             Status = "Prestador Recusou o Serviço";
@@ -50,6 +51,7 @@ namespace Deal.Models
         public void AcordoAceito()
         {
             Status = "Acordo Feito";
+            IsAcordoFeito = true;
             IsDisponivel = false;
         }
     }
