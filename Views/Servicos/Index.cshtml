@@ -85,9 +85,13 @@
                     @Html.DisplayFor(modelItem => item.Prestador.Nome)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.IsDisponivel)
+                </td>
+                <td>
                     <a asp-action="Edit" asp-route-id="@item.ServicoId">Edição</a> |
                     <a asp-action="Details" asp-route-id="@item.ServicoId">Detalhes</a> |
-                    @if (item.FkPrestador == null)
+                    <a asp-action="Delete" asp-route-id="@item.ServicoId">Apagar</a> |
+                    @if (item.IsDisponivel)
                     {
                         <a asp-action="AddPrestador" asp-route-id="@item.ServicoId">Selecionar Prestador</a> 
                     }
