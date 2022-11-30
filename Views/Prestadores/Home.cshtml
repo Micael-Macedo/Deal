@@ -70,7 +70,7 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.AcordosCancelados)
         </dd>
-        <a asp-action="Portfolio" asp-controller="Portfolios" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Ver Portfolio</a>
+        <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@Model.FkPortfolio" class="btn btn-info" style="width: 200px;">Ver Portfolio</a>
         <a asp-action="ServicosPendentes" asp-controller="Servicos" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Ver Serviços Pendentes<p>@ServicosPendentes</p></a> 
         <a asp-action="FindService" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Buscar Serviços</a>
         <a asp-action="AcordosPrestador" asp-controller="Acordo" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Ver Acordos</a>

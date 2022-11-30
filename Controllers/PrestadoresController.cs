@@ -97,6 +97,10 @@ namespace Deal.Controllers
                 if(areasAtuacao == null){
                     return NotFound();
                 }
+                Portfolio portfolio = new Portfolio();
+                _context.Add(portfolio);
+                await _context.SaveChangesAsync();
+                prestador.FkPortfolio = portfolio.PortfolioId;
                 _context.Add(prestador);
                 await _context.SaveChangesAsync();
                 foreach (int areasAtuacaoId in areasAtuacao)
@@ -107,9 +111,7 @@ namespace Deal.Controllers
                     _context.AreasDeAtuacaoDoPrestador.Add(areasDeAtuacaoDosPrestadores);
                 }
                 await _context.SaveChangesAsync();
-
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Edit", "Portfolios", new {id = prestador.FkPortfolio});
             }
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", prestador.FkPortfolio);
             return View(prestador);

@@ -21,9 +21,7 @@ namespace Deal.Controllers
         // GET: Portfolios
         public async Task<IActionResult> Index()
         {
-
               return View(await _context.Portfolios.ToListAsync());
-
         }
 
         // GET: Portfolios/Details/5
@@ -40,7 +38,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["Fotos"] = _context.Fotos.Where(f => f.FkPortfolio == portfolio.PortfolioId).ToList();
+            ViewData["Certificados"] = _context.Certificado.Where(c => c.FkPortfolio == portfolio.PortfolioId).ToList();
             return View(portfolio);
         }
 
@@ -55,7 +54,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PortfolioId,Descricao,ExperienciaProfissional")] Portfolio portfolio)
+        public async Task<IActionResult> Create([Bind("PortfolioId,Apresentação,Linkedin,Site,ExperienciaProfissional")] Portfolio portfolio)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +86,7 @@ namespace Deal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PortfolioId,Descricao,ExperienciaProfissional")] Portfolio portfolio)
+        public async Task<IActionResult> Edit(int id, [Bind("PortfolioId,Apresentação,Linkedin,Site,ExperienciaProfissional")] Portfolio portfolio)
         {
             if (id != portfolio.PortfolioId)
             {
@@ -157,7 +156,6 @@ namespace Deal.Controllers
         private bool PortfolioExists(int id)
         {
           return _context.Portfolios.Any(e => e.PortfolioId == id);
-
         }
     }
 }
