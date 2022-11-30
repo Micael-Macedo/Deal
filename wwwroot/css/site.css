@@ -373,3 +373,40 @@ h2{
 .btn{
   color: white !important;
 }
+
+.AcordoHomePage{
+  display: flex;
+  justify-content: space-around;
+  background-image: linear-gradient(90deg, white, rgb(180, 170, 170));
+  padding: 100px 50px;
+}
+.UserCard{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  border-radius: 10px;
+  width: 400px;
+  padding: 10px 20px;
+}
+.UserCard h3{
+  text-align: center;
+  color: #8E44CD;
+}
+.UserCard hr{
+  border: 1px solid #8E44CD ;
+}
+.UserPhoto{
+  display: flex;
+  justify-content: center;
+}
+.UserCard img{
+  width: 200px;
+  height: 200px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+.ServiceInfo{
+  background-image: linear-gradient(90deg, white, rgb(180, 170, 170));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -6,14 +6,17 @@
 <h1>@ViewData["Title"]</h1>
 
 <div>
-    <div style="display: flex; justify-content: space-around;">
-        <div class="Cliente">
-            <h2>Cliente</h2>
-            <img width="200px" src="@Model.Servico.Cliente.FotoUsuario" alt="" srcset="">
+    <h2></h2>
+    <div class="AcordoHomePage">
+        <div class="UserCard">
+            <h3>Cliente</h3>
+            <div class="UserPhoto">
+                <img width="200px" src="@Model.Servico.Cliente.FotoUsuario" alt="" srcset="">
+            </div>
             <p><b>Nome: </b> @Model.Servico.Cliente.Nome</p>
+            <hr>
             <p><b>Email: </b> @Model.Servico.Cliente.Email</p>
             <p><b>Telefone: </b> @Model.Servico.Cliente.Telefone</p>
-            <p><b>Idade: </b> @Model.Servico.Cliente.Idade</p>
             <p><b>Pontuação: </b> @Model.Servico.Cliente.Pontuacao</p>
             <p><b>Acordos Realizados: </b> @Model.Servico.Cliente.QtdAcordoRealizados</p>
             @if (@Model.AcordoFinalizado == true && @Model.AvaliouPrestador != true)
@@ -25,17 +28,25 @@
                 <p>Cliente Gostaria de finalizar o Acordo</p>
             }
             @if(@Model.AcordoFinalizado != true && @Model.ClienteFinalizaAcordo != true){
-                <a asp-action="ClienteFinalizaAcordo" asp-route-id="@Model.AcordoId">Finalizar Acordo</a>
-                <a asp-action="CancelarAcordo" asp-route-id="@Model.AcordoId">Deletar Acordo</a>
+                <a asp-action="ClienteFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn btn-success">Finalizar Acordo</a>
+                <a asp-action="CancelarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-danger">Deletar Acordo</a>
             }
         </div>
-        <div class="Prestador">
-            <h2>Prestador</h2>
-            <img width="200px" src="@Model.Servico.Prestador.FotoPrestador" alt="" srcset="">
+        <div>
+            @if (@Model.AcordoFinalizado)
+            {
+                <p>Acordo Finalizado</p>
+            }
+        </div>
+        <div class="UserCard">
+            <h3>Prestador</h3>
+            <div class="UserPhoto">
+                <img width="200px" src="@Model.Servico.Prestador.FotoPrestador" alt="" srcset="">
+            </div>
             <p><b>Nome: </b>@Model.Servico.Prestador.Nome</p>
+            <hr>
             <p><b>Email: </b>@Model.Servico.Prestador.Email</p>
             <p><b>Telefone: </b>@Model.Servico.Prestador.Telefone</p>
-            <p><b>Idade: </b>@Model.Servico.Prestador.Idade</p>
             <p><b>Pontuação: </b>@Model.Servico.Prestador.Pontuacao</p>
             <p><b>Serviços Realizados: </b>@Model.Servico.Prestador.QtdServicoRealizados</p>
             @if (@Model.AcordoFinalizado == true && @Model.AvaliouCliente != true)
@@ -48,21 +59,25 @@
             }
             @if (@Model.AcordoFinalizado != true && @Model.PrestadorFinalizaAcordo != true)
             {
-                <a asp-action="PrestadorFinalizaAcordo" asp-route-id="@Model.AcordoId">Finalizar Acordo</a>
-                <a asp-action="EncerrarAcordo" asp-route-id="@Model.AcordoId">Cancelar Acordo</a>
+                <a asp-action="PrestadorFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn btn-success">Finalizar Acordo</a>
+                <a asp-action="EncerrarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-danger">Cancelar Acordo</a>
             }
         </div>
     </div>
-    <div class="Servico">
-        <h2>Informações do serviço</h2>
-        <p>@Model.Servico.Categoria.Atuacao</p>
-        <p>@Model.Servico.Nome</p>
-        <p>@Model.Servico.Descricao</p>
-        <p>@Model.Servico.Endereco</p>
-        <input hidden type="text" value="@Model.Servico.Latitude" id="DealLat">
-        <input hidden type="text" value="@Model.Servico.Longitude" id="DealLong"> 
-        <div class="card-container col-md-4">
-            <div class="map" id="gmp-map"></div>
+    <div class="ServiceInfo">
+        <div>
+            <h2>Informações do serviço</h2>
+            <p>@Model.Servico.Categoria.Atuacao</p>
+            <p>@Model.Servico.Nome</p>
+            <p>@Model.Servico.Descricao</p>
+            <p>@Model.Servico.Endereco</p>
+            <input hidden type="text" value="@Model.Servico.Latitude" id="DealLat">
+            <input hidden type="text" value="@Model.Servico.Longitude" id="DealLong"> 
+            <div class="ServiceLocal">
+                <div class="card-container col-md-4">
+                    <div class="map" id="gmp-map"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
