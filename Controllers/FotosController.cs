@@ -51,7 +51,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            ViewBag.portfolioId = id;
+            ViewBag.portfolioIdFoto = id;
             return View();
         }
 
@@ -66,7 +66,7 @@ namespace Deal.Controllers
             {
                 _context.Add(foto);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Portfolios", new {id = foto.FkPortfolio});
             }
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", foto.FkPortfolio);
             return View(foto);

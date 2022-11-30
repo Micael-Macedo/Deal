@@ -201,14 +201,14 @@ namespace Deal.Controllers
             {
                 return Problem("Entity set 'ProjectDealContext.Servicos'  is null.");
             }
-            var servico = await _context.Servicos.FindAsync(id);
+            Servico servico = await _context.Servicos.FindAsync(id);
+            int? clienteId = servico.FkCliente;
             if (servico != null)
             {
                 _context.Servicos.Remove(servico);
             }
-
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Home","Clientes", new {id = clienteId});
         }
         // POST: Servicos/Delete/5
         [HttpPost]
@@ -326,7 +326,7 @@ namespace Deal.Controllers
         }
         public async Task<IActionResult> ServicosPendentes(int? id)
         {
-            ViewBag.PrestadorId = id;
+            ViewBag.prestadorIdServicosPendentes = id;
             var projectDealContext = _context.Servicos.Where(S => S.FkPrestador == id && S.Status == "Convite Enviado").Include(s => s.Categoria).Include(s => s.Cliente);
             return View(await projectDealContext.ToListAsync());
         }
@@ -351,6 +351,7 @@ namespace Deal.Controllers
                     if (escolha == "Recusar")
                     {
                         servico.PrestadorRecusaServico();
+                        return RedirectToAction("Home", "Prestadores", new { id = prestadorId });
 
                     }
                     _context.Servicos.Update(servico);
@@ -433,7 +434,7 @@ namespace Deal.Controllers
         }
         public async Task<IActionResult> MeusServicos(int? id)
         {
-            ViewBag.ClienteId = id;
+            ViewBag.ClienteIdMeusServicos = id;
             var projectDealContext = _context.Servicos.Where(s => s.FkCliente == id).Include(s => s.Categoria).Include(s => s.Cliente).Include(s => s.Prestador);
             return View(await projectDealContext.ToListAsync());
         }

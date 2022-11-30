@@ -1,88 +1,65 @@
 @model IEnumerable<Deal.Models.Servico>
 @{
     ViewData["Title"] = "Serviços Pendentes";
-    int PrestadorId = ViewBag.PrestadorId;
+    int prestadorIdServicosPendentes = ViewBag.prestadorIdServicosPendentes;
 }
 
 <h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@PrestadorId" class="btn btn-info">Retornar a pagina inicial</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cliente)
-            </th>
-            <th>
-                Serviço
-            </th>
-            <th>
-                Descrição
-            </th>
-            <th>
-                Endereço
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cidade)
-            </th>
-            <th>
-                Número
-            </th>
-            <th>
-                CEP
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cliente.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Endereco)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Numero)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cep)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Categoria.Atuacao)
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.ServicoId">Ver Serviço</a> |
-                </td>
-                <td>
-                <div class="form-group">
-                    <form asp-action="ServicosPendentes" method="post">
-                        <input type="hidden" name="servicoId" value="@item.ServicoId"/>
-                        <input type="hidden" name="prestadorId" value="@item.FkPrestador">
-                        <input name="escolha" type="submit" value="Recusar" class="btn btn-danger" />
-                        <input name="escolha" type="submit" value="Aceitar" class="btn btn-success" />
-                    </form>
+<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@prestadorIdServicosPendentes" class="btn btn-info">Retornar a pagina inicial</a>
+<div class="AllServicesCards">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+    @foreach (var item in Model)
+    {   
+        <div class="col">
+            <div class="serviceCard">
+                <div class="serviceCard-Content">
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            Servico:
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Categoria:
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Categoria.Atuacao)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Descrição:
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Endereço:
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Endereco)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Cidade:
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Cidade)
+                        </dd>
+                    </dl>
                 </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                <div class="serviceCardButtons">
+                    <div class="form-group">
+                        <form asp-action="ServicosPendentes" method="post">
+                            <a asp-action="Details" asp-controller="Clientes" asp-route-id="@item.FkCliente" class="btn btn-info">Ver Cliente</a>
+                            <input type="hidden" name="servicoId" value="@item.ServicoId"/>
+                            <input type="hidden" name="prestadorId" value="@item.FkPrestador">
+                            <input name="escolha" type="submit" value="Recusar" class="btn btn-danger" />
+                            <input name="escolha" type="submit" value="Aceitar" class="btn btn-success" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+</div>

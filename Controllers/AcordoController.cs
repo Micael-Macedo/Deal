@@ -471,14 +471,14 @@ namespace Deal.Controllers
         }
         public async Task<IActionResult> AcordosCliente(int? id)
         {
-            ViewBag.ClienteId = id;
+            ViewBag.ClienteIdAcordo = id;
             return _context.Acordos != null ?
                         View(await _context.Acordos.Where(a => a.Servico.FkCliente == id).ToListAsync()) :
                         Problem("Entity set 'ProjectDealContext.Acordos'  is null.");
         }
         public async Task<IActionResult> AcordosPrestador(int? id)
         {
-            ViewBag.PrestadorId = id;
+            ViewBag.PrestadorIdAcordo = id;
             return _context.Acordos != null ?
                         View(await _context.Acordos.Where(a => a.Servico.FkPrestador == id).ToListAsync()) :
                         Problem("Entity set 'ProjectDealContext.Acordos'  is null.");

@@ -1,11 +1,11 @@
 @model IEnumerable<Deal.Models.Acordo>
 @{
     ViewData["Title"] = "AcordosPrestador";
-    int PrestadorId = ViewBag.PrestadorId;
+    int prestadorIdAcordo = ViewBag.PrestadorIdAcordo;
 }
 
 <h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@PrestadorId" class="btn btn-info">Retornar a pagina inicial</a>
+<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@prestadorIdAcordo" class="btn btn-info">Retornar a pagina inicial</a>
 <table class="table">
     <thead>
         <tr>

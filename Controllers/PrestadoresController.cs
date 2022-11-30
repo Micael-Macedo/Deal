@@ -66,8 +66,12 @@ namespace Deal.Controllers
             }
             var prestador = await _context.Prestadores
                 .Include(p => p.Portfolio)
+                .Include(p => p.Portfolio.Fotos)
+                .Include(p => p.Portfolio.Certificados)
                 .FirstOrDefaultAsync(m => m.PrestadorId == id);
             prestador.AreasAtuacao = AreasDeAtuacaoDoPrestador;
+            prestador.Portfolio.Fotos = await _context.Fotos.Where(f => f.FkPortfolio == prestador.FkPortfolio).ToListAsync();
+            prestador.Portfolio.Certificados = await _context.Certificado.Where(c => c.FkPortfolio == prestador.FkPortfolio).ToListAsync();
             if (prestador == null)
             {
                 return NotFound();
@@ -211,13 +215,28 @@ namespace Deal.Controllers
                 return Problem("Entity set 'ProjectDealContext.Prestadores'  is null.");
             }
             var prestador = await _context.Prestadores.FindAsync(id);
+            List<AreasDeAtuacaoDoPrestador> areaAtuacaosDoPrestador = await _context.AreasDeAtuacaoDoPrestador.Where(a => a.FkPrestador == prestador.PrestadorId).ToListAsync();
+            foreach (var areaAtuacao in areaAtuacaosDoPrestador)
+            {
+                _context.AreasDeAtuacaoDoPrestador.Remove(areaAtuacao);
+            }
+            List<NotaPrestador> notasPrestador = await _context.NotaPrestadores.Where(n => n.FkPrestador == prestador.PrestadorId).ToListAsync();
+            foreach (var notaPrestador in notasPrestador)
+            {
+                _context.NotaPrestadores.Remove(notaPrestador);
+            }
+            List<Servico> servicos = await _context.Servicos.Where(s => s.FkPrestador == prestador.PrestadorId).ToListAsync();
+            foreach (var servico in servicos)
+            {
+                _context.Servicos.Remove(servico);
+            }
             if (prestador != null)
             {
                 _context.Prestadores.Remove(prestador);
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> FindService(int? id)

@@ -107,6 +107,7 @@ namespace Deal.Models
                 Servico.Prestador.AcordosCancelados++;
                 Servico.Status = "Prestador Cancelou o acordo";
                 Servico.IsDisponivel = true;
+                Servico.IsAcordoFeito = false;
                 Servico.Prestador.MediaNota();
                 return true;
             }else{
