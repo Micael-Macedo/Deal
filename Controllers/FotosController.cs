@@ -45,9 +45,13 @@ namespace Deal.Controllers
         }
 
         // GET: Fotos/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId");
+            if (id == null || _context.Fotos == null)
+            {
+                return NotFound();
+            }
+            ViewBag.portfolioId = id;
             return View();
         }
 

@@ -25,10 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FotoPrestador)
+                 <img src="@Html.DisplayFor(modelItem => item.FotoPrestador)" alt="" srcset="" width="200px" height="200px">
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Portfolio.PortfolioId)
+                @Html.DisplayFor(modelItem => item.FkPortfolio)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.FotoId">Editar</a> |

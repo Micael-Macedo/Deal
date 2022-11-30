@@ -40,13 +40,17 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
             return View(certificado);
         }
 
         // GET: Certificado/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
+            if (id == null || _context.Portfolios == null)
+            {
+                return NotFound();
+            }
+            ViewBag.portfolioId = id;
             return View();
         }
 
