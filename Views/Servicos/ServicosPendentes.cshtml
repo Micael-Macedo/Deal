@@ -1,10 +1,11 @@
 @model IEnumerable<Deal.Models.Servico>
 @{
     ViewData["Title"] = "Serviços Pendentes";
+    int PrestadorId = ViewBag.PrestadorId;
 }
 
 <h1>@ViewData["Title"]</h1>
-
+<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@PrestadorId" class="btn btn-info">Retornar a pagina inicial</a>
 <table class="table">
     <thead>
         <tr>

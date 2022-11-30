@@ -41,12 +41,13 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
+            int QtdServicosPresentes = await _context.Servicos.Where(s => s.FkPrestador == id && s.Status == "Convite enviado").CountAsync();
             var prestador = await _context.Prestadores.FindAsync(id);
             if (prestador == null)
             {
                 return NotFound();
             }
+            ViewBag.ServicosPresentes = QtdServicosPresentes;
             return View(prestador);
         }
 
