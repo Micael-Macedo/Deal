@@ -50,7 +50,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            ViewBag.portfolioId = id;
+            ViewBag.portfolioIdCertificado = id;
             return View();
         }
 

@@ -2,10 +2,11 @@
 
 @{
     ViewData["Title"] = "Detalhes";
+    int? prestadorId = ViewBag.prestadorId;
 }
 
 <h1>Detalhes</h1>
-
+<a asp-action="Servicos" asp-controller="ServicosPendentes" asp-route-id="@prestadorId" class="btn btn-info">Retornar para Serviços Solicitados</a>
 <div>
     <h4>Cliente</h4>
     <hr />
@@ -14,7 +15,7 @@
             Foto
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FotoUsuario)
+             <img src="@Html.DisplayFor(model => model.FotoUsuario)" alt="" srcset="" width="200px">
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Nome)
@@ -63,6 +64,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pontuacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pontuacao)
         </dd>
         <dt class = "col-sm-2">
             Acordos Realizados
