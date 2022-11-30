@@ -326,6 +326,7 @@ namespace Deal.Controllers
         }
         public async Task<IActionResult> ServicosPendentes(int? id)
         {
+            ViewBag.PrestadorId = id;
             var projectDealContext = _context.Servicos.Where(S => S.FkPrestador == id && S.Status == "Convite Enviado").Include(s => s.Categoria).Include(s => s.Cliente);
             return View(await projectDealContext.ToListAsync());
         }

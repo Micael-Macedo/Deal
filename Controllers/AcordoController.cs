@@ -189,7 +189,6 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            acordo.Servico.Prestador.MediaNota();
             return View(acordo);
         }
         public async Task<IActionResult> AvaliacaoDoCliente(int? id)
@@ -408,10 +407,11 @@ namespace Deal.Controllers
         public async Task<IActionResult> CancelarAcordo(int? id, string justificativa)
         {
             Acordo acordo = await _context.Acordos.FindAsync(id);
-            Servico servico = await _context.Servicos.FindAsync(acordo.FkServico);
-            Cliente cliente = await _context.Clientes.FindAsync(servico.FkCliente);
-            cliente.AcordosCancelados += 1;
-            cliente.NotasDoCliente = await _context.NotaClientes.Where(n => n.FkCliente == cliente.ClienteId).ToListAsync();
+            acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
+            acordo.Servico.Cliente = await _context.Clientes.FindAsync(acordo.Servico.FkCliente);
+            acordo.Servico.Cliente.NotasDoCliente = await _context.NotaClientes.Where(n => n.FkCliente == acordo.Servico.Cliente.ClienteId).ToListAsync();
+            int clienteId = acordo.Servico.Cliente.ClienteId;       
+            acordo.CancelarAcordo();
 
             AcordoCancelado acordoCancelado = new AcordoCancelado();
             acordoCancelado.AcordoFk = acordo.AcordoId;
@@ -419,11 +419,11 @@ namespace Deal.Controllers
             _context.AcordosCancelados.Add(acordoCancelado);
             await _context.SaveChangesAsync();
 
-            _context.Clientes.Update(cliente);
-            _context.Servicos.Remove(servico);
+            _context.Clientes.Update(acordo.Servico.Cliente);
+            _context.Servicos.Remove(acordo.Servico);
             _context.Acordos.Remove(acordo);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Home", "Clientes", new { id = cliente.ClienteId });
+            return RedirectToAction("Home", "Clientes", new { id = clienteId });
         }
         public async Task<IActionResult> EncerrarAcordo(int? id)
         {
@@ -450,26 +450,24 @@ namespace Deal.Controllers
         public async Task<IActionResult> EncerrarAcordo(int? id, string justificativa)
         {
             Acordo acordo = await _context.Acordos.FindAsync(id);
-            Servico servico = await _context.Servicos.FindAsync(acordo.FkServico);
-            Prestador prestador = await _context.Prestadores.FindAsync(servico.FkPrestador);
-            servico.Prestador = null;
-            servico.Status = "Prestador Cancelou o acordo";
-            servico.IsDisponivel = true;
-            prestador.AcordosCancelados += 1;
-            prestador.NotasDoPrestador = await _context.NotaPrestadores.Where(n => n.FkPrestador == prestador.PrestadorId).ToListAsync();
-            prestador.MediaNota();
+            acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
+            acordo.Servico.Prestador = await _context.Prestadores.FindAsync(acordo.Servico.FkPrestador);
+            int prestadorId = acordo.Servico.Prestador.PrestadorId;
+            acordo.Servico.Prestador.NotasDoPrestador = await _context.NotaPrestadores.Where(n => n.FkPrestador == acordo.Servico.Prestador.PrestadorId).ToListAsync();
+            if(acordo.EncerrarAcordo()){
+                _context.Prestadores.Update(acordo.Servico.Prestador);
+                acordo.Servico.FkPrestador = null;
+            }
 
             AcordoCancelado acordoCancelado = new AcordoCancelado();
             acordoCancelado.AcordoFk = acordo.AcordoId;
             acordoCancelado.Justificativa = justificativa;
-            _context.AcordosCancelados.Add(acordoCancelado);
-            await _context.SaveChangesAsync();
+            _context.Add(acordoCancelado);
 
-            _context.Prestadores.Update(prestador);
+            _context.Servicos.Update(acordo.Servico);
             _context.Acordos.Remove(acordo);
-            _context.Servicos.Update(servico);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Home", "Prestadores", new { id = prestador.PrestadorId });
+            return RedirectToAction("Home", "Prestadores", new { id = prestadorId });
         }
         public async Task<IActionResult> AcordosCliente(int? id)
         {

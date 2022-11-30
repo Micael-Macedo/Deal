@@ -102,13 +102,16 @@ namespace Deal.Models
             Servico.Cliente.AcordosCancelados++;
             Servico.Cliente.MediaNota();
         }
-        public void EncerrarAcordo(){
-            Servico.Prestador.AcordosCancelados++;
-            Servico.Prestador.MediaNota();
-            Servico.Prestador = null;
-            Servico.FkPrestador = null;
-            Servico.Status = "Prestador Cancelou o acordo";
-            Servico.IsDisponivel = true;
+        public bool EncerrarAcordo(){
+            if(Servico.Prestador != null && Servico != null){
+                Servico.Prestador.AcordosCancelados++;
+                Servico.Status = "Prestador Cancelou o acordo";
+                Servico.IsDisponivel = true;
+                Servico.Prestador.MediaNota();
+                return true;
+            }else{
+                return false;
+            }
         }
         public bool FinalizarAcordo(){
             if(Servico.Cliente != null && Servico.Prestador != null){
