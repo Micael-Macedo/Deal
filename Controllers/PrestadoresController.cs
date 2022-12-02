@@ -76,7 +76,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            ViewBag.areasAtuacao = AreasDeAtuacaoDoPrestador;
+            ViewBag.areasAtuacaoFk = AreasDeAtuacaoDoPrestador;
             return View(prestador);
         }
 
@@ -88,7 +88,7 @@ namespace Deal.Controllers
             return View();
         }
 
-        // POST: Prestadores/Create
+        // POST: Prestadores/Createcreate
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -226,9 +226,15 @@ namespace Deal.Controllers
                 _context.NotaPrestadores.Remove(notaPrestador);
             }
             List<Servico> servicos = await _context.Servicos.Where(s => s.FkPrestador == prestador.PrestadorId).ToListAsync();
+            List<Acordo> acordos = new List<Acordo>();
             foreach (var servico in servicos)
             {
+                acordos.AddRange(_context.Acordos.Where(a => a.FkServico == servico.ServicoId).ToList());
                 _context.Servicos.Remove(servico);
+            }
+            foreach (var acordo in acordos)
+            {
+                _context.Acordos.Remove(acordo);
             }
             if (prestador != null)
             {
@@ -257,7 +263,13 @@ namespace Deal.Controllers
             {
                 servicos.AddRange(_context.Servicos.Where(S => S.FkCategoria == item.AreaAtuacaoId).ToList());
             }
-            List<Servico> servicosFiltrados = servicos.Where(s => s.Status == "Solicitado").ToList();
+            List<LocalDoPrestador> LocaisDoPrestador = _context.LocaisDoPrestador.Where(l => l.PrestadorFk == prestador.PrestadorId).ToList();
+            
+            List<Servico> servicosFiltrados = new List<Servico>();
+            foreach (var local in LocaisDoPrestador)
+            {
+                servicosFiltrados.AddRange(servicos.Where(s => s.Status == "Solicitado" && s.Cidade == local.Cidade).ToList());
+            }
             ViewBag.PrestadorId = prestador.PrestadorId;
             ViewData["Servicos"] = servicosFiltrados;
             return View(prestador);
@@ -277,6 +289,7 @@ namespace Deal.Controllers
                 Servico servico = _context.Servicos.Find(servicoId);
                 servico.FkPrestador = prestadorId;
                 servico.Status = "Prestador tem interesse";
+                servico.IsDisponivel = false;
                 _context.Servicos.Update(servico);
                 await _context.SaveChangesAsync();
             }

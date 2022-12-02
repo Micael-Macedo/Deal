@@ -191,6 +191,44 @@ namespace Deal.Controllers
             }
             return View(acordo);
         }
+        public async Task<IActionResult> AcordoCliente(int? id)
+        {
+            if (id == null || _context.Acordos == null)
+            {
+                return NotFound();
+            }
+
+            var acordo = await _context.Acordos
+            .Include(m => m.Servico.Prestador)
+            .Include(m => m.Servico.Prestador.NotasDoPrestador)
+            .Include(m => m.Servico.Categoria)
+                .FirstOrDefaultAsync(m => m.AcordoId == id);
+
+            if (acordo == null)
+            {
+                return NotFound();
+            }
+            return View(acordo);
+        }
+        public async Task<IActionResult> AcordoPrestador(int? id)
+        {
+            if (id == null || _context.Acordos == null)
+            {
+                return NotFound();
+            }
+
+            var acordo = await _context.Acordos
+            .Include(m => m.Servico.Cliente)
+            .Include(m => m.Servico.Cliente.NotasDoCliente)
+            .Include(m => m.Servico.Categoria)
+                .FirstOrDefaultAsync(m => m.AcordoId == id);
+
+            if (acordo == null)
+            {
+                return NotFound();
+            }
+            return View(acordo);
+        }
         public async Task<IActionResult> AvaliacaoDoCliente(int? id)
         {
             if (id == null || _context.Acordos == null)
@@ -230,7 +268,7 @@ namespace Deal.Controllers
                 acordo.AvaliarCliente();
                 _context.Acordos.Update(acordo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Homepage", "Acordo", new { id = acordo.AcordoId });
+                return RedirectToAction("Home", "Prestadores", new { id = servico.FkPrestador });
             }
             return View(acordo);
         }
@@ -274,7 +312,7 @@ namespace Deal.Controllers
                 acordo.AvaliarPrestador();
                 _context.Acordos.Update(acordo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Homepage", "Acordo", new { id = acordo.AcordoId });
+                return RedirectToAction("Home", "Clientes", new { id = servico.FkCliente });
             }
             return View(acordo);
         }
@@ -325,7 +363,7 @@ namespace Deal.Controllers
                     }
                     _context.Acordos.Update(acordo);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("HomePage", "Acordo", new { id = acordoId });
+                    return RedirectToAction("Home", "Clientes", new { id = acordo.Servico.Cliente.ClienteId });
                 }
             }
             return View(acordo);
@@ -377,7 +415,7 @@ namespace Deal.Controllers
                     }
                     _context.Acordos.Update(acordo);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("HomePage", "Acordo", new { id = acordoId });
+                    return RedirectToAction("Home", "Prestadores", new { id =  acordo.Servico.FkPrestador});
                 }
             }
             return View(acordo);
@@ -471,17 +509,30 @@ namespace Deal.Controllers
         }
         public async Task<IActionResult> AcordosCliente(int? id)
         {
+            if (id == null || _context.Acordos == null)
+            {
+                return NotFound();
+            }
             ViewBag.ClienteIdAcordo = id;
-            return _context.Acordos != null ?
-                        View(await _context.Acordos.Where(a => a.Servico.FkCliente == id).ToListAsync()) :
-                        Problem("Entity set 'ProjectDealContext.Acordos'  is null.");
+            List<Acordo> acordos = await _context.Acordos.Where(a => a.Servico.FkCliente == id).ToListAsync();
+            foreach (var acordo in acordos)
+            {
+                acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
+                acordo.Servico.Categoria = await _context.AreaAtuacao.FindAsync(acordo.Servico.FkCategoria);
+            }
+            
+            return View(acordos);
         }
         public async Task<IActionResult> AcordosPrestador(int? id)
         {
             ViewBag.PrestadorIdAcordo = id;
-            return _context.Acordos != null ?
-                        View(await _context.Acordos.Where(a => a.Servico.FkPrestador == id).ToListAsync()) :
-                        Problem("Entity set 'ProjectDealContext.Acordos'  is null.");
+            List<Acordo> acordos = await _context.Acordos.Where(a => a.Servico.FkPrestador == id).ToListAsync();
+            foreach (var acordo in acordos)
+            {
+                acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
+                acordo.Servico.Categoria = await _context.AreaAtuacao.FindAsync(acordo.Servico.FkCategoria);
+            }
+            return View(acordos);
         }
         private bool AcordoExists(int id)
         {

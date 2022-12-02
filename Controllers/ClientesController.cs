@@ -71,7 +71,7 @@ namespace Deal.Controllers
             {
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Home","Clientes", new {id = cliente.ClienteId} );
             }
             return View(cliente);
         }

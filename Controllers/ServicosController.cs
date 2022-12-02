@@ -273,16 +273,23 @@ namespace Deal.Controllers
             }
             var servico = await _context.Servicos.FindAsync(id);
             List<AreasDeAtuacaoDoPrestador> listPrestadoresDisponiveis = _context.AreasDeAtuacaoDoPrestador.Where(A => A.FkAreaAtuacao == servico.FkCategoria).ToList();
-            List<int?> IdPrestadores = new List<int?>();
-            foreach (var item in listPrestadoresDisponiveis)
+            List<Prestador> prestadoresServico = new List<Prestador>();
+            foreach (var prestadoresDisponiveis in listPrestadoresDisponiveis)
             {
-                IdPrestadores.Add(item.FkPrestador);
+                prestadoresServico.Add(_context.Prestadores.Find(prestadoresDisponiveis.FkPrestador));
             }
+            
+            List<LocalDoPrestador> LocaisDosPrestadores= new List<LocalDoPrestador>();
+            foreach(var prestador in prestadoresServico){
+                LocaisDosPrestadores.AddRange(_context.LocaisDoPrestador.Where(l => l.PrestadorFk == prestador.PrestadorId && l.Cidade == servico.Cidade).ToList());
+            }
+
             List<Prestador> prestadoresFiltrados = new List<Prestador>();
-            foreach (var item in IdPrestadores)
+            foreach (var local in LocaisDosPrestadores)
             {
-                prestadoresFiltrados.Add(_context.Prestadores.Find(item));
+                prestadoresFiltrados.Add(_context.Prestadores.Find(local.PrestadorFk));
             }
+            
             if (servico == null)
             {
                 return NotFound();
@@ -327,6 +334,12 @@ namespace Deal.Controllers
         public async Task<IActionResult> ServicosPendentes(int? id)
         {
             ViewBag.prestadorIdServicosPendentes = id;
+            List<LocalDoPrestador> locaisDoPestador = _context.LocaisDoPrestador.Where(l => l.PrestadorFk == id).ToList();
+            List<Servico> filtroServicosLocalizacao = new List<Servico>();
+            foreach (var localDoPrestador in locaisDoPestador)
+            {
+                filtroServicosLocalizacao.AddRange(_context.Servicos.Where(s => s.Cidade == localDoPrestador.Cidade));
+            }
             var projectDealContext = _context.Servicos.Where(S => S.FkPrestador == id && S.Status == "Convite Enviado").Include(s => s.Categoria).Include(s => s.Cliente);
             return View(await projectDealContext.ToListAsync());
         }
@@ -346,7 +359,7 @@ namespace Deal.Controllers
                         acordo.FkServico = servicoId;
                         _context.Acordos.Add(acordo);
                         await _context.SaveChangesAsync();
-                        return RedirectToAction("HomePage", "Acordo", new { id = acordo.AcordoId });
+                        return RedirectToAction("AcordoPrestador", "Acordo", new { id = acordo.AcordoId });
                     }
                     if (escolha == "Recusar")
                     {
@@ -408,7 +421,7 @@ namespace Deal.Controllers
                         acordo.FkServico = servicoId;
                         _context.Acordos.Add(acordo);
                         await _context.SaveChangesAsync();
-                        return RedirectToAction("HomePage", "Acordo", new { id = acordo.AcordoId });
+                        return RedirectToAction("AcordoCliente", "Acordo", new { id = acordo.AcordoId });
                     }
                     if (escolha == "Recusar")
                     {

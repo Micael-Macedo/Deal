@@ -201,6 +201,25 @@ namespace Deal.Migrations
                     b.ToTable("Fotos");
                 });
 
+            modelBuilder.Entity("Deal.Models.LocalDoPrestador", b =>
+                {
+                    b.Property<int?>("LocalDoPrestadorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cidade")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("PrestadorFk")
+                        .HasColumnType("int");
+
+                    b.HasKey("LocalDoPrestadorId");
+
+                    b.HasIndex("PrestadorFk");
+
+                    b.ToTable("LocaisDoPrestador");
+                });
+
             modelBuilder.Entity("Deal.Models.NotaCliente", b =>
                 {
                     b.Property<int>("NotaClienteId")
@@ -478,6 +497,17 @@ namespace Deal.Migrations
                         .HasForeignKey("FkPortfolio");
 
                     b.Navigation("Portfolio");
+                });
+
+            modelBuilder.Entity("Deal.Models.LocalDoPrestador", b =>
+                {
+                    b.HasOne("Deal.Models.Prestador", "Prestador")
+                        .WithMany()
+                        .HasForeignKey("PrestadorFk")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prestador");
                 });
 
             modelBuilder.Entity("Deal.Models.NotaCliente", b =>
