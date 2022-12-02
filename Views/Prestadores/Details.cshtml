@@ -53,17 +53,30 @@
             <span class="tooltiptext" id="myTooltip"></span>
         </dd>
         <dt class = "col-sm-2">
+            Locais de Atuação:
+        </dt>
+        <dd class = "col-sm-10" style="display: flex;">
+            @if(Model.LocaisDoPrestador != null){
+                foreach (var local in ViewData["LocaisDoPrestador"] as List<LocalDoPrestador>)
+                {
+                <p>
+                    <li>@local.Cidade</li>
+                </p>
+                }
+            }
+        </dd>
+        <dt class = "col-sm-2">
             Área de Atuação
         </dt>         
         @if (Model.AreasAtuacao != null)
         {
         <dd class ="col-sm-10 areasDeAtuacaoDoPrestador">
-            @foreach (var item in areasAtuacao)
-            {
             <p>
+            @foreach (var item in ViewData["AreasDoPrestador"] as List<AreaAtuacao>)
+            {
                 <li>@item.Atuacao</li>
-            </p>
             }
+            </p>
         </dd>
         }
         <dt class = "col-sm-2">

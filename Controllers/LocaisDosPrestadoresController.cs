@@ -171,6 +171,19 @@ namespace Deal.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> MeusLocais(int? id)
+        {   
+            if(id == null || _context.Prestadores == null){
+                return NotFound();
+            }
+            var prestador = _context.Prestadores.Find(id);
+            if(prestador == null){
+                return NotFound();
+            }
+            @ViewBag.PrestadorId = prestador.PrestadorId;
+            var projectDealContext = _context.LocaisDoPrestador.Where(l => l.PrestadorFk == id);
+            return View(await projectDealContext.ToListAsync());
+        }
 
         private bool LocalDoPrestadorExists(int? id)
         {

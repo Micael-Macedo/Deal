@@ -513,7 +513,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            ViewBag.ClienteIdAcordo = id;
+            ViewBag.ClienteId = id;
             List<Acordo> acordos = await _context.Acordos.Where(a => a.Servico.FkCliente == id).ToListAsync();
             foreach (var acordo in acordos)
             {

@@ -3,10 +3,9 @@
 @{
     ViewData["Title"] = "Detalhes";
     Servico servico = new Servico();
-    int PrestadorId = ViewBag.PrestadorId;
 }
 
-<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@PrestadorId" class="btn btn-info">Retornar a pagina inicial</a>
+<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.PrestadorId" class="btn btn-info">Retornar a pagina inicial</a>
 <h1>Detalhes</h1>
 <div>
     <h4>Serviço</h4>
@@ -77,5 +76,5 @@
     }
 </table>
 <div>
-    <a asp-action="Home" asp-route-id="@PrestadorId">Retornar</a>
+    <a asp-action="Home" asp-route-id="@ViewBag.PrestadorId">Retornar</a>
 </div>

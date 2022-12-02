@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Criar";
-    int? portfolioIdCertificado = ViewBag.portfolioIdCertificado;
 }
 
 <h1>Criar</h1>
@@ -13,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input hidden name="FkPortfolio" value="@portfolioIdCertificado" class="form-control" />
+            <input hidden name="FkPortfolio" value="@ViewBag.portfolioIdCertificado" class="form-control" />
             <div class="form-group">
                 <input type="file" class="form-control" onchange="ConverterImagem()" id="NewFoto">
                 <input asp-for="CertificadoFotoPortfolio" type="hidden" id="FotoBase64"/>

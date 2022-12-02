@@ -29,6 +29,7 @@ namespace Deal.Models
         public ICollection<NotaPrestador>? NotasDoPrestador { get; set; } //Criar método média, ArrayNotas sempre começa com 5.0 de nota
         public ICollection<AreaAtuacao>? AreasAtuacao { get; set; }
         public ICollection<AreasDeAtuacaoDoPrestador>? AreasDeAtuacaoDoPrestador { get; set; }
+        public ICollection<LocalDoPrestador>? LocaisDoPrestador { get; set; }
         public int QtdServicoRealizados { get; set; }
         public int AcordosCancelados { get; set; }
 

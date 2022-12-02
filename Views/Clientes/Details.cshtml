@@ -2,11 +2,10 @@
 
 @{
     ViewData["Title"] = "Detalhes";
-    int? prestadorId = ViewBag.prestadorId;
 }
 
 <h1>Detalhes</h1>
-<a asp-action="Servicos" asp-controller="ServicosPendentes" asp-route-id="@prestadorId" class="btn btn-info">Retornar para Serviços Solicitados</a>
+<a asp-action="Servicos" asp-controller="ServicosPendentes" asp-route-id="@ViewBag.prestadorId" class="btn btn-info">Retornar para Serviços Solicitados</a>
 <div>
     <h4>Cliente</h4>
     <hr />

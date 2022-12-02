@@ -76,7 +76,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            ViewBag.areasAtuacaoFk = AreasDeAtuacaoDoPrestador;
+            ViewData["AreasDoPrestador"] = prestador.AreasAtuacao;
+            ViewData["LocaisDoPrestador"] = _context.LocaisDoPrestador.Where(l => l.PrestadorFk == prestador.PrestadorId).ToList();
             return View(prestador);
         }
 
