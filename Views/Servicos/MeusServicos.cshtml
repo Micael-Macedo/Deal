@@ -1,13 +1,12 @@
 @model IEnumerable<Deal.Models.Servico>
 @{
     ViewData["Title"] = "Meus Serviços";
-    int? ClienteIdMeusServicos = ViewBag.ClienteId;
 }
 
 <h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Clientes" asp-route-id="@ClienteIdMeusServicos" class="btn btn-info">Retornar a pagina
+<a asp-action="Home" asp-controller="Clientes" asp-route-id="@ViewBag.ClienteId" class="btn btn-info">Retornar a pagina
     inicial</a>
-    <a asp-action="Create" asp-controller="Servicos" asp-route-id="@ClienteIdMeusServicos" class="btn btn-success">Criar Serviço</a>
+    <a asp-action="Create" asp-controller="Servicos" asp-route-id="@ViewBag.ClienteId" class="btn btn-success">Criar Serviço</a>
 <div class="AllServicesCards">
 
     @foreach (var item in Model)

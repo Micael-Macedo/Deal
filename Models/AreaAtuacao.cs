@@ -9,6 +9,7 @@ namespace Deal.Models
     {
         public int AreaAtuacaoId { get; set; }
         public string? Atuacao { get; set; }
-
+        public bool isOnline { get; set; }
+        public bool isPresencial { get; set; }
     }
 }
