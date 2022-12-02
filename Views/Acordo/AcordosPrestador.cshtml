@@ -27,10 +27,7 @@
                 @Html.DisplayFor(modelItem => item.FkServico)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AcordoId">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.AcordoId">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.AcordoId">Apagar</a> |
-                <a asp-action="HomePage" asp-route-id="@item.AcordoId">Página Inicial</a>
+                <a asp-action="AcordoPrestador" asp-route-id="@item.AcordoId" class="btn btn-info">Ver mais</a>
             </td>
         </tr>
 }

@@ -25,5 +25,6 @@ namespace Deal.Models
         public DbSet<NotaPrestador>? NotaPrestadores { get; set; }
         public DbSet<AreasDeAtuacaoDoPrestador>? AreasDeAtuacaoDoPrestador { get; set; }
         public DbSet<AcordoCancelado>? AcordosCancelados { get; set; }
+        public DbSet<LocalDoPrestador>? LocaisDoPrestador { get; set; }
     }
 }

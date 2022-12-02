@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Deal.Models
 {
-    public class LocaisDoPrestador
+    public class LocalDoPrestador
     {
-        public int? LocaisDoPrestadorId { get; set; }
-        public string? Cidade;
+        public int? LocalDoPrestadorId { get; set; }
+        public string? Cidade { get; set; }
         [ForeignKey("Prestador")]
         public int PrestadorFk { get; set; }
         public virtual Prestador? Prestador { get; set; }

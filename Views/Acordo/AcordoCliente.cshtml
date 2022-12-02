@@ -1,0 +1,65 @@
+@model Deal.Models.Acordo
+@{
+    ViewData["Title"] = "Acordo Cliente";
+}
+<h1>@ViewData["Title"]</h1>
+<a asp-action="Home" asp-controller="Clientes" asp-route-id="@Model.Servico.FkCliente" class="btn btn-info">Retornar a
+    pagina inicial</a>
+
+<div>
+    <h2></h2>
+    <div class="AcordoHomePage">
+        <div>
+            @if (@Model.AcordoFinalizado)
+            {
+                <p>Acordo Finalizado</p>
+            }
+        </div>
+        <div class="UserCard">
+            <h3>Prestador</h3>
+            <div class="UserPhoto">
+                <img width="200px" src="@Model.Servico.Prestador.FotoPrestador" alt="" srcset="">
+            </div>
+            <p><b>Nome: </b>@Model.Servico.Prestador.Nome</p>
+            <hr>
+            <p><b>Email: </b>@Model.Servico.Prestador.Email</p>
+            <p><b>Telefone: </b>@Model.Servico.Prestador.Telefone</p>
+            <p><b>Pontuação: </b>@Model.Servico.Prestador.Pontuacao</p>
+            <p><b>Serviços Realizados: </b>@Model.Servico.Prestador.QtdServicoRealizados</p>
+            @if (@Model.AcordoFinalizado == true && @Model.AvaliouCliente != true)
+            {
+                <a asp-action="AvaliacaoDoPrestador" asp-route-id="@Model.AcordoId">Avaliar Prestador</a>
+            }
+            @if (@Model.PrestadorFinalizaAcordo == true && @Model.AcordoFinalizado != true)
+            {
+                <p>Prestador Gostaria de finalizar o Acordo</p>
+            }
+            @if (@Model.AcordoFinalizado != true && @Model.ClienteFinalizaAcordo != true)
+            {
+                <a asp-action="ClienteFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn btn-success">Finalizar
+                    Acordo</a>
+                <a asp-action="CancelarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-danger">Cancelar Acordo</a>
+            }
+            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.Servico.FkPrestador" class="btn btn-info">Ver Perfil</a>
+        </div>
+        <div class="ServiceInfo">
+            <div>
+                <h2>Informações do serviço</h2>
+                <p><b>Categoria: </b> @Model.Servico.Categoria.Atuacao</p>
+                <p><b>Nome: </b> @Model.Servico.Nome</p>
+                <p><b>Descrição: </b> @Model.Servico.Descricao</p>
+                <p><b>Endereço: </b> @Model.Servico.Endereco</p>
+                <input hidden type="text" value="@Model.Servico.Latitude" id="DealLat">
+                <input hidden type="text" value="@Model.Servico.Longitude" id="DealLong">
+                <div class="ServiceLocal">
+                    <div class="card-container col-md-4">
+                        <div class="map" id="gmp-map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+<script src="~/js/Dealmaps.js"></script>
+}

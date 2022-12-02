@@ -5,31 +5,38 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Clientes" asp-route-id="@clienteIdAcordo" class="btn btn-info">Retornar a pagina inicial</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Numero do acordo
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Servico.Nome)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AcordoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FkServico)
-            </td>
-            <td>
-                <a asp-action="HomePage" asp-route-id="@item.AcordoId" class="btn btn-info">Ver mais</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<a asp-action="Home" asp-controller="Clientes" asp-route-id="@clienteIdAcordo" class="btn btn-info">Retornar a pagina
+    inicial</a>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="serviceCard">
+            <div class="serviceCard-Content">
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        Acordo:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(modelItem => item.AcordoId)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Serviço:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(modelItem => item.Servico.Nome)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Categoria:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(modelItem => item.Servico.Categoria.Atuacao)
+                    </dd>
+                </dl>
+            </div>
+            <div class="serviceCardButtons">
+                <a asp-action="AcordoCliente" asp-route-id="@item.AcordoId" class="btn btn-info">Ver mais</a>
+            </div>
+        </div>
+    }
+</div>

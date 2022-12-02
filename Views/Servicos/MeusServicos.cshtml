@@ -9,7 +9,6 @@
     inicial</a>
     <a asp-action="Create" asp-controller="Servicos" asp-route-id="@ClienteIdMeusServicos" class="btn btn-success">Criar Serviço</a>
 <div class="AllServicesCards">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
 
     @foreach (var item in Model)
     {   
@@ -64,12 +63,12 @@
                         <a asp-action="HomePage" asp-route-id="@item.ServicoId" class="btn btn-info">Ver Acordo</a>
                         <span>|</span>
                     }
-                    @if ((item.IsDisponivel == true || item.IsAcordoFeito != true) && item.Status != "Convite enviado")
+                    @if (item.IsDisponivel == true && item.IsAcordoFeito != true && item.Status != "Convite enviado")
                     {
                         <a asp-action="AddPrestador" asp-route-id="@item.ServicoId" class="btn btn-success">Selecionar Prestador</a>
                         <span>|</span>
                     }
-                    @if (item.IsAcordoFeito != true && item.Status != "Convite enviado" && item.Status != "Prestador Recusou o Serviço")
+                    @if (item.IsAcordoFeito != true && item.Status != "Convite enviado" && item.Status != "Prestador Recusou o Serviço" && item.FkPrestador != null)
                     {
                         <a asp-action="ConfirmarAcordo" asp-route-id="@item.ServicoId" class="btn btn-success">Confirmar Acordo</a>
                         <span>|</span>
@@ -85,5 +84,4 @@
             </div>
         </div>
     }
-    </div>
 </div>

@@ -3,6 +3,7 @@ using System;
 using Deal.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(ProjectDealContext))]
-    partial class ProjectDealContextModelSnapshot : ModelSnapshot
+    [Migration("20221201232143_LocaisDosPrestadores")]
+    partial class LocaisDosPrestadores
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,19 +203,16 @@ namespace Deal.Migrations
                     b.ToTable("Fotos");
                 });
 
-            modelBuilder.Entity("Deal.Models.LocalDoPrestador", b =>
+            modelBuilder.Entity("Deal.Models.LocaisDoPrestador", b =>
                 {
-                    b.Property<int?>("LocalDoPrestadorId")
+                    b.Property<int?>("LocaisDoPrestadorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<string>("Cidade")
-                        .HasColumnType("longtext");
 
                     b.Property<int>("PrestadorFk")
                         .HasColumnType("int");
 
-                    b.HasKey("LocalDoPrestadorId");
+                    b.HasKey("LocaisDoPrestadorId");
 
                     b.HasIndex("PrestadorFk");
 
@@ -499,7 +498,7 @@ namespace Deal.Migrations
                     b.Navigation("Portfolio");
                 });
 
-            modelBuilder.Entity("Deal.Models.LocalDoPrestador", b =>
+            modelBuilder.Entity("Deal.Models.LocaisDoPrestador", b =>
                 {
                     b.HasOne("Deal.Models.Prestador", "Prestador")
                         .WithMany()
