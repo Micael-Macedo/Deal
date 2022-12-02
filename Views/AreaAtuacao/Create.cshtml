@@ -4,27 +4,24 @@
     ViewData["Title"] = "Criar";
 }
 
-<h1>Criar</h1>
+<div class="container">
+    <div class="titulo_formulario">
+        <h1 style="font-weight: 840; font-size: 45px;">Cadastrar nova área de atuação</h1>
+    </div>
+    <div class="container_formulario">
+        <div style="width: 800px;">
+            <form asp-action="Create">
+                <div class="item_formulario">
+                    <label asp-for="Atuacao" class="control-label" style="font-weight: 600; margin-bottom: 10px;"> Área de atuação</label>
+                    <input asp-for="Atuacao" class="form-control" />
+                    <span asp-validation-for="Atuacao" class="text-danger"></span>
+                </div>
+                <div class="botao_formulario">
+                    <input type="submit" value="Criar" class="botao_formulario"
+                        style="font-weight: 600; margin-bottom: 10px;" />
+                </div>
 
-<h4>Área de atuação</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Atuacao" class="control-label"></label>
-                <input asp-for="Atuacao" class="form-control" />
-                <span asp-validation-for="Atuacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-primary" />
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Retornar</a>
-</div>
-

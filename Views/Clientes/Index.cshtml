@@ -9,95 +9,115 @@
 <p>
     <a asp-action="Create">Novo Cliente</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Foto
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                CPF
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Idade)
-            </th>
-            <th>
-                Endereço
-            </th>
-            <th>
-                CEP
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Senha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                Acordos Realizados
-            </th>
-            <th>
-                Avaliação
-            </th>
-            <th>
-                Acordos Cancelados
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <img src="@Html.DisplayFor(modelItem => item.FotoUsuario)" alt="" width="300px" height="300px">
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cpf)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Idade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Endereco)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cep)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Telefone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Senha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QtdAcordoRealizados)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pontuacao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AcordosCancelados)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ClienteId">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.ClienteId">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ClienteId">Apagar</a> |
-                    <a asp-action="Home" asp-route-id="@item.ClienteId">Home</a> |
-                    <a asp-controller="Servicos" asp-action="Create" asp-route-id="@item.ClienteId">Criar Servico</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+
+<div class="container-fluid" style="margin-left: 30px;">
+
+    <div>
+        <div>
+            <table class="table tabela">
+                <thead class="thead_tabela">
+                    <tr>
+                        <th style="padding-right: 70px;">
+                            Foto
+                        </th>
+                        <th style="padding-right: 70px;">
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th style="padding-right: 70px;">
+                            CPF
+                        </th>
+                        <th style="padding-right: 90px;">
+                            @Html.DisplayNameFor(model => model.Idade)
+                        </th>
+                        <th style="padding-right: 90px;">
+                            Endereço
+                        </th>
+                        <th style="padding-right: 70px;">
+                            CEP
+                        </th>
+                        <th style="padding-right: 70px;">
+                            @Html.DisplayNameFor(model => model.Telefone)
+                        </th>
+                        <th style="padding-right: 90px;">
+                            @Html.DisplayNameFor(model => model.Senha)
+                        </th>
+                        <th style="padding-right: 90px;">
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th style="padding-right: 70px;">
+                            Acordos Realizados
+                        </th>
+                        <th style="padding-right: 70px;">
+                            Avaliação
+                        </th>
+                        <th style="padding-right: 70px;">
+                            Acordos Cancelados
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="thead_tabela2">
+                            <td class="td_tabela" style="padding-right: 10px;">
+                                <img src="@Html.DisplayFor(modelItem => item.FotoUsuario)" alt="" width="130px">
+                            </td>
+                            <td class="td_tabela" style="padding-right: 0px;">
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td class="td_tabela" style="padding-right: 50px;">
+                                @Html.DisplayFor(modelItem => item.Cpf)
+                            </td>
+                            <td class="td_tabela" style="padding-right: 50px;">
+                                @Html.DisplayFor(modelItem => item.Idade)
+                            </td>
+                            <td class="td_tabela" style="padding-right: 50px;">
+                                @Html.DisplayFor(modelItem => item.Endereco)
+                            </td>
+                            <td class="td_tabela" style="padding-right: 50px;">
+                                @Html.DisplayFor(modelItem => item.Cep)
+                            </td>
+                            <td class="td_tabela" style="padding-right: 50px;">
+                                @Html.DisplayFor(modelItem => item.Telefone)
+                            </td>
+                            <td class="td_tabela" style="padding-right: 50px;">
+                                @Html.DisplayFor(modelItem => item.Senha)
+                            </td>
+                            <td class="td_tabela" style="padding-right: 50px;">
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td class="td_tabela" style="padding-right: 50px;">
+                                @Html.DisplayFor(modelItem => item.QtdAcordoRealizados)
+                            </td>
+                            <td class="td_tabela" style="padding-right: 50px;">
+                                @Html.DisplayFor(modelItem => item.Pontuacao)
+                            </td>
+                            <td class="td_tabela" style="padding-right: 50px;">
+                                @Html.DisplayFor(modelItem => item.AcordosCancelados)
+                            </td>
+                        </tr>
+                        <td>
+                            <a asp-controller="Clientes" asp-action="Create" type="submit" class="botao_formulario3"
+                            asp-route-id="@item.ClienteId" style="font-weight: 600; margin: 10px; background-color: blueviolet; height: 60px;">Criar novo cliente</a> |
+                            <a asp-action="Edit" type="submit" class="botao_formulario3" asp-route-id="@item.ClienteId"
+                            style="font-weight: 600; margin: 10px;">Editar</a> |
+                            <a asp-action="Details" type="submit" class="botao_formulario3" asp-route-id="@item.ClienteId"
+                            style="font-weight: 600; margin: 10px;">Detalhes</a> |
+                            <a asp-action="Delete" type="submit" class="botao_formulario3" asp-route-id="@item.ClienteId"
+                            style="font-weight: 600; margin: 10px;">Apagar</a> |
+                            <a asp-action="Home" type="submit" class="botao_formulario3" asp-route-id="@item.ClienteId"
+                            style="font-weight: 600; margin: 10px;">Home</a> |
+                            <a asp-controller="Servicos" asp-action="Create" type="submit" class="botao_formulario3"
+                            asp-route-id="@item.ClienteId" style="font-weight: 600; margin: 10px;">Criar
+                                Servico</a>
+                            
+                        </td>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>

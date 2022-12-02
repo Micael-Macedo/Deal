@@ -4,70 +4,80 @@
     ViewData["Title"] = "Criar";
 }
 
-<h1>Criar</h1>
+<div class="container">
+    <div class="titulo_formulario">
+        <h1 style="font-weight: 840; font-size: 45px;">Cadastrar prestador</h1>
+    </div>
 
-<h4>Prestador</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Foto</label>
-                <input type="file" class="form-control" onchange="ConverterImagem()" id="NewFoto">
-                <input asp-for="FotoPrestador" type="hidden" id="FotoBase64" />
-                <span asp-validation-for="FotoPrestador" class="text-danger"></span>
-                <div id="apresentar-imagem" style="width: 10%; height: 10%; margin-bottom: 200px; position: relative;"></div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">CPF</label>
-                <input asp-for="Cpf" class="form-control" />
-                <span asp-validation-for="Cpf" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Idade" class="control-label"></label>
-                <input asp-for="Idade" class="form-control" />
-                <span asp-validation-for="Idade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Endereço</label>
-                <input asp-for="Endereco" class="form-control" />
-                <span asp-validation-for="Endereco" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">CEP</label>
-                <input asp-for="Cep" class="form-control" />
-                <span asp-validation-for="Cep" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefone" class="control-label"></label>
-                <input asp-for="Telefone" class="form-control" />
-                <span asp-validation-for="Telefone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Senha" class="control-label"></label>
-                <input type="password" asp-for="Senha" class="form-control" />
-                <span asp-validation-for="Senha" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input type="email" asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Área de Atuação</label>
-                <select multiple="multiple" class="multi-select" class ="form-control" asp-items="ViewBag.AreaAtuacaoId" name="areasAtuacao"></select>
-            </div>
+    <div class="container_formulario">
+        <div style="width: 800px;">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
-                    <input type="submit" value="Criar" class="btn btn-primary" />
+                    <label class="control-label">Foto</label>
+                    <input type="file" class="form-control" onchange="ConverterImagem()" id="NewFoto">
+                    <input asp-for="FotoPrestador" type="hidden" id="FotoBase64" />
+                    <span asp-validation-for="FotoPrestador" class="text-danger"></span>
+                    <div id="apresentar-imagem"
+                        style="width: 10%; height: 10%; margin-bottom: 20px; position: relative;"></div>
                 </div>
-        </form>
+                <div class="item_formulario">
+                    <label asp-for="Nome" class="control-label" style="font-weight: 600; margin-bottom: 10px;"></label>
+                    <input asp-for="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label class="control-label" style="font-weight: 600; margin-bottom: 10px;">CPF</label>
+                    <input asp-for="Cpf" class="form-control" />
+                    <span asp-validation-for="Cpf" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label asp-for="Idade" class="control-label" style="font-weight: 600; margin-bottom: 10px;"></label>
+                    <input asp-for="Idade" class="form-control" />
+                    <span asp-validation-for="Idade" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label class="control-label" style="font-weight: 600; margin-bottom: 10px;">Endereço</label>
+                    <input asp-for="Endereco" class="form-control" />
+                    <span asp-validation-for="Endereco" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label class="control-label" style="font-weight: 600; margin-bottom: 10px;">CPF</label>
+                    <input asp-for="Cep" class="form-control" />
+                    <span asp-validation-for="Cep" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label asp-for="Telefone" class="control-label"
+                        style="font-weight: 600; margin-bottom: 10px;"></label>
+                    <input asp-for="Telefone" class="form-control" />
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label asp-for="Senha" class="control-label" style="font-weight: 600; margin-bottom: 10px;"></label>
+                    <input type="password" asp-for="Senha" class="form-control" />
+                    <span asp-validation-for="Senha" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label asp-for="Email" class="control-label" style="font-weight: 600; margin-bottom: 0px;"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label class="control-label">Área de Atuação</label>
+                    <select multiple="multiple" class="multi-select" class="form-control"
+                        asp-items="ViewBag.AreaAtuacaoId" name="areasAtuacao"></select>
+                </div>
+                <div class="botao_formulario">
+                    <input type="submit" value="Criar" class="botao_formulario"
+                        style="font-weight: 600; margin-bottom: 10px;" />
+                </div>
+                <div class="botao_formulario2">
+                    <input type="submit" value="Retornar" asp-action="Index" class="botao_formulario"
+                        style="font-weight: 600; background-color: #b780e7;" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
+</div>
