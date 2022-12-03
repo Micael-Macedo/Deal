@@ -67,6 +67,7 @@ namespace Deal.Controllers
         {
             if (ModelState.IsValid)
             {
+                locaisDoPrestador.Prestador = _context.Prestadores.Find(locaisDoPrestador.PrestadorFk);
                 foreach (var cidade in Cidades)
                 {
                     if(cidade != null){
@@ -76,7 +77,7 @@ namespace Deal.Controllers
                         await _context.SaveChangesAsync();
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "Portfolios", new {id = locaisDoPrestador.Prestador.FkPortfolio});
             }
             return View(locaisDoPrestador);
         }

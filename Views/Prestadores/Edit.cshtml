@@ -22,9 +22,7 @@
                 <div id="apresentar-imagem" style="width: 10%; height: 10%; margin-bottom: 200px; position: relative;"></div>
             </div>
             <div class="form-group">
-                <label  class="control-label">Portfolio</label>
-                <select asp-for="FkPortfolio" class="form-control" asp-items="ViewBag.FkPortfolio"></select>
-                <span asp-validation-for="FkPortfolio" class="text-danger"></span>
+                <input hidden asp-for="FkPortfolio" class="form-control" value="@Model.FkPortfolio"></input>
             </div>
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
@@ -66,7 +64,10 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            
+            <div class="form-group">
+                <label  class="control-label">Área de Atuação</label>
+                <select multiple="multiple" class="multi-select" class ="form-control" asp-items="ViewBag.AreaAtuacaoId" name="areasAtuacao"></select>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
