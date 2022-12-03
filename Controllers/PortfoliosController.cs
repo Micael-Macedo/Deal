@@ -60,7 +60,7 @@ namespace Deal.Controllers
             {
                 _context.Add(portfolio);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Portfolios", new {id = portfolio.PortfolioId});
+                return RedirectToAction("Create", "LocaisDosPrestadores", new {id = portfolio.PortfolioId});
             }
             return View(portfolio);
         }

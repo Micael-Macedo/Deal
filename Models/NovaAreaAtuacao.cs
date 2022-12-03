@@ -10,6 +10,6 @@ namespace Deal.Models
         public string? NovaAreaAtuacaoId { get; set; }
         public string? AreaAtuacao { get; set; }
         public bool isOnline { get; set; }
-        public bool isPresencial { get; set; }
+        
     }
 }
