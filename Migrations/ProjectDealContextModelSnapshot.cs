@@ -87,6 +87,9 @@ namespace Deal.Migrations
                     b.Property<int?>("PrestadorId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("isOnline")
+                        .HasColumnType("tinyint(1)");
+
                     b.HasKey("AreaAtuacaoId");
 
                     b.HasIndex("PrestadorId");
@@ -275,6 +278,9 @@ namespace Deal.Migrations
 
                     b.Property<string>("AreaAtuacao")
                         .HasColumnType("longtext");
+
+                    b.Property<bool>("isOnline")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("NovaAreaAtuacaoId");
 
@@ -502,7 +508,7 @@ namespace Deal.Migrations
             modelBuilder.Entity("Deal.Models.LocalDoPrestador", b =>
                 {
                     b.HasOne("Deal.Models.Prestador", "Prestador")
-                        .WithMany()
+                        .WithMany("LocaisDoPrestador")
                         .HasForeignKey("PrestadorFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -600,6 +606,8 @@ namespace Deal.Migrations
                     b.Navigation("AreasAtuacao");
 
                     b.Navigation("AreasDeAtuacaoDoPrestador");
+
+                    b.Navigation("LocaisDoPrestador");
 
                     b.Navigation("NotasDoPrestador");
                 });

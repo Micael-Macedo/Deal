@@ -116,7 +116,7 @@ namespace Deal.Controllers
                     _context.AreasDeAtuacaoDoPrestador.Add(areasDeAtuacaoDosPrestadores);
                 }
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Edit", "Portfolios", new {id = prestador.FkPortfolio});
+                return RedirectToAction("Edit", "Portfolios", new {id = portfolio.PortfolioId});
             }
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", prestador.FkPortfolio);
             return View(prestador);
@@ -260,16 +260,19 @@ namespace Deal.Controllers
                 AreasDeAtuacao.Add(_context.AreaAtuacao.Find(item.FkAreaAtuacao));
             }
             List<Servico> servicos = new List<Servico>();
+            List<Servico> servicosFiltrados = new List<Servico>();
             foreach (var item in AreasDeAtuacao)
             {
-                servicos.AddRange(_context.Servicos.Where(S => S.FkCategoria == item.AreaAtuacaoId).ToList());
+                servicos.AddRange(_context.Servicos.Where(S => S.FkCategoria == item.AreaAtuacaoId && S.IsDisponivel == true).ToList());
+                if(item.isOnline == true){
+                    servicosFiltrados.AddRange(_context.Servicos.Where(S => S.FkCategoria == item.AreaAtuacaoId && S.IsDisponivel == true).ToList());
+                }
             }
             List<LocalDoPrestador> LocaisDoPrestador = _context.LocaisDoPrestador.Where(l => l.PrestadorFk == prestador.PrestadorId).ToList();
             
-            List<Servico> servicosFiltrados = new List<Servico>();
             foreach (var local in LocaisDoPrestador)
             {
-                servicosFiltrados.AddRange(servicos.Where(s => s.Status == "Solicitado" && s.Cidade == local.Cidade).ToList());
+                servicosFiltrados.AddRange(servicos.Where(s => s.Cidade == local.Cidade || s.Categoria.isOnline == true).ToList());
             }
             ViewBag.PrestadorId = prestador.PrestadorId;
             ViewData["Servicos"] = servicosFiltrados;

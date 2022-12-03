@@ -272,22 +272,27 @@ namespace Deal.Controllers
                 return NotFound();
             }
             var servico = await _context.Servicos.FindAsync(id);
+            servico.Categoria = _context.AreaAtuacao.Find(servico.FkCategoria);
             List<AreasDeAtuacaoDoPrestador> listPrestadoresDisponiveis = _context.AreasDeAtuacaoDoPrestador.Where(A => A.FkAreaAtuacao == servico.FkCategoria).ToList();
             List<Prestador> prestadoresServico = new List<Prestador>();
             foreach (var prestadoresDisponiveis in listPrestadoresDisponiveis)
             {
                 prestadoresServico.Add(_context.Prestadores.Find(prestadoresDisponiveis.FkPrestador));
             }
-            
-            List<LocalDoPrestador> LocaisDosPrestadores= new List<LocalDoPrestador>();
-            foreach(var prestador in prestadoresServico){
-                LocaisDosPrestadores.AddRange(_context.LocaisDoPrestador.Where(l => l.PrestadorFk == prestador.PrestadorId && l.Cidade == servico.Cidade).ToList());
-            }
-
             List<Prestador> prestadoresFiltrados = new List<Prestador>();
-            foreach (var local in LocaisDosPrestadores)
-            {
-                prestadoresFiltrados.Add(_context.Prestadores.Find(local.PrestadorFk));
+            if(servico.Categoria.isOnline == false){
+
+                List<LocalDoPrestador> LocaisDosPrestadores= new List<LocalDoPrestador>();
+                foreach(var prestador in prestadoresServico){
+                    LocaisDosPrestadores.AddRange(_context.LocaisDoPrestador.Where(l => l.PrestadorFk == prestador.PrestadorId && l.Cidade == servico.Cidade).ToList());
+                }
+
+                foreach (var local in LocaisDosPrestadores)
+                {
+                    prestadoresFiltrados.Add(_context.Prestadores.Find(local.PrestadorFk));
+                }
+            }else{
+                prestadoresFiltrados = prestadoresServico;
             }
             
             if (servico == null)
