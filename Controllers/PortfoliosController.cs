@@ -38,6 +38,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            var prestador = await _context.Prestadores.Where(p => p.FkPortfolio == portfolio.PortfolioId).FirstAsync();
+            ViewBag.PrestadorId = prestador.PrestadorId;
             ViewData["Fotos"] = _context.Fotos.Where(f => f.FkPortfolio == portfolio.PortfolioId).ToList();
             ViewData["Certificados"] = _context.Certificado.Where(c => c.FkPortfolio == portfolio.PortfolioId).ToList();
             return View(portfolio);
@@ -111,7 +113,7 @@ namespace Deal.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction();
             }
             return View(portfolio);
         }

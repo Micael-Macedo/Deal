@@ -413,3 +413,7 @@ h2{
   justify-content: center;
   align-items: center;
 }
+
+.form-group select{
+  height: 300px;
+}

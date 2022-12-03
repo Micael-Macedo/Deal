@@ -47,6 +47,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            
             ViewBag.ServicosPresentes = QtdServicosPresentes;
             return View(prestador);
         }
@@ -116,7 +117,7 @@ namespace Deal.Controllers
                     _context.AreasDeAtuacaoDoPrestador.Add(areasDeAtuacaoDosPrestadores);
                 }
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Edit", "Portfolios", new {id = portfolio.PortfolioId});
+                return RedirectToAction("Create", "LocaisDosPrestadores", new {id = prestador.PrestadorId});
             }
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", prestador.FkPortfolio);
             return View(prestador);
@@ -136,6 +137,7 @@ namespace Deal.Controllers
                 return NotFound();
             }
             ViewBag.PrestadorId = prestador.PrestadorId;
+            ViewData["AreaAtuacaoId"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", prestador.FkPortfolio);
             return View(prestador);
         }
