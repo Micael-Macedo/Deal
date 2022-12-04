@@ -1,0 +1,135 @@
+@model IEnumerable<Deal.Models.Cliente>
+
+@{
+
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="titulo_formulario">
+    <h1 style="font-weight: 840; font-size: 45px;">Seus perfis</h1>
+</div>
+
+<div class="container" style="margin-left: 70px;">
+    <div class="tabela">
+        <table class="table">
+            <thead class="thead_tabela">
+                <tr>
+                    <th style="padding-right: 70px;">
+                        Foto
+                    </th>
+                    <th style="padding-right: 70px;">
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th style="padding-right: 70px;">
+                        CPF
+                    </th>
+                    <th style="padding-right: 90px;">
+                        @Html.DisplayNameFor(model => model.Idade)
+                    </th>
+                    <th style="padding-right: 90px;">
+                        Endereço
+                    </th>
+                    <th style="padding-right: 70px;">
+                        CEP
+                    </th>
+                    <th style="padding-right: 70px;">
+                        @Html.DisplayNameFor(model => model.Telefone)
+                    </th>
+                    <th style="padding-right: 90px;">
+                        @Html.DisplayNameFor(model => model.Senha)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="thead_tabela2">
+                        <td class="td_tabela" style="padding-right: 10px;">
+                            <img src="@Html.DisplayFor(modelItem => item.FotoUsuario)" alt="" width="130px"
+                            style="padding: 10px">
+                        </td>
+                        <td class="td_tabela" style="padding-right: 0px;">
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td class="td_tabela" style="padding-right: 50px;">
+                            @Html.DisplayFor(modelItem => item.Cpf)
+                        </td>
+                        <td class="td_tabela" style="padding-right: 50px;">
+                            @Html.DisplayFor(modelItem => item.Idade)
+                        </td>
+                        <td class="td_tabela" style="padding-right: 50px;">
+                            @Html.DisplayFor(modelItem => item.Endereco)
+                        </td>
+                        <td class="td_tabela" style="padding-right: 50px;">
+                            @Html.DisplayFor(modelItem => item.Cep)
+                        </td>
+                        <td class="td_tabela" style="padding-right: 50px;">
+                            @Html.DisplayFor(modelItem => item.Telefone)
+                        </td>
+                        <td class="td_tabela" style="padding-right: 50px;">
+                            @Html.DisplayFor(modelItem => item.Senha)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <table class="table">
+            <thead class="thead_tabela">
+                <tr>
+                    <th style="padding-right: 230px;">
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th style="padding-right: 50px;">
+                        Acordos Realizados
+                    </th>
+                    <th style="padding-right: 50px;">
+                        Avaliação
+                    </th>
+                    <th style="padding-right: 50px;">
+                        Acordos Cancelados
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+
+                {
+                    <tr class="thead_tabela2">
+                        <td class="td_tabela" style="padding-right: 50px; padding-left: 40px">
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td class="td_tabela" style="padding-right: 200px;">
+                            @Html.DisplayFor(modelItem => item.QtdAcordoRealizados)
+                        </td>
+                        <td class="td_tabela" style="padding-right: 130px;">
+                            @Html.DisplayFor(modelItem => item.Pontuacao)
+                        </td>
+                        <td class="td_tabela" style="padding-right: 50px;">
+                            @Html.DisplayFor(modelItem => item.AcordosCancelados)
+                        </td>
+                    </tr>
+                    <td>
+                        <a asp-controller="Clientes" asp-action="Create" type="submit" class="btn"
+                        asp-route-id="@item.ClienteId"
+                        style="font-weight: 600; margin: 10px; background-color: blueviolet;">Criar novo
+                            cliente</a>
+                        <a asp-action="Edit" type="submit" class="btn" asp-route-id="@item.ClienteId"
+                        style="font-weight: 600; margin: 10px; background-color: #b780e7;">Editar</a>
+                        <a asp-action="Details" type="submit" class="btn" asp-route-id="@item.ClienteId"
+                        style="font-weight: 600; margin: 10px; background-color: #b780e7;">Detalhes</a>
+                        <a asp-action="Delete" type="submit" class="btn" asp-route-id="@item.ClienteId"
+                        style="font-weight: 600; margin: 10px; background-color: #b780e7;">Apagar</a>
+                        <a asp-action="Home" type="submit" class="btn" asp-route-id="@item.ClienteId"
+                        style="font-weight: 600; margin: 10px; background-color: #b780e7;">Home</a>
+                        <a asp-controller="Servicos" asp-action="Create" type="submit" class="btn"
+                        asp-route-id="@item.ClienteId" style="font-weight: 600; margin: 10px; background-color: #b780e7;">Criar
+                            Servico</a>
+
+                    </td>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

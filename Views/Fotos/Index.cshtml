@@ -1,0 +1,41 @@
+@model IEnumerable<Deal.Models.Foto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Adcionar Foto</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Foto
+            </th>
+            <th>
+                Portfolio
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                 <img src="@Html.DisplayFor(modelItem => item.FotoPrestador)" alt="" srcset="" width="200px" height="200px">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkPortfolio)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FotoId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.FotoId">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.FotoId">Apagar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

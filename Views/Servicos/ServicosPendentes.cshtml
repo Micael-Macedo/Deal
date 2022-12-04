@@ -1,0 +1,65 @@
+@model IEnumerable<Deal.Models.Servico>
+@{
+    ViewData["Title"] = "Serviços Pendentes";
+    int prestadorIdServicosPendentes = ViewBag.prestadorIdServicosPendentes;
+}
+
+<h1>@ViewData["Title"]</h1>
+<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@prestadorIdServicosPendentes" class="btn btn-info">Retornar a pagina inicial</a>
+<div class="AllServicesCards">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+    @foreach (var item in Model)
+    {   
+        <div class="col">
+            <div class="serviceCard">
+                <div class="serviceCard-Content">
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            Servico:
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Categoria:
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Categoria.Atuacao)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Descrição:
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Endereço:
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Endereco)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Cidade:
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(modelItem => item.Cidade)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="serviceCardButtons">
+                    <div class="form-group">
+                        <form asp-action="ServicosPendentes" method="post">
+                            <a asp-action="Details" asp-controller="Clientes" asp-route-id="@item.FkCliente" class="btn btn-info">Ver Cliente</a>
+                            <input type="hidden" name="servicoId" value="@item.ServicoId"/>
+                            <input type="hidden" name="prestadorId" value="@item.FkPrestador">
+                            <input name="escolha" type="submit" value="Recusar" class="btn btn-danger" />
+                            <input name="escolha" type="submit" value="Aceitar" class="btn btn-success" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+</div>

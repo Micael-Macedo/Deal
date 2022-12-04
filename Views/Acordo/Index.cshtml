@@ -1,0 +1,41 @@
+@model IEnumerable<Deal.Models.Acordo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Numero do acordo
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Servico.Nome)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AcordoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkServico)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AcordoId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.AcordoId">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.AcordoId">Apagar</a> |
+                <a asp-action="HomePage" asp-route-id="@item.AcordoId">Página Inicial</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

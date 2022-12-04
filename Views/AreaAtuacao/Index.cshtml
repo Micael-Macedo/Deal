@@ -1,0 +1,35 @@
+@model IEnumerable<Deal.Models.AreaAtuacao>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Nova área de atuação</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Área de atuação
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Atuacao)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AreaAtuacaoId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.AreaAtuacaoId">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.AreaAtuacaoId">Apagar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

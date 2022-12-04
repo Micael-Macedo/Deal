@@ -1,0 +1,24 @@
+@model Deal.Models.Certificado
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Certificado</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Certificado
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CertificadoFotoPortfolio)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.CertificadoId">Editar</a> |
+    <a asp-action="Index">Retornar</a>
+</div>

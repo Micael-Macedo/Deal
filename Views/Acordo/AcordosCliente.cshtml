@@ -1,0 +1,35 @@
+@model IEnumerable<Deal.Models.Acordo>
+@{
+    ViewData["Title"] = "Acordos Cliente";
+    int clienteIdAcordo = ViewBag.ClienteIdAcordo;
+}
+
+<h1>@ViewData["Title"]</h1>
+<a asp-action="Home" asp-controller="Clientes" asp-route-id="@clienteIdAcordo" class="btn btn-info">Retornar a pagina inicial</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Numero do acordo
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Servico.Nome)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AcordoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkServico)
+            </td>
+            <td>
+                <a asp-action="HomePage" asp-route-id="@item.AcordoId" class="btn btn-info">Ver mais</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
