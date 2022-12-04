@@ -372,14 +372,14 @@ h2 {
 .AllServicesCards {
   display: flex;
   flex-wrap: wrap;
-  margin: 3%;
+  margin-top: 50px;
 }
 
 .serviceCard {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-  background-color: #8E44CD;
+  margin: 10px;
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
   min-width: 500px;
-  border: 1px solid black;
+  border: 1px solid #8E44CD;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -389,13 +389,18 @@ h2 {
 .serviceCard-Content {
   font-size: 18px;
   background-color: white;
-  height: 200px;
-  padding: 20px 15px 0 15px;
+  height: 270px;
+  padding: 5px 10px 0 30px;
   border-radius: 5px 5px 0 0;
 }
 
 .serviceCardButtons {
-  margin: 10px 5px;
+  margin: 15px 30px;
+}
+
+.txt_card {
+  columns: 10px;
+  padding: 5px 0px 10px 10px;
 }
 
 .btn {
@@ -456,7 +461,8 @@ h2 {
 }
 
 .titulo_formulario {
-  font-size: 50px;;
+  font-size: 50px;
+  ;
   margin-top: 40px;
   margin-bottom: 30px;
   display: flex;
@@ -465,8 +471,8 @@ h2 {
 }
 
 .apresentar-imagem {
-  max-width: 400px;
-  max-height: 400px;
+  margin-top: 20px;
+  width: 80px;
 }
 
 .item_formulario {
@@ -582,4 +588,19 @@ h2 {
   height: 80px;
   display: flex;
   align-items: center;
+}
+
+.titulo_home {
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-login {
+  background-color: white;
+  font-size: 18px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
 }

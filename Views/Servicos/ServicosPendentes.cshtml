@@ -4,45 +4,52 @@
     int prestadorIdServicosPendentes = ViewBag.prestadorIdServicosPendentes;
 }
 
-<h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@prestadorIdServicosPendentes" class="btn btn-info">Retornar a pagina inicial</a>
+<div class="container" style="margin-top: 20px">
+    <div class="titulo_home">
+        <h1 style="font-weight: 840; font-size: 45px;">Serviços pendentes</h1>
+    </div>
+    <a asp-action="Home" asp-controller="Prestadores" asp-route-id="@prestadorIdServicosPendentes" type="submit" class="btn" style="font-weight: 600; background-color: blueviolet;">Retornar para a página principal</a>
+</div>
+
+
 <div class="AllServicesCards">
     <div class="row row-cols-1 row-cols-md-3 g-4">
-
     @foreach (var item in Model)
     {   
         <div class="col">
             <div class="serviceCard">
                 <div class="serviceCard-Content">
+                    <table class="table">
+
                     <dl class="row">
                         <dt class="col-sm-2">
                             Servico:
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="txt_card">
                             @Html.DisplayFor(modelItem => item.Nome)
                         </dd>
                         <dt class="col-sm-2">
                             Categoria:
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="txt_card">
                             @Html.DisplayFor(modelItem => item.Categoria.Atuacao)
                         </dd>
                         <dt class="col-sm-2">
                             Descrição:
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="txt_card">
                             @Html.DisplayFor(modelItem => item.Descricao)
                         </dd>
                         <dt class="col-sm-2">
                             Endereço:
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="txt_card">
                             @Html.DisplayFor(modelItem => item.Endereco)
                         </dd>
                         <dt class="col-sm-2">
                             Cidade:
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd class="txt_card">
                             @Html.DisplayFor(modelItem => item.Cidade)
                         </dd>
                     </dl>
