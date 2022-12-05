@@ -26,7 +26,7 @@
             <p><b>Telefone: </b>@Model.Servico.Prestador.Telefone</p>
             <p><b>Pontuação: </b>@Model.Servico.Prestador.Pontuacao</p>
             <p><b>Serviços Realizados: </b>@Model.Servico.Prestador.QtdServicoRealizados</p>
-            @if (@Model.AcordoFinalizado == true && @Model.AvaliouCliente != true)
+            @if (@Model.AcordoFinalizado == true && @Model.AvaliouPrestador != true)
             {
                 <a asp-action="AvaliacaoDoPrestador" asp-route-id="@Model.AcordoId">Avaliar Prestador</a>
             }
