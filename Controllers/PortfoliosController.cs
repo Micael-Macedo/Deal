@@ -60,9 +60,10 @@ namespace Deal.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(portfolio);
+                _context.Update(portfolio);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Create", "LocaisDosPrestadores", new {id = portfolio.PortfolioId});
+                Prestador prestador = await _context.Prestadores.FirstAsync(p => p.FkPortfolio == portfolio.PortfolioId);
+                return RedirectToAction("Home", "Prestadores", new {id = prestador.PrestadorId});
             }
             return View(portfolio);
         }
@@ -80,6 +81,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+             Prestador prestador = await _context.Prestadores.FirstAsync(p => p.FkPortfolio == portfolio.PortfolioId);
             return View(portfolio);
         }
 
@@ -94,6 +96,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            Prestador prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.FkPortfolio == portfolio.PortfolioId);
 
             if (ModelState.IsValid)
             {
@@ -113,9 +116,9 @@ namespace Deal.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction();
+                return RedirectToAction("Home", "Prestadores", new {id = prestador.PrestadorId});
             }
-            return View(portfolio);
+            return RedirectToAction("Home", "Prestadores", new {id = prestador.PrestadorId});
         }
 
         // GET: Portfolios/Delete/5

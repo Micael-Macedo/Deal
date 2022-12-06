@@ -70,7 +70,6 @@
             @Html.DisplayFor(model => model.QtdAcordoRealizados)
         </dd>
         <a asp-action="Edit" asp-route-id="@Model.ClienteId" class="btn btn-info" style="width: 200px;">Editar Perfil</a>
-        <a asp-action="Details" asp-route-id="@Model.ClienteId" class="btn btn-info" style="width: 200px;">Ver Perfil</a>
         <a asp-action="Create" asp-controller="Servicos" asp-route-id="@Model.ClienteId" class="btn btn-success" style="width: 200px;">Criar Serviço</a>
         <a asp-action="MeusServicos" asp-controller="Servicos" asp-route-id="@Model.ClienteId" class="btn btn-info" style="width: 200px;">Ver Serviços</a>
         <a asp-action="AcordosCliente" asp-controller="Acordo" asp-route-id="@Model.ClienteId" class="btn btn-info" style="width: 200px;">Ver Acordos</a>

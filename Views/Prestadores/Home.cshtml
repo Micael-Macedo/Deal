@@ -73,7 +73,7 @@
         <a asp-action="ServicosPendentes" asp-controller="Servicos" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Ver Serviços Pendentes<p>@ViewBag.ServicosPresentes</p></a> 
         <a asp-action="FindService" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Buscar Serviços</a>
         <a asp-action="MeusLocais" asp-controller="LocaisDosPrestadores" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Ver Locais de Atuação Atuais</a>
-        <a asp-action="Create" asp-controller="LocaisDosPrestadores" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Adicionar Locais De Atuação</a>
+        <a asp-action="AdicionarLocais" asp-controller="LocaisDosPrestadores" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Adicionar Locais De Atuação</a>
         <a asp-action="AcordosPrestador" asp-controller="Acordo" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Ver Acordos</a>
         <a asp-action="Edit" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Editar Perfil</a>
         <a asp-action="Delete" asp-route-id="@Model.PrestadorId" class="btn btn-danger" style="width: 200px;">Deletar Perfil</a>

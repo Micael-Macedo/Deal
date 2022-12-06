@@ -1,12 +1,13 @@
 @model IEnumerable<Deal.Models.Servico>
 @{
     ViewData["Title"] = "Meus Serviços";
+    var idCliente =  ViewData["IdCliente"]; 
 }
 
 <h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Clientes" asp-route-id="@ViewBag.ClienteId" class="btn btn-info">Retornar a pagina
+<a asp-action="Home" asp-controller="Clientes" asp-route-id="@idCliente" class="btn btn-info">Retornar a pagina
     inicial</a>
-    <a asp-action="Create" asp-controller="Servicos" asp-route-id="@ViewBag.ClienteId" class="btn btn-success">Criar Serviço</a>
+    <a asp-action="Create" asp-controller="Servicos" asp-route-id="@idCliente" class="btn btn-success">Criar Serviço</a>
 <div class="AllServicesCards">
 
     @foreach (var item in Model)
@@ -59,7 +60,7 @@
                     <a asp-action="Details" asp-route-id="@item.ServicoId" class="btn btn-info">Detalhes</a> |
                     @if (item.IsAcordoFeito)
                     {
-                        <a asp-action="HomePage" asp-route-id="@item.ServicoId" class="btn btn-info">Ver Acordo</a>
+                        <a asp-action="AcordosCliente" asp-controller="Acordo" asp-route-id="@item.FkCliente" class="btn btn-info">Ver Acordos</a>
                         <span>|</span>
                     }
                     @if (item.IsDisponivel == true && item.IsAcordoFeito != true && item.Status != "Convite enviado")

@@ -21,8 +21,10 @@
             </div>
             <p><b>Nome: </b>@Model.Servico.Cliente.Nome</p>
             <hr>
+            <h3>Formas de contato:</h3>
             <p><b>Email: </b>@Model.Servico.Cliente.Email</p>
             <p><b>Telefone: </b>@Model.Servico.Cliente.Telefone</p>
+            <hr>
             <p><b>Pontuação: </b>@Model.Servico.Cliente.Pontuacao</p>
             <p><b>Serviços Realizados: </b>@Model.Servico.Cliente.QtdAcordoRealizados</p>
             @if (@Model.AcordoFinalizado == true && @Model.AvaliouCliente != true)
