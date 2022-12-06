@@ -1,0 +1,34 @@
+@model Deal.Models.LocalDoPrestador
+
+@{
+    ViewData["Title"] = "Adicionar Locais";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Locais Do Prestador</h4>
+<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.PrestadorFkLocal" class="btn btn-info">Retornar a pagina inicial</a>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AdicionarLocais">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div>
+                <button type="button" class="add_form_locais">Adicionar mais campos &nbsp;
+                    <span>+</span>
+                </button>
+            </div>
+            <div class="locaisForm">
+                <label asp-for="Cidade" class="control-label"></label>
+                <span asp-validation-for="Cidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input hidden asp-for="PrestadorFk" value="@ViewBag.PrestadorFkLocal">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

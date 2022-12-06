@@ -71,7 +71,7 @@ namespace Deal.Controllers
                 servico.Status = "Solicitado";
                 _context.Add(servico);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                 return RedirectToAction("MeusServicos", "Servicos", new { id = servico.FkCliente });
             }
             ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
@@ -452,7 +452,7 @@ namespace Deal.Controllers
         }
         public async Task<IActionResult> MeusServicos(int? id)
         {
-            ViewBag.ClienteIdMeusServicos = id;
+            ViewData["IdCliente"] = id;
             var projectDealContext = _context.Servicos.Where(s => s.FkCliente == id).Include(s => s.Categoria).Include(s => s.Cliente).Include(s => s.Prestador);
             return View(await projectDealContext.ToListAsync());
         }

@@ -136,7 +136,7 @@ namespace Deal.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Home","Clientes", new {id = cliente.ClienteId} );
             }
             return View(cliente);
         }
@@ -175,7 +175,7 @@ namespace Deal.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index","Home");
         }
 
         private bool ClienteExists(int id)

@@ -77,11 +77,11 @@ namespace Deal.Controllers
                         await _context.SaveChangesAsync();
                     }
                 }
-                return RedirectToAction("Create", "Portfolios", new {id = locaisDoPrestador.Prestador.FkPortfolio});
+                return RedirectToAction("Edit", "Portfolios", new {id = locaisDoPrestador.Prestador.FkPortfolio});
             }
-            return View(locaisDoPrestador);
+             return RedirectToAction("Edit", "Portfolios", new {id = locaisDoPrestador.Prestador.FkPortfolio});
         }
-
+    //Add uma pagina para adicionar Locais de atuacao
         // GET: LocaisDosPrestadores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -95,7 +95,6 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            ViewData["PrestadorFk"] = new SelectList(_context.Prestadores, "PrestadorId", "PrestadorId", localDoPrestador.PrestadorFk);
             return View(localDoPrestador);
         }
 
@@ -132,7 +131,7 @@ namespace Deal.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PrestadorFk"] = new SelectList(_context.Prestadores, "PrestadorId", "PrestadorId", localDoPrestador.PrestadorFk);
-            return View(localDoPrestador);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: LocaisDosPrestadores/Delete/5
@@ -184,6 +183,38 @@ namespace Deal.Controllers
             @ViewBag.PrestadorId = prestador.PrestadorId;
             var projectDealContext = _context.LocaisDoPrestador.Where(l => l.PrestadorFk == id);
             return View(await projectDealContext.ToListAsync());
+        }
+        public async Task<IActionResult> AdicionarLocais(int? id)
+        {   
+            if(id == null || _context.Prestadores == null){
+                return NotFound();
+            }
+            var prestador = _context.Prestadores.Find(id);
+            if(prestador == null){
+                return NotFound();
+            }
+            ViewBag.PrestadorFkLocal = prestador.PrestadorId;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdicionarLocais([Bind("LocaisDoPrestadorId,PrestadorFk")] LocalDoPrestador locaisDoPrestador, List<string> Cidades)
+        {
+            if (ModelState.IsValid)
+            {
+                locaisDoPrestador.Prestador = _context.Prestadores.Find(locaisDoPrestador.PrestadorFk);
+                foreach (var cidade in Cidades)
+                {
+                    if(cidade != null){
+                        locaisDoPrestador.LocalDoPrestadorId = null;
+                        locaisDoPrestador.Cidade = cidade;
+                        _context.Add(locaisDoPrestador);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+                return RedirectToAction("Home", "Prestadores", new {id = locaisDoPrestador.Prestador.PrestadorId});
+            }
+             return RedirectToAction("Home", "Prestadores", new {id = locaisDoPrestador.Prestador.PrestadorId});
         }
 
         private bool LocalDoPrestadorExists(int? id)
