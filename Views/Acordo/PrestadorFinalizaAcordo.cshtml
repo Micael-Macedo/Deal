@@ -1,4 +1,4 @@
-@model Deal.Models.Acordo
+@model Deal.Models.UsuarioPrestador
 @{
     ViewData["Title"] = "PrestadorFinalizaAcordo";
 }
@@ -36,7 +36,7 @@
                 @Html.DisplayFor(model => model.Servico.Categoria.Atuacao)
             </dd>
             <form asp-action="PrestadorFinalizaAcordo" method="post">
-                <input type="hidden" asp-for="AcordoId">
+                <input type="hidden" asp-for="Acordo.AcordoId">
                 <button type="submit" name="Finalizar" class="btn btn-primary" value="true">Finalizar</button>
             </form>
         </dl>

@@ -1,14 +1,12 @@
-@model Deal.Models.Prestador
+@model Deal.Models.UsuarioPrestador
 
 @{
     ViewData["Title"] = "Detalhes";
     var areasAtuacao = ViewBag.areasAtuacaoFk;
+    Layout = "_LayoutPrestador";
 }
 
 <h1>Detalhes</h1>
- @{
-    
- }
 <div>
     <h4>Prestador</h4>
     <hr />
@@ -17,38 +15,38 @@
             Foto
         </dt>
         <dd class = "col-sm-10">
-            <img src="@Html.DisplayFor(model => model.FotoPrestador)" alt="" srcset="" width="300px">
+            <img src="@Html.DisplayFor(model => model.Prestador.FotoPrestador)" alt="" srcset="" width="300px">
     
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.Prestador.Nome)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
+            @Html.DisplayFor(model => model.Prestador.Nome)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Idade)
+            @Html.DisplayNameFor(model => model.Prestador.Idade)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Idade)
+            @Html.DisplayFor(model => model.Prestador.Idade)
         </dd>
         <dt class = "col-sm-2">
             Serviços Realizados
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.QtdServicoRealizados)
+            @Html.DisplayFor(model => model.Prestador.QtdServicoRealizados)
         </dd>
         <dt class = "col-sm-2">
             Pontuação
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pontuacao)
+            @Html.DisplayFor(model => model.Prestador.Pontuacao)
         </dd>
         <dt class = "col-sm-2">
             Link do Prestador:
         </dt>
         <dd class = "col-sm-10">
-            <input style="display: none;" type="text" value="https://localhost:7234/Prestadores/Details/@Model.PrestadorId" id="linkPrestador">
+            <input style="display: none;" type="text" value="https://localhost:7234/Prestadores/Details/@Model.Prestador.PrestadorId" id="linkPrestador">
             <button  onclick="copiarLinkPrestador()" onmouseout="outFunc()" style="width: 300px;">Copiar link do prestador</button>
             <span class="tooltiptext" id="myTooltip"></span>
         </dd>
@@ -56,7 +54,7 @@
             Locais de Atuação:
         </dt>
         <dd class = "col-sm-10" style="display: flex;">
-            @if(Model.LocaisDoPrestador != null){
+            @if(Model.Prestador.LocaisDoPrestador != null){
                 foreach (var local in ViewData["LocaisDoPrestador"] as List<LocalDoPrestador>)
                 {
                 <p>
@@ -68,7 +66,7 @@
         <dt class = "col-sm-2">
             Área de Atuação
         </dt>         
-        @if (Model.AreasAtuacao != null)
+        @if (Model.Prestador.AreasAtuacao != null)
         {
         <dd class ="col-sm-10 areasDeAtuacaoDoPrestador">
             <p>
@@ -82,9 +80,9 @@
         <dt class = "col-sm-2">
             Fotos
         </dt>  
-        @if (Model.Portfolio.Fotos != null)
+        @if (Model.Prestador.Portfolio.Fotos != null)
         {
-            @foreach (var foto in Model.Portfolio.Fotos)
+            @foreach (var foto in Model.Prestador.Portfolio.Fotos)
             {
                 <img src="@foto.FotoPrestador" style="width: 200px !important;">
             }
@@ -92,9 +90,9 @@
         <dt class = "col-sm-2">
             Certificados
         </dt>  
-        @if (Model.Portfolio.Certificados != null)
+        @if (Model.Prestador.Portfolio.Certificados != null)
         {
-            @foreach (var certificado in Model.Portfolio.Certificados)
+            @foreach (var certificado in Model.Prestador.Portfolio.Certificados)
             {
                 <img src="@certificado.CertificadoFotoPortfolio" style="width: 200px !important;">
             }
@@ -103,6 +101,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.PrestadorId">Editar</a> |
-    <a asp-action="Home" asp-route-id="@Model.PrestadorId">Retornar</a>
+    <a asp-action="Edit" asp-route-id="@Model.Prestador.PrestadorId">Editar</a> |
+    <a asp-action="Home" asp-route-id="@Model.Prestador.PrestadorId">Retornar</a>
 </div>
