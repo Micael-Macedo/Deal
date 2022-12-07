@@ -28,6 +28,7 @@ namespace Deal.Models
         public int QtdAcordoRealizados { get; set; }
 
         public int AcordosCancelados { get; set; }
+        public int QtdContaReportada { get; set; }
 
         public double MediaNota()
         {

@@ -173,6 +173,9 @@ namespace Deal.Migrations
                     b.Property<int>("QtdAcordoRealizados")
                         .HasColumnType("int");
 
+                    b.Property<int>("QtdContaReportada")
+                        .HasColumnType("int");
+
                     b.Property<string>("Senha")
                         .HasColumnType("longtext");
 
@@ -346,6 +349,9 @@ namespace Deal.Migrations
                     b.Property<double>("Pontuacao")
                         .HasColumnType("double");
 
+                    b.Property<int>("QtdContaReportada")
+                        .HasColumnType("int");
+
                     b.Property<int>("QtdServicoRealizados")
                         .HasColumnType("int");
 
@@ -360,6 +366,67 @@ namespace Deal.Migrations
                     b.HasIndex("FkPortfolio");
 
                     b.ToTable("Prestadores");
+                });
+
+            modelBuilder.Entity("Deal.Models.ReporteCliente", b =>
+                {
+                    b.Property<int>("ReporteClienteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("FkCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FkPrestador")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FkServico")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Motivo")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("ReporteClienteId");
+
+                    b.HasIndex("FkCliente");
+
+                    b.HasIndex("FkPrestador");
+
+                    b.HasIndex("FkServico");
+
+                    b.ToTable("ReportesClientes");
+                });
+
+            modelBuilder.Entity("Deal.Models.ReportePrestador", b =>
+                {
+                    b.Property<int>("ReportePrestadorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("FkCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FkPrestador")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FkServico")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Motivo")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("PrestadorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReportePrestadorId");
+
+                    b.HasIndex("FkCliente");
+
+                    b.HasIndex("FkServico");
+
+                    b.HasIndex("PrestadorId");
+
+                    b.ToTable("ReportesPrestadores");
                 });
 
             modelBuilder.Entity("Deal.Models.Servico", b =>
@@ -553,6 +620,58 @@ namespace Deal.Migrations
                         .HasForeignKey("FkPortfolio");
 
                     b.Navigation("Portfolio");
+                });
+
+            modelBuilder.Entity("Deal.Models.ReporteCliente", b =>
+                {
+                    b.HasOne("Deal.Models.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("FkCliente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Deal.Models.Prestador", "Prestador")
+                        .WithMany()
+                        .HasForeignKey("FkPrestador")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Deal.Models.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("FkServico")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Prestador");
+
+                    b.Navigation("Servico");
+                });
+
+            modelBuilder.Entity("Deal.Models.ReportePrestador", b =>
+                {
+                    b.HasOne("Deal.Models.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("FkCliente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Deal.Models.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("FkServico")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Deal.Models.Prestador", "prestador")
+                        .WithMany()
+                        .HasForeignKey("PrestadorId");
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Servico");
+
+                    b.Navigation("prestador");
                 });
 
             modelBuilder.Entity("Deal.Models.Servico", b =>

@@ -9,7 +9,8 @@ namespace Deal.Models
 {
     public class Prestador
     {
-        public Prestador(){
+        public Prestador()
+        {
             Pontuacao = 5;
         }
         public int PrestadorId { get; set; }
@@ -32,8 +33,9 @@ namespace Deal.Models
         public ICollection<LocalDoPrestador>? LocaisDoPrestador { get; set; }
         public int QtdServicoRealizados { get; set; }
         public int AcordosCancelados { get; set; }
+        public int QtdContaReportada { get; set; }
 
-         public double MediaNota()
+        public double MediaNota()
         {
             double MediaAvaliacao;
             if (NotasDoPrestador == null || NotasDoPrestador.Count == 0)
@@ -42,9 +44,11 @@ namespace Deal.Models
                 {
                     double PontuacaoPenalizada = AcordosCancelados / 5;
                     MediaAvaliacao = (5 + PontuacaoPenalizada) / (PontuacaoPenalizada + 1);
-                    return Math.Round(MediaAvaliacao,2);
-                }else{
-                    return Math.Round(Pontuacao,2);
+                    return Math.Round(MediaAvaliacao, 2);
+                }
+                else
+                {
+                    return Math.Round(Pontuacao, 2);
                 }
             }
             else
@@ -58,10 +62,12 @@ namespace Deal.Models
                 {
                     double PontuacaoPenalizada = AcordosCancelados / 5;
                     MediaAvaliacao = (TotalNotas + PontuacaoPenalizada + 5) / (NotasDoPrestador.Count + PontuacaoPenalizada + 1);
-                }else{
+                }
+                else
+                {
                     MediaAvaliacao = TotalNotas / NotasDoPrestador.Count;
                 }
-                return Math.Round(MediaAvaliacao,2);
+                return Math.Round(MediaAvaliacao, 2);
             }
         }
         public bool VerificarAcordosCancelados()
