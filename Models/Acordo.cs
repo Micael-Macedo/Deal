@@ -114,6 +114,30 @@ namespace Deal.Models
                 return false;
             }
         }
+        public bool ReportarCliente(){
+            if(Servico.Cliente != null && Servico != null){
+                Servico.Status = "Prestador Cancelou o acordo";
+                Servico.IsDisponivel = true;
+                Servico.IsAcordoFeito = false;
+                Servico.Cliente.QtdContaReportada++;
+                Servico.FkPrestador = null;
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public bool ReportarPrestador(){
+            if(Servico.Prestador != null && Servico != null){
+                Servico.Status = "Prestador reportado";
+                Servico.IsDisponivel = true;
+                Servico.IsAcordoFeito = false;
+                Servico.Prestador.QtdContaReportada++;
+                Servico.FkPrestador = null;
+                return true;
+            }else{
+                return false;
+            }
+        }
         public bool FinalizarAcordo(){
             if(Servico.Cliente != null && Servico.Prestador != null){
                 Servico.Cliente.QtdAcordoRealizados++;
