@@ -1,35 +1,38 @@
 @model Deal.Models.AreaAtuacao
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Criar";
 }
 
-<h1>Create</h1>
+<div class="container">
+    <div class="titulo_formulario">
+        <h1 style="font-weight: 840; font-size: 45px;">Cadastrar nova área de atuação</h1>
+    </div>
+    <div class="container_formulario">
+        <div style="width: 800px;">
+            <form asp-action="Create">
+                <div class="item_formulario">
+                    <label asp-for="Atuacao" class="control-label" style="font-weight: 600; margin-bottom: 10px;"> Área
+                        de atuação</label>
+                    <input asp-for="Atuacao" class="form-control" />
+                    <span asp-validation-for="Atuacao" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="isOnline" /> @Html.DisplayNameFor(model =>
+                        model.isOnline)
+                    </label>
+                </div>
+                <div class="botao_formulario">
+                    <input type="submit" value="Criar" class="botao_formulario"
+                        style="font-weight: 600; margin-bottom: 10px;" />
+                </div>
+                <div class="botao_formulario2">
+                    <input type="submit" value="Retornar" asp-action="Index" class="botao_formulario"
+                        style="font-weight: 600; background-color: #b780e7;" />
+                </div>
 
-<h4>AreaAtuacao</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Atuacao" class="control-label"></label>
-                <input asp-for="Atuacao" class="form-control" />
-                <span asp-validation-for="Atuacao" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="isOnline" /> @Html.DisplayNameFor(model => model.isOnline)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
