@@ -7,8 +7,73 @@
 
 <div>
     <h4>Cliente</h4>
+     <a asp-action="Index" type="submit" class="btn" style="font-weight: 600; background-color: blueviolet;">Retornar para a página principal</a>
     <hr />
-    <dl class="row">
+
+     <div class="col">
+            <div class="serviceCard">
+                <div class="serviceCard-Content">
+                    <dl class="row">
+                        <div class="row" style="margin-bottom: 15px;">
+                            <dt class="col-3">
+                                <a style="font-weight: 700; font-size: 30px;"> @Html.DisplayFor(model => model.Nome)</a>
+                            </dt>
+                        </div>
+                        <div class="row">
+                            <dt class="col-3">
+                                CPF:
+                                <a style="font-weight: 400;"> @Html.DisplayFor(model => model.Cpf)</a>
+                            </dt>
+    
+                            <dt class="col-3">
+                                Idade:
+                                <a style="font-weight: 400;"> @Html.DisplayFor(model => model.Idade)</a>
+                            </dt>
+                        </div>
+                        <div class="row" style="margin-top: 20px;">
+                            <dt class="col-3">
+                                Endereço:
+                                <a style="font-weight: 400;">@Html.DisplayFor(model => model.Endereco)</a>
+                            </dt>
+
+                            <dt class="col-3">
+                                    CEP:
+                                    <a style="font-weight: 400;">@Html.DisplayFor(model => model.Cep)</a>
+                            </dt>
+                            
+                        </div> 
+                        <div class="row" style="margin-top: 20px;">
+                                <dt class="col-3">
+                                Telefone:
+                                <a style="font-weight: 400; width: 500px;">@Html.DisplayFor(model => model.Telefone)</a>
+                            </dt>
+
+                             <dt class="col-3">
+                                    Email:
+                                <a style="font-weight: 400;">@Html.DisplayFor(model => model.Email)</a>
+                            </dt>
+                        </div> 
+                             <div class="row" style="margin-top: 20px;">
+                                <dt class="col-3">
+                                Acordos Realizados:
+                                <a style="font-weight: 400; width: 500px;">@Html.DisplayFor(model => model.QtdAcordoRealizados)</a>
+                            </dt>
+
+                        </div>
+                    </dl>
+                </div>
+                <div class="serviceCardButtons">
+                    <a asp-action="Edit" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #b760e7;">Editar Perfil</a>             
+                    <a asp-action="Details" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Perfil</a>
+                    <a asp-action="HomePage" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #35e44c;">Criar Serviço</a>
+                    <a asp-action="AddPrestador" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Serviço</a>
+                    <a asp-action="ConfirmarAcordo" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Acordos</a>
+                    <a asp-action="ClienteCancelaServico" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #e21122;">Deletar Conta</a> 
+                </div>
+            </div>
+        </div>
+
+    @* <dl class="row">
         <dt class = "col-sm-2">
             Foto
         </dt>
@@ -70,9 +135,10 @@
             @Html.DisplayFor(model => model.QtdAcordoRealizados)
         </dd>
         <a asp-action="Edit" asp-route-id="@Model.ClienteId" class="btn btn-info" style="width: 200px;">Editar Perfil</a>
+        <a asp-action="Details" asp-route-id="@Model.ClienteId" class="btn btn-info" style="width: 200px;">Ver Perfil</a>
         <a asp-action="Create" asp-controller="Servicos" asp-route-id="@Model.ClienteId" class="btn btn-success" style="width: 200px;">Criar Serviço</a>
         <a asp-action="MeusServicos" asp-controller="Servicos" asp-route-id="@Model.ClienteId" class="btn btn-info" style="width: 200px;">Ver Serviços</a>
         <a asp-action="AcordosCliente" asp-controller="Acordo" asp-route-id="@Model.ClienteId" class="btn btn-info" style="width: 200px;">Ver Acordos</a>
         <a asp-action="Delete" asp-route-id="@Model.ClienteId" class="btn btn-danger" style="width: 200px;">Deletar Conta</a>
     </dl>
-</div>
+</div> *@
