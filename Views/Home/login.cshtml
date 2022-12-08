@@ -1,27 +1,34 @@
 @{
+
     ViewData["Title"] = "Pagina Login";
 }
 
-<h1>@ViewData["Title"]</h1>
 
 <div class="container1 container loginPage">
     <section class="container section-form">
-        <div>
-            <h1 class="titulo">Seja agora um <span class="roxo">cliente</span> ou <span class="roxo">profissional</span>
-            </h1>
-
+            <div>
+            <div class="titulo_formulario_login">
+                <h1 style="font-weight: 840;">Seja agora um
+                    <br><span class="roxo">cliente</span> ou <span class="roxo">profissional</span>
+            </div>
+           
             <form asp-action="login" class="formulario">
-                <p class="texto-email">Email</p>
-                <input id="email" name="email" type="text" placeholder="Email">
-                <p class="texto-senha">Senha</p>
-                <input id="senha" name="senha" type="password" placeholder="Senha">
+                <div class="item_formulario">
+                    <label class="control-label" style="font-weight: 600;">Email</label>
+                    <input id="email" name="email" type="text" placeholder="Email">
+                </div>
+                <div class="item_formulario">
+                    <label class="control-label" style="font-weight: 600;">Senha</label>
+                    <input id="senha" name="email" type="password" placeholder="Senha">
+                </div>
                 <div class="form-check form-switch">
-                    <input name="direcionamento" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <input name="direcionamento" class="form-check-input" type="checkbox" role="switch"
+                        id="flexSwitchCheckDefault">
                     <label class="form-check-label" for="flexSwitchCheckDefault">Prestador</label>
                 </div>
-                <button class="login">Login</button>
+                <button class="btn-login">Login</button>
             </form>
-            <a asp-action="criarConta"><button class="criar-conta">Criar conta</button></a>
+            <a asp-action="criarConta"><button class="btn-login">Criar conta</button></a>
         </div>
     </section>
 </div>

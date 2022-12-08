@@ -360,9 +360,21 @@ h2 {
 }
 
 .loginPage {
-  border: 2px solid black;
+  background-image: url("../img/bg-login.png");
+  background-size: 600px;
+  background-position-x: 340px;
+  background-repeat: no-repeat;
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border-radius: 3%;
+  background-color: rgb(241, 241, 241);
+  height: 550px;
+  width: 920px;
+  margin-top: 40px;
+  padding: 5px 50px 50px 50px;
+  display: block;
+  align-items: center;
+  justify-content: center;
 
-  border-radius: 5px;
 }
 
 .AvalicaoAcordo input {
@@ -407,11 +419,24 @@ h2 {
   color: white !important;
 }
 
+.btn-links {
+  background-color: #af53ff;
+  box-shadow: rgba(0, 0, 0, 0.30) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border: 0ch;
+}
+
 .AcordoHomePage {
   display: flex;
   justify-content: space-around;
   background-image: linear-gradient(90deg, white, rgb(180, 170, 170));
   padding: 100px 50px;
+}
+
+.Links_perfil {
+  padding-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .UserCard {
@@ -460,11 +485,30 @@ h2 {
   justify-content: center;
 }
 
-.titulo_formulario {
-  font-size: 50px;
-  ;
+.titulo_formulario_login {
+  font-weight: 840;
+  font-size: 40px;
   margin-top: 40px;
   margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.titulo_formulario_index {
+  font-weight: 840;
+  font-size: 40px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo_links{
+  font-weight: 840;
+  font-size: 40px;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -522,6 +566,39 @@ h2 {
   color: #ffffff;
   border: 0ch;
 }
+
+.btn-login {
+  display: block;
+  margin: 15px 0px;
+  border-radius: 3%;
+  font-size: 16px;
+  height: 35px;
+  width:120px;
+  background-color: #8E44CD;
+  color: #ffffff;
+  border: 0ch;
+}
+
+.btn-login-tela {
+  display: block;
+  padding: 5px;
+  border-radius: 3%;
+  font-size: 16px;
+  height: 35px;
+  width:70px;
+  background-color: white;
+  color: #ffffff;
+  border: 0ch;
+}
+
+.roxo{
+  color:#8E44CD ;
+}
+
+.titulo{
+  text-align: left;
+}
+
 
 .map {
   border-radius: 3%;
@@ -596,11 +673,4 @@ h2 {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
-}
-
-.btn-login {
-  background-color: white;
-  font-size: 18px;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
 }
