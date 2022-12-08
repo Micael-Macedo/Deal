@@ -1,0 +1,34 @@
+@using Deal.Enum
+@model Usuario
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<div class="container1 container loginPage">
+    <section class="container section-form">
+        <div>
+            <h1 class="titulo">Seja agora um <span class="roxo">cliente</span> ou <span class="roxo">profissional</span>
+            </h1>
+
+            <form asp-controller="Usuarios" asp-action="Entrar" method="post" class="formulario">
+                <p class="texto-email">Email</p>
+                <input id="email" name="email" type="text" asp-for="Email" placeholder="Email">
+                <p class="texto-senha">Senha</p>
+                @Html.ValidationMessageFor(x => x.Email)
+                <input id="senha" name="senha" type="password" asp-for="Senha" placeholder="Senha">
+                @Html.ValidationMessageFor(x => x.Senha)
+                <div class="form-group">
+                <label for="nome" class="form-label">Perfil</label>
+                <select asp-for="Perfil">
+                    <option value="0">Selecione</option>
+                    <option value="1">Cliente</option>
+                    <option value="2">Prestador</option>
+                </select>
+            </div>
+                <button class="login">Login</button>
+            </form>
+            <a asp-controller="Home" asp-action="criarConta"><button class="criar-conta">Criar conta</button></a>
+        </div>
+    </section>
+</div>

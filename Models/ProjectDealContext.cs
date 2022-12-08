@@ -28,5 +28,6 @@ namespace Deal.Models
         public DbSet<LocalDoPrestador>? LocaisDoPrestador { get; set; }
         public DbSet<ReporteCliente>? ReportesClientes { get; set; }
         public DbSet<ReportePrestador>? ReportesPrestadores { get; set; }
+        public DbSet<Usuario>? Usuarios { get; set; }
     }
 }
