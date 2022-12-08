@@ -37,36 +37,42 @@
             </div>
             </div>
             </nav> *@
-        <nav class="container-fluid" style="width: auto;">
-            <div class= "container-fluid"style="display: flex; align-items: center; background-color: white;">
-                <div>
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img
-                            src="~/img/LOGO_DEAL.svg" alt="" srcset="" style="width: 60px"></a>
-                </div>
-                <nav class="navbar container-fluid" style="background-color: blueviolet; height: 60px;">
-                    <ul class="display: flex" style="margin-top: -10px; margin-left: -30px;">
-                        <li class="btn-navbar">
-                            <a class="btn" style="font-size: 18px;" asp-area="" asp-controller="Clientes"
-                                asp-action="Index">Cliente</a>
-                        </li>
-                        <li class="navbar-brand">
-                            <a class="btn" style="color: white; font-size: 18px;" asp-area="" asp-controller="Prestadores"
-                                asp-action="Index">Prestadores</a>
-                        </li>
-                        <li class="navbar-brand">
-                            <a class="btn" style="color: white; font-size: 18px;" asp-area="" asp-controller="Acordo"
-                                asp-action="Index">Acordo</a>
-                        </li>
-                        <li class="navbar-brand">
-                            <a class="btn" style="color: white; font-size: 18px;" asp-area="" asp-controller="AreaAtuacao"
-                                asp-action="Index">Tipos de
-                                Servicos</a>
-                        </li>
-                        <li class="btn-login-tela" style="margin-left: 482px;">
-                            <a class="" asp-area="" style="color: blueviolet; margin-left: 7px; margin-right: 7px;" asp-controller="Home" asp-action="login">Login</a>
-                        </li>
+        <nav class="div-navbar">
+            <div class="container-fluid" style="width: 100%;display: flex; height: 80px;">
+                <div class="navbar">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img
+                            src="~/img/LOGO_DEAL.svg" alt="" srcset="" style="width: 80px"></a>
+                </div>  
+                <div class="navbar container-fluid" style="background-color: blueviolet;">
+                    <ul class="div-navbar">
+                        <div style="align-items: left; justify-content: left;display: flex">
+                                <li class="btn-navbar">
+                                    <a class="btn" style="font-size: 22px;" asp-area="" asp-controller="Clientes"
+                                        asp-action="Index">Cliente</a>
+                                </li>
+                                <li class="navbar-brand">
+                                    <a class="btn" style="color: white; font-size: 22px;" asp-area=""
+                                        asp-controller="Prestadores" asp-action="Index">Prestadores</a>
+                                </li>
+                                <li class="navbar-brand">
+                                    <a class="btn" style="color: white; font-size: 22px;" asp-area=""
+                                        asp-controller="Acordo" asp-action="Index">Acordo</a>
+                                </li>
+                                <li class="navbar-brand">
+                                    <a class="btn" style="color: white; font-size: 22px;" asp-area=""
+                                        asp-controller="AreaAtuacao" asp-action="Index">Tipos de
+                                        Servicos</a>
+                                </li>
+                        </div>
+                        <div style="align-items: right; justify-content: right;display: flex;margin: 40px;">
+                            <div>
+                            <li class="btn-login-tela">
+                                <a class="" asp-area="" style="color: blueviolet;" asp-controller="Home" asp-action="login">Login</a>
+                            </li>
+                            </div>
+                        </div>
                     </ul>
-                </nav>
+                </div>
                 <div id="Mobile-Nav">
                     <button>Mobile</button>
                     <ul>
