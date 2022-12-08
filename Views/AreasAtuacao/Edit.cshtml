@@ -1,36 +1,44 @@
 @model Deal.Models.AreaAtuacao
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
-<h1>Edit</h1>
-
-<h4>AreaAtuacao</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="AreaAtuacaoId" />
-            <div class="form-group">
-                <label asp-for="Atuacao" class="control-label"></label>
-                <input asp-for="Atuacao" class="form-control" />
-                <span asp-validation-for="Atuacao" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="isOnline" /> @Html.DisplayNameFor(model => model.isOnline)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="titulo_formulario">
+        <h1 style="font-weight: 840; font-size: 45px;">Editar essa área de atuação</h1>
     </div>
-</div>
+    <hr />
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="container_formulario">
+        <div style="width: 800px;">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="AreaAtuacaoId" />
+                <div class="item_formulario">
+                    <label asp-for="Atuacao" class="control-label" style="font-weight: 600; margin-bottom: 10px;"> Área
+                        de atuação</label>
+                    <input asp-for="Atuacao" class="form-control" />
+                    <span asp-validation-for="Atuacao" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="isOnline" /> @Html.DisplayNameFor(model =>
+                        model.isOnline)
+                    </label>
+                </div>
+                <div class="botao_formulario">
+                    <input type="submit" value="Atualizar" class="botao_formulario"
+                        style="font-weight: 600; margin-bottom: 10px;" />
+                </div>
+                <div class="botao_formulario2">
+                    <input type="submit" value="Retornar" asp-action="Index" class="botao_formulario"
+                        style="font-weight: 600; background-color: #b780e7;" />
+                </div>
+            </form>
+        </div>
+    </div>
 
+    @* <div>
+        <a asp-action="Index">Retornar</a>
+        </div> *@

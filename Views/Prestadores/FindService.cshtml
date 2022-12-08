@@ -8,30 +8,8 @@
 <a asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.PrestadorId" class="btn btn-info">Retornar a pagina inicial</a>
 <h1>Detalhes</h1>
 <div>
-    <h4>Serviço</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        </dd>
-        <dt class="col-sm-2">
-            CEP
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cep)
-        </dd>
-        <dt class="col-sm-2">
-            Endereço
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Endereco)
-        </dd>
-
-    </dl>
+    <h4>Serviços</h4>
+    <hr/>
 </div>
 
 <table>
