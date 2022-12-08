@@ -33,10 +33,79 @@
             <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Cliente</a>
             </li>
 
-            </ul>
+                </ul>
+                </div>
+                </div>
+                </nav> *@
+            <nav>
+                <div class="container-fluid" style="display: flex; align-items: center; background-color: white;">
+                    <div>
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img
+                                src="~/img/Icone Oficial Deal.jpg" alt="" srcset=""> Deal</a>
+                    </div>
+                    <nav class="navbar display: flex" style="background-color: blueviolet; height: 90px;">
+                        <ul>
+                            <li class="navbar-brand">
+                                <a class="" style="color: white;" asp-area="" asp-controller="Clientes"
+                                    asp-action="Index">Cliente</a>
+                            </li>
+                            <li class="navbar-brand">
+                                <a class="" style="color: white;" asp-area="" asp-controller="Prestadores"
+                                    asp-action="Index">Prestadores</a>
+                            </li>
+                            <li class="navbar-brand">
+                                <a class="" style="color: white;" asp-area="" asp-controller="Acordo"
+                                    asp-action="Index">Acordo</a>
+                            </li>
+                            <li class="navbar-brand">
+                                <a class="" style="color: white;" asp-area="" asp-controller="AreasAtuacao"
+                                    asp-action="Index">Tipos de
+                                    Servicos</a>
+                            </li>
+                            <li class="navbar-brand">
+                                <a class="" asp-area="" style="color: white;" asp-controller="Usuarios"
+                                    asp-action="Index">Login
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div id="Mobile-Nav">
+                        <button>Mobile</button>
+                        <ul>
+                            <li class="nav-item">
+                                <a class="" asp-area="" asp-controller="Servicos" asp-action="Index">Servico</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="" asp-area="" asp-controller="Clientes" asp-action="Index">Cliente</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="" asp-area="" asp-controller="Prestadores" asp-action="Index">Prestadores</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="" asp-area="" asp-controller="Acordo" asp-action="Index">Acordo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="" asp-area="" asp-controller="AreaAtuacao" asp-action="Index">Tipos de
+                                    Servicos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <hr>
+        </header>
+        <div>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2022 - Deal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
             </div>
-            </nav> *@
+            </nav> 
         <nav class="container-fluid" style="width: auto;">
             <div class= "container-fluid"style="display: flex; align-items: center; background-color: white;">
                 <div>

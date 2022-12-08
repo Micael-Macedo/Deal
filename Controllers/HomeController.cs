@@ -25,13 +25,17 @@ public class HomeController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult login(string email, string senha, bool direcionamento)
     {
-        if(direcionamento == true){
-            return RedirectToAction("Home","Prestadores", email, senha);
-        }if(direcionamento == false){
-            return RedirectToAction("Home","Clientes", email, senha);
+        if (direcionamento == true)
+        {
+            return RedirectToAction("Home", "Prestadores", email, senha);
+        }
+        if (direcionamento == false)
+        {
+            return RedirectToAction("Home", "Clientes", email, senha);
         }
         return View();
     }
+
 
     public IActionResult criarConta()
     {
