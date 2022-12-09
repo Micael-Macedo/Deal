@@ -45,17 +45,16 @@ namespace Deal.Controllers
         }
 
         // GET: Servicos/Create
-        public IActionResult Create(int? id)
+        public async Task<IActionResult> Create(int? id)
         {
             if (id == null || _context.Servicos == null)
             {
                 return NotFound();
             }
-            int ClienteId = _context.Clientes.Where(c => c.ClienteId == id).FirstOrDefault().ClienteId;
-            Servico servico = new Servico() { FkCliente = ClienteId };
-
+            Cliente cliente = await _context.Clientes.FindAsync(id); 
+            Servico servico = new Servico() { FkCliente = cliente.ClienteId };
+            ViewBag.Cliente = cliente;
             ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
-            ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId");
             return View(servico);
         }
 
@@ -87,6 +86,8 @@ namespace Deal.Controllers
             }
 
             var servico = await _context.Servicos.FindAsync(id);
+            servico.Cliente = await _context.Clientes.FindAsync(servico.FkCliente);
+            ViewBag.Cliente = servico.Cliente;
             if (servico == null)
             {
                 return NotFound();
@@ -126,7 +127,7 @@ namespace Deal.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("MeusServicos","Servicos", new {id = servico.FkCliente});
             }
             ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
@@ -338,6 +339,8 @@ namespace Deal.Controllers
         }
         public async Task<IActionResult> ServicosPendentes(int? id)
         {
+            Prestador prestador = await _context.Prestadores.FindAsync(id);
+            ViewBag.Prestador = prestador;
             ViewBag.prestadorIdServicosPendentes = id;
             List<LocalDoPrestador> locaisDoPestador = _context.LocaisDoPrestador.Where(l => l.PrestadorFk == id).ToList();
             List<Servico> filtroServicosLocalizacao = new List<Servico>();
@@ -453,6 +456,8 @@ namespace Deal.Controllers
         public async Task<IActionResult> MeusServicos(int? id)
         {
             ViewData["IdCliente"] = id;
+            Cliente cliente = await _context.Clientes.FindAsync(id);
+            ViewBag.Cliente = cliente;
             var projectDealContext = _context.Servicos.Where(s => s.FkCliente == id).Include(s => s.Categoria).Include(s => s.Cliente).Include(s => s.Prestador);
             return View(await projectDealContext.ToListAsync());
         }

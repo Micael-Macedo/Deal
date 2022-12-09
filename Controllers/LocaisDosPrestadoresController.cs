@@ -54,6 +54,7 @@ namespace Deal.Controllers
             if(prestador == null){
                 return NotFound();
             }
+            ViewBag.Prestador = prestador;
             ViewBag.PrestadorFkLocal = prestador.PrestadorId;
             return View();
         }
@@ -79,7 +80,7 @@ namespace Deal.Controllers
                 }
                 return RedirectToAction("Edit", "Portfolios", new {id = locaisDoPrestador.Prestador.FkPortfolio});
             }
-             return RedirectToAction("Edit", "Portfolios", new {id = locaisDoPrestador.Prestador.FkPortfolio});
+            return RedirectToAction("Edit", "Portfolios", new {id = locaisDoPrestador.Prestador.FkPortfolio});
         }
     //Add uma pagina para adicionar Locais de atuacao
         // GET: LocaisDosPrestadores/Edit/5
@@ -95,6 +96,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            Prestador prestador = await _context.Prestadores.FindAsync(localDoPrestador.PrestadorFk);
+            ViewBag.Prestador = prestador;
             return View(localDoPrestador);
         }
 
@@ -149,6 +152,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            Prestador prestador = await _context.Prestadores.FindAsync(localDoPrestador.PrestadorFk);
+            ViewBag.Prestador = prestador;
 
             return View(localDoPrestador);
         }
@@ -180,7 +185,8 @@ namespace Deal.Controllers
             if(prestador == null){
                 return NotFound();
             }
-            @ViewBag.PrestadorId = prestador.PrestadorId;
+            ViewBag.Prestador = prestador;
+            ViewBag.PrestadorId = prestador.PrestadorId;
             var projectDealContext = _context.LocaisDoPrestador.Where(l => l.PrestadorFk == id);
             return View(await projectDealContext.ToListAsync());
         }
@@ -193,6 +199,8 @@ namespace Deal.Controllers
             if(prestador == null){
                 return NotFound();
             }
+
+            ViewBag.Prestador = prestador;
             ViewBag.PrestadorFkLocal = prestador.PrestadorId;
             return View();
         }

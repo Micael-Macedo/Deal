@@ -4,7 +4,7 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Clientes" asp-route-id="@Model.Servico.FkCliente" class="btn btn-info">Retornar a pagina inicial</a>
+<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@Model.Servico.FkPrestador" class="btn btn-info">Retornar a pagina inicial</a>
 <div>
     <h2></h2>
     <div class="AcordoHomePage">
@@ -41,7 +41,7 @@
                 <a asp-action="EncerrarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-danger">Cancelar Acordo</a>
                 <a asp-action="Create" asp-controller="ReportesClientes" asp-route-id="@Model.AcordoId" class="btn btn-info">Reportar Cliente</a>
             }
-            <a asp-action="Details" asp-controller="Clientes" asp-route-id="@Model.Servico.FkCliente" class="btn btn-info">Ver Perfil</a>
+            <a asp-action="Details" asp-controller="Clientes" asp-route-id="@Model.Servico.FkCliente" class="btn btn-info" target="_blank">Ver Perfil</a>
         </div>
         <div class="ServiceInfo">
             <div>
@@ -61,6 +61,4 @@
         </div>
     </div>
 </div>
-@section scripts{
-    <script src="~/js/Dealmaps.js"></script>
-}
+<script src="~/js/Dealmaps.js"></script> 

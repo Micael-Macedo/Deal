@@ -34,6 +34,8 @@ namespace Deal.Controllers
         }
         public async Task<IActionResult> PrestadorAcordos(int? id)
         {
+            Prestador prestador = await _context.Prestadores.FindAsync(id);
+            ViewBag.Prestador = prestador;
             List<Acordo> acordos = await _context.Acordos.Where(a => a.Servico.FkPrestador == id).ToListAsync();
             return _context.Acordos != null ?
                         View(acordos) :
@@ -208,6 +210,9 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
+            acordo.Servico.Cliente = await _context.Clientes.FindAsync(acordo.Servico.FkCliente);
+            ViewBag.Cliente = acordo.Servico.Cliente;
             return View(acordo);
         }
         public async Task<IActionResult> AcordoPrestador(int? id)
@@ -218,6 +223,7 @@ namespace Deal.Controllers
             }
 
             var acordo = await _context.Acordos
+            .Include(m => m.Servico)
             .Include(m => m.Servico.Cliente)
             .Include(m => m.Servico.Cliente.NotasDoCliente)
             .Include(m => m.Servico.Categoria)
@@ -227,6 +233,9 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+
+            Prestador prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.PrestadorId == acordo.Servico.FkPrestador);
+            ViewBag.Prestador = prestador;
             return View(acordo);
         }
         public async Task<IActionResult> AvaliacaoDoCliente(int? id)
@@ -245,6 +254,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            Prestador prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.PrestadorId == acordo.Servico.FkPrestador);
+            ViewBag.Prestador = prestador;
 
             return View(acordo);
         }
@@ -288,6 +299,9 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
+            acordo.Servico.Cliente = await _context.Clientes.FindAsync(acordo.Servico.FkCliente);
+            ViewBag.Cliente = acordo.Servico.Cliente;
 
             return View(acordo);
         }
@@ -333,7 +347,9 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
+            acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
+            acordo.Servico.Cliente = await _context.Clientes.FindAsync(acordo.Servico.FkCliente);
+            ViewBag.Cliente = acordo.Servico.Cliente;
             return View(acordo);
         }
         [HttpPost]
@@ -360,10 +376,13 @@ namespace Deal.Controllers
                         acordo.Servico.Prestador = _context.Prestadores.Find(acordo.Servico.FkPrestador);
                         acordo.Servico.Cliente = _context.Clientes.Find(acordo.Servico.FkCliente);
                         acordo.FinalizarAcordo();
+                        _context.Acordos.Update(acordo);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("AvaliacaoDoPrestador", "Acordo", new { id = acordo.AcordoId });
                     }
                     _context.Acordos.Update(acordo);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Home", "Clientes", new { id = acordo.Servico.Cliente.ClienteId });
+                    return RedirectToAction("Home", "Clientes", new { id = acordo.Servico.FkCliente });
                 }
             }
             return View(acordo);
@@ -385,6 +404,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            Prestador prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.PrestadorId == acordo.Servico.FkPrestador);
+            ViewBag.Prestador = prestador;
 
             return View(acordo);
         }
@@ -412,10 +433,13 @@ namespace Deal.Controllers
                         acordo.Servico.Prestador = _context.Prestadores.Find(acordo.Servico.FkPrestador);
                         acordo.Servico.Cliente = _context.Clientes.Find(acordo.Servico.FkCliente);
                         acordo.FinalizarAcordo();
+                        _context.Acordos.Update(acordo);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("AvaliacaoDoCliente", "Acordo", new { id = acordo.AcordoId });
                     }
                     _context.Acordos.Update(acordo);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Home", "Prestadores", new { id =  acordo.Servico.FkPrestador});
+                    return RedirectToAction("Home", "Prestadores", new { id = acordo.Servico.FkPrestador });
                 }
             }
             return View(acordo);
@@ -437,6 +461,9 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
+            acordo.Servico.Cliente = await _context.Clientes.FindAsync(acordo.Servico.FkCliente);
+            ViewBag.Cliente = acordo.Servico.Cliente;
 
             return View(acordo);
         }
@@ -448,7 +475,7 @@ namespace Deal.Controllers
             acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
             acordo.Servico.Cliente = await _context.Clientes.FindAsync(acordo.Servico.FkCliente);
             acordo.Servico.Cliente.NotasDoCliente = await _context.NotaClientes.Where(n => n.FkCliente == acordo.Servico.Cliente.ClienteId).ToListAsync();
-            int clienteId = acordo.Servico.Cliente.ClienteId;       
+            int clienteId = acordo.Servico.Cliente.ClienteId;
             acordo.CancelarAcordo();
 
             AcordoCancelado acordoCancelado = new AcordoCancelado();
@@ -480,6 +507,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            Prestador prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.PrestadorId == acordo.Servico.FkPrestador);
+            ViewBag.Prestador = prestador;
 
             return View(acordo);
         }
@@ -492,7 +521,8 @@ namespace Deal.Controllers
             acordo.Servico.Prestador = await _context.Prestadores.FindAsync(acordo.Servico.FkPrestador);
             int prestadorId = acordo.Servico.Prestador.PrestadorId;
             acordo.Servico.Prestador.NotasDoPrestador = await _context.NotaPrestadores.Where(n => n.FkPrestador == acordo.Servico.Prestador.PrestadorId).ToListAsync();
-            if(acordo.EncerrarAcordo()){
+            if (acordo.EncerrarAcordo())
+            {
                 _context.Prestadores.Update(acordo.Servico.Prestador);
                 acordo.Servico.FkPrestador = null;
             }
@@ -513,6 +543,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+
             ViewBag.ClienteId = id;
             List<Acordo> acordos = await _context.Acordos.Where(a => a.Servico.FkCliente == id).ToListAsync();
             foreach (var acordo in acordos)
@@ -520,7 +551,8 @@ namespace Deal.Controllers
                 acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
                 acordo.Servico.Categoria = await _context.AreaAtuacao.FindAsync(acordo.Servico.FkCategoria);
             }
-            
+            Cliente cliente = await _context.Clientes.FindAsync(id);
+            ViewBag.Cliente = cliente;
             return View(acordos);
         }
         public async Task<IActionResult> AcordosPrestador(int? id)
@@ -532,6 +564,8 @@ namespace Deal.Controllers
                 acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
                 acordo.Servico.Categoria = await _context.AreaAtuacao.FindAsync(acordo.Servico.FkCategoria);
             }
+            Prestador prestador = await _context.Prestadores.FindAsync(id);
+            ViewBag.Prestador = prestador;
             return View(acordos);
         }
         private bool AcordoExists(int id)

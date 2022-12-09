@@ -43,6 +43,9 @@ namespace Deal.Controllers
             }
             int QtdServicosPresentes = await _context.Servicos.Where(s => s.FkPrestador == id && s.Status == "Convite enviado").CountAsync();
             var prestador = await _context.Prestadores.FindAsync(id);
+
+
+            ViewBag.Prestador = prestador;
             if (prestador == null)
             {
                 return NotFound();
@@ -131,11 +134,12 @@ namespace Deal.Controllers
                 return NotFound();
             }
 
-            var prestador = await _context.Prestadores.FindAsync(id);
+            Prestador prestador = await _context.Prestadores.FindAsync(id);
             if (prestador == null)
             {
                 return NotFound();
             }
+            ViewBag.Prestador = prestador;
             ViewBag.PrestadorId = prestador.PrestadorId;
             ViewData["AreaAtuacaoId"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", prestador.FkPortfolio);
@@ -203,7 +207,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.Prestador = prestador;
             return View(prestador);
         }
 
@@ -276,6 +280,7 @@ namespace Deal.Controllers
             {
                 servicosFiltrados.AddRange(servicos.Where(s => s.Cidade == local.Cidade || s.Categoria.isOnline == true).ToList());
             }
+            ViewBag.Prestador = prestador;
             ViewBag.PrestadorId = prestador.PrestadorId;
             ViewData["Servicos"] = servicosFiltrados;
             return View(prestador);
@@ -310,7 +315,7 @@ namespace Deal.Controllers
                     throw;
                 }
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Home","Prestadores", new {id = prestador.PrestadorId});
         }
         private bool PrestadorExists(int id)
         {

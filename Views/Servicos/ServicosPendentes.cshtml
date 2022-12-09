@@ -1,6 +1,7 @@
 @model IEnumerable<Deal.Models.Servico>
 @{
     ViewData["Title"] = "Serviços Pendentes";
+    Layout = "_LayoutPrestador";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -49,7 +50,7 @@
                 <div class="serviceCardButtons">
                     <div class="form-group">
                         <form asp-action="ServicosPendentes" method="post">
-                            <a asp-action="Details" asp-controller="Clientes" asp-route-id="@item.FkCliente" class="btn btn-info">Ver Cliente</a>
+                            <a asp-action="Details" asp-controller="Clientes" asp-route-id="@item.FkCliente" class="btn btn-info" target="_blank">Ver Cliente</a>
                             <input type="hidden" name="servicoId" value="@item.ServicoId"/>
                             <input type="hidden" name="prestadorId" value="@item.FkPrestador">
                             <input name="escolha" type="submit" value="Recusar" class="btn btn-danger" />

@@ -1,3 +1,16 @@
 ﻿@{
-    Layout = "_Layout";
+    @if (ViewBag.Prestador != null)
+    {
+        Layout = "_LayoutPrestador";
+    }
+    @if(ViewBag.Cliente != null)
+    {
+        Layout = "_LayoutCliente";
+    }
+    @if (ViewBag.Cliente == null && ViewBag.Prestador == null) 
+    {
+        Layout = "_Layout";
+    }
+        
 }
+

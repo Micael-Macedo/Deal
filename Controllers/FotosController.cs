@@ -45,12 +45,15 @@ namespace Deal.Controllers
         }
 
         // GET: Fotos/Create
-        public IActionResult Create(int? id)
+        public async Task<IActionResult> Create(int? id)
         {
             if (id == null || _context.Fotos == null)
             {
                 return NotFound();
             }
+            Portfolio portfolio = await _context.Portfolios.FindAsync(id);
+            Prestador prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.FkPortfolio == portfolio.PortfolioId);
+            ViewBag.Prestador = prestador;
             ViewBag.portfolioIdFoto = id;
             return View();
         }
