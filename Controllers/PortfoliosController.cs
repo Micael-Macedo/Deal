@@ -39,6 +39,8 @@ namespace Deal.Controllers
                 return NotFound();
             }
             var prestador = await _context.Prestadores.Where(p => p.FkPortfolio == portfolio.PortfolioId).FirstAsync();
+            ViewBag.Prestador = prestador;
+            ViewBag.prestadorIdServicosPendentes = id;
             ViewBag.PrestadorId = prestador.PrestadorId;
             ViewData["Fotos"] = _context.Fotos.Where(f => f.FkPortfolio == portfolio.PortfolioId).ToList();
             ViewData["Certificados"] = _context.Certificado.Where(c => c.FkPortfolio == portfolio.PortfolioId).ToList();
@@ -81,7 +83,9 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-             Prestador prestador = await _context.Prestadores.FirstAsync(p => p.FkPortfolio == portfolio.PortfolioId);
+            Prestador prestador = await _context.Prestadores.FirstAsync(p => p.FkPortfolio == portfolio.PortfolioId);
+            ViewBag.Prestador = prestador;
+            ViewBag.prestadorIdServicosPendentes = id;
             return View(portfolio);
         }
 

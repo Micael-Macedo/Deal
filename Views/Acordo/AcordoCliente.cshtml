@@ -43,7 +43,7 @@
                 <a asp-action="CancelarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-danger">Cancelar Acordo</a>
                 <a asp-action="Create" asp-controller="ReportesPrestadores" asp-route-id="@Model.AcordoId" class="btn btn-info">Reportar Prestador</a>
             }
-            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.Servico.FkPrestador" class="btn btn-info">Ver Perfil</a>
+            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.Servico.FkPrestador" class="btn btn-info" target="_blank">Ver Perfil</a>
         </div>
         <div class="ServiceInfo">
             <div>
@@ -63,6 +63,4 @@
         </div>
     </div>
 </div>
-@section scripts{
-<script src="~/js/Dealmaps.js"></script>
-}
+<script src="~/js/Dealmaps.js"></script> 

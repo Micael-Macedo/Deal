@@ -51,10 +51,12 @@ namespace Deal.Controllers
                 return NotFound();
             }
             var acordo = await _context.Acordos.FirstOrDefaultAsync(a => a.AcordoId == id);
-            var servico = await _context.Servicos.FirstOrDefaultAsync(a => a.ServicoId == acordo.FkServico);
-            ViewBag.FkServico = servico.ServicoId;
-            ViewBag.FkCliente = servico.FkCliente;
-            ViewBag.FkPrestador = servico.FkPrestador;
+            acordo.Servico = await _context.Servicos.FirstOrDefaultAsync(a => a.ServicoId == acordo.FkServico);
+            acordo.Servico.Cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.ClienteId == acordo.Servico.FkCliente);
+            ViewBag.Cliente = acordo.Servico.Cliente;
+            ViewBag.FkServico = acordo.Servico.ServicoId;
+            ViewBag.FkCliente = acordo.Servico.FkCliente;
+            ViewBag.FkPrestador = acordo.Servico.FkPrestador;
             return View();
         }
 

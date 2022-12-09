@@ -53,6 +53,8 @@ namespace Deal.Controllers
             }
             var acordo = await _context.Acordos.FirstOrDefaultAsync(a => a.AcordoId == id);
             var servico = await _context.Servicos.FirstOrDefaultAsync(a => a.ServicoId == acordo.FkServico);
+            servico.Prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.PrestadorId == servico.FkPrestador);
+            ViewBag.Prestador = servico.Prestador;
             ViewBag.FkServico = servico.ServicoId;
             ViewBag.FkCliente = servico.FkCliente;
             ViewBag.FkPrestador = servico.FkPrestador;

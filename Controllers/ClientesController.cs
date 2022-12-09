@@ -89,6 +89,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Cliente = cliente;
             return View(cliente);
         }
         public async Task<IActionResult> Home(int? id)
@@ -103,6 +104,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Cliente = cliente;
             return View(cliente);
         }
 
@@ -155,6 +157,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Cliente = cliente;
 
             return View(cliente);
         }

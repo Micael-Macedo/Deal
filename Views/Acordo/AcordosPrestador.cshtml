@@ -1,7 +1,7 @@
-@model Deal.Models.UsuarioPrestador
 @{
     ViewData["Title"] = "AcordosPrestador";
     Layout = "_LayoutPrestador";
+    @model IEnumerable<Acordo>
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Acordos) {
+@foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.AcordoId)

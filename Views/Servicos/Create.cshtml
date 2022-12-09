@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="FkCliente" />
+            <input hidden asp-for="FkCliente" />
             <div class="form-group">
                 <label class="control-label">Serviço</label>
                 <input asp-for="Nome" class="form-control" />
@@ -74,6 +74,4 @@
     <a asp-action="Home" asp-controller="Clientes" asp-route-id="@Model.FkCliente">Retornar</a>
 </div>
 
-@section scripts{
-    <script src="~/js/maps.js"></script>
-}
+<script src="~/js/maps.js"></script>

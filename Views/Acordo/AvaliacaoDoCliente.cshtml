@@ -1,4 +1,4 @@
-@model Deal.Models.UsuarioPrestador
+@model Deal.Models.Acordo
 @{
     ViewData["Title"] = "Avaliação Cliente";
 }
@@ -10,7 +10,7 @@
         <img src="@Model.Servico.Cliente.FotoUsuario" alt="" srcset="" width="200px" height="200px">
     </div>
     <form asp-action="AvaliacaoDoCliente" method="post">
-        <input type="hidden" asp-for="Acordo.AcordoId" />
+        <input type="hidden" asp-for="AcordoId" />
         <label for="">Como você avalia @Model.Servico.Cliente.Nome ?</label>
         <div class="AvalicaoAcordo">
             <input name="nota" value="1" type="radio">

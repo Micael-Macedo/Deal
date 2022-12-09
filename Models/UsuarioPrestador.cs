@@ -7,10 +7,7 @@ namespace Deal.Models
 {
     public class UsuarioPrestador
     {
-        public Prestador? Prestador { get; set; }
-        public List<Servico>? Servicos { get; set; }
-        public Servico? Servico { get; set; }
-        public List<Acordo>? Acordos { get; set; }
-        public Acordo? Acordo { get; set; }
+        public int? UsuarioId { get; set; }
+        public string? Nome { get; set; }
     }
 }
