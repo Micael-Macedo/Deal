@@ -1,0 +1,24 @@
+@model Deal.Models.Acordo
+@{
+    ViewData["Title"] = "Avaliação Prestador";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <div class="Prestador-Card-Avaliacao">
+        <img src="@Model.Servico.Prestador.FotoPrestador" alt="" srcset="" width="300px" height="300px">
+    </div>
+    <form asp-action="AvaliacaoDoPrestador" method="post">
+        <input type="hidden" asp-for="AcordoId" />
+        <label for="">Como você avaliar o serviço de @Model.Servico.Prestador.Nome ?</label>
+        <div class="AvalicaoAcordo">
+            <input name="nota" value="1" type="radio">
+            <input name="nota" value="2" type="radio">
+            <input name="nota" value="3" type="radio">
+            <input name="nota" value="4" type="radio">
+            <input name="nota" value="5" type="radio">
+        </div>
+        <button type="submit" class="btn btn-primary">Avaliar</button>
+    </form>
+</div>

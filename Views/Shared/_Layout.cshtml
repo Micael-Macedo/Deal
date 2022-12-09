@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Deal</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Deal.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+
+<body>
+    <header>
+        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow
+            mb-3">
+            <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Deal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Servicos" asp-action="Create">Servico</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Cliente</a>
+            </li>
+
+            </ul>
+            </div>
+            </div>
+            </nav> *@
+        <nav class="container-fluid" style="width: auto;">
+            <div class= "container-fluid"style="display: flex; align-items: center; background-color: white;">
+                <div>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img
+                            src="~/img/LOGO_DEAL.svg" alt="" srcset="" style="width: 60px"></a>
+                </div>
+                <nav class="navbar container-fluid" style="background-color: blueviolet; height: 60px;">
+                    <ul class="display: flex" style="margin-top: -10px; margin-left: -30px;">
+                        <li class="btn-navbar">
+                            <a class="btn" style="font-size: 18px;" asp-area="" asp-controller="Clientes"
+                                asp-action="Index">Cliente</a>
+                        </li>
+                        <li class="navbar-brand">
+                            <a class="btn" style="color: white; font-size: 18px;" asp-area="" asp-controller="Prestadores"
+                                asp-action="Index">Prestadores</a>
+                        </li>
+                        <li class="navbar-brand">
+                            <a class="btn" style="color: white; font-size: 18px;" asp-area="" asp-controller="Acordo"
+                                asp-action="Index">Acordo</a>
+                        </li>
+                        <li class="navbar-brand">
+                            <a class="btn" style="color: white; font-size: 18px;" asp-area="" asp-controller="AreaAtuacao"
+                                asp-action="Index">Tipos de
+                                Servicos</a>
+                        </li>
+                        <li class="btn-login-tela" style="margin-left: 482px;">
+                            <a class="" asp-area="" style="color: blueviolet; margin-left: 7px; margin-right: 7px;" asp-controller="Home" asp-action="login">Login</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div id="Mobile-Nav">
+                    <button>Mobile</button>
+                    <ul>
+                        <li class="nav-item">
+                            <a class="" asp-area="" asp-controller="Servicos" asp-action="Index">Servico</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="" asp-area="" asp-controller="Clientes" asp-action="Index">Cliente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="" asp-area="" asp-controller="Prestadores" asp-action="Index">Prestadores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="" asp-area="" asp-controller="Acordo" asp-action="Index">Acordo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="" asp-area="" asp-controller="AreaAtuacao" asp-action="Index">Tipos de
+                                Servicos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - Deal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsX6svrvjA0smTUMT2SJa7QqCQRfrNRZA&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cAB"
+        async defer></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

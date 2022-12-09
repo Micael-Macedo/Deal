@@ -1,0 +1,103 @@
+@model IEnumerable<Deal.Models.Servico>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Cliente
+            </th>
+            <th>
+                Serviço
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+                Endereço
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Cidade
+            </th>
+            <th>
+                N°
+            </th>
+            <th>
+                CEP
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Prestador
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.ClienteId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria.Atuacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prestador.Nome)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ServicoId">Edição</a> |
+                    <a asp-action="Details" asp-route-id="@item.ServicoId">Detalhes</a> |
+                    
+                    @if (item.IsDisponivel)
+                    {
+                        <a asp-action="AddPrestador" asp-route-id="@item.ServicoId">Selecionar Prestador</a>
+                    }
+                    @if (item.Status == "Prestador tem interesse")
+                    {
+                        <a asp-action="ConfirmarAcordo" asp-route-id="@item.ServicoId">Confirmar Acordo</a>
+                    }
+                    <a asp-action="ClienteCancelaServico" asp-route-id="@item.ServicoId">Cancelar Servico</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

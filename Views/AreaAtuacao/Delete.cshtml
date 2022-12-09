@@ -1,0 +1,27 @@
+@model Deal.Models.AreaAtuacao
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Apagar</h1>
+
+<h3>Você tem certeza?</h3>
+<div>
+    <h4>Área de atuação</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Área de atuação
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Atuacao)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="AreaAtuacaoId" />
+        <input type="submit" value="Apagar" class="btn btn-danger" /> |
+        <a asp-action="Index">Retornar</a>
+    </form>
+</div>

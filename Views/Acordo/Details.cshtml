@@ -1,0 +1,18 @@
+@model Deal.Models.Acordo
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Acordo</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.AcordoId">Editar</a> |
+    <a asp-action="Index">Retornar</a>
+</div>

@@ -1,0 +1,44 @@
+@model Deal.Models.Acordo
+@{
+    ViewData["Title"] = "ClienteFinalizaAcordo";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h2>Deseja Finalizar esse Acordo?</h2>
+    <div>
+        <h4>Servico</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Serviço
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Servico.Nome)
+            </dd>
+            <dt class="col-sm-2">
+                Descrição
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Servico.Descricao)
+            </dd>
+            <dt class="col-sm-2">
+                Endereço
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Servico.Endereco)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Servico.Categoria)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Servico.Categoria.Atuacao)
+            </dd>
+            <form asp-action="ClienteFinalizaAcordo" method="post">
+                <input type="hidden" asp-for="AcordoId">
+                <button type="submit" name="Finalizar" class="btn btn-primary" value="true">Finalizar</button>
+            </form>
+        </dl>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+@model Deal.Models.Prestador
+
+@{
+    ViewData["Title"] = "Editar";
+    int PrestadorId = ViewBag.PrestadorId;
+}
+
+<h1>Editar</h1>
+
+<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@PrestadorId" class="btn btn-info">Retornar a pagina inicial</a>
+<h4>Prestador</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PrestadorId" />
+            <div class="form-group">
+                <label class="control-label">Foto</label>
+                <input type="file" class="form-control" onchange="ConverterImagem()" id="NewFoto">
+                <input asp-for="FotoPrestador" type="hidden" id="FotoBase64" />
+                <span asp-validation-for="FotoPrestador" class="text-danger"></span>
+                <div id="apresentar-imagem" style="width: 10%; height: 10%; margin-bottom: 200px; position: relative;"></div>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Portfolio</label>
+                <select asp-for="FkPortfolio" class="form-control" asp-items="ViewBag.FkPortfolio"></select>
+                <span asp-validation-for="FkPortfolio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">CPF</label>
+                <input asp-for="Cpf" class="form-control" />
+                <span asp-validation-for="Cpf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idade" class="control-label"></label>
+                <input asp-for="Idade" class="form-control" />
+                <span asp-validation-for="Idade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Endereço</label>
+                <input asp-for="Endereco" class="form-control" />
+                <span asp-validation-for="Endereco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">CEP</label>
+                <input asp-for="Cep" class="form-control" />
+                <span asp-validation-for="Cep" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Senha" class="control-label"></label>
+                <input asp-for="Senha" class="form-control" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Home" asp-route-id="@PrestadorId">Retornar</a>
+</div>
+

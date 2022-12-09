@@ -1,0 +1,27 @@
+@model Deal.Models.NovaAreaAtuacao
+
+@{
+    ViewData["Title"] = "Apagar";
+}
+
+<h1>Apagar</h1>
+
+<h3>Você tem certeza que deseja cancelar este serviço?</h3>
+<div>
+    <h4>Nova área de atuação</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Área de Atuação
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AreaAtuacao)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="NovaAreaAtuacaoId" />
+        <input type="submit" value="Apagar" class="btn btn-danger" /> |
+        <a asp-action="Index">Retornar</a>
+    </form>
+</div>

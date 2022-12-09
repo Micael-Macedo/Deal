@@ -1,0 +1,30 @@
+@model Deal.Models.Video
+
+@{
+    ViewData["Title"] = "Detalhe";
+}
+
+<h1>Detalhe</h1>
+
+<div>
+    <h4>Video</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.VideoPrestador)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.VideoPrestador)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Portfolio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Portfolio.PortfolioId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.VideoId">Editar</a> |
+    <a asp-action="Index">Retornar</a>
+</div>

@@ -1,0 +1,27 @@
+@model Deal.Models.AreaAtuacao
+
+@{
+    ViewData["Title"] = "Criar";
+}
+
+<div class="container">
+    <div class="titulo_formulario">
+        <h1 style="font-weight: 840; font-size: 45px;">Cadastrar nova área de atuação</h1>
+    </div>
+    <div class="container_formulario">
+        <div style="width: 800px;">
+            <form asp-action="Create">
+                <div class="item_formulario">
+                    <label asp-for="Atuacao" class="control-label" style="font-weight: 600; margin-bottom: 10px;"> Área de atuação</label>
+                    <input asp-for="Atuacao" class="form-control" />
+                    <span asp-validation-for="Atuacao" class="text-danger"></span>
+                </div>
+                <div class="botao_formulario">
+                    <input type="submit" value="Criar" class="botao_formulario"
+                        style="font-weight: 600; margin-bottom: 10px;" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

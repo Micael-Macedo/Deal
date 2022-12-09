@@ -1,0 +1,24 @@
+@model Deal.Models.NovaAreaAtuacao
+
+@{
+    ViewData["Title"] = "Detalhe";
+}
+
+<h1>Detalhe</h1>
+
+<div>
+    <h4>Nova área atuação</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Área de Atuação
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AreaAtuacao)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.NovaAreaAtuacaoId">Editar</a> |
+    <a asp-action="Index">Retornar</a>
+</div>

@@ -1,0 +1,94 @@
+@model Deal.Models.Prestador
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h1>Detalhes</h1>
+ @{
+    var areasAtuacao = ViewBag.areasAtuacao;
+ }
+<div>
+    <h4>Prestador</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Foto
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="@Html.DisplayFor(model => model.FotoPrestador)" alt="" srcset="" width="300px">
+    
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Idade)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Idade)
+        </dd>
+        <dt class = "col-sm-2">
+            Serviços Realizados
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QtdServicoRealizados)
+        </dd>
+        <dt class = "col-sm-2">
+            Pontuação
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pontuacao)
+        </dd>
+        <dt class = "col-sm-2">
+            Link do Prestador:
+        </dt>
+        <dd class = "col-sm-10">
+            <input style="display: none;" type="text" value="https://localhost:7234/Prestadores/Details/@Model.PrestadorId" id="linkPrestador">
+            <button  onclick="copiarLinkPrestador()" onmouseout="outFunc()" style="width: 300px;">Copiar link do prestador</button>
+            <span class="tooltiptext" id="myTooltip"></span>
+        </dd>
+        <dt class = "col-sm-2">
+            Área de Atuação
+        </dt>         
+        @if (Model.AreasAtuacao != null)
+        {
+        <dd class ="col-sm-10 areasDeAtuacaoDoPrestador">
+            @foreach (var item in areasAtuacao)
+            {
+            <p>
+                <li>@item.Atuacao</li>
+            </p>
+            }
+        </dd>
+        }
+        <dt class = "col-sm-2">
+            Fotos
+        </dt>  
+        @if (Model.Portfolio.Fotos != null)
+        {
+            @foreach (var foto in Model.Portfolio.Fotos)
+            {
+                <img src="@foto.FotoPrestador" style="width: 200px !important;">
+            }
+        }
+        <dt class = "col-sm-2">
+            Certificados
+        </dt>  
+        @if (Model.Portfolio.Certificados != null)
+        {
+            @foreach (var certificado in Model.Portfolio.Certificados)
+            {
+                <img src="@certificado.CertificadoFotoPortfolio" style="width: 200px !important;">
+            }
+        }
+        
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.PrestadorId">Editar</a> |
+    <a asp-action="Home" asp-route-id="@Model.PrestadorId">Retornar</a>
+</div>

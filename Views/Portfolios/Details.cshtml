@@ -1,0 +1,62 @@
+@model Deal.Models.Portfolio
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Portfolio</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Apresentação)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Apresentação)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Linkedin)
+        </dt>
+        <dd class = "col-sm-10">
+            <a href="@Model.Linkedin" target="_blank">Acessar Linkedin</a>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Site)
+        </dt>
+        <dd class = "col-sm-10">
+            <a href="@Model.Site" target="_blank">Acessar Site Pessoal</a>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ExperienciaProfissional)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ExperienciaProfissional)
+        </dd>
+    </dl>
+    @if (ViewData["Fotos"] != null)
+    {    
+        <h2>Fotos</h2>
+        <div class="row">
+            @foreach (var item in ViewData["Fotos"] as IList<Foto>){
+                <img src="@item.FotoPrestador" style="width: 300px !important;">
+            }
+            <a asp-action="Create" asp-controller="Fotos" asp-route-id="@Model.PortfolioId" class="btn btn-primary">Adicionar Fotos</a>
+        </div>
+    }
+    @if (ViewData["Certificados"] != null)
+    {
+        <h2>Certificados</h2>
+        <div class="row">
+            @foreach (var item in ViewData["Certificados"] as IList<Certificado>){
+                <img src="@item.CertificadoFotoPortfolio" style="width: 300px !important;">
+            }
+            <a asp-action="Create" asp-controller="Certificado" asp-route-id="@Model.PortfolioId" class="btn btn-primary">Adicionar Certificados</a>
+        </div>
+    }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.PortfolioId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

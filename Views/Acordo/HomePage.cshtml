@@ -1,0 +1,86 @@
+@model Deal.Models.Acordo
+@{
+    ViewData["Title"] = "HomePage";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h2></h2>
+    <div class="AcordoHomePage">
+        <div class="UserCard">
+            <h3>Cliente</h3>
+            <div class="UserPhoto">
+                <img width="200px" src="@Model.Servico.Cliente.FotoUsuario" alt="" srcset="">
+            </div>
+            <p><b>Nome: </b> @Model.Servico.Cliente.Nome</p>
+            <hr>
+            <p><b>Email: </b> @Model.Servico.Cliente.Email</p>
+            <p><b>Telefone: </b> @Model.Servico.Cliente.Telefone</p>
+            <p><b>Pontuação: </b> @Model.Servico.Cliente.Pontuacao</p>
+            <p><b>Acordos Realizados: </b> @Model.Servico.Cliente.QtdAcordoRealizados</p>
+            @if (@Model.AcordoFinalizado == true && @Model.AvaliouPrestador != true)
+            {
+                <a asp-action="AvaliacaoDoPrestador" asp-route-id="@Model.AcordoId">Avaliar Prestador</a>
+            }
+            @if (@Model.ClienteFinalizaAcordo == true && @Model.AcordoFinalizado != true)
+            {
+                <p>Cliente Gostaria de finalizar o Acordo</p>
+            }
+            @if(@Model.AcordoFinalizado != true && @Model.ClienteFinalizaAcordo != true){
+                <a asp-action="ClienteFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn btn-success">Finalizar Acordo</a>
+                <a asp-action="CancelarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-danger">Deletar Acordo</a>
+            }
+        </div>
+        <div>
+            @if (@Model.AcordoFinalizado)
+            {
+                <p>Acordo Finalizado</p>
+            }
+        </div>
+        <div class="UserCard">
+            <h3>Prestador</h3>
+            <div class="UserPhoto">
+                <img width="200px" src="@Model.Servico.Prestador.FotoPrestador" alt="" srcset="">
+            </div>
+            <p><b>Nome: </b>@Model.Servico.Prestador.Nome</p>
+            <hr>
+            <p><b>Email: </b>@Model.Servico.Prestador.Email</p>
+            <p><b>Telefone: </b>@Model.Servico.Prestador.Telefone</p>
+            <p><b>Pontuação: </b>@Model.Servico.Prestador.Pontuacao</p>
+            <p><b>Serviços Realizados: </b>@Model.Servico.Prestador.QtdServicoRealizados</p>
+            @if (@Model.AcordoFinalizado == true && @Model.AvaliouCliente != true)
+            {
+                <a asp-action="AvaliacaoDoCliente" asp-route-id="@Model.AcordoId">Avaliar Cliente</a>
+            }
+            @if (@Model.PrestadorFinalizaAcordo == true && @Model.AcordoFinalizado != true)
+            {
+                <p>Prestador Gostaria de finalizar o Acordo</p>
+            }
+            @if (@Model.AcordoFinalizado != true && @Model.PrestadorFinalizaAcordo != true)
+            {
+                <a asp-action="PrestadorFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn btn-success">Finalizar Acordo</a>
+                <a asp-action="EncerrarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-danger">Cancelar Acordo</a>
+            }
+        </div>
+    </div>
+    <div class="ServiceInfo">
+        <div>
+            <h2>Informações do serviço</h2>
+            <p>@Model.Servico.Categoria.Atuacao</p>
+            <p>@Model.Servico.Nome</p>
+            <p>@Model.Servico.Descricao</p>
+            <p>@Model.Servico.Endereco</p>
+            <input hidden type="text" value="@Model.Servico.Latitude" id="DealLat">
+            <input hidden type="text" value="@Model.Servico.Longitude" id="DealLong"> 
+            <div class="ServiceLocal">
+                <div class="card-container col-md-4">
+                    <div class="map" id="gmp-map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/js/Dealmaps.js"></script>
+}
