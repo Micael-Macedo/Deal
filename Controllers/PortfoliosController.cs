@@ -65,9 +65,9 @@ namespace Deal.Controllers
                 _context.Update(portfolio);
                 await _context.SaveChangesAsync();
                 Prestador prestador = await _context.Prestadores.FirstAsync(p => p.FkPortfolio == portfolio.PortfolioId);
-                return RedirectToAction("Home", "Prestadores", new {id = prestador.PrestadorId});
             }
-            return View(portfolio);
+                return RedirectToAction("Index", "Usuarios");
+            // return View(portfolio);
         }
 
         // GET: Portfolios/Edit/5
@@ -120,9 +120,9 @@ namespace Deal.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Home", "Prestadores", new {id = prestador.PrestadorId});
+                return RedirectToAction("Index", "Usuarios");
             }
-            return RedirectToAction("Home", "Prestadores", new {id = prestador.PrestadorId});
+            return RedirectToAction("Index", "Usuarios");
         }
 
         // GET: Portfolios/Delete/5

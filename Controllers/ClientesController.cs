@@ -71,9 +71,8 @@ namespace Deal.Controllers
             {
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Home","Clientes", new {id = cliente.ClienteId} );
             }
-            return View(cliente);
+                return RedirectToAction("Index", "Usuarios");
         }
 
         // GET: Clientes/Edit/5

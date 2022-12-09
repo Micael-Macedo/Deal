@@ -4,40 +4,44 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="titulo_formulario">
+    <h1 style="font-weight: 840; font-size: 45px;">Area de atuação</h1>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Atuacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.isOnline)
-            </th>
-            
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Atuacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isOnline)
-            </td>
-            
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AreaAtuacaoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AreaAtuacaoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AreaAtuacaoId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container" style="margin-left: 70px;">
+    <div class="tabela">
+        <table class="table">
+            <thead class="thead_tabela">
+                <tr>
+                    <th style="padding-right: 50px;">
+                        Area de atuação
+                    </th>
+                    </th>
+                    @* <th style="padding-right: 70px;">
+                        Área de atuação
+                        </th> *@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="thead_tabela3">
+                        <td class="td_tabela" style="width: 160px; margin-left: -40px;">
+                            @Html.DisplayFor(modelItem => item.Atuacao)
+                        </td>
+                    </tr>
+                    <td>
+                        <a asp-action="Edit" type="submit" class="btn" asp-route-id="@item.AreaAtuacaoId"
+                        style="font-weight: 600; margin: 10px;background-color: #b780e7;">Editar</a>
+                        <a asp-action="Details" type="submit" class="btn" asp-route-id="@item.AreaAtuacaoId"
+                        style="font-weight: 600; margin: 10px; background-color: #b780e7;">Detalhes</a>
+                        <a asp-action="Delete" type="submit" class="btn" asp-route-id="@item.AreaAtuacaoId"
+                        style="font-weight: 600; margin: 10px; background-color: #e21122;">Apagar</a>
+                    </td>
+                }
+            </tbody>
+        </table>
+        <a asp-controller="AreaAtuacao" asp-action="Create" type="submit" class="btn"
+            style="font-weight: 600; margin: 10px; background-color: blueviolet;">Criar nova area de atuação</a>
+    </div>
+</div>
