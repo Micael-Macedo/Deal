@@ -6,11 +6,11 @@
 }
 
 
-<div class="titulo_formulario">
+<div class="titulo_formulario_index">
     <h1 style="font-weight: 840; font-size: 45px;">Seus perfis</h1>
 </div>
 
-<div class="container" style="margin-left: 70px;">
+<div class="container centralizar">
     <div class="tabela">
         <table class="table">
             <thead class="thead_tabela">
@@ -84,12 +84,13 @@
                         <a asp-controller="Servicos" asp-action="MeusServicos" type="submit" class="btn"
                         asp-route-id="@item.ClienteId"
                         style="font-weight: 600; margin: 10px; background-color: #661da7;">Meus serviços</a>
-
                     </td>
                 }
             </tbody>
         </table>
-        <a asp-controller="Clientes" asp-action="Create" type="submit" class="btn"
-            style="font-weight: 600; margin: 10px; background-color: blueviolet;">Criar novo cliente</a>
     </div>
+</div>
+<div class="centralizar" style="margin: 30px;">
+    <a asp-controller="Clientes" asp-action="Create" type="submit" class="btn"
+        style="font-weight: 600; margin: 10px; background-color: blueviolet;">Criar novo cliente</a>
 </div>
