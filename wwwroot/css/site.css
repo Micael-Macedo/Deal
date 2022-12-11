@@ -217,6 +217,13 @@ h2 {
   text-align: center;
 }
 
+#card-prestador-cliente {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+
 .cardServicosMaisSolicitados {
   width: 300px;
   height: 400px;
@@ -378,6 +385,40 @@ h2 {
 
 }
 
+.Cliente-page {
+  background-image: url("../img/cliente-bg.png");
+  background-size: 600px;
+  background-position-x: 320px;
+  background-repeat: no-repeat;
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border-radius: 3%;
+  background-color: rgb(241, 241, 241);
+  height: 350px;
+  width: 920px;
+  margin-top: 40px;
+  padding: 5px 50px 50px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.Prestador-page {
+  background-image: url("../img/prestador-bg.png");
+  background-size: 700px;
+  background-position-x: 0px;
+  background-repeat: no-repeat;
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border-radius: 3%;
+  background-color: rgb(241, 241, 241);
+  height: 350px;
+  width: 920px;
+  margin-top: 40px;
+  padding: 5px 50px 50px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
 .AvalicaoAcordo input {
   background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Star_icon_stylized.svg/2153px-Star_icon_stylized.svg.png) !important;
 }
@@ -492,10 +533,46 @@ h2 {
   font-weight: 840;
   font-size: 40px;
   margin-top: 40px;
-  margin-bottom: 30px;
   display: flex;
   align-items: center;
   justify-content: left;
+}
+
+.titulo_prestador_page {
+  font-weight: 840;
+  font-size: 50px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.titulo_cliente_page {
+  font-weight: 840;
+  font-size: 50px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.txt_cliente_page {
+  font-weight: 840;
+  font-size: 30px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.txt_prestador_page {
+  font-weight: 840;
+  font-size: 30px;
+  width: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: right;
+  text-align: right;
 }
 
 .titulo_formulario_index {
@@ -591,6 +668,40 @@ h2 {
   justify-content: center;
   align-items: center;
   border: 0ch;
+}
+
+.btn-cliente {
+  text-decoration: none;
+  text-underline-offset: none;
+  display: flex;
+  border-radius: 3%;
+  font-size: 18px;
+  width: 170px;
+  font-weight: 600px;
+  background-color: #b780e7;
+  color: #ffffff;
+  justify-content: center;
+  align-items: flex-end;
+  border: 0ch;
+  padding: 5px;
+  margin-left: 5px;
+  margin-top: 20px;
+}
+
+.btn-prestador{
+  text-decoration: none;
+  text-underline-offset: none;
+  display: flex;
+  border-radius: 3%;
+  font-size: 18px;
+  width: 170px;
+  background-color: #b780e7;
+  justify-content: center;
+  align-items: flex-end;
+  border: 0ch;
+  padding: 5px;
+  margin-left: 620px;
+  margin-top: 20px;
 }
 
 .roxo{
