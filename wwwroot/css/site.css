@@ -138,14 +138,14 @@ section {
 #introducao_Site {
   display: flex;
   width: auto;
-  height: 800px;
+  height: 750px;
   background-image: url(../img/caradamain.png);
   background-repeat: no-repeat;
   background-position: right;
   background-size: 1250px;
   background-position-x: 30px;
   background-position-y: -85px;
-  margin-left: 150px;
+  margin-left: 390px;
   margin-bottom: 0;
   margin-top: 0;
   align-items: center;
@@ -185,7 +185,7 @@ h2 {
   background-image: url(../img/Bg-tipos-de-servco.png);
   background-size: 2080px;
   background-repeat: no-repeat;
-  height: 560px;
+  height: 430px;
   margin-top: 0;
   padding: 10px;
   background-color: blueviolet;
@@ -302,6 +302,7 @@ h2 {
 
 #Deal_sobre_nos {
   background-image: url("../img/BG\ 1.png");
+  padding: 0px;
   text-align: center;
 }
 
@@ -360,9 +361,21 @@ h2 {
 }
 
 .loginPage {
-  border: 2px solid black;
+  background-image: url("../img/bg-login.png");
+  background-size: 600px;
+  background-position-x: 340px;
+  background-repeat: no-repeat;
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border-radius: 3%;
+  background-color: rgb(241, 241, 241);
+  height: 550px;
+  width: 920px;
+  margin-top: 40px;
+  padding: 5px 50px 50px 50px;
+  display: block;
+  align-items: center;
+  justify-content: center;
 
-  border-radius: 5px;
 }
 
 .AvalicaoAcordo input {
@@ -407,11 +420,26 @@ h2 {
   color: white !important;
 }
 
+.btn-links {
+  border-radius: 10px;
+  margin: 5px;
+  background-color: #572980;
+  box-shadow: rgba(0, 0, 0, 0.10) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border: 0ch;
+}
+
 .AcordoHomePage {
   display: flex;
   justify-content: space-around;
   background-image: linear-gradient(90deg, white, rgb(180, 170, 170));
   padding: 100px 50px;
+}
+
+.Links_perfil {
+  padding-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .UserCard {
@@ -460,11 +488,29 @@ h2 {
   justify-content: center;
 }
 
-.titulo_formulario {
-  font-size: 50px;
-  ;
+.titulo_formulario_login {
+  font-weight: 840;
+  font-size: 40px;
   margin-top: 40px;
   margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.titulo_formulario_index {
+  font-weight: 840;
+  font-size: 40px;
+  margin: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo_links{
+  font-weight: 840;
+  font-size: 40px;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -523,6 +569,39 @@ h2 {
   border: 0ch;
 }
 
+.btn-login {
+  display: block;
+  margin: 15px 0px;
+  border-radius: 3%;
+  font-size: 16px;
+  height: 35px;
+  width:120px;
+  background-color: #8E44CD;
+  color: #ffffff;
+  border: 0ch;
+}
+
+.btn-login-tela {
+  display: flex;
+  border-radius: 3%;
+  font-size: 22px;
+  width:100%;
+  background-color: white;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+  border: 0ch;
+}
+
+.roxo{
+  color:#8E44CD ;
+}
+
+.titulo{
+  text-align: left;
+}
+
+
 .map {
   border-radius: 3%;
   margin-bottom: 45px;
@@ -535,45 +614,53 @@ h2 {
   box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
   border-radius: 3%;
   background-color: rgb(241, 241, 241);
-  width: 1190px;
+  width: 90%;
   padding: 50px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centralizar{
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .thead_tabela {
   color: white;
-  height: 60px;
-  width: 1080px;
+  width: 100%;
   background-color: #8E44CD;
-  padding-top: 8px;
-  padding-left: 30px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .thead_tabela2 {
   padding-top: 10px;
+  width: 100%;
   color: rgb(44, 44, 44);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 .thead_tabela3 {
-  padding-top: -10px;
+  width: 100%;
   color: rgb(44, 44, 44);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 .thead_tabela4 {
   color: white;
   height: 60px;
-  width: 1080px;
+  width: 100%;
   background-color: #8E44CD;
-  padding-top: 8px;
-  padding-left: 30px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .th_tabela {
@@ -598,9 +685,11 @@ h2 {
   align-items: center;
 }
 
-.btn-login {
-  background-color: white;
-  font-size: 18px;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
+.div-navbar{
+  padding: auto;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
