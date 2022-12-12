@@ -4,9 +4,10 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Clientes" asp-route-id="@ViewBag.ClienteId" class="btn btn-info">Retornar a pagina
+<a asp-action="Home" asp-controller="Clientes" asp-route-id="@ViewBag.ClienteId" class="btn btn-roxo-escuro">Retornar a pagina
     inicial</a>
-
+<br>
+<br>
 <div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var item in Model)
     {
@@ -34,7 +35,7 @@
                 </dl>
             </div>
             <div class="serviceCardButtons">
-                <a asp-action="AcordoCliente" asp-route-id="@item.AcordoId" class="btn btn-info">Ver mais</a>
+                <a asp-action="AcordoCliente" asp-route-id="@item.AcordoId" class="btn btn-roxo">Ver mais</a>
             </div>
         </div>
     }

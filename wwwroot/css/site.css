@@ -539,27 +539,25 @@ h2 {
 
 .AcordoHomePage {
   display: flex;
-  justify-content: space-around;
-  background-image: linear-gradient(90deg, white, rgb(180, 170, 170));
-  padding: 100px 50px;
+  justify-content: center;
+  padding: 0 50px;
 }
 
 .Links_perfil {
-  padding-bottom: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .UserCard {
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  background-color: white;
-  border-radius: 10px;
+  background-color: rgb(241, 241, 241);
+  border-radius: 10px 0 0 10px;
   width: 400px;
   padding: 10px 20px;
 }
 
 .UserCard h3 {
+  margin-top: 40px;
   text-align: center;
   color: #8E44CD;
 }
@@ -574,23 +572,29 @@ h2 {
 }
 
 .UserCard img {
+  
   width: 200px;
   height: 200px;
   margin: 10px 0;
   border-radius: 10px;
 }
-
+.ServiceInfo h2{
+  color: #8E44CD;
+  margin-bottom: 8px !important;
+}
 .ServiceInfo {
-  background-image: linear-gradient(90deg, white, rgb(180, 170, 170));
+  background-color: rgb(241, 241, 241);
+  border-radius: 0 5px 5px 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 5%;
 }
 
 .container_formulario {
   box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
   border-radius: 3%;
-  background-color: rgb(241, 241, 241);
+  background-color: rgb(221, 221, 221);
   padding: 50px;
   display: flex;
   align-items: center;
@@ -764,6 +768,7 @@ h2 {
   font-size: 18px;
   width: 170px;
   background-color: #b780e7;
+  color: #ffffff;
   justify-content: center;
   align-items: flex-end;
   border: 0ch;
@@ -871,4 +876,64 @@ h2 {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.userDetails{
+  display: flex;
+  width: 70%;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border-radius: 3%;
+  background-color: rgb(241, 241, 241);
+  border-radius: 10px;
+  padding: 2% 5%;
+  margin: 0 auto;
+}
+.userBasicInfo{
+  display: flex;
+}
+.userImageInfo{
+  display: flex;
+  justify-content: center;
+}
+.userDetails img{
+  margin: 50px;
+  width: 290px;
+  height: 290px;
+  border: 5px #8E44CD solid;
+  border-radius: 50%;
+}
+.userName{
+  display: flex;
+  justify-content: center;
+  font-weight: 700; 
+  font-size: 30px; 
+}
+.userInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+.locaisDeAtuacao{
+  display: flex;
+  flex-wrap: wrap;  
+}
+.locaisDeAtuacao li{
+  margin-right: 20px;
+}
+.infoUserDetails{
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 13px 2px;
+  font-size: 18px;
+  gap: 20px;
+}
+.areasDeAtuacaoDoPrestador{
+  display: flex;
+  flex-wrap: wrap;
+}
+.areasDeAtuacaoDoPrestador li{
+  margin-right: 20px;
+  font-size: 18px;
 }

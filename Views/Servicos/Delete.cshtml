@@ -1,10 +1,10 @@
 @model Deal.Models.Servico
 
 @{
-    ViewData["Title"] = "Apagar";
+    ViewData["Title"] = "Delete";
 }
 
-<h1>Apagar</h1>
+<h1>Cancelar Serviço</h1>
 
 <h3>Você tem certeza que deseja cancelar este serviço?</h3>
 <div>
@@ -12,7 +12,7 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cliente)
+            Cliente
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Cliente.Nome)
@@ -36,13 +36,13 @@
             @Html.DisplayFor(model => model.Endereco)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
+            Estado
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Estado)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cidade)
+            Cidade
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Cidade)
@@ -60,7 +60,7 @@
             @Html.DisplayFor(model => model.Cep)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
+            Categoria
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Categoria.Atuacao)
