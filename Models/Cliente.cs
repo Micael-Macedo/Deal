@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Deal;
@@ -16,11 +17,13 @@ namespace Deal.Models
         public string? FotoUsuario { get; set; }
         public ICollection<Servico>? Servicos { get; set; }
         public string? Nome { get; set; }
+        [Required(ErrorMessage = "Digite o CPF")]
         public string? Cpf { get; set; }
         public int Idade { get; set; }
         public string? Endereco { get; set; }
         public string? Cep { get; set; }
         public string? Telefone { get; set; }
+        [Required(ErrorMessage = "Digite a senha")]
         public string? Senha { get; set; }
         public string? Email { get; set; }
         public double Pontuacao { get; set; }
@@ -39,9 +42,11 @@ namespace Deal.Models
                 {
                     double PontuacaoPenalizada = AcordosCancelados / 5;
                     MediaAvaliacao = (5 + PontuacaoPenalizada) / (PontuacaoPenalizada + 1);
-                    return Math.Round (MediaAvaliacao,2);
-                }else{
-                    return Math.Round (Pontuacao,2);
+                    return Math.Round(MediaAvaliacao, 2);
+                }
+                else
+                {
+                    return Math.Round(Pontuacao, 2);
                 }
             }
             else
@@ -55,10 +60,12 @@ namespace Deal.Models
                 {
                     double PontuacaoPenalizada = AcordosCancelados / 5;
                     MediaAvaliacao = (TotalNotas + PontuacaoPenalizada + 5) / (NotasDoCliente.Count + PontuacaoPenalizada + 1);
-                }else{
+                }
+                else
+                {
                     MediaAvaliacao = TotalNotas / NotasDoCliente.Count;
                 }
-                return Math.Round (MediaAvaliacao,2);
+                return Math.Round(MediaAvaliacao, 2);
             }
         }
         public bool VerificarAcordosCancelados()

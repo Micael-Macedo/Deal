@@ -1,0 +1,40 @@
+@model Deal.Models.NovaAreaAtuacao
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>NovaAreaAtuacao</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <input type="hidden" value="@ViewBag.PrestadorId" name="prestadorId" >
+            <div class="item_formulario">
+                <label asp-for="Atuacao" class="control-label" style="font-weight: 600; margin-bottom: 10px;"> Área
+                    de atuação</label>
+                <input asp-for="Atuacao" class="form-control" />
+                <span asp-validation-for="Atuacao" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="isOnline" />Serviço Online?
+                </label>
+            </div>
+            <div class="botao_formulario">
+                <input type="submit" value="Criar" class="botao_formulario"
+                    style="font-weight: 600; margin-bottom: 10px;" />
+            </div>
+            <div class="botao_formulario2">
+                <input type="submit" value="Retornar" asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.PrestadorId" class="botao_formulario"
+                    style="font-weight: 600; background-color: #b780e7;" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+</div>
