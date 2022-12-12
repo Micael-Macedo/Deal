@@ -25,7 +25,8 @@ namespace Deal.Controllers
             foreach (var cliente in clientes)
             {
                 List<NotaCliente> notasDoCliente = await _context.NotaClientes.Where(n => n.FkCliente == cliente.ClienteId).ToListAsync();
-                if(notasDoCliente.Count != 0){
+                if (notasDoCliente.Count != 0)
+                {
                     cliente.NotasDoCliente = notasDoCliente;
                 }
                 cliente.Pontuacao = cliente.MediaNota();
@@ -50,7 +51,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            
+
             return View(cliente);
         }
 
@@ -72,7 +73,7 @@ namespace Deal.Controllers
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
             }
-                return RedirectToAction("Index", "Usuarios");
+            return RedirectToAction("Index", "Usuarios");
         }
 
         // GET: Clientes/Edit/5
@@ -137,7 +138,7 @@ namespace Deal.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Home","Clientes", new {id = cliente.ClienteId} );
+                return RedirectToAction("Home", "Clientes", new { id = cliente.ClienteId });
             }
             return View(cliente);
         }
@@ -177,7 +178,7 @@ namespace Deal.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         private bool ClienteExists(int id)

@@ -150,6 +150,7 @@ namespace Deal.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Cpf")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Email")
@@ -177,6 +178,7 @@ namespace Deal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Senha")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Telefone")
@@ -276,10 +278,11 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deal.Models.NovaAreaAtuacao", b =>
                 {
-                    b.Property<string>("NovaAreaAtuacaoId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("NovaAreaAtuacaoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("AreaAtuacao")
+                    b.Property<string>("Atuacao")
                         .HasColumnType("longtext");
 
                     b.Property<bool>("isOnline")

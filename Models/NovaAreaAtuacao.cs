@@ -7,8 +7,8 @@ namespace Deal.Models
 {
     public class NovaAreaAtuacao
     {
-        public string? NovaAreaAtuacaoId { get; set; }
-        public string? AreaAtuacao { get; set; }
+        public int NovaAreaAtuacaoId { get; set; }
+        public string? Atuacao { get; set; }
         public bool isOnline { get; set; }
         
     }
