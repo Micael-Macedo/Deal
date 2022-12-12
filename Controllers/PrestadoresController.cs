@@ -56,7 +56,7 @@ namespace Deal.Controllers
         }
 
         // GET: Prestadores/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, string? user, int? idUser)
         {
             if (id == null || _context.Prestadores == null)
             {
@@ -82,6 +82,18 @@ namespace Deal.Controllers
             }
             ViewData["AreasDoPrestador"] = prestador.AreasAtuacao;
             ViewData["LocaisDoPrestador"] = _context.LocaisDoPrestador.Where(l => l.PrestadorFk == prestador.PrestadorId).ToList();
+            
+            if(idUser != null){
+                if(user == "Cliente"){
+                    Cliente cliente = await _context.Clientes.FindAsync(idUser);
+                    if(cliente != null){
+                        ViewBag.Cliente = cliente;
+                    }
+                }
+                if(user == "Prestador"){
+                    ViewBag.Prestador = prestador;
+                }
+            }
             return View(prestador);
         }
 
@@ -185,7 +197,7 @@ namespace Deal.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Home","Prestadores", new { id = prestador.PrestadorId});
             }
             ViewData["AreaAtuacaoId"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             ViewData["FkPortfolio"] = new SelectList(_context.Portfolios, "PortfolioId", "PortfolioId", prestador.FkPortfolio);

@@ -48,12 +48,12 @@
                                 <a style="font-weight: 400; width: 500px;">@Html.DisplayFor(model => model.Telefone)</a>
                             </dt>
 
-                             <dt class="col-3">
+                            <dt class="col-3">
                                     Email:
                                 <a style="font-weight: 400;">@Html.DisplayFor(model => model.Email)</a>
                             </dt>
                         </div> 
-                             <div class="row" style="margin-top: 20px;">
+                            <div class="row" style="margin-top: 20px;">
                                 <dt class="col-3">
                                 Acordos Realizados:
                                 <a style="font-weight: 400; width: 500px;">@Html.DisplayFor(model => model.QtdAcordoRealizados)</a>
@@ -63,12 +63,13 @@
                     </dl>
                 </div>
                 <div class="serviceCardButtons">
+                    <a asp-action="Details" asp-route-id="@Model.ClienteId" asp-route-idUser="@Model.ClienteId" asp-route-user="Cliente" class="btn"
+                    style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Perfil</a>
                     <a asp-action="Edit" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #b760e7;">Editar Perfil</a>             
-                    <a asp-action="Details" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Perfil</a>
-                    <a asp-action="HomePage" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #35e44c;">Criar Serviço</a>
-                    <a asp-action="AddPrestador" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Serviço</a>
-                    <a asp-action="ConfirmarAcordo" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Acordos</a>
-                    <a asp-action="ClienteCancelaServico" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #e21122;">Deletar Conta</a> 
+                    <a asp-action="Create" asp-controller="Servicos" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #35e44c;">Criar Serviço</a>
+                    <a asp-action="MeusServicos" asp-controller="Servicos" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Serviços</a>
+                    <a asp-action="AcordosCliente" asp-controller="Acordo" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Acordos</a>
+                    <a asp-action="Delete" asp-route-id="@Model.ClienteId" class="btn" style="font-weight: 600; margin: 10px; background-color: #e21122;">Deletar Conta</a> 
                 </div>
             </div>
         </div>

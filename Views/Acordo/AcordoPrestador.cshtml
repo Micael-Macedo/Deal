@@ -41,7 +41,7 @@
                 <a asp-action="EncerrarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-danger">Cancelar Acordo</a>
                 <a asp-action="Create" asp-controller="ReportesClientes" asp-route-id="@Model.AcordoId" class="btn btn-info">Reportar Cliente</a>
             }
-            <a asp-action="Details" asp-controller="Clientes" asp-route-id="@Model.Servico.FkCliente" class="btn btn-info" target="_blank">Ver Perfil</a>
+            <a asp-action="Details" asp-controller="Clientes" asp-route-id="@Model.Servico.FkCliente" class="btn btn-info" target="_blank" asp-route-idUser="@Model.Servico.FkPrestador" asp-route-user="Prestador">Ver Perfil</a>
         </div>
         <div class="ServiceInfo">
             <div>

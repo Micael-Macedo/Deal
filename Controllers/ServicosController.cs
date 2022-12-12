@@ -40,7 +40,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
+            Cliente cliente = await _context.Clientes.FindAsync(servico.FkCliente);
+            ViewBag.Cliente = cliente;
             return View(servico);
         }
 
@@ -169,7 +170,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-
+            Cliente cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.ClienteId == servico.FkCliente);
+            ViewBag.Cliente = cliente;
             return View(servico);
         }
         // GET: Servicos/Delete/5
@@ -188,6 +190,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            Prestador prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.PrestadorId == servico.FkPrestador);
+            ViewBag.Prestador = prestador;
             ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId");
             return View(servico);
@@ -303,7 +307,8 @@ namespace Deal.Controllers
             ViewData["Prestadores"] = prestadoresFiltrados;
             ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "AreaAtuacaoId", servico.FkCategoria);
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", servico.FkCliente);
-
+            Cliente cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.ClienteId == servico.FkCliente);
+            ViewBag.Cliente = cliente;
             return View(servico);
         }
         [HttpPost]
@@ -409,6 +414,8 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            Cliente cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.ClienteId == servico.FkCliente);
+            ViewBag.Cliente = cliente;
 
             return View(servico);
         }
@@ -434,6 +441,9 @@ namespace Deal.Controllers
                     if (escolha == "Recusar")
                     {
                         servico.ClienteRecusaServico();
+                        _context.Servicos.Update(servico);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction("MeusServicos","Servicos", new {id = servico.FkCliente});
                     }
                     _context.Servicos.Update(servico);
                     await _context.SaveChangesAsync();

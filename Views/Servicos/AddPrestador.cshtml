@@ -91,7 +91,7 @@
                 @item.Email
             </td>
             <td>
-                <a asp-controller="Prestadores" asp-action="Details" asp-route-id="@item.PrestadorId" target="_blank">Ver Prestador</a> |
+                <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.FkPrestador" asp-route-idUser="@Model.FkCliente" asp-route-user="Cliente" class="btn btn-info" target="_blank">Ver Perfil</a>|
             </td>
             <td>
                 <form asp-action="AddPrestador" method="post">

@@ -37,7 +37,7 @@ namespace Deal.Controllers
         }
 
         // GET: Clientes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, string? user, int? idUser)
         {
             if (id == null || _context.Clientes == null)
             {
@@ -49,6 +49,17 @@ namespace Deal.Controllers
             if (cliente == null)
             {
                 return NotFound();
+            }
+            if(idUser != null){
+                if(user == "Cliente"){
+                    if(cliente != null){
+                        ViewBag.Cliente = cliente;
+                    }
+                }
+                if(user == "Prestador"){
+                    Prestador prestador = await _context.Prestadores.FindAsync(idUser);
+                    ViewBag.Prestador = prestador;
+                }
             }
             
             return View(cliente);

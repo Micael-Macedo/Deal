@@ -37,8 +37,7 @@
             <p>Ver mais informações</p>
         </dt>
         <dd class="col-sm-10">
-            <a asp-action="Details" asp-controller="Prestadores" target="_blank"
-                asp-route-id="@Model.FkPrestador">Visualizar Perfil</a>
+            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.FkPrestador" asp-route-idUser="@Model.FkCliente" asp-route-user="Cliente" class="btn btn-info" target="_blank">Ver Perfil</a>
         </dd>
     </dl>
 </div>

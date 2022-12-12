@@ -1,11 +1,16 @@
 @model Deal.Models.Cliente
 
 @{
+    if(ViewBag.Cliente != null){
+        Layout = "_LayoutCliente";
+    }else
+    if(ViewBag.Prestador != null){
+        Layout = "_LayoutPrestador";
+    }
     ViewData["Title"] = "Detalhes";
 }
 
 <h1>Detalhes</h1>
-<a asp-action="Servicos" asp-controller="ServicosPendentes" asp-route-id="@ViewBag.prestadorId" class="btn btn-info">Retornar para Serviços Solicitados</a>
 <div>
     <h4>Cliente</h4>
     <hr />
@@ -14,7 +19,7 @@
             Foto
         </dt>
         <dd class = "col-sm-10">
-             <img src="@Html.DisplayFor(model => model.FotoUsuario)" alt="" srcset="" width="200px">
+            <img src="@Html.DisplayFor(model => model.FotoUsuario)" alt="" srcset="" width="200px">
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Nome)
