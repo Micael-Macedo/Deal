@@ -2,58 +2,41 @@
     ViewData["Title"] = "CriaConta";
 }
 
-<h1>@ViewData["Title"]</h1>
 
-<div class="container" style="text-align: center; margin-bottom: -70;">
-    <p style="margin: -20; margin-top: 80; font-weight: bold; font-size: 50;">Qual o seu</p>
-    <p style="font-weight: bold; font-size: 50; color: rgb(142,68,205)">objetivo?</p>
+
+<div class="container">
+    <div class="titulo_formulario_index">
+    <h1 style="font-weight: 840; font-size: 45px;">Qual o seu objetivo?</h1>
 </div>
 
-<div class="container" style="display: flex; justify-content: center; border-radius: 20%;">
-    <div class="row row-cols-1 row-cols-md-2 g-1">
-        <div class="col">
-            <div class="container">
-                <div class="col-6" style="padding-top: 110px;">
-                    <div class="card-body3" style="background-color: rgb(248, 248, 248);padding: 30px;">
-                        <img src="~/img/cliente-card.png" class="card-img-top" style="width: 450; border-radius: 5%;">
-                        <h5 class="card-title"
-                            style="padding-bottom: 5; margin-top: 25; font-weight: bold; font-size: 35; color: rgb(142,68,205); text-align: center">
-                            Cliente</h5>
-                        <p class="card-text" style="text-align: center; font-size: 22; font-weight: 200;">Procurar e
-                            solicitar serviços de acordo com a sua necessidade</p>
-                        <div class="container">
-                            <div class="text-center">
-                                <a asp-controller="Clientes" asp-action="Create"><button type="button" class="btn btn"
-                                        style="margin: 10; width: 150; color: rgb(255, 255, 255); font-weight: bold; font-size: 20; background-color: rgb(142,68,205); text-align: center; align-content: center;">Acesse
-                                        aqui</button></a>
+<div class="container Cliente-page">
+    <section class="container section-form">
+        <div>
+            <div class="titulo_cliente_page">
+                <h1 style="font-weight: 840;">
+                    <span class="roxo">Cliente</span>
+            </div>
+            <div class="txt_cliente_page">
+                <h1 style="font-weight: 440; font-size: 25px;">
+                    <span>Procurar e solicitar serviços de acordo com a sua necessidade</span>
+            </div >
+            <a asp-controller="Clientes" type="submit" asp-action="Create" class="btn-cliente" style="font-weight: 600px;">Acesse aqui</a>
+        </div>
+    </section>
+</div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="container Prestador-page">
+    <section class="container section-form">
+        <div>
+            <div class="titulo_prestador_page">
+                <h1 style="font-weight: 840;">
+                    <span class="roxo">Prestador</span>
             </div>
+            <div class="txt_prestador_page">
+                <h1 class="txt_prestador_page" style="font-weight: 440; font-size: 25px;">
+                    <span>Fornecer serviços em sua <br> respectiva área de atuação</span>
+            </div >
+            <a asp-controller="Prestadores" type="submit" asp-action="Create" class="btn-prestador" style="font-weight: 600px;">Acesse aqui</a>
         </div>
-        <div class="col">
-            <div class="container">
-                <div class="col-6" style="padding-top: 110px; padding-bottom: 60px;">
-                    <div class="card-body3" style="background-color: rgb(248, 248, 248);padding: 30px;">
-                        <img src="~/img/prestador-card.png" class="card-img-top" alt="..."
-                            style="width: 450; border-radius: 5%;">
-                        <h5 class="card-title"
-                            style="padding-bottom: 5; margin-top: 25; font-weight: bold; font-size: 35; color: rgb(142,68,205); text-align: center">
-                            Prestador</h5>
-                        <p class="card-text" style="text-align: center; font-size: 22; font-weight: 200;">Fornecer
-                            serviços em sua respectiva área de atuação</p>
-                        <div class="container">
-                            <div class="text-center">
-                                <a asp-controller="Prestadores" asp-action="Create"><button type="button" class="btn btn"
-                                        style="margin: 10; width: 150; color: rgb(255, 255, 255); font-weight: bold; font-size: 20; background-color: rgb(142,68,205); text-align: center; align-content: center;">Acesse
-                                        aqui</button></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 </div>

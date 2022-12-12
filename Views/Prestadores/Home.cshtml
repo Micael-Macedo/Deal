@@ -4,57 +4,104 @@
     Layout = "_LayoutPrestador";
 }
 
-<h1>@ViewData["Title"]</h1>
-
 <div>
-    <h4>Cliente</h4>
-    <a asp-action="Index" type="submit" class="btn" style="font-weight: 600; background-color: blueviolet;">Retornar
-        para a página principal</a>
-    <hr />
-
-    <div class="col">
-        <div class="serviceCard">
-            <div class="serviceCard-Content">
-                <dl class="row">
-                    <div class="row" style="margin-bottom: 15px;">
-                        <dt class="col-3">
-                            Nome:
-                            <a style="font-weight: 700; font-size: 30px;"> @Html.DisplayFor(model => model.Nome)</a>
-                        </dt>
+    <div class="titulo_formulario_index">
+        <h1 style="font-weight: 840; font-size: 45px;">Seu perfil</h1>
+    </div>
+    <div class="container centralizar">
+        <div class="Prestador-home">
+            <div class="row">
+                <div class="centralizar" style="margin-bottom: 15px;">
+                    <div style="width: 290px;">
+                        <img style="width: 290px; height: 290px; border-radius: 50%; border: solid blueviolet;"
+                            src="@Html.DisplayFor(model => model.FotoPrestador)"></img>
                     </div>
+                </div>
+                <div class="centralizar" style="margin-bottom: 15px; text-align: center;">
+                    <div style="width: 290px;">
+                        <a style="font-weight: 700; font-size: 30px; margin-top: 20px"> @Html.DisplayFor(model =>
+                            model.Nome)</a>
+                    </div>
+                </div>
+            </div>
+            <div class="txt-cliente-home">
+                <div class="row centralizar">
                     <div class="row">
                         <dt class="col-3">
                             CPF:
                             <a style="font-weight: 400;"> @Html.DisplayFor(model => model.Cpf)</a>
                         </dt>
-
                         <dt class="col-3">
                             Idade:
                             <a style="font-weight: 400;"> @Html.DisplayFor(model => model.Idade)</a>
                         </dt>
-                    </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <dt class="col-3">
+                        <dt class="col-5">
                             Endereço:
-                            <a style="font-weight: 400;">@Html.DisplayFor(model => model.Endereco)</a>
+                            <a style="font-weight: 400; width: 300px;">@Html.DisplayFor(model => model.Endereco)</a>
                         </dt>
-
-                        <dt class="col-3">
-                            CEP:
-                            <a style="font-weight: 400;">@Html.DisplayFor(model => model.Cep)</a>
-                        </dt>
-
+                        <div class="row" style="margin-top: 20px;">
+                            <dt class="col-3">
+                                Telefone:
+                                <a style="font-weight: 400; width: 400px;">@Html.DisplayFor(model => model.Telefone)</a>
+                            </dt>
+                            <dt class="col-3" style="width: 400px;">
+                                Email:
+                                <a style="font-weight: 400;">@Html.DisplayFor(model => model.Email)</a>
+                            </dt>
+                        </div>
+                        <div class="row" style="margin-top: 20px;">
+                            <dt class="col-3">
+                                Acordos Realizados:
+                                <a style="font-weight: 400; width: 500px;">@Html.DisplayFor(model =>
+                                    model.QtdServicoRealizados)</a>
+                            </dt>
+                            <dt class="col-4">
+                                Acordos Cancelados:
+                                <a style="font-weight: 400; width: 60px;">@Html.DisplayFor(model =>
+                                    model.AcordosCancelados)</a>
+                            </dt>
+                            <dt class="col-3">
+                                CEP:
+                                <a style="font-weight: 400;">@Html.DisplayFor(model => model.Cep)</a>
+                            </dt>
+                        </div>
                     </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <dt class="col-3">
-                            Telefone:
-                            <a style="font-weight: 400; width: 500px;">@Html.DisplayFor(model => model.Telefone)</a>
-                        </dt>
+                    <div class="group-cliente-home-buttons">
+                        <div style="">
+                            <div>
+                                <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@Model.PrestadorId"
+                                    class="btn btn-roxo" style="font-weight: 600; margin: 10px;">Ver
+                                    Portfolio</a>
+                                <a asp-action="AcordosPrestador" asp-controller="Acordo"
+                                    asp-route-id="@Model.PrestadorId" class="btn btn-roxo"
+                                    style="font-weight: 600; margin: 10px;">Ver
+                                    Acordos</a>
+                                <a asp-action="Delete" asp-route-id="@Model.PrestadorId" class="btn btn-vermelho"
+                                    style="font-weight: 600; margin: 10px;">Deletar Perfil</a>
+                                <a asp-action="MeusLocais" asp-controller="LocaisDosPrestadores"
+                                    asp-route-id="@Model.PrestadorId" class="btn btn-roxo"
+                                    style="font-weight: 600; margin: 10px; ">Ver Locais de Atuação
+                                    Atuais</a>
+                            </div>
+                            <div style="">
+                                <a asp-action="Edit" asp-route-id="@Model.PrestadorId" class="btn btn-roxo-escuro"
+                                    style="font-weight: 600;  width: 47%;">Editar Perfil</a>
+                                <a asp-action="ServicosPendentes" asp-controller="Servicos"
+                                    asp-route-id="@Model.PrestadorId" class="btn btn-roxo-escuro"
+                                    style="font-weight: 600;  width: 47%;">Ver Serviço Pendentes @ViewBag.ServicosPresentes
+                                </a>
+                            </div>
+                            <div class="centralizar">
+                                <a asp-action="FindService" asp-route-id="@Model.PrestadorId" class="btn"
+                                    style="font-weight: 600; margin: 10px; background-color: #35e44c;">Buscar
+                                    Serviço</a>
+                                <a asp-action="AdicionarLocais" asp-controller="LocaisDosPrestadores"
+                                    asp-route-id="@Model.PrestadorId" class="btn btn-verde"
+                                    style="font-weight: 600; margin: 10px;">Adicionar Locais De
+                                    Atuação</a>
+                            </div>
 
-                        <dt class="col-3">
-                            Email:
-                            <a style="font-weight: 400;">@Html.DisplayFor(model => model.Email)</a>
-                        </dt>
+                        </div>
                     </div>
                     <div class="row" style="margin-top: 20px;">
                         <dt class="col-3">
@@ -104,86 +151,89 @@
             </div>
         </div>
 
-    </div>
-</div>
-
-@* <div>
-    <h4>Meu Perfil</h4>
-    <hr />
-    <dl class="row">
-    <dt class = "col-sm-2">
-    Foto
-    </dt>
-    <dd class = "col-sm-10">
-    <img src="@Html.DisplayFor(model => model.FotoPrestador)" alt="" width="300px">
-    </dd>
-    <dt class = "col-sm-2">
-    @Html.DisplayNameFor(model => model.Nome)
-    </dt>
-    <dd class = "col-sm-10">
-    @Html.DisplayFor(model => model.Nome)
-    </dd>
-    <dt class = "col-sm-2">
-    CPF
-    </dt>
-    <dd class = "col-sm-10">
-    @Html.DisplayFor(model => model.Cpf)
-    </dd>
-    <dt class = "col-sm-2">
-    @Html.DisplayNameFor(model => model.Idade)
-    </dt>
-    <dd class = "col-sm-10">
-    @Html.DisplayFor(model => model.Idade)
-    </dd>
-    <dt class = "col-sm-2">
-    Endereço
-    </dt>
-    <dd class = "col-sm-10">
-    @Html.DisplayFor(model => model.Endereco)
-    </dd>
-    <dt class = "col-sm-2">
-    CEP
-    </dt>
-    <dd class = "col-sm-10">
-    @Html.DisplayFor(model => model.Cep)
-    </dd>
-    <dt class = "col-sm-2">
-    @Html.DisplayNameFor(model => model.Telefone)
-    </dt>
-    <dd class = "col-sm-10">
-    @Html.DisplayFor(model => model.Telefone)
-    </dd>
-    <dt class = "col-sm-2">
-    @Html.DisplayNameFor(model => model.Senha)
-    </dt>
-    <dd class = "col-sm-10">
-    @Html.DisplayFor(model => model.Senha)
-    </dd>
-    <dt class = "col-sm-2">
-    @Html.DisplayNameFor(model => model.Email)
-    </dt>
-    <dd class = "col-sm-10">
-    @Html.DisplayFor(model => model.Email)
-    </dd>
-    <dt class = "col-sm-2">
-    Acordos Realizados
-    </dt>
-    <dd class = "col-sm-10">
-    @Html.DisplayFor(model => model.AcordosCancelados)
-    </dd>
-    <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@Model.FkPortfolio" class="btn btn-info" style="width:
-    200px;">Ver Portfolio</a>
-    <a asp-action="ServicosPendentes" asp-controller="Servicos" asp-route-id="@Model.PrestadorId" class="btn btn-info"
-    style="width: 200px;">Ver Serviços Pendentes<p>@ViewBag.ServicosPresentes</p></a>
-    <a asp-action="FindService" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Buscar
-    Serviços</a>
-    <a asp-action="MeusLocais" asp-controller="LocaisDosPrestadores" asp-route-id="@Model.PrestadorId" class="btn btn-info"
-    style="width: 200px;">Ver Locais de Atuação Atuais</a>
-    <a asp-action="AdicionarLocais" asp-controller="LocaisDosPrestadores" asp-route-id="@Model.PrestadorId" class="btn
-    btn-info" style="width: 200px;">Adicionar Locais De Atuação</a>
-    <a asp-action="AcordosPrestador" asp-controller="Acordo" asp-route-id="@Model.PrestadorId" class="btn btn-info"
-    style="width: 200px;">Ver Acordos</a>
-    <a asp-action="Edit" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Editar Perfil</a>
-    <a asp-action="Delete" asp-route-id="@Model.PrestadorId" class="btn btn-danger" style="width: 200px;">Deletar Perfil</a>
-    </dl>
-    </div> *@
+        @* <div>
+            <h4>Meu Perfil</h4>
+            <hr />
+            <dl class="row">
+            <dt class = "col-sm-2">
+            Foto
+            </dt>
+            <dd class = "col-sm-10">
+            <img src="@Html.DisplayFor(model => model.FotoPrestador)" alt="" width="300px">
+            </dd>
+            <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+            </dd>
+            <dt class = "col-sm-2">
+            CPF
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cpf)
+            </dd>
+            <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Idade)
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Idade)
+            </dd>
+            <dt class = "col-sm-2">
+            Endereço
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Endereco)
+            </dd>
+            <dt class = "col-sm-2">
+            CEP
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cep)
+            </dd>
+            <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefone)
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Telefone)
+            </dd>
+            <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Senha)
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Senha)
+            </dd>
+            <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class = "col-sm-2">
+            Acordos Realizados
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AcordosCancelados)
+            </dd>
+            <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@Model.FkPortfolio" class="btn btn-info"
+            style="width:
+            200px;">Ver Portfolio</a>
+            <a asp-action="ServicosPendentes" asp-controller="Servicos" asp-route-id="@Model.PrestadorId" class="btn
+            btn-info"
+            style="width: 200px;">Ver Serviços Pendentes<p>@ViewBag.ServicosPresentes</p></a>
+            <a asp-action="FindService" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Buscar
+            Serviços</a>
+            <a asp-action="MeusLocais" asp-controller="LocaisDosPrestadores" asp-route-id="@Model.PrestadorId" class="btn
+            btn-info"
+            style="width: 200px;">Ver Locais de Atuação Atuais</a>
+            <a asp-action="AdicionarLocais" asp-controller="LocaisDosPrestadores" asp-route-id="@Model.PrestadorId"
+            class="btn
+            btn-info" style="width: 200px;">Adicionar Locais De Atuação</a>
+            <a asp-action="AcordosPrestador" asp-controller="Acordo" asp-route-id="@Model.PrestadorId" class="btn btn-info"
+            style="width: 200px;">Ver Acordos</a>
+            <a asp-action="Edit" asp-route-id="@Model.PrestadorId" class="btn btn-info" style="width: 200px;">Editar
+            Perfil</a>
+            <a asp-action="Delete" asp-route-id="@Model.PrestadorId" class="btn btn-danger" style="width: 200px;">Deletar
+            Perfil</a>
+            </dl>
+            </div> *@

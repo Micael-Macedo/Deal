@@ -53,7 +53,8 @@ namespace Deal.Controllers
                 return NotFound();
             }
             Cliente cliente = await _context.Clientes.FindAsync(id); 
-            Servico servico = new Servico() { FkCliente = cliente.ClienteId };
+            Servico servico = new Servico();
+            servico.FkCliente = id;
             ViewBag.Cliente = cliente;
             ViewData["FkCategoria"] = new SelectList(_context.AreaAtuacao, "AreaAtuacaoId", "Atuacao");
             return View(servico);
