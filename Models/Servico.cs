@@ -44,7 +44,7 @@ namespace Deal.Models
         }
         public void ClienteRecusaServico()
         {
-            Status = "Prestador recusado";
+            Status = "Prestador foi recusado";
             IsDisponivel = true;
             FkPrestador = null;
         }

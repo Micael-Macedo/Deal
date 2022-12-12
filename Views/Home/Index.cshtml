@@ -1,7 +1,13 @@
 ﻿@{
-
-
-
+    
+    if(ViewBag.Cliente != null){
+        Layout = "_LayoutCliente";
+    }else
+    if(ViewBag.Prestador != null){
+        Layout = "_LayoutPrestador";
+    }else{
+        Layout = "_Layout";
+    }
     ViewData["Title"] = "Home Page";
 }
 <section id="introducao_Site" style="align-items: center;">

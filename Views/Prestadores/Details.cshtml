@@ -1,6 +1,12 @@
 @model Deal.Models.Prestador
 
 @{
+    if(ViewBag.Cliente != null){
+        Layout = "_LayoutCliente";
+    }else
+    if(ViewBag.Prestador != null){
+        Layout = "_LayoutPrestador";
+    }
     ViewData["Title"] = "Detalhes";
     var areasAtuacao = ViewBag.areasAtuacaoFk;
 }

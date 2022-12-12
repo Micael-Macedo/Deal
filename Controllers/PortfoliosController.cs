@@ -38,7 +38,7 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            var prestador = await _context.Prestadores.Where(p => p.FkPortfolio == portfolio.PortfolioId).FirstAsync();
+            var prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.FkPortfolio == portfolio.PortfolioId);
             ViewBag.Prestador = prestador;
             ViewBag.prestadorIdServicosPendentes = id;
             ViewBag.PrestadorId = prestador.PrestadorId;
@@ -48,9 +48,19 @@ namespace Deal.Controllers
         }
 
         // GET: Portfolios/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int? id)
         {
-            return View();
+            Prestador prestador = await _context.Prestadores.FindAsync(id);
+            if(prestador != null){
+                Portfolio portfolio = new Portfolio();
+                _context.Portfolios.Add(portfolio);
+                await _context.SaveChangesAsync();
+                prestador.FkPortfolio = portfolio.PortfolioId;
+                _context.Prestadores.Update(prestador);
+                await _context.SaveChangesAsync();
+                return View(portfolio);
+            }
+            return RedirectToAction("Home", "Prestadores", new {id = id});
         }
 
         // POST: Portfolios/Create
@@ -64,10 +74,10 @@ namespace Deal.Controllers
             {
                 _context.Update(portfolio);
                 await _context.SaveChangesAsync();
-                Prestador prestador = await _context.Prestadores.FirstAsync(p => p.FkPortfolio == portfolio.PortfolioId);
+                Prestador prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.FkPortfolio == portfolio.PortfolioId);
+                return RedirectToAction("Home", "Prestadores", new {id = prestador.PrestadorId});
             }
-                return RedirectToAction("Index", "Usuarios");
-            // return View(portfolio);
+            return View(portfolio);
         }
 
         // GET: Portfolios/Edit/5
@@ -108,6 +118,7 @@ namespace Deal.Controllers
                 {
                     _context.Update(portfolio);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Usuarios");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -120,7 +131,6 @@ namespace Deal.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index", "Usuarios");
             }
             return RedirectToAction("Index", "Usuarios");
         }

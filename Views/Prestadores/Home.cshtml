@@ -124,9 +124,11 @@
             </div>
 
             <div class="serviceCardButtons">
+                <a asp-action="Details" asp-route-id="@Model.PrestadorId" asp-route-idUser="@Model.PrestadorId" asp-route-user="Prestador" class="btn"
+                    style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Perfil</a>
                 <a asp-action="Edit" asp-route-id="@Model.PrestadorId" class="btn"
                     style="font-weight: 600; margin: 10px; background-color: #b760e7;">Editar Perfil</a>
-                <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@Model.PrestadorId" class="btn"
+                <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@Model.FkPortfolio" class="btn"
                     style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Portfolio</a>
                 <a asp-action="ServicosPendentes" asp-controller="Servicos" asp-route-id="@Model.PrestadorId"
                     class="btn" style="font-weight: 600; margin: 10px; background-color: #b760e7;">Ver Serviço Pendentes

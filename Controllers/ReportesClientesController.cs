@@ -183,7 +183,7 @@ namespace Deal.Controllers
 
         private bool ReporteClienteExists(int id)
         {
-          return _context.ReportesClientes.Any(e => e.ReporteClienteId == id);
+            return _context.ReportesClientes.Any(e => e.ReporteClienteId == id);
         }
     }
 }
