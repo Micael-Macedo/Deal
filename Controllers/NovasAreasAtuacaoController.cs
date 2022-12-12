@@ -9,25 +9,25 @@ using Deal.Models;
 
 namespace Deal.Controllers
 {
-    public class NovaAreaAtuacaoController : Controller
+    public class NovasAreasAtuacaoController : Controller
     {
         private readonly ProjectDealContext _context;
 
-        public NovaAreaAtuacaoController(ProjectDealContext context)
+        public NovasAreasAtuacaoController(ProjectDealContext context)
         {
             _context = context;
         }
 
-        // GET: NovaAreaAtuacao
+        // GET: NovasAreasAtuacao
         public async Task<IActionResult> Index()
         {
-              return _context.NovasAreasAtuacoes != null ? 
-                          View(await _context.NovasAreasAtuacoes.ToListAsync()) :
-                          Problem("Entity set 'ProjectDealContext.NovasAreasAtuacoes'  is null.");
+            return _context.NovasAreasAtuacoes != null ?
+                        View(await _context.NovasAreasAtuacoes.ToListAsync()) :
+                        Problem("Entity set 'ProjectDealContext.NovasAreasAtuacoes'  is null.");
         }
 
-        // GET: NovaAreaAtuacao/Details/5
-        public async Task<IActionResult> Details(string id)
+        // GET: NovasAreasAtuacao/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.NovasAreasAtuacoes == null)
             {
@@ -44,30 +44,34 @@ namespace Deal.Controllers
             return View(novaAreaAtuacao);
         }
 
-        // GET: NovaAreaAtuacao/Create
-        public IActionResult Create()
+        // GET: NovasAreasAtuacao/Create
+        public async Task<IActionResult> Create(int? id)
         {
+            Prestador prestador = await _context.Prestadores.FindAsync(id);
+            ViewBag.prestador = prestador;
+            ViewBag.PrestadorId = id;
             return View();
         }
 
-        // POST: NovaAreaAtuacao/Create
+        // POST: NovasAreasAtuacao/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NovaAreaAtuacaoId,AreaAtuacao")] NovaAreaAtuacao novaAreaAtuacao)
+        public async Task<IActionResult> Create([Bind("NovaAreaAtuacaoId,Atuacao,isOnline")] NovaAreaAtuacao novaAreaAtuacao, int PrestadorId)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(novaAreaAtuacao);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction("Home", "Prestadores", new { id = PrestadorId });
             }
             return View(novaAreaAtuacao);
         }
 
-        // GET: NovaAreaAtuacao/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        // GET: NovasAreasAtuacao/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.NovasAreasAtuacoes == null)
             {
@@ -82,12 +86,12 @@ namespace Deal.Controllers
             return View(novaAreaAtuacao);
         }
 
-        // POST: NovaAreaAtuacao/Edit/5
+        // POST: NovasAreasAtuacao/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("NovaAreaAtuacaoId,AreaAtuacao")] NovaAreaAtuacao novaAreaAtuacao)
+        public async Task<IActionResult> Edit(int id, [Bind("NovaAreaAtuacaoId,Atuacao,isOnline")] NovaAreaAtuacao novaAreaAtuacao)
         {
             if (id != novaAreaAtuacao.NovaAreaAtuacaoId)
             {
@@ -117,8 +121,8 @@ namespace Deal.Controllers
             return View(novaAreaAtuacao);
         }
 
-        // GET: NovaAreaAtuacao/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        // GET: NovasAreasAtuacao/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.NovasAreasAtuacoes == null)
             {
@@ -135,10 +139,10 @@ namespace Deal.Controllers
             return View(novaAreaAtuacao);
         }
 
-        // POST: NovaAreaAtuacao/Delete/5
+        // POST: NovasAreasAtuacao/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.NovasAreasAtuacoes == null)
             {
@@ -149,14 +153,14 @@ namespace Deal.Controllers
             {
                 _context.NovasAreasAtuacoes.Remove(novaAreaAtuacao);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool NovaAreaAtuacaoExists(string id)
+        private bool NovaAreaAtuacaoExists(int id)
         {
-          return (_context.NovasAreasAtuacoes?.Any(e => e.NovaAreaAtuacaoId == id)).GetValueOrDefault();
+            return (_context.NovasAreasAtuacoes?.Any(e => e.NovaAreaAtuacaoId == id)).GetValueOrDefault();
         }
     }
 }

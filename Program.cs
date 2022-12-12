@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ProjectDealContext>(opt =>{
-    opt.UseMySql(connection, ServerVersion.AutoDetect(connection)); 
+builder.Services.AddDbContext<ProjectDealContext>(opt =>
+{
+    opt.UseMySql(connection, ServerVersion.AutoDetect(connection));
 });
 builder.Services.AddControllers();
 // Add services to the container.
