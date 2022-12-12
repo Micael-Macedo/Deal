@@ -208,7 +208,8 @@ namespace Deal.Controllers
                 return Problem("Entity set 'ProjectDealContext.Servicos'  is null.");
             }
             Servico servico = await _context.Servicos.FindAsync(id);
-            int? clienteId = servico.FkCliente;
+            servico.Cliente = await _context.Clientes.FindAsync(servico.FkCliente);
+            var clienteId = servico.Cliente.ClienteId;
             if (servico != null)
             {
                 _context.Servicos.Remove(servico);

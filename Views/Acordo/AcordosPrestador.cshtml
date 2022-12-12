@@ -4,6 +4,44 @@
     @model IEnumerable<Acordo>
 }
 
+<<<<<<< HEAD
+<h1>@ViewData["Title"]</h1>
+<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.PrestadorIdAcordo" class="btn btn-roxo-escuro">Retornar a pagina inicial</a>
+<br>
+<br>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="serviceCard">
+            <div class="serviceCard-Content">
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        Acordo:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(modelItem => item.AcordoId)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Serviço:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(modelItem => item.Servico.Nome)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Categoria:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(modelItem => item.Servico.Categoria.Atuacao)
+                    </dd>
+                </dl>
+            </div>
+            <div class="serviceCardButtons">
+                <a asp-action="AcordoCliente" asp-route-id="@item.AcordoId" class="btn btn-roxo">Ver mais</a>
+            </div>
+        </div>
+    }
+</div>
+=======
 <div class="titulo_formulario_index centralizar">
     <h1 style="font-weight: 840; font-size: 45px;">Seus acordos</h1>
 </div>
@@ -43,3 +81,4 @@
         </table>
     </div>
 </div>
+>>>>>>> main

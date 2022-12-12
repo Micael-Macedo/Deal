@@ -201,6 +201,7 @@ namespace Deal.Controllers
             }
 
             var acordo = await _context.Acordos
+            .Include(m => m.Servico.Cliente)
             .Include(m => m.Servico.Prestador)
             .Include(m => m.Servico.Prestador.NotasDoPrestador)
             .Include(m => m.Servico.Categoria)
@@ -210,8 +211,6 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            acordo.Servico = await _context.Servicos.FindAsync(acordo.FkServico);
-            acordo.Servico.Cliente = await _context.Clientes.FindAsync(acordo.Servico.FkCliente);
             ViewBag.Cliente = acordo.Servico.Cliente;
             return View(acordo);
         }

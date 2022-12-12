@@ -7,83 +7,56 @@
     if(ViewBag.Prestador != null){
         Layout = "_LayoutPrestador";
     }
-    ViewData["Title"] = "Detalhes";
+    ViewData["Title"] = "Prestador";
+    var areasAtuacao = ViewBag.areasAtuacaoFk;
 }
-
-<h1>Detalhes</h1>
-<div>
-    <h4>Cliente</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Foto
-        </dt>
-        <dd class = "col-sm-10">
-            <img src="@Html.DisplayFor(model => model.FotoUsuario)" alt="" srcset="" width="200px">
+<div class="titulo_formulario_index">
+    <h1 style="font-weight: 840; font-size: 45px;">Perfil de @Model.Nome</h1>
+</div>
+<div class="userDetails">
+    <dl class="userInfo">
+        <dd class="userImageInfo">
+            <img src="@Html.DisplayFor(model => model.FotoUsuario)" alt="" srcset="" width="300px">
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            CPF
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cpf)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Idade)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Idade)
-        </dd>
-        <dt class = "col-sm-2">
-            Endereço
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Endereco)
-        </dd>
-        <dt class = "col-sm-2">
-            CEP
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cep)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Senha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Senha)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pontuacao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pontuacao)
-        </dd>
-        <dt class = "col-sm-2">
-            Acordos Realizados
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.QtdAcordoRealizados)
-        </dd>
+        <h3 class="userName">@Html.DisplayFor(model => model.Nome)</h3>
+        <div class="userBasicInfo">
+            <div class="row">
+                <div class="infoUserDetails">
+                    <dt >
+                        @Html.DisplayNameFor(model => model.Idade) :
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Idade)
+                    </dd>
+                </div>
+                <div class="infoUserDetails">
+                    <dt >
+                        Serviços Realizados:
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.QtdAcordoRealizados)
+                    </dd>
+                </div>
+            </div>
+            <div class="row">
+                <div class="infoUserDetails">
+                    <dt >
+                        Pontuação:
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Pontuacao)
+                    </dd>
+                </div>
+                <div class="infoUserDetails">
+                    <dt >
+                        Acordos Cancelados:
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.AcordosCancelados)
+                    </dd>
+                </div>
+            </div>
+        </div>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ClienteId">Editar</a> |
-    <a asp-action="Home" asp-route-id="@Model.ClienteId">Retornar</a>
-</div>
+

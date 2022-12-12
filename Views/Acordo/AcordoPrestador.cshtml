@@ -4,16 +4,9 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@Model.Servico.FkPrestador" class="btn btn-info">Retornar a pagina inicial</a>
+<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@Model.Servico.FkPrestador" class="btn btn-roxo-escuro">Retornar a pagina inicial</a>
 <div>
-    <h2></h2>
     <div class="AcordoHomePage">
-        <div>
-            @if (@Model.AcordoFinalizado)
-            {
-                <p>Acordo Finalizado</p>
-            }
-        </div>
         <div class="UserCard">
             <h3>Cliente</h3>
             <div class="UserPhoto">
@@ -27,9 +20,10 @@
             <hr>
             <p><b>Pontuação: </b>@Model.Servico.Cliente.Pontuacao</p>
             <p><b>Serviços Realizados: </b>@Model.Servico.Cliente.QtdAcordoRealizados</p>
+            <a asp-action="Details" asp-controller="Clientes" asp-route-id="@Model.Servico.FkCliente" class="btn btn-roxo" target="_blank" asp-route-idUser="@Model.Servico.FkPrestador" asp-route-user="Prestador">Ver Perfil</a>
             @if (@Model.AcordoFinalizado == true && @Model.AvaliouCliente != true)
             {
-                <a asp-action="AvaliacaoDoCliente" asp-route-id="@Model.AcordoId">Avaliar Cliente</a>
+                <a asp-action="AvaliacaoDoCliente" asp-route-id="@Model.AcordoId" class="btn" style="background-color: #35e44c;">Avaliar Cliente</a>
             }
             @if (@Model.ClienteFinalizaAcordo == true && @Model.AcordoFinalizado != true)
             {
@@ -37,11 +31,14 @@
             }
             @if (@Model.AcordoFinalizado != true && @Model.PrestadorFinalizaAcordo != true)
             {
-                <a asp-action="PrestadorFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn btn-success">Finalizar Acordo</a>
-                <a asp-action="EncerrarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-danger">Cancelar Acordo</a>
-                <a asp-action="Create" asp-controller="ReportesClientes" asp-route-id="@Model.AcordoId" class="btn btn-info">Reportar Cliente</a>
+                <a asp-action="PrestadorFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn" style="background-color: #35e44c;">Finalizar Acordo</a>
+                <a asp-action="EncerrarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-vermelho">Cancelar Acordo</a>
+                <a asp-action="Create" asp-controller="ReportesClientes" asp-route-id="@Model.AcordoId" class="btn btn-vermelho">Reportar Cliente</a>
             }
-            <a asp-action="Details" asp-controller="Clientes" asp-route-id="@Model.Servico.FkCliente" class="btn btn-info" target="_blank" asp-route-idUser="@Model.Servico.FkPrestador" asp-route-user="Prestador">Ver Perfil</a>
+            @if (@Model.AcordoFinalizado)
+            {
+                <p>Acordo Finalizado</p>
+            }
         </div>
         <div class="ServiceInfo">
             <div>

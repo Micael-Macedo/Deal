@@ -7,105 +7,133 @@
     if(ViewBag.Prestador != null){
         Layout = "_LayoutPrestador";
     }
-    ViewData["Title"] = "Detalhes";
+    ViewData["Title"] = "Prestador";
     var areasAtuacao = ViewBag.areasAtuacaoFk;
 }
-
-<h1>Detalhes</h1>
-<div>
-    <h4>Prestador</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Foto
-        </dt>
-        <dd class = "col-sm-10">
+<div class="titulo_formulario_index">
+    <h1 style="font-weight: 840; font-size: 45px;">Perfil de @Model.Nome</h1>
+</div>
+<div class="userDetails">
+    <dl class="userInfo">
+        <dd class="userImageInfo">
             <img src="@Html.DisplayFor(model => model.FotoPrestador)" alt="" srcset="" width="300px">
-    
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Idade)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Idade)
-        </dd>
-        <dt class = "col-sm-2">
-            Serviços Realizados
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.QtdServicoRealizados)
-        </dd>
-        <dt class = "col-sm-2">
-            Pontuação
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pontuacao)
-        </dd>
-        <dt class = "col-sm-2">
-            Link do Prestador:
-        </dt>
-        <dd class = "col-sm-10">
-            <input style="display: none;" type="text" value="https://localhost:7234/Prestadores/Details/@Model.PrestadorId" id="linkPrestador">
-            <button  onclick="copiarLinkPrestador()" onmouseout="outFunc()" style="width: 300px;">Copiar link do prestador</button>
-            <span class="tooltiptext" id="myTooltip"></span>
-        </dd>
-        <dt class = "col-sm-2">
-            Locais de Atuação:
-        </dt>
-        <dd class = "col-sm-10" style="display: flex;">
-            @if(Model.LocaisDoPrestador != null){
-                foreach (var local in ViewData["LocaisDoPrestador"] as List<LocalDoPrestador>)
+        <h3 class="userName">@Html.DisplayFor(model => model.Nome)</h3>
+        <div class="userBasicInfo">
+            <div class="row">
+                <div class="infoUserDetails">
+                    <dt >
+                        @Html.DisplayNameFor(model => model.Idade) :
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Idade)
+                    </dd>
+                </div>
+                <div class="infoUserDetails">
+                    <dt >
+                        Serviços Realizados:
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.QtdServicoRealizados)
+                    </dd>
+                </div>
+            </div>
+            <div class="row">
+                <div class="infoUserDetails">
+                    <dt >
+                        Pontuação:
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Pontuacao)
+                    </dd>
+                </div>
+                <div class="infoUserDetails">
+                    <dt style="display: flex; align-items: center;">
+                        Link do Prestador:
+                    </dt>
+                    <dd style="display: flex; align-items: center;>
+                        <input style="display: none;" type="text" value="https://localhost:7234/Prestadores/Details/@Model.PrestadorId" id="linkPrestador">
+                        <button  onclick="copiarLinkPrestador()" onmouseout="outFunc()" style="width: 300px;" class="btn btn-roxo-escuro">Copiar link do prestador</button>
+                        <span class="tooltiptext" id="myTooltip"></span>
+                    </dd>
+                </div>
+            </div>
+        </div>
+        <div class="infoUserDetails">
+            <dt>
+                Sobre o Prestador:
+            </dt>
+            <dd>
+                @if (Model.Portfolio.Apresentacao != null)
                 {
-                <p>
-                    <li>@local.Cidade</li>
-                </p>
+                    <p>@Model.Portfolio.Apresentacao</p>
                 }
-            }
-        </dd>
-        <dt class = "col-sm-2">
-            Área de Atuação
-        </dt>         
-        @if (Model.AreasAtuacao != null)
-        {
-        <dd class ="col-sm-10 areasDeAtuacaoDoPrestador">
-            <p>
-            @foreach (var item in ViewData["AreasDoPrestador"] as List<AreaAtuacao>)
+            </dd>
+        </div> 
+        <div class="infoUserDetails">
+            <dt>
+                Experiência:
+            </dt>
+            @if (Model.Portfolio.ExperienciaProfissional != null)
             {
-                <li>@item.Atuacao</li>
+                <dd>
+                    <p>@Model.Portfolio.ExperienciaProfissional</p>
+                </dd>
             }
-            </p>
-        </dd>
-        }
-        <dt class = "col-sm-2">
-            Fotos
-        </dt>  
+        </div>
+        <div class="infoUserDetails">
+            <dt >
+                Locais de Atuação:
+            </dt>
+            <dd class="locaisDeAtuacao">
+                @if(Model.LocaisDoPrestador != null){
+                    foreach (var local in ViewData["LocaisDoPrestador"] as List<LocalDoPrestador>)
+                    {
+                        <li>@local.Cidade</li>
+                    }
+                }
+            </dd>
+        </div>
+        <div class="infoUserDetails">
+            <dt >
+                Área de Atuação
+            </dt>         
+            @if (Model.AreasAtuacao != null)
+            {
+            <dd class ="areasDeAtuacaoDoPrestador">
+                @foreach (var item in ViewData["AreasDoPrestador"] as List<AreaAtuacao>)
+                {
+                    <li>@item.Atuacao</li>
+                }
+            </dd>
+            }
+        </div>
+        <div class="infoUserDetails">
+            <dt>
+                Fotos
+            </dt>  
         @if (Model.Portfolio.Fotos != null)
         {
             @foreach (var foto in Model.Portfolio.Fotos)
             {
-                <img src="@foto.FotoPrestador" style="width: 200px !important;">
+                <dd>
+                    <img src="@foto.FotoPrestador" style="width: 200px !important;">
+                </dd>
             }
-        }
-        <dt class = "col-sm-2">
-            Certificados
-        </dt>  
-        @if (Model.Portfolio.Certificados != null)
-        {
-            @foreach (var certificado in Model.Portfolio.Certificados)
+        } 
+        </div>
+        <div class="infoUserDetails">
+            <dt >
+                Certificados
+            </dt>  
+            @if (Model.Portfolio.Certificados != null)
             {
-                <img src="@certificado.CertificadoFotoPortfolio" style="width: 200px !important;">
+                @foreach (var certificado in Model.Portfolio.Certificados)
+                {
+                    <img src="@certificado.CertificadoFotoPortfolio" style="width: 200px !important;">
+                }
             }
-        }
-        
+        </div>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PrestadorId">Editar</a> |
-    <a asp-action="Home" asp-route-id="@Model.PrestadorId">Retornar</a>
-</div>
+
