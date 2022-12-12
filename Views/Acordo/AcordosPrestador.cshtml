@@ -4,32 +4,42 @@
     @model IEnumerable<Acordo>
 }
 
-<h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.PrestadorIdAcordo" class="btn btn-info">Retornar a pagina inicial</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Numero do acordo
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Servico.Nome)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AcordoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FkServico)
-            </td>
-            <td>
-                <a asp-action="AcordoPrestador" asp-route-id="@item.AcordoId" class="btn btn-info">Ver mais</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="titulo_formulario_index centralizar">
+    <h1 style="font-weight: 840; font-size: 45px;">Seus acordos</h1>
+</div>
+<div class="centralizar">
+    <a asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.PrestadorIdAcordo"
+        class="btn btn-roxo " style="font-weight: 600; margin: 10px 0 30px;">Retornar a pagina de perfil</a>
+</div>
+<div class="container centralizar">
+    <div class="Cliente-acordo">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Numero do acordo
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Servico.Nome)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AcordoId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FkServico)
+                        </td>
+                        <td>
+                            <a asp-action="AcordoPrestador" asp-route-id="@item.AcordoId" class="btn btn-info">Ver mais</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
