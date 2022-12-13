@@ -432,16 +432,6 @@ h2 {
   margin-bottom: 70px;
 }
 
-.Add-restador-page {
-  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
-  border-radius: 3%;
-  background-color: rgb(240, 240, 240);
-  height: 60%;
-  width: 70%;
-  padding: 50px 50px 50px 50px;
-  margin-bottom: 70px;
-}
-
 .txt-cliente-home {
   margin-top: 40px;
     font-size: 18px;
@@ -477,14 +467,6 @@ h2 {
   justify-content: right;
 }
 
-.container-meues-servicos {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: right;
-  flex-wrap: wrap;
-}
-
 .servicos-page {
   box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
   border-radius: 3%;
@@ -494,7 +476,8 @@ h2 {
   margin: 10px 0px 40px 0px;
   padding: 20px 30px 40px 30px;
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .acordos-page {
@@ -1079,4 +1062,15 @@ h2 {
 .areasDeAtuacaoDoPrestador li{
   margin-right: 20px;
   font-size: 18px;
+}
+
+.WarningInfo{
+  font-size: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+.formContent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

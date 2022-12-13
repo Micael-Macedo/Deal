@@ -53,11 +53,15 @@ namespace Deal.Controllers
             var acordo = await _context.Acordos.FirstOrDefaultAsync(a => a.AcordoId == id);
             acordo.Servico = await _context.Servicos.FirstOrDefaultAsync(a => a.ServicoId == acordo.FkServico);
             acordo.Servico.Cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.ClienteId == acordo.Servico.FkCliente);
+            acordo.Servico.Prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.PrestadorId == acordo.Servico.FkPrestador);
+            ReportePrestador reportePrestador = new ReportePrestador();
+            reportePrestador.Cliente = acordo.Servico.Cliente;   
+            reportePrestador.Prestador = acordo.Servico.Prestador;   
             ViewBag.Cliente = acordo.Servico.Cliente;
             ViewBag.FkServico = acordo.Servico.ServicoId;
             ViewBag.FkCliente = acordo.Servico.FkCliente;
             ViewBag.FkPrestador = acordo.Servico.FkPrestador;
-            return View();
+            return View(reportePrestador);
         }
 
         // POST: ReportesPrestadores/Create
