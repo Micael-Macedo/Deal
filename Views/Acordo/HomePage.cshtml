@@ -3,10 +3,10 @@
     ViewData["Title"] = "HomePage";
 }
 
-<h1>@ViewData["Title"]</h1>
-
-<div>
-    <h2></h2>
+ <div class="titulo_formulario_index">
+                    <h1 style="font-weight: 840; font-size: 45px;">Página principal</h1>
+                </div>
+<div class="container-fluid centralizar">
     <div class="AcordoHomePage">
         <div class="UserCard">
             <h3>Cliente</h3>
@@ -28,8 +28,8 @@
                 <p>Cliente Gostaria de finalizar o Acordo</p>
             }
             @if(@Model.AcordoFinalizado != true && @Model.ClienteFinalizaAcordo != true){
-                <a asp-action="ClienteFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn btn-success">Finalizar Acordo</a>
-                <a asp-action="CancelarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-danger">Deletar Acordo</a>
+                <a asp-action="ClienteFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn btn-verde">Finalizar Acordo</a>
+                <a asp-action="CancelarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-vermelho">Deletar Acordo</a>
             }
         </div>
         <div>
@@ -59,8 +59,8 @@
             }
             @if (@Model.AcordoFinalizado != true && @Model.PrestadorFinalizaAcordo != true)
             {
-                <a asp-action="PrestadorFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn btn-success">Finalizar Acordo</a>
-                <a asp-action="EncerrarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-danger">Cancelar Acordo</a>
+                <a asp-action="PrestadorFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn btn-verde">Finalizar Acordo</a>
+                <a asp-action="EncerrarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-vermelho">Cancelar Acordo</a>
             }
         </div>
     </div>
@@ -74,7 +74,7 @@
             <input hidden type="text" value="@Model.Servico.Latitude" id="DealLat">
             <input hidden type="text" value="@Model.Servico.Longitude" id="DealLong"> 
             <div class="ServiceLocal">
-                <div class="card-container col-md-4">
+                <div class="card-container col-md-2">
                     <div class="map" id="gmp-map"></div>
                 </div>
             </div>

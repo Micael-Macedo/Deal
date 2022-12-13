@@ -10,9 +10,6 @@
     <h1 style="font-weight: 840; font-size: 45px;">Editar Prestador</h1>
 </div>
 
-<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@PrestadorId" class="btn btn-roxo-escuro">Retornar a pagina inicial</a>
-<hr />
-
 <div class="container_formulario">
      <div style="width: 800px;">
         <form asp-action="Edit">
@@ -66,8 +63,8 @@
                     <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-                <div class="item_formulario">
-                    <label class="control-label">Área de Atuação</label>
+                <div class="item_formulario" style="width: 70%;">
+                    <label class="control-label" style="font-weight: 600; margin-bottom: 0px;">Área de Atuação</label>
                     <select multiple="multiple" class="multi-select" class="form-control" asp-items="ViewBag.AreaAtuacaoId" name="areasAtuacao"></select>
                 </div>
                 <div class="botao_formulario">
@@ -75,7 +72,7 @@
                         style="font-weight: 600; margin-bottom: 10px;" />
                 </div>
                 <div class="botao_formulario2">
-                    <input type="submit" value="Retornar" asp-action="Home" asp-route-id ="@Model.PrestadorId" class="botao_formulario"
+                    <input type="submit" value="Retornar" asp-action="Home" asp-controller="Prestadores" asp-route-id="@PrestadorId" class="botao_formulario"
                         style="font-weight: 600; background-color: #b780e7;" />
                 </div>
         </form>

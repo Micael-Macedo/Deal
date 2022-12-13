@@ -7,12 +7,9 @@
 <div class="titulo_formulario_index centralizar">
     <h1 style="font-weight: 840; font-size: 45px;">Seus acordos</h1>
 </div>
-<div class="centralizar">
-    <a asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.PrestadorIdAcordo"
-        class="btn btn-roxo " style="font-weight: 600; margin: 0px 0 30px;">Retornar a pagina de perfil</a>
-</div>
+
 <div class="container centralizar">
-    <div class="Cliente-acordo">
+    <div class="Cliente-acordo" style="width: 40%;">
         <table class="table">
             <thead>
                 <tr>
@@ -34,9 +31,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.FkServico)
                         </td>
-                        <td>
-                            <a asp-action="AcordoPrestador" asp-route-id="@item.AcordoId" class="btn btn-info">Ver mais</a>
-                        </td>
+                        <div>
+                            <a asp-action="AcordoPrestador" asp-route-id="@item.AcordoId" class="btn btn-roxo-escuro">Ver mais</a>
+                        </div>
                     </tr>
                 }
             </tbody>
