@@ -4,13 +4,13 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Cancelar Serviço</h1>
+<div class="container_delete" style="justify-content: left; align-items: left;">
 
-<h3>Você tem certeza que deseja cancelar este serviço?</h3>
+<h1 style="font-weight: 840; font-size: 45px; margin-bottom: 10px;">Deletar Serviço</h1>
+<h4>Você tem certeza que deseja deletar este serviço?</h4>
 <div>
-    <h4>Serviço</h4>
-    <hr />
-    <dl class="row">
+    <hr style="margin: 40px 0 20px;"/>
+    <dl class="row" style="display: flex; justify-content: left; align-items: left;">
         <dt class = "col-sm-2">
             Cliente
         </dt>
@@ -65,12 +65,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Categoria.Atuacao)
         </dd>
-        
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="ServicoId" />
-        <input type="submit" value="Apagar" class="btn btn-danger" /> |
-        <a asp-action="Index">Retornar</a>
+        <input type="submit" value="Apagar" class="btn btn-vermelho" style="font-weight: 600;" />
+        <a asp-action="Home" asp-route-id="@Model.ServicoId" class="btn btn-roxo" style="font-weight: 600;">Retornar</a>
     </form>
+</div>
 </div>

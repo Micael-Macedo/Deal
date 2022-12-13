@@ -12,7 +12,7 @@ namespace Deal.Models
         public string? Motivo { get; set; }
         [ForeignKey("Prestador")]
         public int FkPrestador { get; set; }
-        public Prestador? prestador { get; set; }
+        public Prestador? Prestador { get; set; }
         [ForeignKey("Cliente")]
         public int FkCliente { get; set; }
         public Cliente? Cliente { get; set; }

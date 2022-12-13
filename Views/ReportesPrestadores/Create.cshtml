@@ -4,13 +4,16 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>ReportePrestador</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<div class="container_delete" style="justify-content: center; align-items: center;">
+    <div class="titulo_formulario_index">
+        <h1 style="font-weight: 840; font-size: 45px;">Deseja Reportar @Model.Prestador.Nome?</h1>
+    </div>
+    <div class="WarningInfo">
+        <p>O Acordo será será cancelado</p>
+    </div>
+    <hr style="margin: 40px 0 20px;" />
+    <div class="formContent">
+        <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Motivo" class="control-label"></label>
@@ -18,22 +21,18 @@
                 <span asp-validation-for="Motivo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input hidden asp-for="FkPrestador" value="@ViewBag.FkPrestador" class="form-control" />
+                <input hidden asp-for="FkCliente" class ="form-control" value="@ViewBag.FkCliente">
             </div>
             <div class="form-group">
-                <input hidden asp-for="FkCliente" class ="form-control" value="@ViewBag.FkCliente"></input>
+                <input hidden asp-for="FkPrestador" class ="form-control" value="@ViewBag.FkPrestador">
             </div>
             <div class="form-group">
                 <input hidden asp-for="FkServico" class ="form-control" value="@ViewBag.FkServico">
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Reportar" class="btn btn-roxo" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
