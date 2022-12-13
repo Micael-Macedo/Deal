@@ -19,10 +19,13 @@
             <p><b>Email: </b>@Model.Servico.Prestador.Email</p>
             <p><b>Telefone: </b>@Model.Servico.Prestador.Telefone</p>
             <hr>
-            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.Servico.FkPrestador" asp-route-idUser="@Model.Servico.FkCliente" asp-route-user="Cliente" class="btn btn-roxo" target="_blank">Ver Perfil</a>
+            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.Servico.FkPrestador"
+                asp-route-idUser="@Model.Servico.FkCliente" asp-route-user="Cliente" class="btn btn-roxo"
+                target="_blank">Ver Perfil</a>
             @if (@Model.AcordoFinalizado == true && @Model.AvaliouPrestador != true)
             {
-                <a asp-action="AvaliacaoDoPrestador" asp-route-id="@Model.AcordoId" class="btn" style="background-color: #35e44c;">Avaliar Prestador</a>
+                <a asp-action="AvaliacaoDoPrestador" asp-route-id="@Model.AcordoId" class="btn"
+                style="background-color: #35e44c;">Avaliar Prestador</a>
             }
             @if (@Model.PrestadorFinalizaAcordo == true && @Model.AcordoFinalizado != true)
             {
@@ -30,10 +33,12 @@
             }
             @if (@Model.AcordoFinalizado != true && @Model.ClienteFinalizaAcordo != true)
             {
-                <a asp-action="ClienteFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn" style="background-color: #35e44c;">Finalizar
+                <a asp-action="ClienteFinalizaAcordo" asp-route-id="@Model.AcordoId" class="btn"
+                style="background-color: #35e44c;">Finalizar
                     Acordo</a>
                 <a asp-action="CancelarAcordo" asp-route-id="@Model.AcordoId" class="btn btn-vermelho">Cancelar Acordo</a>
-                <a asp-action="Create" asp-controller="ReportesPrestadores" asp-route-id="@Model.AcordoId" class="btn btn-vermelho">Reportar Prestador</a>
+                <a asp-action="Create" asp-controller="ReportesPrestadores" asp-route-id="@Model.AcordoId"
+                class="btn btn-vermelho">Reportar Prestador</a>
             }
             @if (@Model.AcordoFinalizado)
             {
@@ -55,7 +60,10 @@
                     </div>
                 </div>
             </div>
+
         </div>
+
     </div>
+
 </div>
-<script src="~/js/Dealmaps.js"></script> 
+<script src="~/js/Dealmaps.js"></script>

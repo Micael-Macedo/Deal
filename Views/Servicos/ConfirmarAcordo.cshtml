@@ -3,104 +3,123 @@
     ViewData["Title"] = "ConviteServico";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="titulo_formulario_index centralizar">
+    <h1 style="font-weight: 840; font-size: 45px;">Confirmar Acordo</h1>
+</div>
 
-<h1>Confirmar Acordo</h1>
-<div>
-    <h4>Prestador</h4>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Prestador.FotoPrestador)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="@Model.Prestador.FotoPrestador" alt="" width="300px" height="300px">
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Prestador.Nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Prestador.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            Pontuação
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Prestador.Pontuacao)
-        </dd>
-        <dt class="col-sm-2">
-            Serviços Realizados
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Prestador.QtdServicoRealizados)
-        </dd>
-        <dt class="col-sm-2">
-            <p>Ver mais informações</p>
-        </dt>
-        <dd class="col-sm-10">
-            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.FkPrestador" asp-route-idUser="@Model.FkCliente" asp-route-user="Cliente" class="btn btn-info" target="_blank">Ver Perfil</a>
-        </dd>
-    </dl>
-</div>
-<div>
-    <form asp-action="ConfirmarAcordo" method="post">
-        <input name="servicoId" asp-for="ServicoId" type="hidden" />
-        <div class="form-group">
-            <input name="escolha" type="submit" value="Aceitar" class="btn btn-primary" />
-            <input name="escolha" type="submit" value="Recusar" class="btn btn-primary" />
+<div class="container centralizar">
+    <div class="Confirmar-acordo-page">
+        <div class="row">
+            <div class="centralizar" style="margin-bottom: 15px;">
+                <div style="width: 290px;">
+                    <img style="width: 290px; height: 290px; border-radius: 50%; border: solid blueviolet; "
+                        src="@Html.DisplayFor(model => model.Prestador.FotoPrestador)"></img>
+                </div>
+            </div>
         </div>
-    </form>
+        <div class="txt-cliente-home" style="font-size: 20px; align-items: ;">
+            <div class="row centralizar">
+                <div class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Prestador.Nome)
+                    </dt>
+                    <dd class="col-sm-3">
+                        @Html.DisplayFor(model => model.Prestador.Nome)
+                    </dd>
+                    <dt class="col-sm-4">
+                        Pontuação
+                    </dt>
+                    <dd class="col-sm-1">
+                        @Html.DisplayFor(model => model.Prestador.Pontuacao)
+                    </dd>
+                    <dt class="col-sm-5">
+                        Serviços Realizados
+                    </dt>
+                    <dd class="col-sm-1">
+                        @Html.DisplayFor(model => model.Prestador.QtdServicoRealizados)
+                    </dd>
+                </div>
+            </div>
+            <div class="group-cliente-home-buttons">
+                <div style="width: 100%;">
+                    <div>
+                        <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.FkPrestador"
+                            asp-route-idUser="@Model.FkCliente" asp-route-user="Cliente" class="btn btn-roxo"
+                            style="font-weight: 600; margin: 10px; width: 100%; ">Ver Perfil</a>
+                    </div>
+                    <div>
+                        <form asp-action="ConfirmarAcordo" method="post">
+                            <input name="servicoId" asp-for="ServicoId" type="hidden" />
+                            <div class="form-group">
+                                <input name="escolha" type="submit" value="Aceitar" class="btn btn-verde"
+                                    style="width: 46%;" />
+                                <input name="escolha" type="submit" value="Recusar" class="btn btn-vermelho"
+                                    style="width: 47%;" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <h4>Servico</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Serviço
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            Descrição
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class="col-sm-2">
-            Endereço
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Endereco)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cidade)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cidade)
-        </dd>
-        <dt class="col-sm-2">
-            Número
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Numero)
-        </dd>
-        <dt class="col-sm-2">
-            CEP
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cep)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Atuacao)
-        </dd>
-    </dl>
+
+<div class="container centralizar">
+
+    <div class="Confirmar-acordo-page ">
+        <div class="container">
+            <h1 style="font-weight: 840; font-size: 30px; color: #b760e7;">Serviço</h1>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Serviço
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
+                <dt class="col-sm-2">
+                    Descrição
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Descricao)
+                </dd>
+                <dt class="col-sm-2">
+                    Endereço
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Endereco)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Estado)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Estado)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Cidade)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Cidade)
+                </dd>
+                <dt class="col-sm-2">
+                    Número
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Numero)
+                </dd>
+                <dt class="col-sm-2">
+                    CEP
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Cep)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Categoria)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Categoria.Atuacao)
+                </dd>
+            </dl>
+        </div>
+    </div>
 </div>

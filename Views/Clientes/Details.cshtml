@@ -1,10 +1,13 @@
 @model Deal.Models.Cliente
 
 @{
-    if(ViewBag.Cliente != null){
+    if (ViewBag.Cliente != null)
+    {
         Layout = "_LayoutCliente";
-    }else
-    if(ViewBag.Prestador != null){
+    }
+    else
+            if (ViewBag.Prestador != null)
+    {
         Layout = "_LayoutPrestador";
     }
     ViewData["Title"] = "Prestador";
@@ -22,7 +25,7 @@
         <div class="userBasicInfo">
             <div class="row">
                 <div class="infoUserDetails">
-                    <dt >
+                    <dt>
                         @Html.DisplayNameFor(model => model.Idade) :
                     </dt>
                     <dd>
@@ -30,7 +33,7 @@
                     </dd>
                 </div>
                 <div class="infoUserDetails">
-                    <dt >
+                    <dt>
                         Serviços Realizados:
                     </dt>
                     <dd>
@@ -40,7 +43,7 @@
             </div>
             <div class="row">
                 <div class="infoUserDetails">
-                    <dt >
+                    <dt>
                         Pontuação:
                     </dt>
                     <dd>
@@ -48,7 +51,7 @@
                     </dd>
                 </div>
                 <div class="infoUserDetails">
-                    <dt >
+                    <dt>
                         Acordos Cancelados:
                     </dt>
                     <dd>
@@ -56,7 +59,18 @@
                     </dd>
                 </div>
             </div>
-        </div>
-    </dl>
-</div>
 
+        </div>
+        @if (ViewBag.User == "Prestador")
+        {
+            <a asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.UserId" class="btn btn-roxo"
+            style="font-weight: 600;">Retornar</a>
+        }
+        else if (ViewBag.User == "Cliente")
+        {
+
+            <a asp-action="Home" asp-controller="Clientes" asp-route-id="@ViewBag.UserId" class="btn btn-roxo" style="font-weight: 600;">Retornar</a>
+        }
+    </dl>
+
+</div>
