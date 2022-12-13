@@ -5,108 +5,119 @@
     Prestador prestador = new Prestador();
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Servico</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Cliente
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cliente.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            Serviço
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            Descrição
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class="col-sm-2">
-            Endereço
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Endereco)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cidade)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cidade)
-        </dd>
-        <dt class="col-sm-2">
-            Número
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Numero)
-        </dd>
-        <dt class="col-sm-2">
-            CEP
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cep)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Atuacao)
-        </dd>
-    </dl>
+<div class="titulo_formulario_index centralizar">
+    <h1 style="font-weight: 840; font-size: 45px;">Selecione o prestador</h1>
 </div>
 
-<table>
-    @foreach (var item in ViewData["Prestadores"] as IList<Prestador>)
-    {
-        <thead>
-            <th>Foto prestador</th>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Email</th>
-        </thead>
-        <tbody>
-            <td>
-                <img src="@item.FotoPrestador" alt="" srcset="" style="width: 100px; height: 100px;">
-            </td>
-            <td>
-                @item.Nome
-            </td>
-            <td>
-                @item.Idade
-            </td>
-            <td>
-                @item.Email
-            </td>
-            <td>
-                <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.FkPrestador" asp-route-idUser="@Model.FkCliente" asp-route-user="Cliente" class="btn btn-info" target="_blank">Ver Perfil</a>|
-            </td>
-            <td>
-                <form asp-action="AddPrestador" method="post">
-                    <input name="servicoId" asp-for="ServicoId" type="hidden" />
-                    <input name="prestadorId" value="@item.PrestadorId" type="hidden">
-                    <div class="form-group">
-                        <input type="submit" value="Convidar" class="btn btn-primary" />
-                    </div>
-                </form>
-            </td>
-        </tbody>
 
-    }
-</table>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ServicoId">Editar</a> |
-    <a asp-action="Index">Retornar</a>
+<div class="container centralizar">
+    <div class="Add-restador-page">
+        <h1 style="font-weight: 840; font-size: 30px; color: #b760e7;">Serviço</h1>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Cliente
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cliente.Nome)
+            </dd>
+            <dt class="col-sm-2">
+                Serviço
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+            <dt class="col-sm-2">
+                Descrição
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
+            <dt class="col-sm-2">
+                Endereço
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Endereco)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Estado)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cidade)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cidade)
+            </dd>
+            <dt class="col-sm-2">
+                Número
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Numero)
+            </dd>
+            <dt class="col-sm-2">
+                CEP
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cep)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Categoria)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Categoria.Atuacao)
+            </dd>
+        </dl>
+    </div>
+
 </div>
+    <div class="container centralizar">
+
+        <div class="Add-restador-page ">
+
+            <table>
+                @foreach (var item in ViewData["Prestadores"] as IList<Prestador>)
+                {
+                    <thead>
+                        <th style="padding-right: 40px; padding-bottom: 20px; padding-top: 20px;">Foto prestador</th>
+                        <th style="padding-right: 40px; padding-bottom: 20px;  padding-top: 20px;">Nome</th>
+                        <th style="padding-right: 40px; padding-bottom: 20px;  padding-top: 20px;">Idade</th>
+                        <th style="padding-right: 40px; padding-bottom: 20px;  padding-top: 20px;">Email</th>
+                    </thead>
+                    <tbody>
+                        <td>
+                            <img src="@item.FotoPrestador" alt="" srcset="" style="width: 100px; height: 100px;">
+                        </td>
+                        <td>
+                            @item.Nome
+                        </td>
+                        <td>
+                            @item.Idade
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.FkPrestador"
+                            asp-route-idUser="@Model.FkCliente" asp-route-user="Cliente" class="btn btn-roxo"
+                            target="_blank">Ver Perfil</a>
+                        </td>
+                        <td>
+                            <form asp-action="AddPrestador" method="post">
+                                <input name="servicoId" asp-for="ServicoId" type="hidden" />
+                                <input name="prestadorId" value="@item.PrestadorId" type="hidden">
+                                <div class="form-group">
+                                    <input type="submit" value="Convidar" class="btn btn-roxo-escuro" />
+                                </div>
+                            </form>
+                        </td>
+                    </tbody>
+                }
+            </table>
+        </div>
+    </div>
+        <div class="container centralizar">
+            <a asp-action="Index" class="btn btn-roxo">Retornar</a>
+        </div>
