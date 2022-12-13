@@ -73,28 +73,14 @@
                         </td>
                     </tr>
                     <td>
-                        <a asp-action="Edit" type="submit" class="btn" asp-route-id="@item.PrestadorId"
-                        style="font-weight: 600; margin: 10px;background-color: #b780e7;">Editar</a>
+
                         <a asp-action="Details" type="submit" class="btn" asp-route-id="@item.PrestadorId"
                         style="font-weight: 600; margin: 10px; background-color: #b780e7;">Detalhes</a>
-                        <a asp-action="Home" type="submit" class="btn" asp-route-id="@item.PrestadorId"
-                        style="font-weight: 600; margin: 10px; background-color: #b780e7;">Home</a>
-                        <a asp-action="Delete" type="submit" class="btn" asp-route-id="@item.PrestadorId"
-                        style="font-weight: 600; margin: 10px; background-color: #e21122;">Apagar</a>
-                        <a asp-controller="Servicos" asp-action="Create" type="submit" class="btn"
-                        asp-route-id="@item.PrestadorId"
-                        style="font-weight: 600; margin: 10px; background-color: #35e44c;">Criar
-                            Servico</a>
-                        <a asp-controller="Servicos" asp-action="ServicosPendentes" type="submit" class="btn"
-                        asp-route-id="@item.PrestadorId"
-                        style="font-weight: 600; margin: 10px; background-color: #661da7;">Meus serviços</a>
+
+
                     </td>
                 }
             </tbody>
         </table>
     </div>
-</div>
-<div class="centralizar" style="margin: 30px;">
-    <a asp-controller="Prestadores" asp-action="Create" type="submit" class="btn"
-        style="font-weight: 600; margin: 10px; background-color: blueviolet;">Criar novo prestador</a>
 </div>
