@@ -4,39 +4,40 @@
     ViewData["Title"] = "Index";
 }
 
+<br>
 
-
-<div class="container" style="margin-left: 70px;">
-    <div class="tabela">
-        <table class="table">
-            <thead class="thead_tabela">
-                <tr>
-                    <th style="padding-right: 50px;">
-                        Area de atuação
-                    </th>
-                    </th>
-                    @* <th style="padding-right: 70px;">
-                        Área de atuação
-                        </th> *@
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="thead_tabela3">
-                        <td class="td_tabela" style="width: 160px; margin-left: -40px;">
-                            @Html.DisplayFor(modelItem => item.Atuacao)
-                        </td>
+    <div class="container centralizar">
+        <div class="tabela">
+            <table class="table">
+                <thead class="thead_tabela">
+                    <tr>
+                        <th style="padding-right: 50px;">
+                            Area de atuação
+                        </th>
+                        </th>
+                        @* <th style="padding-right: 70px;">
+                            Área de atuação
+                            </th> *@
                     </tr>
-                    <td>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="thead_tabela3">
+                            <td class="td_tabela" style="width: 160px; margin-left: -40px;">
+                                @Html.DisplayFor(modelItem => item.Atuacao)
+                            </td>
+                        </tr>
+                        <td>
 
-                        <a asp-action="Details" type="submit" class="btn" asp-route-id="@item.AreaAtuacaoId"
-                        style="font-weight: 600; margin: 10px; background-color: #b780e7;">Detalhes</a>
+                            <a asp-action="Details" type="submit" class="btn" asp-route-id="@item.AreaAtuacaoId"
+                            style="font-weight: 600; margin: 10px; background-color: #b780e7;">Detalhes</a>
 
-                    </td>
-                }
-            </tbody>
-        </table>
+                        </td>
+                    }
+                </tbody>
+            </table>
 
+        </div>
     </div>
-</div>
+ 

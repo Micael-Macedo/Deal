@@ -51,18 +51,25 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
-            if(idUser != null){
-                if(user == "Cliente"){
-                    if(cliente != null){
+            if (idUser != null)
+            {
+                if (user == "Cliente")
+                {
+                    if (cliente != null)
+                    {
                         ViewBag.Cliente = cliente;
+                        ViewBag.User = "Cliente";
                     }
                 }
-                if(user == "Prestador"){
+                if (user == "Prestador")
+                {
                     Prestador prestador = await _context.Prestadores.FindAsync(idUser);
                     ViewBag.Prestador = prestador;
+                    ViewBag.User = "Prestador";
                 }
+                ViewBag.UserId = idUser;
             }
-            
+
             return View(cliente);
         }
 
