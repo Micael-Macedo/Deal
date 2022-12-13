@@ -99,7 +99,7 @@
                             @item.Email
                         </td>
                         <td>
-                            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.FkPrestador"
+                            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@item.PrestadorId"
                             asp-route-idUser="@Model.FkCliente" asp-route-user="Cliente" class="btn btn-roxo"
                             target="_blank">Ver Perfil</a>
                         </td>

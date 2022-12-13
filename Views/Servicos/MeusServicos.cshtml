@@ -72,7 +72,7 @@
                         
                         @if (item.IsAcordoFeito != true)
                         {
-                            <a asp-action="ClienteCancelaServico" asp-route-id="@item.ServicoId" class="btn btn-vermelho" style="font-weight: 600; margin: 10px;">Cancelar Servico</a>
+                            <a asp-action="Delete" asp-route-id="@item.ServicoId" class="btn btn-vermelho" style="font-weight: 600; margin: 10px;">Cancelar Servico</a>
                         }
                     </div>
                 </div>

@@ -72,9 +72,9 @@ namespace Deal.Controllers
         {
             if (ModelState.IsValid)
             {
+                Prestador prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.FkPortfolio == portfolio.PortfolioId);
                 _context.Update(portfolio);
                 await _context.SaveChangesAsync();
-                Prestador prestador = await _context.Prestadores.FirstOrDefaultAsync(p => p.FkPortfolio == portfolio.PortfolioId);
                 return RedirectToAction("Home", "Prestadores", new {id = prestador.PrestadorId});
             }
             return View(portfolio);
