@@ -4,9 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="titulo_formulario">
-    <h1 style="font-weight: 840; font-size: 45px;">Area de atuação</h1>
-</div>
+
 
 <div class="container" style="margin-left: 70px;">
     <div class="tabela">
@@ -31,17 +29,14 @@
                         </td>
                     </tr>
                     <td>
-                        <a asp-action="Edit" type="submit" class="btn" asp-route-id="@item.AreaAtuacaoId"
-                        style="font-weight: 600; margin: 10px;background-color: #b780e7;">Editar</a>
+
                         <a asp-action="Details" type="submit" class="btn" asp-route-id="@item.AreaAtuacaoId"
                         style="font-weight: 600; margin: 10px; background-color: #b780e7;">Detalhes</a>
-                        <a asp-action="Delete" type="submit" class="btn" asp-route-id="@item.AreaAtuacaoId"
-                        style="font-weight: 600; margin: 10px; background-color: #e21122;">Apagar</a>
+
                     </td>
                 }
             </tbody>
         </table>
-        <a asp-controller="AreaAtuacao" asp-action="Create" type="submit" class="btn"
-            style="font-weight: 600; margin: 10px; background-color: blueviolet;">Criar nova area de atuação</a>
+
     </div>
 </div>
