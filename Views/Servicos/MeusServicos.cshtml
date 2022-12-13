@@ -3,18 +3,10 @@
     ViewData["Title"] = "Meus Serviços";
     var idCliente =  ViewData["IdCliente"]; 
 }
-<<<<<<< HEAD
-
-<h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Clientes" asp-route-id="@idCliente" class="btn btn-roxo-escuro">Retornar a pagina
-    inicial</a>
-    <a asp-action="Create" asp-controller="Servicos" asp-route-id="@idCliente" class="btn" style="background-color: #35e44c;">Criar Serviço</a>
-<div class="AllServicesCards">
-=======
-    <div class="titulo_formulario_index">
-        <h1 style="font-weight: 840; font-size: 45px; display: flex">Seus serviços</h1>
+<div class="titulo_formulario_index centralizar">
+        <h1 style="font-weight: 840; font-size: 45px;">Seus serviços</h1>
     </div>
->>>>>>> main
+<div class="container centralizar">
 
     @foreach (var item in Model)
     {   
@@ -63,23 +55,19 @@
                     @if (item.IsAcordoFeito != true)
                     {
                         <a asp-action="Edit" asp-route-id="@item.ServicoId" class="btn btn-roxo">Editar</a> 
-                        <span>|</span>
                     }
-                    <a asp-action="Details" asp-route-id="@item.ServicoId" class="btn btn-roxo">Detalhes</a> |
+                    <a asp-action="Details" asp-route-id="@item.ServicoId" class="btn btn-roxo">Detalhes</a>
                     @if (item.IsAcordoFeito)
                     {
                         <a asp-action="AcordosCliente" asp-controller="Acordo" asp-route-id="@item.FkCliente" class="btn btn-roxo">Ver Acordos</a>
-                        <span>|</span>
                     }
                     @if (item.IsDisponivel == true && item.IsAcordoFeito != true && item.Status != "Convite enviado")
                     {
                         <a asp-action="AddPrestador" asp-route-id="@item.ServicoId" class="btn" style="background-color: #35e44c;">Selecionar Prestador</a>
-                        <span>|</span>
                     }
                     @if (item.IsAcordoFeito != true && item.Status != "Convite enviado" && item.Status != "Prestador Recusou o Serviço" && item.FkPrestador != null)
                     {
                         <a asp-action="ConfirmarAcordo" asp-route-id="@item.ServicoId" class="btn" style="background-color: #35e44c;">Confirmar Acordo</a>
-                        <span>|</span>
                     }
                     
                     @if (item.IsAcordoFeito != true)
@@ -93,3 +81,5 @@
             </div>
         </div>
     }
+</div>
+    
