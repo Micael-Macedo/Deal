@@ -499,7 +499,7 @@ h2 {
   box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
   border-radius: 3%;
   background-color: rgb(241, 241, 241);
-  height: 300px;
+  height: fit-content;
   width: 920px;
   margin: 10px 0px 40px 0px;
   padding: 20px 30px 40px 30px;
@@ -725,9 +725,10 @@ h2 {
   box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
   border-radius: 3%;
   background-color: rgb(241, 241, 241);
+  
   width: 60%;
   margin: 30px;
-  padding: 40px;
+  padding: 0 40px;
 }
 
 .container_formulario {
@@ -1101,4 +1102,21 @@ h2 {
 .areasDeAtuacaoDoPrestador li{
   margin-right: 20px;
   font-size: 18px;
+}
+
+.contentTitle{
+  text-align: center;
+}
+.ServiceDetailsCard{
+  margin: 20px 35%;
+  border-radius: 10px;
+  padding: 3%;
+  background-color: rgb(241, 241, 241);
+  display: flex;
+  justify-content: center;
+}
+.ServiceDetailsCardInfo{
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
 }
