@@ -1063,3 +1063,14 @@ h2 {
   margin-right: 20px;
   font-size: 18px;
 }
+
+.WarningInfo{
+  font-size: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+.formContent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

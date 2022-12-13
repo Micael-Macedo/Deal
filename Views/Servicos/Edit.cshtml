@@ -1,80 +1,87 @@
 @model Deal.Models.Servico
 
 @{
-    ViewData["Title"] = "Editar";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Editar</h1>
+@section scripts{
+<script src="~/js/maps.js"></script>
+}
 
-<h4>Serviço</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ServicoId" />
-            <div class="form-group">
-                <label  class="control-label">Cliente</label>
-                <select asp-for="FkCliente" class="form-control" asp-items="ViewBag.FkCliente"></select>
-                <span asp-validation-for="FkCliente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Serviço</label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Discrição</label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Endereço</label>
-                <input asp-for="Endereco" class="form-control" id="location-input" />
-                <span asp-validation-for="Endereco" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cidade" class="control-label"></label>
-                <input asp-for="Cidade" class="form-control" />
-                <span asp-validation-for="Cidade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Número</label>
-                <input asp-for="Numero" class="form-control" />
-                <span asp-validation-for="Numero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">CEP</label>
-                <input asp-for="Cep" class="form-control" />
-                <span asp-validation-for="Cep" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input hidden asp-for="Latitude" class="form-control" id="Lat" />
-                <span asp-validation-for="Latitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input hidden asp-for="Longitude" class="form-control" id="Long" />
-                <span asp-validation-for="Longitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Categoria</label>
-                <select asp-for="FkCategoria" class="form-control" asp-items="ViewBag.FkCategoria"></select>
-                <span asp-validation-for="FkCategoria" class="text-danger"></span>
-            </div>
-                     
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="titulo_formulario_index">
+        <h1 style="font-weight: 840; font-size: 45px;">Cadastrar serviço</h1>
     </div>
-    <div class="card-container col-md-4" >
-        <div class="map" id="service-gmp-map"></div>
+    <div class="container_formulario">
+        <div style="width: 800px;">
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="FkCliente" />
+                <div class="item_formulario">
+                    <label class="control-label" style="font-weight: 600; margin-bottom: 10px;">Serviço</label>
+                    <input asp-for="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label class="control-label" style="font-weight: 600; margin-bottom: 10px;">Descrição</label>
+                    <input asp-for="Descricao" class="form-control" />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label class="control-label" style="font-weight: 600; margin-bottom: 10px;">Endereço</label>
+                    <input asp-for="Endereco" class="form-control" id="location-input" />
+                    <span asp-validation-for="Endereco" class="text-danger"></span>
+                </div>
+                <div class="card-container col-md-4">
+                    <div class="map" id="service-gmp-map"></div>
+                </div>
+                <div class="item_formulario">
+                    <label asp-for="Estado" class="control-label"
+                        style="font-weight: 600; margin-bottom: 10px;"></label>
+                    <input asp-for="Estado" class="form-control" id="administrative_area_level_1-input" />
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label asp-for="Cidade" class="control-label"
+                        style="font-weight: 600; margin-bottom: 10px;"></label>
+                    <input asp-for="Cidade" class="form-control" id="locality-input" />
+                    <span asp-validation-for="Cidade" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label class="control-label" style="font-weight: 600; margin-bottom: 10px;">Número</label>
+                    <input asp-for="Numero" class="form-control" />
+                    <span asp-validation-for="Numero" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label class="control-label" style="font-weight: 600; margin-bottom: 10px;">CEP</label>
+                    <input asp-for="Cep" class="form-control" id="postal_code-input" />
+                    <span asp-validation-for="Cep" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <input hidden asp-for="Latitude" class="form-control" id="Lat"
+                        style="font-weight: 600; margin-bottom: 10px;" />
+                    <span asp-validation-for="Latitude" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <input hidden asp-for="Longitude" class="form-control" id="Long"
+                        style="font-weight: 600; margin-bottom: 10px;" />
+                    <span asp-validation-for="Longitude" class="text-danger"></span>
+                </div>
+                <div class="item_formulario">
+                    <label asp-for="FkCategoria" class="control-label"
+                        style="font-weight: 600; margin-bottom: 10px;">Categoria</label>
+                    <select asp-for="FkCategoria" class="form-control" asp-items="ViewBag.FkCategoria"></select>
+                </div>
+                <div class="botao_formulario">
+                    <input type="submit" value="Criar" class="botao_formulario"
+                        style="font-weight: 600; margin-bottom: 10px;" />
+                </div>
+                <div class="botao_formulario2">
+                    <input type="submit" value="Retornar" asp-action="Home" asp-controller="Clientes"
+                        asp-route-id="@Model.FkCliente" class="botao_formulario"
+                        style="font-weight: 600; background-color: #b780e7;" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <script src="~/js/maps.js"></script>
-

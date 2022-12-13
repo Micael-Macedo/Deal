@@ -106,7 +106,7 @@ namespace Deal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ServicoId,FkCliente,Nome,Descricao,Endereco,Estado,Cidade,Numero,Cep,FkCategoria,Status,Latitude,Longitude")] Servico servico)
         {
-            if (id != servico.ServicoId)
+            if (id == null)
             {
                 return NotFound();
             }
