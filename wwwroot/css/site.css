@@ -480,6 +480,59 @@ h2 {
   justify-content: center;
 }
 
+.acordos-page {
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border-radius: 3%;
+  background-color: rgb(241, 241, 241);
+  height: 300px;
+  width: 920px;
+  margin: 10px 0px 40px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.encerrar-page {
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border-radius: 3%;
+  background-color: rgb(241, 241, 241);
+  height: 470px;
+  width: 75%;
+  margin: 60px 0px 50px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.AcordoHomePage {
+  height: 420px;
+  width: 55%;
+  margin: 60px 0px 50px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.txt-acordos {
+    margin-top: 0px;
+    font-size: 18px;
+    height: 100%;
+    width: 100%;
+    padding: 5px 10px 10 30px;
+    justify-content: center;
+}
+
+.txt-encerrar{
+    margin-top: 0px;
+    font-size: 18px;
+    height: 100%;
+    width: 100%;
+    padding: 5px 10px 0 30px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
 .txt-cliente-servicos {
   margin-top: 40px;
     font-size: 18px;
@@ -591,13 +644,16 @@ h2 {
 }
 
 .UserCard {
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border-radius: 3%;
   background-color: rgb(241, 241, 241);
-  border-radius: 10px 0 0 10px;
   width: 400px;
+  margin: 30px;
   padding: 10px 20px;
 }
 
 .UserCard h3 {
+  font-weight: 800;
   margin-top: 40px;
   text-align: center;
   color: #8E44CD;
@@ -619,17 +675,20 @@ h2 {
   margin: 10px 0;
   border-radius: 10px;
 }
+
 .ServiceInfo h2{
+  font-weight: 800;
   color: #8E44CD;
   margin-bottom: 8px !important;
 }
+
 .ServiceInfo {
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border-radius: 3%;
   background-color: rgb(241, 241, 241);
-  border-radius: 0 5px 5px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 5%;
+  width: 60%;
+  margin: 30px;
+  padding: 40px;
 }
 
 .container_formulario {
@@ -660,6 +719,11 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: left;
+}
+
+.multi-select {
+  height: 20%;
+  width: 70%;
 }
 
 .add_form_locais {

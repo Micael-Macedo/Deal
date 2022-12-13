@@ -8,42 +8,37 @@
     <h1 style="font-weight: 840; font-size: 45px;">Seus acordos</h1>
 </div>
 <div class="centralizar">
-
-</div>
-
-<div class="container centralizar">
-    <div class="Cliente-acordo">
-        <div class="table">
-            @foreach (var item in Model)
-            {
-                <div class="serviceCard">
-                    <div class="serviceCard-Content">
+    <div class="container centralizar" style="display: flex; flex-direction: row;">
+        <div class="acordos-page" style="width: 40%; height: 30%; padding: 30px;">
+            <div class="txt-acordos">
+                <div class="row centralizar">
+                    @foreach (var item in Model)
+                    {                
                         <dl class="row">
-                            <dt class="col-sm-3">
-                                Acordo:
-                            </dt>
-                            <dd class="col-sm-9">
-                                @Html.DisplayFor(modelItem => item.AcordoId)
-                            </dd>
-                            <dt class="col-sm-3">
-                                Serviço:
-                            </dt>
-                            <dd class="col-sm-9">
-                                @Html.DisplayFor(modelItem => item.Servico.Nome)
-                            </dd>
-                            <dt class="col-sm-3">
-                                Categoria:
-                            </dt>
-                            <dd class="col-sm-9">
-                                @Html.DisplayFor(modelItem => item.Servico.Categoria.Atuacao)
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="serviceCardButtons">
-                        <a asp-action="AcordoCliente" asp-route-id="@item.AcordoId" class="btn btn-info">Ver mais</a>
-                    </div>
-                </div>
-            }
+                                    <dt class="col-sm-3">
+                                        Acordo:
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        @Html.DisplayFor(modelItem => item.AcordoId)
+                                    </dd>
+                                    <dt class="col-sm-3">
+                                        Serviço:
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        @Html.DisplayFor(modelItem => item.Servico.Nome)
+                                    </dd>
+                                    <dt class="col-sm-3">
+                                        Categoria:
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        @Html.DisplayFor(modelItem => item.Servico.Categoria.Atuacao)
+                                    </dd>
+                                </dl>
+                            <a asp-action="AcordoCliente" asp-route-id="@item.AcordoId" class="btn btn-roxo-escuro" style="margin:0px">Ver mais</a>
+                    }
+                </div>    
+            </div>
         </div>
     </div>
 </div>
+
