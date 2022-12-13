@@ -426,11 +426,13 @@ namespace Deal.Controllers
                 if (Finalizar == "true")
                 {
                     acordo.PrestadorFinalizouAcordo();
+                    acordo.Servico = _context.Servicos.Find(acordo.FkServico);
+                    acordo.Servico.Prestador = _context.Prestadores.Find(acordo.Servico.FkPrestador);
+                    acordo.Servico.Cliente = _context.Clientes.Find(acordo.Servico.FkCliente);
+                    int idPrestador = acordo.Servico.Prestador.PrestadorId;
                     if (acordo.VerificarSeAcordoFoiFinalizado())
                     {
-                        acordo.Servico = _context.Servicos.Find(acordo.FkServico);
-                        acordo.Servico.Prestador = _context.Prestadores.Find(acordo.Servico.FkPrestador);
-                        acordo.Servico.Cliente = _context.Clientes.Find(acordo.Servico.FkCliente);
+
                         acordo.FinalizarAcordo();
                         _context.Acordos.Update(acordo);
                         await _context.SaveChangesAsync();
@@ -438,7 +440,7 @@ namespace Deal.Controllers
                     }
                     _context.Acordos.Update(acordo);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Home", "Prestadores", new { id = acordo.Servico.FkPrestador });
+                    return RedirectToAction("Home", "Prestadores", new { id = idPrestador });
                 }
             }
             return View(acordo);
