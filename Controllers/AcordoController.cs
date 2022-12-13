@@ -368,10 +368,10 @@ namespace Deal.Controllers
             {
                 if (Finalizar == "true")
                 {
+                    acordo.ClienteFinalizouAcordo();
                     acordo.Servico = _context.Servicos.Find(acordo.FkServico);
                     acordo.Servico.Prestador = _context.Prestadores.Find(acordo.Servico.FkPrestador);
                     acordo.Servico.Cliente = _context.Clientes.Find(acordo.Servico.FkCliente);
-                    acordo.ClienteFinalizouAcordo();
                     if (acordo.VerificarSeAcordoFoiFinalizado())
                     {
                         acordo.FinalizarAcordo();
