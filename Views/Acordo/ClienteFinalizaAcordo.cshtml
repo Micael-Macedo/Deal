@@ -37,7 +37,7 @@
             </dd>
             <form asp-action="ClienteFinalizaAcordo" method="post">
                 <input type="hidden" asp-for="AcordoId">
-                <button type="submit" name="Finalizar" class="btn btn-primary" value="true">Finalizar</button>
+                <button type="submit" name="Finalizar" asp-action="home" asp-controller="Clientes" class="btn btn-primary" value="true">Finalizar</button>
             </form>
         </dl>
     </div>
