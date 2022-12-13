@@ -4,16 +4,17 @@
     Layout = "_LayoutPrestador";
 }
 
-<h1>@ViewData["Title"]</h1>
-<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.prestadorIdServicosPendentes" class="btn btn-roxo-escuro">Retornar a pagina inicial</a>
-<div class="AllServicesCards">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="titulo_formulario_index centralizar">
+        <h1 style="font-weight: 840; font-size: 45px;">Seus serviços</h1>
+    </div>
+<div class="container centralizar">
 
     @foreach (var item in Model)
     {   
-        <div class="col">
-            <div class="serviceCard">
-                <div class="serviceCard-Content">
+        <div class="container centralizar">
+            <div class="servicos-page">
+            <div class="txt-cliente-servicos">
+                <div class="row centralizar">
                     <dl class="row">
                         <dt class="col-sm-2">
                             Servico:
@@ -47,17 +48,18 @@
                         </dd>
                     </dl>
                 </div>
-                <div class="serviceCardButtons">
+                <div class="group-cliente-servicos-buttons">
                     <div class="form-group">
                         <a asp-action="Details" asp-controller="Clientes" asp-route-id="@item.FkCliente" class="btn btn-info" target="_blank" asp-route-idUser="@item.FkPrestador" asp-route-user="Prestador">Ver Cliente</a>
                         <form asp-action="ServicosPendentes" method="post">
                             <input type="hidden" name="servicoId" value="@item.ServicoId"/>
                             <input type="hidden" name="prestadorId" value="@item.FkPrestador">
-                            <input name="escolha" type="submit" value="Recusar" class="btn btn-danger" />
-                            <input name="escolha" type="submit" value="Aceitar" class="btn btn-success" />
+                            <input name="escolha" type="submit" value="Recusar" class="btn btn-vermelho" />
+                            <input name="escolha" type="submit" value="Aceitar" class="btn btn-verde" />
                         </form>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     }
