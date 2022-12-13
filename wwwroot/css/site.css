@@ -412,6 +412,16 @@ h2 {
   margin-bottom: 70px;
 }
 
+.Confirmar-acordo-page {
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border-radius: 3%;
+  background-color: rgb(241, 241, 241);
+  height: 60%;
+  width: 65%;
+  padding: 50px 50px 50px 50px;
+  margin-bottom: 70px;
+}
+
 .Cliente-acordo {
   box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
   border-radius: 3%;
@@ -487,6 +497,18 @@ h2 {
   height: 300px;
   width: 920px;
   margin: 10px 0px 40px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmar-acordos-page {
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 10px 36px 0px, rgba(59, 59, 59, 0.06) 0px 0px 0px 1px;
+  border-radius: 3%;
+  background-color: rgb(241, 241, 241);
+  height: 80%;
+  width: 80%;
+  margin: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
