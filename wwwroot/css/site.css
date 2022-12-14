@@ -999,7 +999,7 @@ h2 {
   color: rgb(44, 44, 44);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .thead_tabela4 {
@@ -1020,7 +1020,7 @@ h2 {
 
 .td_tabela {
   margin-top: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   height: 80px;
   display: flex;
   align-items: center;
