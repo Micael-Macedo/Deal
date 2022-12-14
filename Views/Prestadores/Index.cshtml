@@ -48,12 +48,12 @@
                 {
                     <tr class="thead_tabela3">
                         <td class="td_tabela" style="padding-right: 30px;">
-                            <img src="@Html.DisplayFor(modelItem => item.FotoPrestador)" alt="" width="90px"
+                            <img src="@Html.DisplayFor(modelItem => item.FotoPrestador)" alt="" width="90px" height="90px"
                             style="padding: 10px">
                         </td>
                         <td class="td_tabela" style="padding-right: 20px;">
                             @Html.DisplayFor(modelItem => item.Nome)
-                        </td class="td_tabela" style="padding-right: 10px;">
+                        </td>
                         <td class="td_tabela" style="padding-right: 50px;">
                             @Html.DisplayFor(modelItem => item.Idade)
                         </td>
@@ -71,11 +71,8 @@
                         </td>
                     </tr>
                     <td>
-
                         <a asp-action="Details" type="submit" class="btn" asp-route-id="@item.PrestadorId"
                         style="font-weight: 600; margin: 10px; background-color: #b780e7;">Detalhes</a>
-
-
                     </td>
                 }
             </tbody>
