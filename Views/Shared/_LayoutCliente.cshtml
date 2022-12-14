@@ -13,37 +13,43 @@
         <link rel="stylesheet" href="~/Deal.styles.css" asp-append-version="true" />
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,800;0,900;1,700;1,800;1,900&display=swap"
+            rel="stylesheet">
     </head>
 
     <body>
         <nav class="div-navbar">
             <div class="container-fluid" style="width: 100%;display: flex; height: 80px;">
                 <div class="navbar">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="@cliente.ClienteId" asp-route-user="Cliente"><img
-                            src="~/img/LOGO_DEAL.svg" alt="" srcset="" style="width: 80px"></a>
-                </div>  
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"
+                        asp-route-id="@cliente.ClienteId" asp-route-user="Cliente"><img src="~/img/LOGO_DEAL.svg" alt=""
+                            srcset="" style="width: 80px"></a>
+                </div>
                 <div class="navbar container-fluid" style="background-color: blueviolet;">
                     <ul class="div-navbar">
                         <div style="align-items: left; justify-content: left;display: flex">
-                                <li class="navbar-brand">
-                                    <a class="" style="color: white;" asp-area="" asp-controller="Acordo"
+                            <li class="navbar-brand">
+                                <a class="" style="color: white;" asp-area="" asp-controller="Acordo"
                                     asp-action="AcordosCliente" asp-route-id="@cliente.ClienteId">Ver Acordos</a>
-                                </li>
-                                <li class="navbar-brand">
-                                    <a class="" style="color: white;" asp-controller="Servicos" asp-action="MeusServicos"
+                            </li>
+                            <li class="navbar-brand">
+                                <a class="" style="color: white;" asp-controller="Servicos" asp-action="MeusServicos"
                                     asp-route-id="@cliente.ClienteId">Ver serviços</a>
-                                </li>
-                                <li class="navbar-brand">
-                                    <a class="" asp-area="" style="color: white;" asp-controller="Clientes"
+                            </li>
+                            <li class="navbar-brand">
+                                <a class="" asp-area="" style="color: white;" asp-controller="Clientes"
                                     asp-action="Home" asp-route-id="@cliente.ClienteId">@cliente.Nome
                                 </a>
-                                </li>
+                            </li>
                         </div>
                         <div style="align-items: right; justify-content: right;display: flex;margin: 40px;">
                             <div>
-                            <li class="btn-login-tela">
-                                <a class="" asp-area="" asp-controller="Home" asp-action="index">Sair</a>
-                            </li>
+                                <li class="btn-login-tela">
+                                    <a class="" asp-area="" asp-controller="Home" asp-action="index">Sair</a>
+                                </li>
                             </div>
                         </div>
                     </ul>
@@ -71,7 +77,7 @@
                 </div>
             </div>
         </nav>
-    </header>
+        </header>
         <div>
             <main role="main" class="pb-3">
             @RenderBody()
