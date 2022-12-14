@@ -18,7 +18,9 @@
                     <input type="file" class="form-control" onchange="ConverterImagem()" id="NewFoto">
                     <input asp-for="FotoUsuario" type="hidden" id="FotoBase64" />
                     <span asp-validation-for="FotoUsuario" class="text-danger"></span>
-                    <div id="apresentar-imagem" class="apresentar-imagem"></div>
+                    
+                        <div id="apresentar-imagem" class="apresentar-imagem" style="width: 100px;"></div>
+
                 </div>
                 <div class="item_formulario">
                     <label asp-for="Nome" class="control-label" style="font-weight: 600; margin-bottom: 10px;"></label>
