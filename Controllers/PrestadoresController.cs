@@ -44,7 +44,7 @@ namespace Deal.Controllers
             int QtdServicosPresentes = await _context.Servicos.Where(s => s.FkPrestador == id && s.Status == "Convite enviado").CountAsync();
             var prestador = await _context.Prestadores.FindAsync(id);
             prestador.NotasDoPrestador = await _context.NotaPrestadores.Where(n => n.FkPrestador == prestador.PrestadorId).ToListAsync();
-            prestador.MediaNota();
+            prestador.Pontuacao = prestador.MediaNota();
 
             ViewBag.Prestador = prestador;
             if (prestador == null)
@@ -53,6 +53,8 @@ namespace Deal.Controllers
             }
             
             ViewBag.ServicosPresentes = QtdServicosPresentes;
+            _context.Prestadores.Update(prestador);
+            await _context.SaveChangesAsync();
             return View(prestador);
         }
 
@@ -70,10 +72,14 @@ namespace Deal.Controllers
                 AreasDeAtuacaoDoPrestador.Add(_context.AreaAtuacao.Find(areaAtuacao.FkAreaAtuacao));
             }
             var prestador = await _context.Prestadores
+                .Include(p => p.NotasDoPrestador)
                 .Include(p => p.Portfolio)
                 .Include(p => p.Portfolio.Fotos)
                 .Include(p => p.Portfolio.Certificados)
                 .FirstOrDefaultAsync(m => m.PrestadorId == id);
+            if(prestador == null){
+                return NotFound();
+            }
             prestador.AreasAtuacao = AreasDeAtuacaoDoPrestador;
             prestador.Portfolio.Fotos = await _context.Fotos.Where(f => f.FkPortfolio == prestador.FkPortfolio).ToListAsync();
             prestador.Portfolio.Certificados = await _context.Certificado.Where(c => c.FkPortfolio == prestador.FkPortfolio).ToListAsync();
@@ -81,6 +87,9 @@ namespace Deal.Controllers
             {
                 return NotFound();
             }
+            prestador.Pontuacao = prestador.MediaNota();
+            _context.Prestadores.Update(prestador);
+            await _context.SaveChangesAsync();
             ViewData["AreasDoPrestador"] = prestador.AreasAtuacao;
             ViewData["LocaisDoPrestador"] = _context.LocaisDoPrestador.Where(l => l.PrestadorFk == prestador.PrestadorId).ToList();
             
