@@ -99,7 +99,7 @@
                             @item.Email
                         </td>
                         <td>
-                            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@Model.FkPrestador"
+                            <a asp-action="Details" asp-controller="Prestadores" asp-route-id="@item.PrestadorId"
                             asp-route-idUser="@Model.FkCliente" asp-route-user="Cliente" class="btn btn-roxo"
                             target="_blank">Ver Perfil</a>
                         </td>
@@ -118,5 +118,5 @@
         </div>
     </div>
         <div class="container centralizar">
-            <a asp-action="Index" class="btn btn-roxo">Retornar</a>
+            <a asp-action="MeusServicos" asp-controller="Servicos" asp-route-id="@Model.Cliente.ClienteId" class="btn btn-roxo">Retornar</a>
         </div>
