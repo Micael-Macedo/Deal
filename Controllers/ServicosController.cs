@@ -467,7 +467,6 @@ namespace Deal.Controllers
         }
         public async Task<IActionResult> MeusServicos(int? id)
         {
-            ViewData["IdCliente"] = id;
             Cliente cliente = await _context.Clientes.FindAsync(id);
             ViewBag.Cliente = cliente;
             var projectDealContext = _context.Servicos.Where(s => s.FkCliente == id).Include(s => s.Categoria).Include(s => s.Cliente).Include(s => s.Prestador);
