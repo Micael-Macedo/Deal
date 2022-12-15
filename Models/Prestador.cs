@@ -74,7 +74,7 @@ namespace Deal.Models
         }
         public bool VerificarAcordosCancelados()
         {
-            if (AcordosCancelados % 5 == 0)
+            if (AcordosCancelados % 5 != 0)
             {
                 return true;
             }
