@@ -69,6 +69,10 @@ namespace Deal.Controllers
                 }
                 ViewBag.UserId = idUser;
             }
+            cliente.NotasDoCliente = _context.NotaClientes.Where(n => n.FkCliente == cliente.ClienteId).ToList();
+            cliente.Pontuacao = cliente.MediaNota();
+            _context.Clientes.Update(cliente);
+            await _context.SaveChangesAsync();
 
             return View(cliente);
         }
@@ -102,11 +106,13 @@ namespace Deal.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes.FindAsync(id);
+            var cliente = await _context.Clientes
+            .FindAsync(id);
             if (cliente == null)
             {
                 return NotFound();
             }
+            
             ViewBag.Cliente = cliente;
             return View(cliente);
         }
@@ -118,12 +124,14 @@ namespace Deal.Controllers
             }
 
             var cliente = await _context.Clientes.FindAsync(id);
-            cliente.NotasDoCliente = await _context.NotaClientes.Where(n => n.FkCliente == cliente.ClienteId).ToListAsync();
-            cliente.MediaNota();
             if (cliente == null)
             {
                 return NotFound();
             }
+            cliente.NotasDoCliente = await _context.NotaClientes.Where(n => n.FkCliente == cliente.ClienteId).ToListAsync();
+            cliente.Pontuacao = cliente.MediaNota();
+            _context.Clientes.Update(cliente);
+            await _context.SaveChangesAsync();
             ViewBag.Cliente = cliente;
             return View(cliente);
         }
