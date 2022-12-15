@@ -13,7 +13,8 @@
             <div class="row">
                 <div class="centralizar" style="margin-bottom: 15px;">
                     <div style="width: 290px;">
-                            <img style="width: 290px;height: 290px; border-radius: 50%; border: solid blueviolet;" src="@Html.DisplayFor(model => model.FotoPrestador)"></img>
+                        <img style="width: 290px;height: 290px; border-radius: 50%; border: solid blueviolet;"
+                            src="@Html.DisplayFor(model => model.FotoPrestador)"></img>
                     </div>
                 </div>
                 <div class="centralizar" style="margin-bottom: 15px; text-align: center;">
@@ -104,6 +105,9 @@
                                     asp-route-id="@Model.PrestadorId" class="btn btn-verde"
                                     style="font-weight: 600; margin: 10px;">Adicionar Locais De
                                     Atuação</a>
+                                <a asp-action="Create" asp-controller="NovasAreasAtuacao"
+                                    asp-route-id="@Model.PrestadorId" class="btn btn-verde"
+                                    style="font-weight: 600; margin: 10px;">Sugerir Novas Áreas de Atuação</a>
                             </div>
                         </div>
                     </div>
