@@ -1,15 +1,13 @@
 @model IEnumerable<Deal.Models.LocalDoPrestador>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Locais de Atuação";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-    <a asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.PrestadorId" class="btn btn-roxo-escuro">Retornar para home page</a>
+
+<a asp-action="Home" asp-controller="Prestadores" asp-route-id="@ViewBag.PrestadorId"
+    class="btn btn-roxo-escuro">Retornar para home page</a>
 <table class="table">
     <thead>
         <tr>
@@ -19,17 +17,20 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cidade)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.LocalDoPrestadorId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.LocalDoPrestadorId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.LocalDoPrestadorId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cidade)
+                </td>
+                <td>
+
+                    <a asp-action="Delete" class="btn btn-vermelho" asp-route-id="@item.LocalDoPrestadorId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<p>
+    <a class="btn btn-roxo" asp-route-id="@ViewBag.PrestadorId" asp-action="Create">Criar</a>
+</p>
