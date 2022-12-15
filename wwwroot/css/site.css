@@ -1120,3 +1120,6 @@ h2 {
   justify-content: space-between;
   gap: 25px;
 }
+.apresentar-imagem img {
+  width: 500px;
+}

@@ -43,7 +43,8 @@ namespace Deal.Controllers
             }
             int QtdServicosPresentes = await _context.Servicos.Where(s => s.FkPrestador == id && s.Status == "Convite enviado").CountAsync();
             var prestador = await _context.Prestadores.FindAsync(id);
-
+            prestador.NotasDoPrestador = await _context.NotaPrestadores.Where(n => n.FkPrestador == prestador.PrestadorId).ToListAsync();
+            prestador.MediaNota();
 
             ViewBag.Prestador = prestador;
             if (prestador == null)
