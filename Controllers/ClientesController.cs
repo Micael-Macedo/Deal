@@ -200,11 +200,46 @@ namespace Deal.Controllers
                 return Problem("Entity set 'ProjectDealContext.Clientes'  is null.");
             }
             var cliente = await _context.Clientes.FindAsync(id);
+            cliente.NotasDoCliente = await _context.NotaClientes.Where( n => n.FkCliente == cliente.ClienteId).ToListAsync();
+            if(cliente.NotasDoCliente != null){
+                foreach (var nota in cliente.NotasDoCliente)
+                {
+                    _context.NotaClientes.Remove(nota);
+                }
+            }
+            List<Servico> servicos = await _context.Servicos.Where(s => s.FkCliente == cliente.ClienteId).ToListAsync();
+            List<Acordo> acordos = new List<Acordo>();
+            foreach (var servico in servicos)
+            {
+                acordos.Add(await _context.Acordos.Where(a => a.FkServico == servico.ServicoId).FirstOrDefaultAsync());
+            }
+            if(acordos != null && _context.Acordos != null){
+                List<NotaPrestador> notasPrestadores = new List<NotaPrestador>();
+                foreach (var acordo in acordos)
+                {
+                    notasPrestadores.Add(_context.NotaPrestadores.Where(n => n.FkAcordo == acordo.AcordoId).FirstOrDefault());
+                    _context.Acordos.Remove(acordo);
+                }
+                if(notasPrestadores != null && _context.NotaPrestadores != null){
+                    foreach (var notaPrestador in notasPrestadores)
+                    {
+                        if(notaPrestador != null){
+                            _context.NotaPrestadores.Remove(notaPrestador);
+                        }
+                    }
+                }
+            }
+            if(servicos != null){
+                foreach (var servico in servicos)
+                {
+                    _context.Servicos.Remove(servico);
+                }
+            }
             if (cliente != null)
             {
                 _context.Clientes.Remove(cliente);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
         }
